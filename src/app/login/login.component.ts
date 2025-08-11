@@ -10,6 +10,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { LoginService } from './login.service';
 import { UserToken } from './user-token.model';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -127,6 +128,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 })
 export class LoginComponent implements OnInit {
 
+  private http = inject(HttpClient);
+
   private loginService = inject(LoginService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -176,21 +179,24 @@ export class LoginComponent implements OnInit {
 
 
   submitForm(): void {
-    // tslint:disable-next-line:forin
-    /*
-    for (const i in this.loginForm.controls) {
-      this.loginForm.controls[ i ].markAsDirty();
-      this.loginForm.controls[ i ].updateValueAndValidity();
-    }
-    */
 
-    this.loginService
-        .doLogin('001', this.form.value.staffNo!, this.form.value.password!)
+    const url =  GlobalProperty.serverUrl() + `/api/system/user/login`;
+    const body = {companyCode: '001', staffNo: this.form.value.staffNo!, password: this.form.value.password!};
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      withCredentials: true
+    }
+
+    this.http
+        .post<UserToken>(url, body, options).pipe(
+          // tap((userToken: UserToken) => console.log(userToken.token) ),
+          // catchError((err) => Observable.throw(err))
+        )
         .subscribe(
           (model: UserToken) => {
-          this.setItemSessionStorage(model);
+            this.setItemSessionStorage(model);
 
-          this.router.navigate([this.FIRST_PAGE_URL, {isForwarding: true}]);
+            this.router.navigate([this.FIRST_PAGE_URL, {isForwarding: true}]);
           }
         );
   }
