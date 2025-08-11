@@ -3,8 +3,8 @@ import { CommonModule, formatDate } from '@angular/common';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-//import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
-//import { CalendarFullcalendarComponent } from "../../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
+import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
+import { CalendarFullcalendarComponent } from "../../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -30,15 +30,13 @@ export interface NewDateSelectedArgs {
   selector: 'app-work-calendar-view',
   imports: [
     CommonModule,
-    //CalendarFullcalendarComponent
+    CalendarFullcalendarComponent
 ],
   template: `
-  <!--
     <app-calendar-fullcalendar
       (eventClicked)="eventClicked($event)"
       (dayClicked)="onDateClick($event)">
     </app-calendar-fullcalendar>
--->
   `,
   styles: [`
     .calendar-div {
@@ -52,8 +50,7 @@ export interface NewDateSelectedArgs {
 })
 export class WorkCalendarViewComponent implements AfterViewInit {
 
-  //calendar2 = viewChild.required(CalendarFullcalendarComponent);
-  calendar2 = null;
+  calendar2 = viewChild.required(CalendarFullcalendarComponent);
 
   @Input() fkWorkCalendar: string = '';
 
@@ -61,12 +58,12 @@ export class WorkCalendarViewComponent implements AfterViewInit {
   newDateSelected = output<NewDateSelectedArgs>();
   eventDataChanged = output<any>();
   visibleRangeChanged = output<{start: Date, end: Date, date: Date}>();
-  //modeChanged = output<ModeChangedArgs>();
+  modeChanged = output<ModeChangedArgs>();
 
   from!: string;
   to!: string;
   eventData: any[] = [];
-  //mode?: ModeChangedArgs;
+  mode?: ModeChangedArgs;
 
   private http = inject(HttpClient);
 
@@ -78,8 +75,8 @@ export class WorkCalendarViewComponent implements AfterViewInit {
     //this.to = formatDate(this.calendar().displayEnd.toDateLocal(),'YYYYMMdd','ko-kr') ?? '';
 
     // Fullcalendar
-    //this.from = formatDate(this.calendar2().calendar().getApi().view.activeStart,'YYYYMMdd','ko-kr') ?? '';
-    //this.to = formatDate(this.calendar2().calendar().getApi().view.activeEnd,'YYYYMMdd','ko-kr') ?? '';
+    this.from = formatDate(this.calendar2().calendar().getApi().view.activeStart,'YYYYMMdd','ko-kr') ?? '';
+    this.to = formatDate(this.calendar2().calendar().getApi().view.activeEnd,'YYYYMMdd','ko-kr') ?? '';
 
     // console.log(this.calendar2().calendar().getApi().view.type);
 
@@ -104,7 +101,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
 
     if (workGroupId === "" || workGroupId === null || workGroupId === undefined) {
       this.eventData = [];
-      //this.calendar2().setEvents([]);
+      this.calendar2().setEvents([]);
       return;
     }
 
@@ -146,7 +143,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
               allDay: e.allDay
             }));
 
-            //this.calendar2().setEvents(data2);
+            this.calendar2().setEvents(data2);
           }
       )
 
@@ -166,13 +163,22 @@ export class WorkCalendarViewComponent implements AfterViewInit {
     let allDay: boolean = true;
     //console.log(this.calendar().mode());
 
-    /*
+    //if (this.calendar().mode() === 'Month') {
     if (this.calendar2().calendar().getApi().view.type === 'dayGridMonth') {
+      // 선택한 날 + 1일 0시로 설정되어 있어서 전날 23시 59분 59초로 강제로 변경
+      /*
+      endDate = new Date(params.end);
+      endDate.setDate(endDate.getDate() - 1);
+      endDate.setHours(23);
+      endDate.setMinutes(59);
+      endDate.setSeconds(59);
+      endDate.setMilliseconds(999);
+      */
       allDay = true;
     } else {
 
       allDay = false;
-    }*/
+    }
 
     //console.log(endDate);
 
@@ -180,8 +186,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
     this.newDateSelected.emit(eventArgs);
   }
 
-  //calendarModeChanged(params: ModeChangedArgs): void {
-  calendarModeChanged(params: any): void {
+  calendarModeChanged(params: ModeChangedArgs): void {
     //this.mode = params;
     //this.modeChanged.emit(this.mode);
   }

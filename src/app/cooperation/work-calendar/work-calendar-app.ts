@@ -10,8 +10,8 @@ import { WorkCalendarFormComponent } from './calendar/work-calendar-form.compone
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-//import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
-//import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
+import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
+import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
 import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.component";
 
 @Component({
@@ -21,7 +21,7 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.co
     NzButtonModule,
     NzIconModule,
     WorkCalendarViewComponent,
-    //CalendarDaypilotNavigatorComponent,
+    CalendarDaypilotNavigatorComponent,
     WorkCalendarEventFormDrawerComponent,
     WorkCalendarFormDrawerComponent,
     MyWorkCalendarListComponent
@@ -43,12 +43,10 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.co
 
     <div class="grid-wrapper">
       @defer {
-      <!--
       <app-calendar-daypilot-navigator class="navi"
         [events]="this.eventData"
         (selectChanged)="navigatorSelectChanged($event)">
       </app-calendar-daypilot-navigator>
-      -->
       }
       <app-my-work-calendar-list
         (rowClicked)="workGroupSelect($event)"
@@ -109,7 +107,7 @@ export class WorkCalendarApp implements AfterViewInit {
   myWorkGroupList = viewChild.required(MyWorkCalendarListComponent);
   workGroupForm = viewChild.required(WorkCalendarFormComponent);
 
-  //navigator = viewChild.required(CalendarDaypilotNavigatorComponent);
+  navigator = viewChild.required(CalendarDaypilotNavigatorComponent);
   workCalendar = viewChild.required(WorkCalendarViewComponent);
   workEventForm = viewChild.required(WorkCalendarEventFormComponent);
 
@@ -227,8 +225,7 @@ export class WorkCalendarApp implements AfterViewInit {
     */
   }
 
-  //modeChanged(params: ModeChangedArgs): void {
-  modeChanged(params: any): void {
+  modeChanged(params: ModeChangedArgs): void {
     this.mode = params.mode;
   }
 

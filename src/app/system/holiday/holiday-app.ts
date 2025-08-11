@@ -18,10 +18,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-//import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
+import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-//import { CalendarFullcalendarComponent } from "../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
-//import { DateSelectArg } from '@fullcalendar/core/index.js';
+import { CalendarFullcalendarComponent } from "../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
+import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -42,9 +42,9 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzSearchAreaComponent,
     HolidayGridComponent,
     HolidayFormDrawerComponent,
-    //CalendarDaypilotNavigatorComponent,
+    CalendarDaypilotNavigatorComponent,
     ShapeComponent,
-    //CalendarFullcalendarComponent
+    CalendarFullcalendarComponent
 ],
   template: `
 <ng-template #header>
@@ -82,11 +82,11 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     <nz-tab nzTitle="달력">
     <ng-template nz-tab>
       <div [style]="'height: calc(100vh - 272px)'">
-        <!--
+
         <app-calendar-fullcalendar
           (dayClicked)="newHoliday2($event)"
         ></app-calendar-fullcalendar>
-        -->
+
       </div>
     </ng-template>
     </nz-tab>
@@ -101,12 +101,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
             (rowDoubleClicked)="edit($event)">
           </app-holiday-grid>
 
-          <!--
+
           <app-calendar-daypilot-navigator
             [events]="grid().filteredList()"
             (selectChanged)="navigatorSelectChanged($event)">
           </app-calendar-daypilot-navigator>
-          -->
+
         </div>
       </ng-template>
     </nz-tab>
