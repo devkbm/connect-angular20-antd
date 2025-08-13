@@ -1,4 +1,4 @@
-import { Component, inject, effect, input } from '@angular/core';
+import { Component, inject, effect, input, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -40,12 +40,12 @@ export interface Post {
     PostFileUploadComponent
   ],
   template: `
-<nz-page-header nzTitle="제목" [nzSubtitle]="post?.title">
+<nz-page-header nzTitle="제목" [nzSubtitle]="post()?.title">
   <nz-page-header-content>
-      {{post?.fromDate}}
+      {{post()?.fromDate}}
   </nz-page-header-content>
 </nz-page-header>
-첨부파일 <br/>
+첨부파일 - {{postId()}} <br/>
 <!--<app-nz-file-upload [fileList]="fileList"></app-nz-file-upload>-->
 <app-nz-file-download [fileList]="fileList" [height]="'100px'"></app-nz-file-download>
 
@@ -54,7 +54,7 @@ export interface Post {
   [(uploadedFileList)]="fileList">
 </app-post-file-upload>
 
-<div [innerHTML]="post?.contents | trustHtml"></div>
+<div [innerHTML]="post()?.contents | trustHtml"></div>
   `,
   styles: `
 nz-page-header {
@@ -68,7 +68,7 @@ export class PostViewComponent {
 
   postId = input<string>();
 
-  post: Post | null = null;
+  post = signal<Post | null>(null);
   fileList: any = [];
 
   constructor() {
@@ -91,7 +91,7 @@ export class PostViewComponent {
         .subscribe(
           (model: ResponseObject<Post>) => {
             if (model.data) {
-              this.post = model.data;
+              this.post.set(model.data);
               this.fileList = model.data.fileList;
 
               this.updateHitCount(this.postId(), SessionManager.getUserId());

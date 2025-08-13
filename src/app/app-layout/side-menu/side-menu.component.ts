@@ -1,4 +1,4 @@
-import { Component, inject, input, effect } from '@angular/core';
+import { Component, inject, input, effect, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -28,8 +28,8 @@ import { filter } from 'rxjs';
   template: `
       <div class="logo">LOGO</div>
 
-      <ul class="menu" nz-menu [nzTheme]="menuInfo.theme" [nzMode]="menuInfo.mode" [nzInlineIndent]="menuInfo.inline_indent">
-        <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuInfo.menuItems }"></ng-container>
+      <ul class="menu" nz-menu [nzTheme]="menuInfo().theme" [nzMode]="menuInfo().mode" [nzInlineIndent]="menuInfo().inline_indent">
+        <ng-container *ngTemplateOutlet="menuTpl; context: { $implicit: menuInfo().menuItems }"></ng-container>
         <ng-template #menuTpl let-menus>
           @for (menu of menus; track menu.key) {
             @if (!menu.children) {
@@ -108,13 +108,13 @@ export class SideMenuComponent {
   private router = inject(Router);
   private http = inject(HttpClient);
 
-  menuInfo: {theme: NzMenuThemeType, mode: NzMenuModeType, inline_indent: number, isCollapsed: boolean, menuItems: MenuHierarchy[]} = {
+  menuInfo = signal<{theme: NzMenuThemeType, mode: NzMenuModeType, inline_indent: number, isCollapsed: boolean, menuItems: MenuHierarchy[]}>({
     theme: 'dark',
     mode: 'inline',
     inline_indent: 12,
     isCollapsed: false,
     menuItems: []
-  }
+  });
 
   menuGroupCode = input<string>('');
 
@@ -126,32 +126,11 @@ export class SideMenuComponent {
       if (this.menuGroupCode() !== '') {
         this.getMenuList(this.menuGroupCode());
       }
-
     })
   }
 
   saveSessionUrl(ev: any) {
-    //ev.preventDefault();
-    // 최초 접속한 url 저장되지 않은 오류가 있음, 해결방법 확인 필요
-    /*
-    this.router.events.pipe(
-      filter((event) => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.previousUrl = this.currentUrl;
-      this.currentUrl = event.url;
-
-      if (this.previousUrl && this.previousUrl !== '/login' && this.previousUrl !== '/home;isForwarding=true') {
-        sessionStorage.setItem('lastVisitUrl', this.previousUrl);
-      }
-    });
-    */
-
-    //const lastNav = this.router.lastSuccessfulNavigation;
-    //sessionStorage.setItem('lastVisitUrl', lastNav?.finalUrl?.toString()!);
-    //const lastNav = this.router.getCurrentNavigation();
-    //console.log(lastNav?.initialUrl.toString());
     sessionStorage.setItem('lastVisitUrl', this.router.getCurrentNavigation()?.initialUrl.toString()!);
-
   }
 
   getMenuList(menuGroupCode: string): void {
@@ -165,7 +144,8 @@ export class SideMenuComponent {
         )
         .subscribe(
           (model: ResponseList<MenuHierarchy>) => {
-            this.menuInfo.menuItems = model.data;
+            this.menuInfo.update(obj => ({...obj, menuItems: model.data}));
+
             sessionStorage.setItem('menuList', JSON.stringify(model.data));
           }
         );

@@ -16,6 +16,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'common-code-app',
@@ -24,6 +26,8 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
+    NzButtonModule,
+    NzIconModule,
     NzSelectModule,
     NzInputModule,
     NzDividerModule,

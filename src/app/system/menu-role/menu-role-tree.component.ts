@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, viewChild, input, output, effect } from '@angular/core';
+import { Component, inject, viewChild, input, output, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NzTreeComponent, NzTreeModule, NzTreeNode } from 'ng-zorro-antd/tree';
 import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
@@ -44,7 +44,7 @@ function convert(tree: MenuRoleHierarchy[]) {
         class="body"
         #treeComponent
         nzCheckable
-        [nzData]="nodeItems"
+        [nzData]="nodeItems()"
         [nzSearchValue]="searchValue()"
         [nzCheckedKeys]="defaultCheckedKeys"
         (nzCheckBoxChange)="nzCheck()"
@@ -75,7 +75,8 @@ export class MenuRoleTreeComponent {
 
   treeComponent = viewChild.required(NzTreeComponent);
 
-  nodeItems: MenuRoleHierarchy[] = [];
+  //nodeItems: MenuRoleHierarchy[] = [];
+  nodeItems = signal<MenuRoleHierarchy[]>([]);
   defaultCheckedKeys: NzTreeNodeKey[] = [];
 
   saveNodes: MenuRoleMapping[] = [];
@@ -95,7 +96,7 @@ export class MenuRoleTreeComponent {
       if (this.menuGroupCode() && this.roleCode()) {
         this.getHierarchy();
       } else {
-        this.nodeItems = [];
+        this.nodeItems.set([]);
       }
     });
   }
@@ -111,15 +112,15 @@ export class MenuRoleTreeComponent {
         .subscribe(
           (model: ResponseList<MenuRoleHierarchy>) => {
             if ( model.data ) {
-              this.nodeItems = model.data;
+              this.nodeItems.set(model.data);
 
               //this.defaultCheckedKeys = this.nodeItems.flatMap(e => [e, ...e.children || []]).map(e => e.checked ? e.key : -1).filter(val => val !== -1);
-              this.defaultCheckedKeys = convert(this.nodeItems);
+              this.defaultCheckedKeys = convert(this.nodeItems());
               console.log(this.defaultCheckedKeys);
-              console.log(convert(this.nodeItems));
+              console.log(convert(this.nodeItems()));
 
             } else {
-              this.nodeItems = [];
+              this.nodeItems.set([]);
             }
           }
       )

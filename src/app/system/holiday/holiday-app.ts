@@ -152,7 +152,7 @@ export class HolidayApp implements AfterViewInit {
   private http = inject(HttpClient);
 
   grid = viewChild.required(HolidayGridComponent);
-  //calendar = viewChild.required(CalendarFullcalendarComponent);
+  calendar = viewChild.required(CalendarFullcalendarComponent);
 
   query: {
     holiday : { key: string, value: string, list: {label: string, value: string}[], year: Date },
@@ -205,7 +205,7 @@ export class HolidayApp implements AfterViewInit {
     const date: Date = this.query.holiday.year;
 
     if ( this.tab.index == 0 ) {
-      //this.calendar().getHolidayList(date.getFullYear()+'0101', date.getFullYear()+'1231');
+      this.calendar().getHolidayList(date.getFullYear()+'0101', date.getFullYear()+'1231');
     } else {
       this.grid().gridQuery.set({fromDate: date.getFullYear()+'0101', toDate: date.getFullYear()+'1231'});
     }
