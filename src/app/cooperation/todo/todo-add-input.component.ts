@@ -24,9 +24,6 @@ export interface TodoModel {
   template: `
     <button nz-button (click)="addTodo(newText())">add</button>
     <input nz-input placeholder="입력해주세요." [(ngModel)]="newText" (keyup.enter)="addTodo(newText())">
-
-    <!--<button (click)="addTodo(newText)">+</button>-->
-    <!--<button (click)="addTodo(newText)">+</button><input type="text" placeholder="할 일 추가" [(ngModel)]="newText" (keyup.enter)="addTodo(newText)">-->
   `,
   styles: [`
     :host {

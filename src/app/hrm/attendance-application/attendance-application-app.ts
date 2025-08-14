@@ -13,10 +13,10 @@ import { SessionManager } from 'src/app/core/session-manager';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-//import { CalendarFullcalendarComponent } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
+import { CalendarFullcalendarComponent } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
 
 import { ResponseList } from 'src/app/core/model/response-list';
-//import { DateSelectArg, EventClickArg } from '@fullcalendar/core/index.js';
+import { DateSelectArg, EventClickArg } from '@fullcalendar/core/index.js';
 
 import { AttendanceApplicationFormComponent } from './attendance-application-form.component';
 import { AttendanceApplicationGridComponent } from './attendance-application-grid.component';
@@ -36,7 +36,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
     AttendanceApplicationGridComponent,
     AttendanceApplicationFormComponent,
     ShapeComponent,
-    //CalendarFullcalendarComponent
+    CalendarFullcalendarComponent
 ],
   template: `
 
@@ -61,13 +61,11 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
   <nz-tabset [(nzSelectedIndex)]="tab.index">
     <nz-tab nzTitle="달력">
       <div style="height: calc(100vh - 272px)">
-        <!--
         <app-calendar-fullcalendar
           (dayClicked)="dayClicked($event)"
           (eventClicked)="itemClicked($event)"
         >
         </app-calendar-fullcalendar>
-        -->
       </div>
     </nz-tab>
     <nz-tab nzTitle="리스트">

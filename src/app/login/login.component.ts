@@ -1,6 +1,7 @@
 import { Component, OnInit, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { SessionManager } from 'src/app/core/session-manager';
@@ -9,8 +10,9 @@ import { GlobalProperty } from 'src/app/core/global-property';
 
 import { LoginService } from './login.service';
 import { UserToken } from './user-token.model';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+
+
 
 @Component({
   selector: 'app-login',
@@ -18,17 +20,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NzSelectModule
+    NzRadioModule
   ],
   template: `
 <div class="body">
   <div class="login">
     <h1>Login</h1>
 
-    <nz-select [(ngModel)]="serverType">
-      <nz-option nzValue="LOCAL" nzLabel="로컬"></nz-option>
-      <nz-option nzValue="PROD" nzLabel="운영기"></nz-option>
-    </nz-select> {{serverType()}}
+    <nz-radio-group [(ngModel)]="serverType" nzButtonStyle="solid">
+      <label nz-radio-button nzValue="LOCAL">로컬</label>
+      <label nz-radio-button nzValue="PROD">운영기</label>
+    </nz-radio-group>{{serverType()}}
+
     <form nz-form [formGroup]="form">
       <input type="text" formControlName="staffNo" placeholder="Username" required="required" />
       <input type="password" formControlName="password" placeholder="Password" required="required" />

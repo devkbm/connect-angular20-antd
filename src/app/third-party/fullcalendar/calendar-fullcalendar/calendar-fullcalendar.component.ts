@@ -110,8 +110,8 @@ export class CalendarFullcalendarComponent {
   currentEvents = signal<EventApi[]>([]);
 
   holidays : Date[] = [
-    new Date('2024-12-20T00:00:00'),
-    new Date('2024-12-25T00:00:00'),
+    //new Date('2024-12-20T00:00:00'),
+    //new Date('2024-12-25T00:00:00'),
   ];
 
   holidayList = signal<DateInfo[]>([]);

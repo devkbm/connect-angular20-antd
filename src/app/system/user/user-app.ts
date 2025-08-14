@@ -23,6 +23,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { UserListComponent } from './user-list.component';
 
 @Component({
   selector: 'user-app',
@@ -42,7 +43,8 @@ import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-ar
     UserGridComponent,
     UserFormDrawerComponent,
     ShapeComponent,
-    UesrSearchComponent
+    UesrSearchComponent,
+    UserListComponent
 ],
   template: `
 <ng-template #header>
@@ -68,11 +70,17 @@ import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-ar
 
     <div style="flex: 1">
       @defer {
-      <app-user-grid #userGrid
-        (rowClicked)="userGridSelected($event)"
-        (editButtonClicked)="editForm($event)"
-        (rowDoubleClicked)="editForm($event)">
-      </app-user-grid>
+        @if (view === 'grid') {
+          <app-user-grid #userGrid
+            (rowClicked)="userGridSelected($event)"
+            (editButtonClicked)="editForm($event)"
+            (rowDoubleClicked)="editForm($event)">
+          </app-user-grid>
+        }
+        @else if (view === 'list') {
+          <app-user-list (editButtonClicked)="editForm($event)">
+          </app-user-list>
+        }
       }
     </div>
   </div>
@@ -112,6 +120,9 @@ export class UserApp implements OnInit {
   private http = inject(HttpClient);
 
   grid = viewChild.required(UserGridComponent);
+  list = viewChild.required(UserListComponent);
+
+  view: 'grid' | 'list' = 'list';
 
   query: {
     user : { key: string, value: string, list: {label: string, value: string}[] }
@@ -141,7 +152,7 @@ export class UserApp implements OnInit {
 
   }
 
-  editForm(item: User) {
+  editForm(item: any) {
     this.drawer.user.formDataId = item.userId;
     this.drawer.user.visible = true;
   }

@@ -1,4 +1,4 @@
-import { Component, Input, TemplateRef, viewChild, inject } from '@angular/core';
+import { Component, Input, TemplateRef, viewChild, inject, signal } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgModel, NgControl, FormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerComponent, NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -23,8 +23,7 @@ export enum TimeFormat {
       [nzDisabled]="disabled"
       [nzInputReadOnly]="readonly"
       nzAllowClear="false"
-      [(ngModel)]="_value"
-      (ngModelChange)="dateValueChange($event)"
+      [ngModel]="_value()"
       (blur)="onTouched()">
     </nz-date-picker>
     <nz-time-picker #time
@@ -32,8 +31,7 @@ export enum TimeFormat {
       [nzFormat]="timeFormat"
       [nzNowText]="' '"
       [nzMinuteStep]="30"
-      [(ngModel)]="_value"
-      (ngModelChange)="timeValueChange($event)">
+      [ngModel]="_value">
     </nz-time-picker>
   `,
   styles:[`
@@ -60,7 +58,7 @@ export class NzInputDateTimeComponent implements ControlValueAccessor {
 
   @Input() nzErrorTip?: string | TemplateRef<{$implicit: AbstractControl | NgModel;}>;
 
-  _value: any;
+  _value = signal('');
 
   onChange!: (value: string | null) => void;
   onTouched!: () => void;
@@ -73,7 +71,7 @@ export class NzInputDateTimeComponent implements ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this._value = obj;
+    this._value.set(obj);
   }
 
   registerOnChange(fn: any): void {
@@ -90,71 +88,6 @@ export class NzInputDateTimeComponent implements ControlValueAccessor {
 
   focus(): void {
     this.dateElement()?.focus();
-  }
-
-  dateValueChange(val: Date) {
-    this._value = val;
-    const nativeValue = this.dateElement()?.pickerInput?.nativeElement.value as string;
-    // keyboard로 8자리 숫자입력 받을 경우 Date로 변환 처리
-    if (nativeValue.length === 8) {
-      this._value = this.convertDate(nativeValue);
-    }
-
-    if (this._value !== null) {
-      this.onChange(formatDate(this._value,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-    } else {
-      this.onChange(null);
-      this.focus();
-    }
-  }
-
-  timeValueChange(val: any) {
-    this._value = val;
-    const nativeValue = this.timeElement()?.inputRef.nativeElement.value as string;
-    console.log(nativeValue);
-
-    if (this._value !== null) {
-      this.onChange(formatDate(this._value,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-      //this.onChange(this._value);
-    }
-  }
-
-  convertDate(dateStr: string): Date | null {
-    const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-    const convertValue = dateStr.replace(reg,'');
-
-    if (dateStr.length >= 8) {
-      const year = convertValue.substring(0,4);
-      const month = convertValue.substring(4,6);
-      const day = convertValue.substring(6,8);
-      const dateStr = year + '-' + month + '-' + day;
-      const dateNum = Date.parse(dateStr);
-      // Validate Date String
-      if (!isNaN(dateNum)) {
-        return new Date(dateStr);
-      }
-    }
-
-    return null;
-  }
-
-  convertTime(timeStr: string): Date | null {
-    const reg = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
-    const convertValue = timeStr.replace(reg,'');
-
-    if (timeStr.length >= 8) {
-      const year = convertValue.substring(0,4);
-      const month = convertValue.substring(4,6);
-      const day = convertValue.substring(6,8);
-      const dateStr = year + '-' + month + '-' + day;
-      const dateNum = Date.parse(dateStr);
-      // Validate Date String
-      if (!isNaN(dateNum)) {
-        return new Date(dateStr);
-      }
-    }
-
-    return null;
   }
 
 }

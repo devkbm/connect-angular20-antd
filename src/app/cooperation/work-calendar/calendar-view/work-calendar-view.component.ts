@@ -74,9 +74,11 @@ export class WorkCalendarViewComponent implements AfterViewInit {
     //this.from = formatDate(this.calendar().displayStart.toDateLocal(),'YYYYMMdd','ko-kr') ?? '';
     //this.to = formatDate(this.calendar().displayEnd.toDateLocal(),'YYYYMMdd','ko-kr') ?? '';
 
+    //console.log()
+
     // Fullcalendar
-    this.from = formatDate(this.calendar2().calendar().getApi().view.activeStart,'YYYYMMdd','ko-kr') ?? '';
-    this.to = formatDate(this.calendar2().calendar().getApi().view.activeEnd,'YYYYMMdd','ko-kr') ?? '';
+    this.from = formatDate(this.calendar2().calendar().getApi().view.activeStart,'yyyyMMdd','ko-kr') ?? '';
+    this.to = formatDate(this.calendar2().calendar().getApi().view.activeEnd,'yyyyMMdd','ko-kr') ?? '';
 
     // console.log(this.calendar2().calendar().getApi().view.type);
 

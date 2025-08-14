@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit, OnChanges, SimpleChanges, inject, input, signal, effect, Renderer2, output } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, inject, input, signal, Renderer2, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators, ValueChangeEvent } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,13 +16,10 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-import { NzInputDateTimeComponent, TimeFormat } from 'src/app/third-party/ng-zorro/nz-input-datetime/nz-input-datetime.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-
-//import { WorkCalendarEvent } from './work-calendar-event.model';
-
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 export interface WorkCalendar {
   workCalendarId: string | null;
@@ -41,7 +38,6 @@ export interface WorkCalendarEvent {
   color?: string;
 }
 
-
 export interface NewFormValue {
   workCalendarId: string;
   start: Date;
@@ -59,9 +55,10 @@ export interface NewFormValue {
     NzInputModule,
     NzCheckboxModule,
     NzDatePickerModule,
+    NzTimePickerModule,
     NzSwitchModule,
     NzIconModule,
-    NzInputDateTimeComponent,
+
     NzFormItemCustomComponent,
     NzInputSelectComponent
   ],
@@ -82,7 +79,7 @@ export interface NewFormValue {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="workCalendarId" itemId="workCalendarId"
-                [options]="workGroupList" [opt_value]="'id'" [opt_label]="'name'"
+                [options]="workGroupList()" [opt_value]="'id'" [opt_label]="'name'"
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
@@ -100,29 +97,16 @@ export interface NewFormValue {
       </div>
 
       <div nz-row nzGutter="8">
-        <!--
-        <div nz-col nzSpan="20">
-          <nz-form-item class="form-item">
-            <nz-form-label nzFor="start" [nzXs]="defaultLabelSize.xs" [nzSm]="defaultLabelSize.sm">기간</nz-form-label>
-            <nz-form-control [nzXs]="defaultControlSize.xs" [nzSm]="defaultControlSize.sm">
-              <nz-date-picker formControlName="start" nzFormat="yyyy-MM-dd" style="width: 130px"></nz-date-picker>
-              <nz-time-picker formControlName="start" [nzMinuteStep]="30" [nzFormat]="'HH:mm'" style="width: 90px" [nzNowText]="' '"></nz-time-picker> ~
-              <nz-date-picker formControlName="end" nzFormat="yyyy-MM-dd" style="width: 130px"></nz-date-picker>
-              <nz-time-picker formControlName="end" [nzMinuteStep]="30" [nzFormat]="'HH:mm'" style="width: 90px" [nzNowText]="' '"></nz-time-picker>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-        -->
         <div nz-col nzSpan="10">
           <nz-form-item-custom for="start" label="시작일" required>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              @if (isAllDay()) {
+              @if (this.fg.value.allDay) {
                 <nz-date-picker nzId="start" formControlName="start" required></nz-date-picker>
               } @else {
-                <app-nz-input-datetime
-                  formControlName="start" itemId="start" required
-                  [timeFormat]="timeFormat" [nzErrorTip]="errorTpl">
-                </app-nz-input-datetime>
+                <nz-date-picker
+                  nzId="start" formControlName="start" required
+                  nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" nzPlaceHolder="Start"
+                ></nz-date-picker>
               }
             </nz-form-control>
           </nz-form-item-custom>
@@ -131,13 +115,13 @@ export interface NewFormValue {
         <div nz-col nzSpan="10">
           <nz-form-item-custom for="end" label="종료일" required>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              @if (isAllDay()) {
+              @if (this.fg.value.allDay) {
                 <nz-date-picker nzId="end" formControlName="end" required></nz-date-picker>
               } @else {
-                <app-nz-input-datetime
-                  formControlName="end" itemId="end" required
-                  [timeFormat]="timeFormat" [nzErrorTip]="errorTpl">
-                </app-nz-input-datetime>
+                <nz-date-picker
+                  nzId="end" formControlName="end" required
+                  nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" nzPlaceHolder="End"
+                ></nz-date-picker>
               }
             </nz-form-control>
           </nz-form-item-custom>
@@ -147,7 +131,7 @@ export interface NewFormValue {
           <nz-form-item-custom for="useYn" label="종일">
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <!--<label nz-checkbox nzId="allDay" formControlName="allDay" (ngModelChange)="allDayCheck($event)"></label>-->
-              <nz-switch nzId="allDay" formControlName="allDay" (ngModelChange)="allDayCheck($event)"
+              <nz-switch nzId="allDay" formControlName="allDay"
                     [nzCheckedChildren]="checkedTemplate"
                     [nzUnCheckedChildren]="unCheckedTemplate">
                   <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
@@ -171,15 +155,11 @@ export interface NewFormValue {
   `,
   styles: []
 })
-export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, OnChanges {
-
-  //text = viewChild.required<NzInputTextareaComponent>('text');
+export class WorkCalendarEventFormComponent implements OnInit, OnChanges {
 
   newFormValue = input<NewFormValue>();
 
-  timeFormat: TimeFormat = TimeFormat.HourMinute;
-
-  workGroupList: WorkCalendar[] = [];
+  workGroupList = signal<WorkCalendar[]>([]);
 
   private renderer = inject(Renderer2);
   private http = inject(HttpClient);
@@ -189,60 +169,40 @@ export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, On
   formClosed = output<any>();
 
   fg = inject(FormBuilder).group({
-    id              : new FormControl<string | null>({value: null, disabled: true}, { validators: [Validators.required] }),
+    id              : new FormControl<string | null>(null, { validators: [Validators.required] }),
     text            : new FormControl<string | null>(null, { validators: [Validators.required] }),
-    start           : new FormControl<string | Date | null>(null),
-    end             : new FormControl<string | Date | null>(null),
+    start           : new FormControl<string | Date | null>(new Date()),
+    end             : new FormControl<string | Date | null>(new Date()),
     allDay          : new FormControl<boolean | null>(null),
     workCalendarId  : new FormControl<string | null>(null, { validators: [Validators.required] })
   });
 
   formDataId = input<string>('');
 
-  isAllDay = signal<boolean>(false);
-
   constructor() {
 
     this.fg.controls.start.valueChanges.pipe(pairwise()).subscribe(([prev, next]: [any, any]) => {
-      //console.log(prev,next);
-      if (this.isAllDay() && prev !== next) {
+
+      if (this.fg.value.allDay === true && prev !== next) {
         let date = new Date(next);
         this.removeTime(date);
-        this.fg.controls.start.setValue(formatDate(date,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
+        this.fg.controls.start.setValue(formatDate(date,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
+      } else if (prev !== next) {
+        let date = new Date(next);
+        this.fg.controls.start.setValue(formatDate(date,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
       }
     });
 
     this.fg.controls.end.valueChanges.pipe(pairwise()).subscribe(([prev, next]: [any, any]) => {
-      if (this.isAllDay() && prev !== next) {
+      if (this.fg.value.allDay === true && prev !== next) {
         let date = new Date(next);
         this.removeTime(date);
-        this.fg.controls.end.setValue(formatDate(date,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
+        this.fg.controls.end.setValue(formatDate(date,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
+      } else if (prev !== next) {
+        let date = new Date(next);
+        this.fg.controls.end.setValue(formatDate(date,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
       }
     });
-
-    /*
-    this.fg.controls.start.events.subscribe(event => {
-      if (event instanceof ValueChangeEvent) {
-        let date = event.value;
-        this.removeTime(date);
-        this.fg.controls.start.setValue(formatDate(date,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-      }
-    });
-    */
-
-    effect(() => {
-      if (this.isAllDay()) {
-        let start = new Date(this.fg.controls.start.value!) as Date;
-        this.removeTime(start);
-        console.log(start);
-        this.fg.controls.start.setValue(formatDate(start,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-
-        let end = new Date(this.fg.controls.end.value!) as Date;
-        this.removeTime(end);
-        this.fg.controls.end.setValue(formatDate(end,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-      }
-    })
-
   }
 
   // 시분초 제거
@@ -270,10 +230,6 @@ export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, On
     }
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
   focusInput() {
     this.renderer.selectRootElement('#text').focus();
   }
@@ -285,20 +241,23 @@ export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, On
     params.end.setSeconds(0);
     params.end.setMilliseconds(0);
 
+    this.fg.reset();
+
     this.fg.controls.workCalendarId.setValue(params.workCalendarId);
 
-    this.fg.controls.start.setValue(formatDate(params.start,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
-    this.fg.controls.end.setValue(formatDate(params.end,'YYYY-MM-ddTHH:mm:ss.SSS','ko-kr'));
+    this.fg.controls.start.setValue(formatDate(params.start,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
+    this.fg.controls.end.setValue(formatDate(params.end,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
 
     this.fg.controls.allDay.setValue(params.allDay);
 
-    this.isAllDay.set(params.allDay);
-
+    this.fg.controls.id.disable();
     this.focusInput();
   }
 
   modifyForm(formData: WorkCalendarEvent): void {
     this.fg.patchValue(formData);
+
+    this.fg.controls.id.disable({onlySelf: false, emitEvent: true});
   }
 
   closeForm(): void {
@@ -309,16 +268,18 @@ export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, On
     const url =  GlobalProperty.serverUrl() + `/api/grw/workcalendarevent/${id}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<WorkCalendarEvent>>(url, options).pipe(
+    this.http
+        .get<ResponseObject<WorkCalendarEvent>>(url, options)
+        .pipe(
             //catchError(this.handleError<ResponseObject<WorkCalendarEvent>>('getWorkGroup', undefined))
-            )
-            .subscribe(
-              (model: ResponseObject<WorkCalendarEvent>) => {
-                if (model.data) {
-                  this.modifyForm(model.data);
-                }
-              }
-          )
+        )
+        .subscribe(
+          (model: ResponseObject<WorkCalendarEvent>) => {
+            if (model.data) {
+              this.modifyForm(model.data);
+            }
+          }
+        )
   }
 
   save(): void {
@@ -373,13 +334,10 @@ export class WorkCalendarEventFormComponent implements OnInit, AfterViewInit, On
         )
         .subscribe(
           (model: ResponseList<WorkCalendar>) => {
-            this.workGroupList = model.data;
+            this.workGroupList.set(model.data);
             //this.notifyService.changeMessage(model.message);
           }
         )
-}
-
-  allDayCheck(check: boolean) {
-    this.isAllDay.set(check);
   }
+
 }

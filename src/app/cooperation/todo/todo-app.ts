@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -55,7 +55,7 @@ export interface TodoModel {
       (onTodoAdded)="addTodo($event)">
     </app-todo-add-input>
 
-    @for (todo of todos; track todo.todoId) {
+    @for (todo of todos(); track todo.todoId) {
       <app-todo-text [todo]="todo" (stateChanged)="toggleTodo($event)" (deleteClicked)="deleteTodo($event)"></app-todo-text>
     }
   </div>
@@ -107,9 +107,9 @@ app-todo, app-add-todo {
 }
   `
 })
-export class TodoApp implements OnInit {
+export class TodoApp {
 
-  todos: TodoModel[];
+  todos = signal<TodoModel[]>([]);
   today: Date = new Date();
 
   selectedPkTodoGroup: string = '';
@@ -118,15 +118,10 @@ export class TodoApp implements OnInit {
   private http = inject(HttpClient);
 
   constructor() {
-    this.todos = [
-
+    //this.todos = [
       // {isCompleted: false, todo: '할일1'},
       // {isCompleted: false, todo: '할일2'}
-    ];
-  }
-
-  ngOnInit() {
-
+    //];
   }
 
   toggleTodo(todo: TodoModel) {
@@ -152,13 +147,13 @@ export class TodoApp implements OnInit {
         )
         .subscribe(
           (model: ResponseObject<TodoModel>) => {
-            console.log(model);
-            this.todos.push({
+
+            this.todos.update(value => [...value, {
               groupId : model.data.groupId,
               todoId : model.data.todoId,
               completed : model.data.completed,
               todo : model.data.todo
-            });
+            }]);
           }
         )
   }
@@ -172,9 +167,16 @@ export class TodoApp implements OnInit {
         )
         .subscribe(
           (model: ResponseObject<TodoModel>) => {
-            let index = this.todos.findIndex((e) => e.groupId === todo.groupId && e.todoId === todo.todoId);
+            let index = this.todos().findIndex((e) => e.groupId === todo.groupId && e.todoId === todo.todoId);
             console.log(index);
-            this.todos.splice(index, 1);
+            //this.todos().splice(index, 1);
+
+            this.todos.update(value => {
+              const newArray = [...value];
+              newArray.splice(index, 1);
+              return newArray;
+            });
+            //this.todos.set(this.todos().splice(index, 1));
           }
         );
   }
@@ -185,13 +187,14 @@ export class TodoApp implements OnInit {
     const url = GlobalProperty.serverUrl() + `/api/todo/group/${groupId}/list`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseList<TodoModel>>(url, options).pipe(
+    this.http
+        .get<ResponseList<TodoModel>>(url, options)
+        .pipe(
          // catchError(this.handleError<ResponseList<TodoModel>>('getTodoList', undefined))
         )
         .subscribe(
           (model: ResponseList<TodoModel>) => {
-            console.log(model);
-            this.todos = model.data;
+            this.todos.set(model.data);
           }
         );
   }
@@ -200,7 +203,9 @@ export class TodoApp implements OnInit {
     const url = GlobalProperty.serverUrl() + `/api/todo/group/${groupId}`;
     const options = getHttpOptions();
 
-    this.http.delete<ResponseObject<TodoGroupModel>>(url, options).pipe(
+    this.http
+        .delete<ResponseObject<TodoGroupModel>>(url, options)
+        .pipe(
           //catchError(this.handleError<ResponseObject<TodoGroupModel>>('saveTodoGroup', undefined))
         )
         .subscribe(

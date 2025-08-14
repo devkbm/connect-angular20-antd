@@ -159,6 +159,8 @@ export class CompanyFormComponent  {
     effect(() => {
       if (this.formDataId()) {
         this.get(this.formDataId());
+      } else {
+        this.newForm();
       }
     })
   }
@@ -169,11 +171,16 @@ export class CompanyFormComponent  {
 
   newForm() {
     this.fg.reset();
+
+    this.fg.controls.companyCode.enable();
+
     this.focusInput();
   }
 
   modifyForm(formData: Company) {
     this.fg.patchValue(formData);
+
+    this.fg.controls.companyCode.disable();
   }
 
   closeForm() {

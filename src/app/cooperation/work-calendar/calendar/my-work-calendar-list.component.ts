@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, output } from '@angular/core';
+import { Component, OnInit, inject, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -23,7 +23,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
     </div>
     -->
     <nz-checkbox-group [(ngModel)]="value" (ngModelChange)="selectionChanged($event)">
-      @for (item of workGroupList; track item) {
+      @for (item of workGroupList(); track item) {
         <nz-row [nzGutter]="4">
           <nz-col>
             <div class="color-box" [style.background-color]="item.color">&nbsp;</div>
@@ -45,7 +45,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 })
 export class MyWorkCalendarListComponent implements OnInit {
 
-  workGroupList: any[] = [];
+  workGroupList = signal<any[]>([]);
 
   value: Array<string | number> = [];
   options: NzCheckboxOption[] = [];
@@ -69,9 +69,9 @@ export class MyWorkCalendarListComponent implements OnInit {
         )
         .subscribe(
           (model: ResponseList<any>) => {
-            this.workGroupList = model.data;
+            this.workGroupList.set(model.data);
 
-            for (const opt of this.workGroupList) {
+            for (const opt of this.workGroupList()) {
               this.options.push({label: opt.name!, value: opt.id!})
             }
           }
