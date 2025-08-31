@@ -130,7 +130,7 @@ export class SideMenuComponent {
   }
 
   saveSessionUrl(ev: any) {
-    sessionStorage.setItem('lastVisitUrl', this.router.getCurrentNavigation()?.initialUrl.toString()!);
+    sessionStorage.setItem('lastVisitUrl', this.router.currentNavigation()?.initialUrl.toString()!);
   }
 
   getMenuList(menuGroupCode: string): void {

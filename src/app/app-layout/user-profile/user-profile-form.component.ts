@@ -18,8 +18,6 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseList } from 'src/app/core/model/response-list';
 import { SessionManager } from 'src/app/core/session-manager';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
-
 @Component({
   selector: 'app-user-profile-form',
   imports: [
@@ -31,7 +29,6 @@ import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-
     NzAvatarModule,
     NzIconModule,
     NzButtonModule,
-    NzFormItemCustomComponent,
 ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical">
@@ -47,36 +44,40 @@ import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-
 
       {{this.fg.value |json}}
 
-      <nz-form-item-custom for="userId" label="사용자ID" required="true">
+      <nz-form-item>
+        <nz-form-label nzFor="userId" nzRequired>사용자ID</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <input nz-input id="userId" formControlName="userId" required
           />
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
 
-      <nz-form-item-custom for="beforePassword" label="기존 비밀번호">
+      <nz-form-item>
+        <nz-form-label nzFor="beforePassword" nzRequired>기존 비밀번호</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <input nz-input id="beforePassword" formControlName="beforePassword" required
             placeholder="기존 비밀번호를 입력해주세요."
           />
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
 
-      <nz-form-item-custom for="afterPassword" label="변경 비밀번호">
+      <nz-form-item>
+        <nz-form-label nzFor="afterPassword" nzRequired>변경 비밀번호</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <input nz-input id="afterPassword" formControlName="afterPassword" required
             placeholder="변경 비밀번호를 입력해주세요."
           />
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
 
-      <nz-form-item-custom for="afterPasswordConfirm" label="변경 비밀번호 확인">
+      <nz-form-item>
+        <nz-form-label nzFor="afterPasswordConfirm" nzRequired>변경 비밀번호 확인</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <input nz-input id="afterPasswordConfirm" formControlName="afterPasswordConfirm" required
             placeholder="변경 비밀번호를 한번 더 입력해주세요."
           />
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
     </form>
 
     <button nz-button nzType="primary" (click)="passwordChange()">
