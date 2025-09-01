@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, OnInit, AfterViewInit, inject, Renderer2, input, effect, output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
-
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { BizCodeType } from './biz-code-type.model';
 import { SelectControlModel } from 'src/app/core/model/select-control.model.ts';
@@ -15,11 +17,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-import { HttpClient } from '@angular/common/http';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
+
 
 @Component({
   selector: 'app-biz-code-type-form',
@@ -31,7 +30,6 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzInputModule,
     NzInputNumberModule,
     NzCrudButtonGroupComponent,
-    NzFormItemCustomComponent,
     NzInputSelectComponent
 ],
   template: `
@@ -48,29 +46,32 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="typeId" label="업무코드분류ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeId" nzRequired>업무코드분류ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeId" formControlName="typeId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="typeName" label="코드분류명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeName" nzRequired>코드분류명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeName" formControlName="typeName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="sequence" label="순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="sequence" nzRequired>순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999"
               ></nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
       </div>
@@ -78,7 +79,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="bizType" label="시스템" required>
+          <nz-form-item>
+            <nz-form-label nzFor="bizType" nzRequired>시스템</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="bizType" itemId="bizType"
@@ -86,20 +88,21 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment" nzRequired>비고</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="comment" formControlName="comment"
               placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 

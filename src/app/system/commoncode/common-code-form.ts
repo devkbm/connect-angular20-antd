@@ -16,7 +16,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzFormItemCustomComponent } from "src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+
 import { NzInputTreeSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select/nz-input-tree-select.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 
@@ -30,7 +30,6 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent,
     NzInputSelectComponent,
     NzInputTreeSelectComponent
   ],
@@ -52,7 +51,8 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="systemTypeCode" label="시스템구분코드" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="systemTypeCode" nzRequired>시스템구분코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required="true"
                 formControlName="systemTypeCode" itemId="systemTypeCode"
@@ -60,12 +60,13 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <!--상위 공통코드 필드-->
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="parentId" label="상위 공통코드">
+          <nz-form-item>
+            <nz-form-label nzFor="parentId" nzRequired>상위 공통코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-tree-select
                 formControlName="parentId" itemId="parentId"
@@ -73,7 +74,7 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
                 placeholder="Please select">
               </nz-input-tree-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
       </div>
@@ -81,32 +82,35 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="code" label="코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="code" nzRequired>코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="code" formControlName="code" required
                 placeholder="코드를 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="codeName" label="코드명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="codeName" nzRequired>코드명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="codeName" formControlName="codeName" required
                 placeholder="코드명 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="codeNameAbbreviation" label="코드약어">
+          <nz-form-item>
+            <nz-form-label nzFor="codeNameAbbreviation">코드약어</nz-form-label>
             <nz-form-control>
               <input nz-input id="codeNameAbbreviation" formControlName="codeNameAbbreviation"
                 placeholder="코드약어를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
       </div>
@@ -114,53 +118,58 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="5">
-          <nz-form-item-custom for="fromDate" label="시작일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="fromDate" nzRequired>시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="fromDate" formControlName="fromDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
         <div nz-col nzSpan="5">
-          <nz-form-item-custom for="toDate" label="종료일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="toDate" nzRequired>종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="5">
-          <nz-form-item-custom for="seq" label="출력 순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="seq" nzRequired>출력 순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="seq" formControlName="seq" required
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="5">
-          <nz-form-item-custom for="lowLevelCodeLength" label="하위 코드 길이">
+          <nz-form-item>
+            <nz-form-label nzFor="lowLevelCodeLength">하위 코드 길이</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="lowLevelCodeLength" formControlName="lowLevelCodeLength"
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
       <!-- 4 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="cmt" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="cmt">비고</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="cmt" formControlName="cmt"
                 placeholder="비고" [rows]="13">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 

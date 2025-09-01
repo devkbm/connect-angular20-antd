@@ -1,18 +1,16 @@
 import { Component, Renderer2, effect, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
+import { HttpClient } from '@angular/common/http';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 export interface Company {
   /**
@@ -51,7 +49,6 @@ export interface Company {
     NzFormModule,
     NzInputModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent
 ],
   template: `
     {{fg.getRawValue()| json}} - {{fg.valid}}
@@ -70,21 +67,23 @@ export interface Company {
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="companyCode" label="회사코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="companyCode" nzRequired>회사코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="companyCode" formControlName="companyCode" required
                 placeholder="회사코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="companyName" label="회사명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="companyName" nzRequired>회사명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="companyName" formControlName="companyName" required
                 placeholder="회사명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
       </div>
@@ -92,39 +91,43 @@ export interface Company {
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="businessRegistrationNumber" label="사업자등록번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="businessRegistrationNumber" nzRequired>사업자등록번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="businessRegistrationNumber" formControlName="businessRegistrationNumber" required
                 placeholder="사업자등록번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="coporationNumber" label="법인번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="coporationNumber" nzRequired>법인번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="coporationNumber" formControlName="coporationNumber" required
                 placeholder="법인번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="nameOfRepresentative" label="대표자" required>
+          <nz-form-item>
+            <nz-form-label nzFor="nameOfRepresentative" nzRequired>대표자</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="nameOfRepresentative" formControlName="nameOfRepresentative" required
                 placeholder="대표자를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="establishmentDate" label="시작일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="establishmentDate" nzRequired>시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="establishmentDate" formControlName="establishmentDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 

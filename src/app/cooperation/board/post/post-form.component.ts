@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzUploadChangeParam, NzUploadComponent, NzUploadFile } from 'ng-zorro-antd/upload';
-import { NzFormItemCustomComponent } from "src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 import { NzInputCkeditorComponent } from 'src/app/third-party/ckeditor/nz-input-ckeditor.component';
 import { NzFileUploadComponent } from 'src/app/third-party/ng-zorro/nz-file-upload/nz-file-upload.component';
@@ -46,7 +45,6 @@ export interface Post {
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
     NzInputCkeditorComponent,
     NzCrudButtonGroupComponent,
     //NzFileUploadComponent,
@@ -65,15 +63,18 @@ export interface Post {
         }
       </ng-template>
 
-      <nz-form-item-custom for="title" label="메뉴코드" required>
+
+      <nz-form-item>
+        <nz-form-label nzFor="title" nzRequired>메뉴코드</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <input nz-input id="title" formControlName="title" required
             placeholder="제목을 입력해주세요."
           />
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
 
-      <nz-form-item-custom for="contents" label="내용">
+      <nz-form-item>
+        <nz-form-label nzFor="contents">내용</nz-form-label>
         <nz-form-control>
           @defer {
             <nz-input-ckeditor
@@ -83,7 +84,7 @@ export interface Post {
             </nz-input-ckeditor>
           }
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>
 
       <app-post-file-upload
         [attachedFileList]="attachedFileList"

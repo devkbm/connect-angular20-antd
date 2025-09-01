@@ -14,7 +14,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -31,7 +31,6 @@ import { DeptFormValidatorService } from './validator/dept-form-validator.servic
     NzInputNumberModule,
     NzTreeSelectModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent
 ],
   template: `
     <!--{{fg.getRawValue()| json}} - {{fg.valid}}-->
@@ -73,95 +72,106 @@ import { DeptFormValidatorService } from './validator/dept-form-validator.servic
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="deptCode" label="부서코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="deptCode" nzRequired>부서코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="deptCode" formControlName="deptCode" required
                 placeholder="부서코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="deptNameKorean" label="부서코드명(한글)" required>
+          <nz-form-item>
+            <nz-form-label nzFor="deptNameKorean" nzRequired>부서코드명(한글)</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="deptNameKorean" formControlName="deptNameKorean" required
                 placeholder="부서코드명(한글)을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="deptAbbreviationKorean" label="부서코드명(한글) 약어">
+          <nz-form-item>
+            <nz-form-label nzFor="deptAbbreviationKorean">부서코드명(한글) 약어</nz-form-label>
             <nz-form-control>
               <input nz-input id="deptAbbreviationKorean" formControlName="deptAbbreviationKorean"
                 placeholder="부서코드명(한글) 약어를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="deptNameEnglish" label="부서코드명(영문)" required>
+          <nz-form-item>
+            <nz-form-label nzFor="deptNameEnglish" nzRequired>부서코드명(영문)</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="deptNameEnglish" formControlName="deptNameEnglish" required
                 placeholder="부서코드명(영문)을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="deptAbbreviationEnglish" label="부서코드명(영문) 약어">
+          <nz-form-item>
+            <nz-form-label nzFor="deptAbbreviationEnglish">부서코드명(영문) 약어</nz-form-label>
             <nz-form-control>
               <input nz-input id="deptAbbreviationEnglish" formControlName="deptAbbreviationEnglish"
                 placeholder="부서코드명(영문) 약어를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
+
       </div>
 
       <!-- 4 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="fromDate" label="시작일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="fromDate" nzRequired>시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="fromDate" formControlName="fromDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="toDate" label="종료일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="toDate" nzRequired>종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="seq" label="출력 순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="seq" nzRequired>출력 순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="seq" formControlName="seq" required
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
+
       </div>
 
       <!-- 5 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">설명</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="설명을 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 

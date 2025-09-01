@@ -2,9 +2,12 @@ import { Component, AfterViewInit, inject, Renderer2, input, effect, output } fr
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { BizCode } from './biz-code.model';
 
@@ -12,10 +15,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzFormItemCustomComponent } from "src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
-import { HttpClient } from '@angular/common/http';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
+
 
 @Component({
   selector: 'app-biz-code-form',
@@ -27,7 +27,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzInputModule,
     NzCheckboxModule,
     NzInputNumberModule,
-    NzFormItemCustomComponent
+
 ],
   template: `
     {{fg.getRawValue() | json}}
@@ -43,62 +43,69 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="typeId" label="업무코드분류ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeId" nzRequired>업무코드분류ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeId" formControlName="typeId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="code" label="코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="code" nzRequired>코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="code" formControlName="code" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="codeName" label="코드명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="codeName" nzRequired>코드명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="codeName" formControlName="codeName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="useYn" label="사용여부" required>
+          <nz-form-item>
+            <nz-form-label nzFor="useYn" nzRequired>사용여부</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <label nz-checkbox nzId="useYn" formControlName="useYn"></label>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="sequence" label="순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="sequence" nzRequired>순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment" nzRequired>비고</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="비고를 입력해주세요." [rows]="20">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
+
       </div>
 
     </form>
