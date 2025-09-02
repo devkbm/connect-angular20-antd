@@ -4,13 +4,15 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+
 import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
 
 @Component({
   selector: 'app-form-test',
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    NzGridModule, NzFormModule, NzInputModule,
+    NzGridModule, NzFormModule, NzInputModule, NzSelectModule,
     NzFormItemCustomComponent
 ],
   template: `
@@ -39,6 +41,20 @@ import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-it
             </nz-form-control>
           </nz-form-item-custom>
         </div>
+
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="holidayName" nzRequired>휴일명</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <nz-select formControlName="input_text3">
+                <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+                <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+                <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
       </div>
     </form>
   `,
@@ -49,5 +65,6 @@ export class FormTestComponent {
   fg: FormGroup = inject(FormBuilder).group({
     input_text: ['test', [ Validators.required ]],
     input_text2: ['test', [ Validators.required ]],
+    input_text3: ['test', [ Validators.required ]],
   });
 }
