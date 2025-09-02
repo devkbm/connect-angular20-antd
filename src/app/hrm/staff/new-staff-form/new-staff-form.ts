@@ -12,7 +12,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputRregnoComponent } from 'src/app/third-party/ng-zorro/nz-input-rregno/nz-input-rregno.component';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 
 import { NewStaff } from './new-staff-form.model';
 
@@ -24,7 +24,7 @@ import { NewStaff } from './new-staff-form.model';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+
     NzInputRregnoComponent
   ],
   template: `
@@ -44,33 +44,35 @@ import { NewStaff } from './new-staff-form.model';
       <!-- 1 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="staffNo" label="직원번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="name" label="직원명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="name" nzRequired>직원명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="name" formControlName="name" required
                 placeholder="직원명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="residentRegistrationNumber" label="주민등록번호" required>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-rregno
+          <nz-form-item>
+            <nz-form-label nzFor="residentRegistrationNumber" nzRequired>주민등록번호</nz-form-label>
+            <nz-input-rregno
                 formControlName="residentRegistrationNumber" itemId="residentRegistrationNumber"
                 placeholder="주민등록번호를 입력해주세요."
                 [required]="true">
               </nz-input-rregno>
-            </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
+
         </div>
       </div>
 

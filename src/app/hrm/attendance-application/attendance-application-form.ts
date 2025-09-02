@@ -17,7 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 import { NzInputSelectStaffComponent } from 'src/app/third-party/ng-zorro/nz-input-select-staff/nz-input-select-staff.component';
@@ -33,7 +33,7 @@ import { HttpClient } from '@angular/common/http';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+
     NzDividerModule,
     NzDatePickerModule,
     NzInputSelectComponent,
@@ -58,29 +58,32 @@ import { HttpClient } from '@angular/common/http';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="dutyId" label="근태신청ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="dutyId" nzRequired>근태신청ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="dutyId" formControlName="dutyId" readonly placeholder="신규"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="staffNo" label="직원">
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select-staff required
                 formControlName="staffNo" itemId="staffNo"
                 placeholder="Please select">
               </nz-input-select-staff>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="dutyCode" label="근태코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="dutyCode" nzRequired>근태코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="dutyCode" itemId="dutyCode"
@@ -88,36 +91,39 @@ import { HttpClient } from '@angular/common/http';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="dutyReason" label="근태사유">
+          <nz-form-item>
+            <nz-form-label nzFor="dutyReason" nzRequired>근태사유</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="dutyReason" formControlName="dutyReason"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="fromDate" label="근태 시작일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="fromDate" nzRequired>근태 시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="fromDate" formControlName="fromDate" [nzFormat]="'yyyy-MM-dd'">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="toDate" label="근태 종료일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="toDate" nzRequired>근태 종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>               
         </div>
       </div>
 

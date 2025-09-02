@@ -11,7 +11,7 @@ import { MenuGroup } from '../menu/menu-group.model';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -27,7 +27,7 @@ import { RoleFormValidatorService } from './validator/role-form-validator.servic
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+    
     NzInputSelectComponent
   ],
   template: `
@@ -45,21 +45,24 @@ import { RoleFormValidatorService } from './validator/role-form-validator.servic
       </ng-template>
 
       <div class="card-1">
-        <nz-form-item-custom for="roleCode" label="롤 코드" required>
+        <nz-form-item>
+          <nz-form-label nzFor="roleCode" nzRequired>롤 코드</nz-form-label>
           <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
             <input nz-input id="roleCode" formControlName="roleCode" required
               placeholder="롤 코드를 입력해주세요."/>
           </nz-form-control>
-        </nz-form-item-custom>
+        </nz-form-item>        
 
-        <nz-form-item-custom for="roleName" label="롤 명" required>
+        <nz-form-item>
+          <nz-form-label nzFor="roleName" nzRequired>롤 명</nz-form-label>
           <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
             <input nz-input id="roleName" formControlName="roleName" required
               placeholder="롤 명을 입력해주세요."/>
           </nz-form-control>
-        </nz-form-item-custom>
+        </nz-form-item>                
 
-        <nz-form-item-custom for="menuGroupCode" label="메뉴그룹" required>
+        <nz-form-item>
+          <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹</nz-form-label>
           <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
             <nz-input-select required
               formControlName="menuGroupCode" itemId="menuGroupCode"
@@ -67,15 +70,16 @@ import { RoleFormValidatorService } from './validator/role-form-validator.servic
               placeholder="Please select"
             ></nz-input-select>
           </nz-form-control>
-        </nz-form-item-custom>
-
-        <nz-form-item-custom for="description" label="설명">
+        </nz-form-item>                
+        
+        <nz-form-item>
+          <nz-form-label nzFor="description">설명</nz-form-label>
           <nz-form-control>
             <textarea nz-input id="description" formControlName="description"
             placeholder="권한에 대한 설명을 입력해주세요." [rows]="10">
             </textarea>
           </nz-form-control>
-        </nz-form-item-custom>
+        </nz-form-item>                        
       </div>
     </form>
   `,

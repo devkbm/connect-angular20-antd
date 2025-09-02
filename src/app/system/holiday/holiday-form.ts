@@ -10,7 +10,7 @@ import { Holiday } from './holiday.model';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzFormItemCustomComponent } from "src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -25,7 +25,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzFormModule,
     NzInputModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent
+
   ],
   template: `
     {{fg.value | json}} - {{fg.valid}}
@@ -44,22 +44,24 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="date" label="휴일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="date" nzRequired>휴일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="date" formControlName="date" style="width: 150px">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="holidayName" label="휴일명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="holidayName" nzRequired>휴일명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="holidayName" formControlName="holidayName" required
                 placeholder="휴일명을 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
       </div>
@@ -67,13 +69,14 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">설명</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="설명을 입력해주세요." [rows]="13">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 

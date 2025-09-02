@@ -11,7 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
@@ -35,7 +35,7 @@ export interface PayItem {
     ReactiveFormsModule,
     NzFormModule,
     NzInputNumberModule,
-    NzFormItemCustomComponent
+
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical" style="padding: 0px; margin: 0px;">
@@ -51,47 +51,52 @@ export interface PayItem {
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="itemCode" label="급여항목코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="itemCode" nzRequired>급여항목코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="itemCode" formControlName="itemCode" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="itemName" label="급여항목명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="itemName" nzRequired>급여항목명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="itemName" formControlName="itemName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="type" label="구분" required>
+          <nz-form-item>
+            <nz-form-label nzFor="type" nzRequired>구분</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="type" formControlName="type"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="usePayTable" label="급여테이블Y/N" required>
+          <nz-form-item>
+            <nz-form-label nzFor="usePayTable">급여테이블Y/N</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-switch nzId="usePayTable" formControlName="usePayTable"></nz-switch>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="seq" label="순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="seq" nzRequired>순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="seq" formControlName="seq" required
                 [nzMin]="0" [nzMax]="9999" placeholder="순번을 입력해주세요.">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
       </div>

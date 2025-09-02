@@ -21,7 +21,7 @@ import { FormlyModule } from '@ngx-formly/core';
 import { FormlyNgZorroAntdModule } from '@ngx-formly/ng-zorro-antd';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { HrmCodeFormValidatorService } from './validator/hrm-code-form-validator.service';
 import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
 
@@ -36,7 +36,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
     NzInputNumberModule,
     NzCheckboxModule,
     NzDividerModule,
-    NzFormItemCustomComponent,
+
     FormlyModule,
     FormlyNgZorroAntdModule
   ],
@@ -57,60 +57,66 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="typeId" label="구분ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeId" nzRequired>구분ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeId" formControlName="typeId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="code" label="코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="code" nzRequired>코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="code" formControlName="code" required
                 placeholder="코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="10">
-        <nz-form-item-custom for="codeName" label="코드명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="codeName" nzRequired>코드명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="codeName" formControlName="codeName" required
                 placeholder="코드명를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="sequence" label="출력 순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="sequence" nzRequired>출력 순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999"
               ></nz-input-number>
-            </nz-form-control>
-          </nz-form-item-custom>
+            </nz-form-control>          
+          </nz-form-item>                                                          
         </div>
 
         <div nz-col nzSpan="2">
-          <nz-form-item-custom for="useYn" label="사용" required>
+          <nz-form-item>
+            <nz-form-label nzFor="useYn" nzRequired>사용</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <label nz-checkbox nzId="useYn" formControlName="useYn"></label>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                    
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">설명</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="설명을 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                              
         </div>
       </div>
 

@@ -14,7 +14,6 @@ import { pairwise } from 'rxjs';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -58,8 +57,7 @@ export interface NewFormValue {
     NzTimePickerModule,
     NzSwitchModule,
     NzIconModule,
-
-    NzFormItemCustomComponent,
+    
     NzInputSelectComponent
   ],
   template: `
@@ -75,7 +73,8 @@ export interface NewFormValue {
       <!-- 1 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="workCalendarId" label="작업그룹 ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="workCalendarId" nzRequired>작업그룹 ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="workCalendarId" itemId="workCalendarId"
@@ -83,22 +82,24 @@ export interface NewFormValue {
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="id" label="일정ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="id" nzRequired>일정ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="id" formControlName="id" required
                 placeholder="일정ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="start" label="시작일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="start" nzRequired>시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               @if (this.fg.value.allDay) {
                 <nz-date-picker nzId="start" formControlName="start" required></nz-date-picker>
@@ -109,11 +110,12 @@ export interface NewFormValue {
                 ></nz-date-picker>
               }
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="end" label="종료일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="end" nzRequired>종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               @if (this.fg.value.allDay) {
                 <nz-date-picker nzId="end" formControlName="end" required></nz-date-picker>
@@ -124,11 +126,12 @@ export interface NewFormValue {
                 ></nz-date-picker>
               }
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="useYn" label="종일">
+          <nz-form-item>
+            <nz-form-label nzFor="useYn">종일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <!--<label nz-checkbox nzId="allDay" formControlName="allDay" (ngModelChange)="allDayCheck($event)"></label>-->
               <nz-switch nzId="allDay" formControlName="allDay"
@@ -137,20 +140,20 @@ export interface NewFormValue {
                   <ng-template #checkedTemplate><span nz-icon nzType="check"></span></ng-template>
                   <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
               </nz-switch>
-
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
       </div>
 
-      <nz-form-item-custom for="text" label="제목">
+      <nz-form-item>
+        <nz-form-label nzFor="text">제목</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
           <textarea nz-input id="text" formControlName="text"
             placeholder="제목을 입력해주세요." [rows]="10">
           </textarea>
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>       
     </form>
   `,
   styles: []

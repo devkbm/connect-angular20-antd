@@ -9,12 +9,11 @@ import { MenuGroup } from './menu-group.model';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { MenuGroupFormValidatorService } from './validator/menu-group-form-validator.service';
-import { sequence } from '@angular/animations';
 
 @Component({
   selector: 'app-menu-group-form',
@@ -24,7 +23,7 @@ import { sequence } from '@angular/animations';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent
+
 ],
   template: `
     {{fg.value | json}}
@@ -44,48 +43,53 @@ import { sequence } from '@angular/animations';
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuGroupCode" label="메뉴그룹코드" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요." />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuGroupName" label="메뉴그룹명" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="menuGroupName" nzRequired>메뉴그룹명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupName" formControlName="menuGroupName" placeholder="메뉴그룹명을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuGroupUrl" label="메뉴그룹URL" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="menuGroupUrl" nzRequired>메뉴그룹URL</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupUrl" formControlName="menuGroupUrl" placeholder="메뉴그룹URL을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="sequence" label="순번" >
+          <nz-form-item>
+            <nz-form-label nzFor="sequence">순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                      
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="description" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="description">비고</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="description" formControlName="description"
               placeholder="비고" [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                
         </div>
       </div>
 

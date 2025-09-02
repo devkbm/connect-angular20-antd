@@ -11,7 +11,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 
 @Component({
@@ -23,7 +23,6 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzFormModule,
     NzInputModule,
     NzCrudButtonGroupComponent,
-    NzFormItemCustomComponent,
     NzInputSelectComponent
   ],
   template: `
@@ -40,23 +39,26 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="teamId" label="팀ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="teamId" nzRequired>팀ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="teamId" formControlName="teamId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="teamName" label="팀명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="teamName" nzRequired>팀명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="teamName" formControlName="teamName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="memberList" label="팀원" required>
+          <nz-form-item>
+            <nz-form-label nzFor="memberList" nzRequired>팀원</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="memberList" itemId="memberList"
@@ -64,7 +66,7 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
                 placeholder="팀원을 선택해주세요.">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
     </form>

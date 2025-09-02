@@ -14,7 +14,6 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 
 @Component({
   selector: 'app-word-form',
@@ -24,7 +23,7 @@ import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+        
     NzCrudButtonGroupComponent
   ],
   template: `
@@ -43,43 +42,47 @@ import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-
       <!-- 1 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="logicalName" label="logicalName" required>
+          <nz-form-item>
+            <nz-form-label nzFor="logicalName" nzRequired>logicalName</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="logicalName" formControlName="logicalName" required
                 placeholder="logicalName을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="physicalName" label="physicalName" required>
+          <nz-form-item>
+            <nz-form-label nzFor="physicalName" nzRequired>physicalName</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="physicalName" formControlName="physicalName" required
                 placeholder="physicalName 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="logicalNameEng" label="logicalNameEng">
+          <nz-form-item>
+            <nz-form-label nzFor="logicalNameEng">logicalNameEng</nz-form-label>
             <nz-form-control>
               <input nz-input id="logicalNameEng" formControlName="logicalNameEng"
                 placeholder="logicalNameEng 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 
       <!-- 2 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">비고</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 

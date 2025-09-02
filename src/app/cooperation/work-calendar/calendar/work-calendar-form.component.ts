@@ -12,7 +12,6 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzInputNgxColorsComponent } from 'src/app/third-party/ngx-colors/nz-input-ngx-colors.component';
 
@@ -37,7 +36,6 @@ export interface WorkCalendar {
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
     NzInputSelectComponent,
     NzInputNgxColorsComponent,
   ],
@@ -56,36 +54,40 @@ export interface WorkCalendar {
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="workCalendarId" label="CALEDNAR ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="workCalendarId" nzRequired>CALEDNAR ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="workCalendarId" formControlName="workCalendarId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="workCalendarName" label="CALENDAR NAME" required>
+          <nz-form-item>
+            <nz-form-label nzFor="workCalendarName" nzRequired>CALENDAR NAME</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="workCalendarName" formControlName="workCalendarName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="color" label="색상">
+          <nz-form-item>
+            <nz-form-label nzFor="color">색상</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-ngx-colors formControlName="color"
                 [itemId]="'color'"
                 [colorPalette]="preset_colors">
               </nz-input-ngx-colors>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="memberList" label="팀원" required>
+        <nz-form-item>
+            <nz-form-label nzFor="memberList" nzRequired>팀원</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="memberList" itemId="memberList"
@@ -93,7 +95,7 @@ export interface WorkCalendar {
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
       </div>

@@ -19,7 +19,7 @@ import { MenuRoleTreeComponent } from './menu-role-tree.component';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -33,7 +33,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzFormModule,
     NzButtonModule,
     NzDrawerModule,
-    NzFormItemCustomComponent,
+
     NzInputSelectComponent,
     MenuGroupGridComponent,
     MenuGroupFormComponent,
@@ -48,7 +48,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     <button nz-button (click)="newMenuGroup()">신규 메뉴그룹</button>
     <button nz-button (click)="newMenu()">신규 메뉴</button>
     <div nz-col nzSpan="12">
-      <nz-form-item-custom for="menuGroup" label="메뉴그룹">
+      <nz-form-item>
+        <nz-form-label nzFor="menuGroup" nzRequired>메뉴그룹</nz-form-label>
         <nz-form-control>
           <nz-input-select
             [(ngModel)]="menuGroup.selectedItem" itemId="menuGroup"
@@ -56,11 +57,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
             placeholder="Please select">
           </nz-input-select>
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>      
     </div>
 
     <div nz-col nzSpan="12">
-      <nz-form-item-custom for="roleCode" label="롤">
+      <nz-form-item>
+        <nz-form-label nzFor="roleCode" nzRequired>롤</nz-form-label>
         <nz-form-control>
           <nz-input-select
             [(ngModel)]="role.selectedItem" itemId="roleCode"
@@ -68,7 +70,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
             placeholder="Please select">
           </nz-input-select>
         </nz-form-control>
-      </nz-form-item-custom>
+      </nz-form-item>      
     </div>
 
     <div class="page-content">

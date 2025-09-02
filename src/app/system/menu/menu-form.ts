@@ -13,7 +13,7 @@ import { MenuGroup } from './menu-group.model';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+
 import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-select/nz-input-select.component";
 import { NzInputTreeSelectComponent } from "../../third-party/ng-zorro/nz-input-tree-select/nz-input-tree-select.component";
 import { HttpClient } from '@angular/common/http';
@@ -30,7 +30,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
-    NzFormItemCustomComponent,
+
     NzInputSelectComponent,
     NzInputTreeSelectComponent
 ],
@@ -51,7 +51,8 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
       <!-- 1 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="menuGroupCode" label="메뉴그룹코드" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required="true"
                 formControlName="menuGroupCode" itemId="menuGroupCode"
@@ -61,11 +62,12 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
               >
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="parentMenuCode" label="상위 메뉴" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="parentMenuCode" nzRequired>상위 메뉴</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-tree-select
                 formControlName="parentMenuCode" itemId="parentMenuCode"
@@ -73,33 +75,36 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="상위 메뉴 없음">
               </nz-input-tree-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
       </div>
 
       <!-- 2 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuCode" label="메뉴코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="menuCode" nzRequired>메뉴코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuCode" formControlName="menuCode" required
                 placeholder="메뉴코드를 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuName" label="메뉴명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="menuName" nzRequired>메뉴명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuName" formControlName="menuName" required
                 placeholder="메뉴명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="menuType" label="메뉴타입" required="true">
+          <nz-form-item>
+            <nz-form-label nzFor="menuType" nzRequired>메뉴타입</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required="true"
                 formControlName="menuType" itemId="menuType"
@@ -107,17 +112,18 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="메뉴타입을 선택해주세요">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="sequence" label="순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="sequence" nzRequired>순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999" placeholder="순번을 입력해주세요.">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
       </div>
@@ -125,16 +131,18 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
       <!-- 3 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="appUrl" label="APP URL" required>
+          <nz-form-item>
+            <nz-form-label nzFor="appUrl" nzRequired>APP URL</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="appUrl" formControlName="appUrl" required
                 placeholder="URL을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="appIconType" label="APP ICON TYPE" required>
+          <nz-form-item>
+            <nz-form-label nzFor="appIconType" nzRequired>APP ICON TYPE</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <!--
               <input nz-input id="appIconType" formControlName="appIconType" required
@@ -146,11 +154,12 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="ICON TYPE을 입력해주세요.">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="appIcon" label="APP ICON" required>
+          <nz-form-item>
+            <nz-form-label nzFor="appIcon" nzRequired>APP ICON</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
             @if (this.fg.controls.appIconType.value === 'RESOURCE') {
               <nz-input-select required
@@ -163,7 +172,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="ICON을 입력해주세요."/>
             }
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>               
         </div>
       </div>
 

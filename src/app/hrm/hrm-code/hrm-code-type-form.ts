@@ -12,7 +12,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { HrmCodeTypeFormValidatorService } from './validator/hrm-code-type-form-validator.service';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -28,7 +28,7 @@ import { HttpClient } from '@angular/common/http';
     NzInputModule,
     NzInputNumberModule,
     NzDividerModule,
-    NzFormItemCustomComponent
+
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -46,56 +46,61 @@ import { HttpClient } from '@angular/common/http';
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="typeId" label="구분ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeId" nzRequired>구분ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeId" formControlName="typeId" required
                 placeholder="구분ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="typeName" label="구분명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="typeName" nzRequired>구분명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeName" formControlName="typeName" required
                 placeholder="구분명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="sequence" label="출력 순번" required>
+          <nz-form-item>
+            <nz-form-label nzFor="sequence" nzRequired>출력 순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999"
               ></nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">설명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="comment" formControlName="comment"
               placeholder="설명을 입력해주세요." [rows]="8">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="fieldConfig" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="fieldConfig">설명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="fieldConfig" formControlName="fieldConfig"
               placeholder="" [rows]="8">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
       </div>
 

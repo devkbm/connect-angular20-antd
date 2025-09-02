@@ -16,7 +16,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select-dept/nz-input-tree-select-dept.component';
 import { HttpClient } from '@angular/common/http';
@@ -35,7 +35,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzDatePickerModule,
     NzDividerModule,
     NzInputTreeSelectDeptComponent,
-    NzFormItemCustomComponent,
+
     NzInputSelectComponent,
   ],
   template: `
@@ -53,37 +53,41 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="staffNo" label="직원번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="staffName" label="직원명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffName" nzRequired>직원명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffName" formControlName="staffName" required
                 placeholder="직원명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
       </div>
 
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="seq" label="발령순번">
+          <nz-form-item>
+            <nz-form-label nzFor="seq">발령순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="seq" formControlName="seq" readonly
                 placeholder="신규"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="appointmentTypeCode" label="발령분류" required>
+          <nz-form-item>
+            <nz-form-label nzFor="appointmentTypeCode" nzRequired>발령분류</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="appointmentTypeCode" itemId="appointmentTypeCode"
@@ -91,11 +95,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="applyType" label="적용구분" required>
+          <nz-form-item>
+            <nz-form-label nzFor="applyType" nzRequired>적용구분</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="applyType" itemId="applyType"
@@ -103,25 +108,27 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="appointmentDate" label="발령일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="appointmentDate" nzRequired>발령일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="appointmentDate" formControlName="appointmentDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="appointmentEndDate" label="발령종료일">
+          <nz-form-item>
+            <nz-form-label nzFor="appointmentEndDate">발령종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="appointmentEndDate" formControlName="appointmentEndDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                          
         </div>
 
       </div>
@@ -129,21 +136,23 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="recordName" label="발령내용" required>
+          <nz-form-item>
+            <nz-form-label nzFor="recordName" nzRequired>발령내용</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="recordName" formControlName="recordName" required
                 placeholder="발령내용을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                                    
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="comment" label="비고" required>
+          <nz-form-item>
+            <nz-form-label nzFor="comment" nzRequired>비고</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="comment" formControlName="comment" required
                 placeholder="비고내용을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>               
         </div>
 
       </div>
@@ -152,25 +161,28 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 4 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="blngDeptCode" label="소속부서" required>
+          <nz-form-item>
+            <nz-form-label nzFor="blngDeptCode" nzRequired>소속부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-tree-select-dept itemId="blngDeptCode" formControlName="blngDeptCode" required>
               </nz-input-tree-select-dept>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                         
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="workDeptCode" label="근무부서" required>
+          <nz-form-item>
+            <nz-form-label nzFor="workDeptCode" nzRequired>근무부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-tree-select-dept itemId="workDeptCode" formControlName="workDeptCode" required>
               </nz-input-tree-select-dept>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                   
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="dutyResponsibilityCode" label="직책">
+          <nz-form-item>
+            <nz-form-label nzFor="dutyResponsibilityCode">직책</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select
                 formControlName="dutyResponsibilityCode" itemId="dutyResponsibilityCode"
@@ -178,7 +190,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
       </div>
 
@@ -186,7 +198,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 5 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="jobGroupCode" label="직군" required>
+          <nz-form-item>
+            <nz-form-label nzFor="jobGroupCode" nzRequired>직군</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="jobGroupCode" itemId="jobGroupCode"
@@ -194,11 +207,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="jobPositionCode" label="직위" required>
+          <nz-form-item>
+            <nz-form-label nzFor="jobPositionCode" nzRequired>직위</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="jobPositionCode" itemId="jobPositionCode"
@@ -206,11 +220,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="jobCode" label="직무" required>
+          <nz-form-item>
+            <nz-form-label nzFor="jobCode" nzRequired>직무</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="jobCode" itemId="jobCode"
@@ -218,7 +233,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
       </div>
 
@@ -226,7 +241,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <div nz-row nzGutter="8">
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="occupationCode" label="직종" required>
+          <nz-form-item>
+            <nz-form-label nzFor="occupationCode" nzRequired>직종</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="occupationCode" itemId="occupationCode"
@@ -234,11 +250,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                    
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="jobGradeCode" label="직급" required>
+          <nz-form-item>
+            <nz-form-label nzFor="jobGradeCode" nzRequired>직급</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="jobGradeCode" itemId="jobGradeCode"
@@ -246,11 +263,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                              
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="payStepCode" label="호봉" required>
+          <nz-form-item>
+            <nz-form-label nzFor="payStepCode" nzRequired>호봉</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="payStepCode" itemId="payStepCode"
@@ -258,7 +276,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                        
         </div>
       </div>
 

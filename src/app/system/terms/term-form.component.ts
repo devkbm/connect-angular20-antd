@@ -16,7 +16,7 @@ import { DataDomainService } from './data-domain.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
@@ -28,7 +28,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+    
     NzInputSelectComponent,
     NzCrudButtonGroupComponent
   ],
@@ -46,15 +46,17 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="termId" label="용어ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="termId" nzRequired>용어ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="termId" formControlName="termId" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="system" label="시스템" required>
+          <nz-form-item>
+            <nz-form-label nzFor="system" nzRequired>시스템</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="system" itemId="system"
@@ -62,14 +64,15 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="term" label="용어" required>
+          <nz-form-item>
+            <nz-form-label nzFor="term" nzRequired>용어</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="term" itemId="term"
@@ -77,19 +80,21 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="columnName" label="컬럼명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="columnName" nzRequired>컬럼명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="columnName" formControlName="columnName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="dataDomainId" label="도메인" required>
+          <nz-form-item>
+            <nz-form-label nzFor="dataDomainId" nzRequired>도메인</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="dataDomainId" itemId="dataDomainId"
@@ -97,39 +102,42 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="termEng" label="용어(영문)">
+          <nz-form-item>
+            <nz-form-label nzFor="termEng">용어(영문)</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="termEng" formControlName="termEng"
                 placeholder="용어(영문)를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="description" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="description">설명</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="description" formControlName="description"
                 placeholder="설명을 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">비고</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                
         </div>
       </div>
 

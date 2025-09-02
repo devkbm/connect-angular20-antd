@@ -10,7 +10,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
@@ -37,7 +37,7 @@ export interface PartnerStaff {
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzFormItemCustomComponent
+        
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical" style="padding: 0px; margin: 0px;">
@@ -53,19 +53,22 @@ export interface PartnerStaff {
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="staffNo" label="직원번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required readonly/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="name" label="직원명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="name" nzRequired>직원명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="name" formControlName="name" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>
+          
         </div>
       </div>
 

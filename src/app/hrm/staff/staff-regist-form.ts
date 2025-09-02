@@ -20,7 +20,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzUploadModule, NzUploadChangeParam } from 'ng-zorro-antd/upload';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputRadioGroupComponent } from 'src/app/third-party/ng-zorro/nz-input-radio-group/nz-input-radio-group.component';
 import { NzInputRregnoComponent } from 'src/app/third-party/ng-zorro/nz-input-rregno/nz-input-rregno.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -42,7 +42,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzDividerModule,
     NzInputRadioGroupComponent,
     NzInputRregnoComponent,
-    NzFormItemCustomComponent
+
   ],
   template: `
     <!--{{fg.getRawValue() | json}}-->
@@ -84,52 +84,62 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="staffNo" label="직원번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required readonly/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="name" label="직원명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="name" nzRequired>직원명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="name" formControlName="name" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="8">
-          <app-nz-input-radio-group
-            formControlName="gender" itemId="gender"
-            placeholder=""
-            [options]="genderOptions"
-            [required]="false" [nzErrorTip]="errorTpl">성별
-          </app-nz-input-radio-group>
+          <nz-form-item>
+            <nz-form-label nzFor="gender" nzRequired>성별</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <app-nz-input-radio-group
+                formControlName="gender" itemId="gender"
+                placeholder=""
+                [options]="genderOptions"
+                [required]="false" [nzErrorTip]="errorTpl">성별
+              </app-nz-input-radio-group>
+            </nz-form-control>
+          </nz-form-item>                                        
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="nameEng" label="직원명(영문)">
+          <nz-form-item>
+            <nz-form-label nzFor="nameEng">직원명(영문)</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="nameEng" formControlName="nameEng"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="nameChi" label="직원명(한문)">
+          <nz-form-item>
+            <nz-form-label nzFor="nameChi">직원명(한문)</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="nameChi" formControlName="nameChi"/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12" >
-          <nz-form-item-custom for="residentRegistrationNumber" label="주민등록번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="residentRegistrationNumber">주민등록번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-rregno
                 formControlName="residentRegistrationNumber" itemId="residentRegistrationNumber"
@@ -137,16 +147,17 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
                 [required]="true">
               </nz-input-rregno>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="birthday" label="생년월일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="birthday">생년월일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="birthday" formControlName="birthday">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
       </div>
     </form>

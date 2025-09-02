@@ -14,13 +14,12 @@ import { HrmCodeService } from '../../shared/hrm-code.service';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
-
 
 @Component({
   selector: 'app-staff-school-career-form',
@@ -32,7 +31,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent,
+
     NzInputSelectComponent
   ],
   template: `
@@ -51,7 +50,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 2 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="schoolCareerType" label="학력" required>
+          <nz-form-item>
+            <nz-form-label nzFor="schoolCareerType" nzRequired>학력</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="schoolCareerType" itemId="schoolCareerType"
@@ -59,11 +59,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="schoolCode" label="학교" required>
+          <nz-form-item>
+            <nz-form-label nzFor="schoolCode" nzRequired>학교</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="schoolCode" itemId="schoolCode"
@@ -71,78 +72,85 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="fromDate" label="시작일">
+          <nz-form-item>
+            <nz-form-label nzFor="fromDate">시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="fromDate" formControlName="fromDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="toDate" label="종료일">
+          <nz-form-item>
+            <nz-form-label nzFor="toDate">종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                          
         </div>
       </div>
 
       <!-- 3 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="majorName" label="전공">
+          <nz-form-item>
+            <nz-form-label nzFor="majorName">전공</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="majorName" formControlName="majorName"
                 placeholder="전공을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>               
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="pluralMajorName" label="부전공">
+          <nz-form-item>
+            <nz-form-label nzFor="pluralMajorName">부전공</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="pluralMajorName" formControlName="pluralMajorName"
                 placeholder="부전공을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                         
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="location" label="지역">
+          <nz-form-item>
+            <nz-form-label nzFor="location">지역</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="location" formControlName="location"
                 placeholder="지역을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                   
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="lessonYear" label="수업년한">
+          <nz-form-item>
+            <nz-form-label nzFor="lessonYear">수업년한</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-number nzId="lessonYear" formControlName="lessonYear"
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                             
         </div>
       </div>
 
       <!-- 4 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">비고</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="비고를 입력해주세요." [rows]="23">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                       
         </div>
       </div>
 

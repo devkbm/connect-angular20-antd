@@ -14,7 +14,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -29,7 +29,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzFormModule,
     NzInputModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent,
+
     NzInputSelectComponent,
   ],
   template: `
@@ -48,7 +48,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 2 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="licenseType" label="자격면허" required>
+          <nz-form-item>
+            <nz-form-label nzFor="licenseType" nzRequired>자격면허</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="licenseType" itemId="licenseType"
@@ -56,34 +57,37 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>               
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="licenseNumber" label="자격면허 번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="licenseNumber" nzRequired>자격면허 번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="licenseNumber" formControlName="licenseNumber" required
                 placeholder="자격면허 번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                         
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="dateOfAcquisition" label="취득일자" required>
+          <nz-form-item>
+            <nz-form-label nzFor="dateOfAcquisition" nzRequired>취득일자</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-date-picker nzId="dateOfAcquisition" formControlName="dateOfAcquisition">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                   
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="certificationAuthority" label="인증기관">
+          <nz-form-item>
+            <nz-form-label nzFor="certificationAuthority">인증기관</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="certificationAuthority" formControlName="certificationAuthority"
                 placeholder="인증기관을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                             
         </div>
 
       </div>
@@ -91,13 +95,14 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <!-- 3 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="comment" label="비고">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">비고</nz-form-label>
             <nz-form-control>
               <textarea nz-input id="comment" formControlName="comment"
                 placeholder="비고를 입력해주세요." [rows]="23">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                       
         </div>
       </div>
 

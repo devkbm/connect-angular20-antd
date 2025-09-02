@@ -11,7 +11,7 @@ import { ResouceTypeEnum } from './resource-type-enum';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
+
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -27,7 +27,7 @@ import { WebResourceFormValidatorService } from './validator/web-resource-form-v
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzFormItemCustomComponent,
+    
     NzInputSelectComponent
   ],
   template: `
@@ -47,27 +47,30 @@ import { WebResourceFormValidatorService } from './validator/web-resource-form-v
       <!-- 1 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="resourceId" label="리소스ID" required>
+          <nz-form-item>
+            <nz-form-label nzFor="resourceId" nzRequired>리소스ID</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="resourceId" formControlName="resourceId" required
                 placeholder="리소스ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="resourceName" label="리소스명" required>
+          <nz-form-item>
+            <nz-form-label nzFor="resourceName" nzRequired>리소스명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="resourceName" formControlName="resourceName" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
       </div>
 
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="resourceType" label="리소스타입" required>
+          <nz-form-item>
+            <nz-form-label nzFor="resourceType" nzRequired>리소스타입</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="resourceType" itemId="resourceType"
@@ -75,29 +78,31 @@ import { WebResourceFormValidatorService } from './validator/web-resource-form-v
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="url" label="URL 정보" required>
+          <nz-form-item>
+            <nz-form-label nzFor="url" nzRequired>URL 정보</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="url" formControlName="url" required
                 placeholder="URL 정보를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
       </div>
 
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="description" label="설명">
+          <nz-form-item>
+            <nz-form-label nzFor="description">설명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <textarea nz-input id="description" formControlName="description"
                 placeholder="설명를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
       </div>
 

@@ -19,7 +19,6 @@ import { UserFormValidatorService } from './validator/user-form-validator.servic
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select-dept/nz-input-tree-select-dept.component';
 
@@ -34,8 +33,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
 
     NzFormModule,
     NzInputModule,
-    NzSwitchModule,
-    NzFormItemCustomComponent,
+    NzSwitchModule,    
     NzInputTreeSelectDeptComponent,
     NzInputSelectComponent
   ],
@@ -69,38 +67,42 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
       <!-- 2 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="userId" label="아이디" required>
+          <nz-form-item>
+            <nz-form-label nzFor="userId" nzRequired>아이디</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="userId" formControlName="userId" required readonly/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="companyCode" label="조직코드" required>
+          <nz-form-item>
+            <nz-form-label nzFor="companyCode" nzRequired>조직코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="companyCode" formControlName="companyCode" required
                 placeholder="조직코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="staffNo" label="직원번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="staffNo" nzRequired>직원번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="6">
-          <nz-form-item-custom for="name" label="이름" required>
+          <nz-form-item>
+            <nz-form-label nzFor="name" nzRequired>이름</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="name" formControlName="name" required
                 placeholder="이름을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                    
         </div>
 
       </div>
@@ -108,29 +110,32 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
       <!-- 3 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="4">
-          <nz-form-item-custom for="enabled" label="사용여부" required>
+          <nz-form-item>
+            <nz-form-label nzFor="enabled" nzRequired>사용여부</nz-form-label>
             <nz-form-control>
               <nz-switch nzId="enabled" formControlName="enabled">
               </nz-switch>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                              
         </div>
 
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="mobileNum" label="휴대폰번호" required>
+          <nz-form-item>
+            <nz-form-label nzFor="mobileNum" nzRequired>휴대폰번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="mobileNum" formControlName="mobileNum" required
                 placeholder="휴대폰 번호을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                        
         </div>
 
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="email" label="이메일" required>
+          <nz-form-item>
+            <nz-form-label nzFor="email" nzRequired>이메일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="email" formControlName="email" required/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
 
       </div>
@@ -139,18 +144,20 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="deptCode" label="부서">
+          <nz-form-item>
+            <nz-form-label nzFor="deptCode">부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-tree-select-dept itemId="deptCode" formControlName="deptCode" placeholder="부서 없음">
               </nz-input-tree-select-dept>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
       </div>
 
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="24">
-          <nz-form-item-custom for="roleList" label="롤" required>
+          <nz-form-item>
+            <nz-form-label nzFor="roleList" nzRequired>롤</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-input-select required
                 formControlName="roleList" itemId="roleList"
@@ -158,7 +165,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
                 placeholder="Please select">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
       </div>
     </form>

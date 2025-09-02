@@ -9,7 +9,6 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 import { NzListRoadAddressComponent } from 'src/app/third-party/ng-zorro/nz-list-road-address/nz-list-road-address.component';
 
@@ -30,7 +29,7 @@ import { StaffContact } from './staff-contact-form.model';
     NzDividerModule,
     NzListRoadAddressComponent,
     NzCrudButtonGroupComponent,
-    NzFormItemCustomComponent,
+
   ],
   template: `
     <app-nz-crud-button-group
@@ -57,51 +56,56 @@ import { StaffContact } from './staff-contact-form.model';
       <!-- 2 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="2">
-          <nz-form-item-custom for="contact_homePostNumber" label="우편번호">
+          <nz-form-item>
+            <nz-form-label nzFor="contact_homePostNumber">우편번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="contact_homePostNumber" formControlName="homePostNumber"
                 placeholder="우편번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                  
         </div>
 
         <div nz-col nzSpan="12">
-          <nz-form-item-custom for="contact_homeMainAddress" label="기본주소">
+          <nz-form-item>
+            <nz-form-label nzFor="contact_homeMainAddress">기본주소</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="contact_homeMainAddress" formControlName="homeMainAddress"
                 placeholder="기본주소를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                            
         </div>
 
         <div nz-col nzSpan="10">
-          <nz-form-item-custom for="contact_homeSubAddress" label="상세주소">
+          <nz-form-item>
+            <nz-form-label nzFor="contact_homeSubAddress">상세주소</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="contact_homeSubAddress" formControlName="homeSubAddress"
                 placeholder="상세주소를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                      
         </div>
       </div>
 
       <!-- 3 Row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="contact_extensionNumber" label="내선번호">
+          <nz-form-item>
+            <nz-form-label nzFor="contact_extensionNumber">내선번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="contact_extensionNumber" formControlName="extensionNumber"
                 placeholder="내선번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="contact_mobileNumber" label="휴대번호">
+          <nz-form-item>
+            <nz-form-label nzFor="contact_mobileNumber">휴대번호</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="contact_mobileNumber" formControlName="mobileNumber"
                 placeholder="휴대번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>                                                                                          
         </div>
       </div>
 
