@@ -16,9 +16,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
-import { NzInputTreeSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select/nz-input-tree-select.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+
 
 @Component({
   selector: 'app-common-code-form',
@@ -30,8 +31,8 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
+    NzTreeSelectModule,
     NzInputSelectComponent,
-    NzInputTreeSelectComponent
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -68,11 +69,14 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
           <nz-form-item>
             <nz-form-label nzFor="parentId" nzRequired>상위 공통코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select
-                formControlName="parentId" itemId="parentId"
-                [nodes]="nodeItems"
-                placeholder="Please select">
-              </nz-input-tree-select>
+              <nz-tree-select
+                nzId="parentId"
+                formControlName="parentId"
+                [nzNodes]="nodeItems"
+                nzPlaceHolder="부서 없음"
+                >
+              </nz-tree-select>
+
             </nz-form-control>
           </nz-form-item>
         </div>

@@ -1,25 +1,26 @@
 import { Component, OnInit, AfterViewInit, inject, Renderer2, input, effect, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { Menu } from './menu.model';
 import { MenuHierarchy } from './menu-hierarchy.model';
 import { MenuGroup } from './menu-group.model';
 
+import { MenuFormValidatorService } from './validator/menu-form-validator.service';
+
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-select/nz-input-select.component";
-import { NzInputTreeSelectComponent } from "../../third-party/ng-zorro/nz-input-tree-select/nz-input-tree-select.component";
-import { HttpClient } from '@angular/common/http';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
-import { MenuFormValidatorService } from './validator/menu-form-validator.service';
 
 @Component({
   selector: 'app-menu-form',
@@ -30,9 +31,9 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
+    NzTreeSelectModule,
 
     NzInputSelectComponent,
-    NzInputTreeSelectComponent
 ],
   template: `
     {{fg.getRawValue() | json}}
@@ -62,20 +63,23 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
               >
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="parentMenuCode" nzRequired>상위 메뉴</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select
-                formControlName="parentMenuCode" itemId="parentMenuCode"
-                [nodes]="menuHiererachy"
-                placeholder="상위 메뉴 없음">
-              </nz-input-tree-select>
+              <nz-tree-select
+                nzId="parentMenuCode"
+                formControlName="parentMenuCode"
+                [nzNodes]="menuHiererachy"
+                nzPlaceHolder="상위 메뉴 없음"
+                >
+              </nz-tree-select>
+
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -89,7 +93,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="메뉴코드를 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -99,7 +103,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
               <input nz-input id="menuName" formControlName="menuName" required
                 placeholder="메뉴명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -112,7 +116,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="메뉴타입을 선택해주세요">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -123,7 +127,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 [nzMin]="0" [nzMax]="9999" placeholder="순번을 입력해주세요.">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
       </div>
@@ -137,7 +141,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
               <input nz-input id="appUrl" formControlName="appUrl" required
                 placeholder="URL을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -154,7 +158,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="ICON TYPE을 입력해주세요.">
               </nz-input-select>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -172,7 +176,7 @@ import { MenuFormValidatorService } from './validator/menu-form-validator.servic
                 placeholder="ICON을 입력해주세요."/>
             }
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
       </div>
 
@@ -262,6 +266,7 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
 
   modifyForm(formData: Menu): void {
 
+    console.log(formData.menuGroupCode!);
     this.getMenuHierarchy(formData.menuGroupCode!);
     this.fg.controls.menuCode.disable();
 
@@ -342,9 +347,9 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
   getMenuHierarchy(menuGroupId: string): void {
     if (!menuGroupId) return;
 
-    const url = GlobalProperty.serverUrl() + `/api/system/menuhierarchy/${menuGroupId}}`;
+    const url = GlobalProperty.serverUrl() + `/api/system/menuhierarchy/${menuGroupId}`;
     const options = getHttpOptions();
-
+    console.log(menuGroupId);
     this.http
         .get<ResponseList<MenuHierarchy>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))

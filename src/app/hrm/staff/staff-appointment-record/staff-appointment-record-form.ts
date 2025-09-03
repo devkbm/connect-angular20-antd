@@ -2,11 +2,14 @@ import { Component, OnInit, Input, inject, input, effect, output } from '@angula
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseMap } from 'src/app/core/model/response-map';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { StaffAppointmentRecord } from './staff-appointment-record.model';
 import { HrmCode } from '../../hrm-code/hrm-code.model';
@@ -16,12 +19,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select-dept/nz-input-tree-select-dept.component';
-import { HttpClient } from '@angular/common/http';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
 
 @Component({
@@ -34,9 +35,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzInputModule,
     NzDatePickerModule,
     NzDividerModule,
-    NzInputTreeSelectDeptComponent,
-
-    NzInputSelectComponent,
+    NzSelectModule,
+    NzTreeSelectModule,
   ],
   template: `
     {{fg.value | json}}
@@ -59,7 +59,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -69,7 +69,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <input nz-input id="staffName" formControlName="staffName" required
                 placeholder="직원명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
       </div>
 
@@ -82,33 +82,41 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <input nz-input id="seq" formControlName="seq" readonly
                 placeholder="신규"/>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="appointmentTypeCode" nzRequired>발령분류</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="appointmentTypeCode" itemId="appointmentTypeCode"
-                [options]="appointmentTypeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="appointmentTypeCode" formControlName="appointmentTypeCode"
+                nzPlaceHolder="Please select">
+                @for (option of appointmentTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="applyType" nzRequired>적용구분</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="applyType" itemId="applyType"
-                [options]="applyTypeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="applyType" formControlName="applyType"
+                nzPlaceHolder="Please select">
+                @for (option of applyTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -118,7 +126,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <nz-date-picker nzId="appointmentDate" formControlName="appointmentDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                                                
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -128,7 +136,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <nz-date-picker nzId="appointmentEndDate" formControlName="appointmentEndDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                                                          
+          </nz-form-item>
         </div>
 
       </div>
@@ -142,7 +150,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <input nz-input id="recordName" formControlName="recordName" required
                 placeholder="발령내용을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                                                                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -152,7 +160,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <input nz-input id="comment" formControlName="comment" required
                 placeholder="비고내용을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
       </div>
@@ -164,31 +172,44 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
           <nz-form-item>
             <nz-form-label nzFor="blngDeptCode" nzRequired>소속부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select-dept itemId="blngDeptCode" formControlName="blngDeptCode" required>
-              </nz-input-tree-select-dept>
+              <nz-tree-select
+                nzId="blngDeptCode"
+                formControlName="blngDeptCode"
+                [nzNodes]="deptService.nodes()"
+                >
+              </nz-tree-select>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="workDeptCode" nzRequired>근무부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select-dept itemId="workDeptCode" formControlName="workDeptCode" required>
-              </nz-input-tree-select-dept>
+              <nz-tree-select
+                nzId="workDeptCode"
+                formControlName="workDeptCode"
+                [nzNodes]="deptService.nodes()"
+                >
+              </nz-tree-select>
+
             </nz-form-control>
-          </nz-form-item>                                   
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="dutyResponsibilityCode">직책</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select
-                formControlName="dutyResponsibilityCode" itemId="dutyResponsibilityCode"
-                [options]="dutyResponsibilityCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="dutyResponsibilityCode" formControlName="dutyResponsibilityCode"
+                nzPlaceHolder="Please select">
+                @for (option of dutyResponsibilityCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -201,39 +222,51 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
           <nz-form-item>
             <nz-form-label nzFor="jobGroupCode" nzRequired>직군</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="jobGroupCode" itemId="jobGroupCode"
-                [options]="groupJobCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="jobGroupCode" formControlName="jobGroupCode"
+                nzPlaceHolder="Please select">
+                @for (option of groupJobCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="jobPositionCode" nzRequired>직위</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="jobPositionCode" itemId="jobPositionCode"
-                [options]="jobPositionCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="jobPositionCode" formControlName="jobPositionCode"
+                nzPlaceHolder="Please select">
+                @for (option of jobPositionCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="jobCode" nzRequired>직무</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="jobCode" itemId="jobCode"
-                [options]="jobCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="jobCode" formControlName="jobCode"
+                nzPlaceHolder="Please select">
+                @for (option of jobCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
       </div>
 
@@ -244,39 +277,51 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
           <nz-form-item>
             <nz-form-label nzFor="occupationCode" nzRequired>직종</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="occupationCode" itemId="occupationCode"
-                [options]="occupationCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="occupationCode" formControlName="occupationCode"
+                nzPlaceHolder="Please select">
+                @for (option of occupationCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="jobGradeCode" nzRequired>직급</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="jobGradeCode" itemId="jobGradeCode"
-                [options]="jobGradeCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="jobGradeCode" formControlName="jobGradeCode"
+                nzPlaceHolder="Please select">
+                @for (option of jobGradeCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="payStepCode" nzRequired>호봉</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="payStepCode" itemId="payStepCode"
-                [options]="payStepCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="payStepCode" formControlName="payStepCode"
+                nzPlaceHolder="Please select">
+                @for (option of payStepCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                        
+          </nz-form-item>
         </div>
       </div>
 
@@ -329,9 +374,10 @@ export class StaffAppointmentRecordFormComponent implements OnInit {
    */
   dutyResponsibilityCodeList: HrmCode[] = [];
 
+  private http = inject(HttpClient);
   private hrmCodeService = inject(HrmCodeService);
   private notifyService = inject(NotifyService);
-  private http = inject(HttpClient);
+  deptService = inject(DeptTreeSelectService);
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -363,6 +409,8 @@ export class StaffAppointmentRecordFormComponent implements OnInit {
   staff = input<{companyCode: string, staffNo: string, staffName: string}>();
 
   constructor() {
+    this.deptService.getDeptHierarchy();
+
     effect(() => {
       if (this.formDataId()) {
         this.get(this.formDataId()?.staffId!, this.formDataId()?.seq!);

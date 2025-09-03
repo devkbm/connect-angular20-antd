@@ -5,14 +5,16 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
+import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
 @Component({
   selector: 'app-form-test',
   imports: [
     CommonModule, FormsModule, ReactiveFormsModule,
-    NzGridModule, NzFormModule, NzInputModule, NzSelectModule,
+    NzGridModule, NzFormModule, NzInputModule, NzSelectModule, NzTreeSelectModule,
     NzFormItemCustomComponent
 ],
   template: `
@@ -54,17 +56,43 @@ import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-it
             </nz-form-control>
           </nz-form-item>
         </div>
-
       </div>
+
+      <div nz-row nzGutter="8">
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="holidayName" nzRequired>휴일명</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+                  <nz-tree-select
+                    style="width: 250px"
+                    [nzNodes]="deptService.nodes()"
+                    formControlName="input_text4"
+                    nzShowSearch
+                    nzPlaceHolder="Please select"
+                  ></nz-tree-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
     </form>
   `,
   styles: `
   `
 })
 export class FormTestComponent {
+
+  deptService = inject(DeptTreeSelectService);
+
   fg: FormGroup = inject(FormBuilder).group({
     input_text: ['test', [ Validators.required ]],
     input_text2: ['test', [ Validators.required ]],
     input_text3: ['test', [ Validators.required ]],
+    input_text4: ['test', [ Validators.required ]],
   });
+
+  constructor() {
+    this.deptService.getDeptHierarchy();
+  }
+
 }

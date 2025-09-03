@@ -12,11 +12,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { NzInputTreeSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select/nz-input-tree-select.component';
 import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
 export interface BoardManagement {
   boardId: string | null;
@@ -60,7 +60,8 @@ export interface BoardHierarchy {
     NzIconModule,
     NzButtonModule,
     NzDividerModule,
-    NzInputTreeSelectComponent,
+    NzTreeSelectModule,
+
     NzInputSelectComponent
 ],
   template: `
@@ -129,12 +130,13 @@ export interface BoardHierarchy {
           <nz-form-item>
             <nz-form-label nzFor="boardParentId">상위 게시판</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select
-                formControlName="boardParentId" itemId="boardParentId"
-                [nodes]="parentBoardItems"
-                placeholder="상위 게시판 없음"
-              >
-              </nz-input-tree-select>
+              <nz-tree-select
+                nzId="boardParentId"
+                formControlName="boardParentId"
+                [nzNodes]="parentBoardItems"
+                nzPlaceHolder="상위 게시판 없음"
+                >
+              </nz-tree-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -336,7 +338,7 @@ export class BoardFormComponent implements OnInit, AfterViewInit {
   }
 
   getboardHierarchy(): void {
-    const url = GlobalProperty.serverUrl() + `/api/grw/board/boardType`;
+    const url = GlobalProperty.serverUrl() + `/api/grw/board/boardHierarchy`;
     const options = getHttpOptions();
 
     this.http

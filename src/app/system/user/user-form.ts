@@ -19,9 +19,9 @@ import { UserFormValidatorService } from './validator/user-form-validator.servic
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-input-tree-select-dept/nz-input-tree-select-dept.component';
-
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
 @Component({
   selector: 'app-user-form',
@@ -33,9 +33,9 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
 
     NzFormModule,
     NzInputModule,
-    NzSwitchModule,    
-    NzInputTreeSelectDeptComponent,
-    NzInputSelectComponent
+    NzSwitchModule,
+    NzSelectModule,
+    NzTreeSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -72,7 +72,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="userId" formControlName="userId" required readonly/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -82,7 +82,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
               <input nz-input id="companyCode" formControlName="companyCode" required
                 placeholder="조직코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -92,7 +92,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -102,7 +102,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
               <input nz-input id="name" formControlName="name" required
                 placeholder="이름을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
       </div>
@@ -116,7 +116,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
               <nz-switch nzId="enabled" formControlName="enabled">
               </nz-switch>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -126,7 +126,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
               <input nz-input id="mobileNum" formControlName="mobileNum" required
                 placeholder="휴대폰 번호을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -135,7 +135,7 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="email" formControlName="email" required/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
 
       </div>
@@ -147,10 +147,15 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
           <nz-form-item>
             <nz-form-label nzFor="deptCode">부서</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-tree-select-dept itemId="deptCode" formControlName="deptCode" placeholder="부서 없음">
-              </nz-input-tree-select-dept>
+              <nz-tree-select
+                nzId="deptCode"
+                formControlName="deptCode"
+                [nzNodes]="deptService.nodes()"
+                nzPlaceHolder="부서 없음"
+                >
+              </nz-tree-select>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
       </div>
 
@@ -159,13 +164,16 @@ import { NzInputTreeSelectDeptComponent } from 'src/app/third-party/ng-zorro/nz-
           <nz-form-item>
             <nz-form-label nzFor="roleList" nzRequired>롤</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="roleList" itemId="roleList"
-                [options]="authList" [opt_value]="'roleCode'" [opt_label]="'description'" [mode]="'tags'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="roleList" nzMode="tags" formControlName="roleList">
+                @for (option of authList; track option) {
+                  <nz-option
+                    [nzLabel]="option.description"
+                    [nzValue]="option.roleCode">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
       </div>
     </form>
@@ -201,6 +209,7 @@ export class UserFormComponent implements OnInit {
   private renderer = inject(Renderer2);
   private http = inject(HttpClient);
   private validator = inject(UserFormValidatorService);
+  deptService = inject(DeptTreeSelectService);
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -225,7 +234,10 @@ export class UserFormComponent implements OnInit {
 
   formDataId = input<string>('');
 
+
+
   constructor() {
+    this.deptService.getDeptHierarchy();
 
     effect(() => {
       if (this.formDataId()) {
