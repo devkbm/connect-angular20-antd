@@ -17,8 +17,8 @@ import { DataDomainService } from './data-domain.service';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-term-form',
@@ -28,8 +28,8 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
+    NzSelectModule,
     
-    NzInputSelectComponent,
     NzCrudButtonGroupComponent
   ],
   template: `
@@ -58,11 +58,14 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
           <nz-form-item>
             <nz-form-label nzFor="system" nzRequired>시스템</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="system" itemId="system"
-                [options]="systemTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="Please select">
-              </nz-input-select>
+              <nz-select nzId="system" formControlName="system">
+                @for (option of systemTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                    
         </div>
@@ -73,12 +76,15 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="term" nzRequired>용어</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="term" itemId="term"
-                [options]="wordList" [opt_value]="'logicalName'" [opt_label]="'logicalName'" [mode]="'multiple'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                            
+              <nz-select nzId="term" formControlName="term" nzMode="multiple">
+                @for (option of wordList; track option) {
+                  <nz-option
+                    [nzLabel]="option.logicalName"
+                    [nzValue]="option.logicalName">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                              
         </div>
@@ -95,12 +101,15 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="dataDomainId" nzRequired>도메인</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="dataDomainId" itemId="dataDomainId"
-                [options]="dataDomainList" [opt_value]="'domainId'" [opt_label]="'domainName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="dataDomainId" formControlName="dataDomainId" >
+                @for (option of dataDomainList; track option) {
+                  <nz-option
+                    [nzLabel]="option.domainName"
+                    [nzValue]="option.domainId">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                                                  
         </div>

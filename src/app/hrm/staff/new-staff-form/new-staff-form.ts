@@ -11,8 +11,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzInputRregnoComponent } from 'src/app/third-party/ng-zorro/nz-input-rregno/nz-input-rregno.component';
-
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { NewStaff } from './new-staff-form.model';
 
@@ -24,8 +23,10 @@ import { NewStaff } from './new-staff-form.model';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-
-    NzInputRregnoComponent
+    NgxMaskDirective,
+  ],
+  providers: [
+    provideNgxMask()
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -65,12 +66,11 @@ import { NewStaff } from './new-staff-form.model';
 
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzFor="residentRegistrationNumber" nzRequired>주민등록번호</nz-form-label>
-            <nz-input-rregno
-                formControlName="residentRegistrationNumber" itemId="residentRegistrationNumber"
-                placeholder="주민등록번호를 입력해주세요."
-                [required]="true">
-              </nz-input-rregno>
+            <nz-form-label nzFor="residentRegistrationNumber" nzRequired>주민등록번호</nz-form-label>                        
+            <input nz-input required
+              nzId="residentRegistrationNumber" formControlName="residentRegistrationNumber"
+              mask="000000-0000000"  
+            />              
           </nz-form-item>                                        
 
         </div>

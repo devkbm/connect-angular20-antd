@@ -10,8 +10,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -20,6 +18,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { HrmCode } from '../../hrm-code/hrm-code.model';
 import { HrmCodeService } from '../../shared/hrm-code.service';
 import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -32,8 +31,7 @@ import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
     NzInputModule,
     NzDatePickerModule,
     NzCheckboxModule,
-
-    NzInputSelectComponent,
+    NzSelectModule,    
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -85,12 +83,15 @@ import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="dutyResponsibilityCode" nzRequired>직책</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="dutyResponsibilityCode" itemId="dutyResponsibilityCode"
-                [options]="dutyResponsibilityCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="dutyResponsibilityCode" formControlName="dutyResponsibilityCode">
+                @for (option of dutyResponsibilityCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                         
         </div>

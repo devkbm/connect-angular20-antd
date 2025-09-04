@@ -12,11 +12,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface BoardManagement {
   boardId: string | null;
@@ -61,8 +61,7 @@ export interface BoardHierarchy {
     NzButtonModule,
     NzDividerModule,
     NzTreeSelectModule,
-
-    NzInputSelectComponent
+    NzSelectModule,    
 ],
   template: `
     <div>{{fg.getRawValue() | json}}</div>
@@ -115,13 +114,15 @@ export interface BoardHierarchy {
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="boardType" nzRequired>게시판타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="boardType" itemId="boardType"
-                [options]="boardTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="게시판타입을 선택해주세요."
-              >
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="boardType" formControlName="boardType">
+                @for (option of boardTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.descriplabeltion"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>

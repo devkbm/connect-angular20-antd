@@ -18,12 +18,13 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzInputSelectStaffComponent } from 'src/app/third-party/ng-zorro/nz-input-select-staff/nz-input-select-staff.component';
+
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
+import { StaffSelectService } from 'src/app/third-party/ng-zorro/stafff-select.service';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-attendance-application-form',
@@ -33,11 +34,10 @@ import { HttpClient } from '@angular/common/http';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-
+    NzSelectModule,
     NzDividerModule,
-    NzDatePickerModule,
-    NzInputSelectComponent,
-    NzInputSelectStaffComponent,
+    NzDatePickerModule,    
+    
     NzCrudButtonGroupComponent,
     DutyDateListComponent,
   ],
@@ -69,11 +69,15 @@ import { HttpClient } from '@angular/common/http';
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="staffNo" nzRequired>직원</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select-staff required
-                formControlName="staffNo" itemId="staffNo"
-                placeholder="Please select">
-              </nz-input-select-staff>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="staffNo" formControlName="staffNo">
+                @for (option of staffSelectService.list; track option) {
+                  <nz-option
+                    [nzLabel]="option.name"
+                    [nzValue]="option.staffNo">
+                  </nz-option>
+                }
+              </nz-select>              
             </nz-form-control>
           </nz-form-item>                              
         </div>
@@ -84,12 +88,15 @@ import { HttpClient } from '@angular/common/http';
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="dutyCode" nzRequired>근태코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="dutyCode" itemId="dutyCode"
-                [options]="dutyCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="dutyCode" formControlName="dutyCode">
+                @for (option of dutyCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>              
             </nz-form-control>
           </nz-form-item>                                        
         </div>
@@ -167,6 +174,7 @@ export class AttendanceApplicationFormComponent implements OnInit {
   dutyCodeList: HrmCode[] = [];
 
   private hrmCodeService = inject(HrmCodeService);
+  staffSelectService = inject(StaffSelectService);
   private notifyService = inject(NotifyService);
   private http = inject(HttpClient);
 
@@ -187,6 +195,7 @@ export class AttendanceApplicationFormComponent implements OnInit {
 
   ngOnInit() {
     this.getDutyCodeList();
+    this.staffSelectService.getStaffList();
     //this.newForm();
   }
 

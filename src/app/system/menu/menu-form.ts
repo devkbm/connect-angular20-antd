@@ -19,8 +19,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-
-import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-select/nz-input-select.component";
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-menu-form',
@@ -32,9 +31,8 @@ import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-sele
     NzInputModule,
     NzInputNumberModule,
     NzTreeSelectModule,
-
-    NzInputSelectComponent,
-],
+    NzSelectModule,    
+  ],
   template: `
     {{fg.getRawValue() | json}}
     {{fg.valid}}
@@ -54,14 +52,15 @@ import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-sele
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required="true"
-                formControlName="menuGroupCode" itemId="menuGroupCode"
-                (ngModelChange)="selectMenuGroup($event)"
-                [options]="menuGroupList" [opt_value]="'menuGroupCode'" [opt_label]="'menuGroupName'"
-                placeholder="Please select"
-              >
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="menuGroupCode" formControlName="menuGroupCode" (ngModelChange)="selectMenuGroup($event)">
+                @for (option of menuGroupList; track option) {
+                  <nz-option
+                    [nzLabel]="option.menuGroupName"
+                    [nzValue]="option.menuGroupCode">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -109,12 +108,15 @@ import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-sele
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="menuType" nzRequired>메뉴타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required="true"
-                formControlName="menuType" itemId="menuType"
-                [options]="menuTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="메뉴타입을 선택해주세요">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                          
+              <nz-select nzId="menuType" formControlName="menuType">
+                @for (option of menuTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -147,16 +149,15 @@ import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-sele
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="appIconType" nzRequired>APP ICON TYPE</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <!--
-              <input nz-input id="appIconType" formControlName="appIconType" required
-                placeholder="ICON TYPE을 입력해주세요."/>
-              -->
-              <nz-input-select required
-                formControlName="appIconType" itemId="appIconType"
-                [options]="appIconTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="ICON TYPE을 입력해주세요.">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="appIconType" formControlName="appIconType">
+                @for (option of appIconTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -165,12 +166,15 @@ import { NzInputSelectComponent } from "../../third-party/ng-zorro/nz-input-sele
           <nz-form-item>
             <nz-form-label nzFor="appIcon" nzRequired>APP ICON</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-            @if (this.fg.controls.appIconType.value === 'RESOURCE') {
-              <nz-input-select required
-                formControlName="appIcon" itemId="appIcon"
-                [options]="resourceList" [opt_value]="'resourceId'" [opt_label]="'resourceName'"
-                placeholder="ICON을 입력해주세요.">
-              </nz-input-select>
+            @if (this.fg.controls.appIconType.value === 'RESOURCE') {              
+              <nz-select nzId="appIcon" formControlName="appIcon">
+                @for (option of resourceList; track option) {
+                  <nz-option
+                    [nzLabel]="option.resourceName"
+                    [nzValue]="option.resourceId">
+                  </nz-option>
+                }
+              </nz-select>
             } @else {
               <input nz-input id="appIcon" formControlName="appIcon" required
                 placeholder="ICON을 입력해주세요."/>

@@ -14,11 +14,11 @@ import { pairwise } from 'rxjs';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface WorkCalendar {
   workCalendarId: string | null;
@@ -57,8 +57,7 @@ export interface NewFormValue {
     NzTimePickerModule,
     NzSwitchModule,
     NzIconModule,
-    
-    NzInputSelectComponent
+    NzSelectModule,    
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -75,12 +74,15 @@ export interface NewFormValue {
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="workCalendarId" nzRequired>작업그룹 ID</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="workCalendarId" itemId="workCalendarId"
-                [options]="workGroupList()" [opt_value]="'id'" [opt_label]="'name'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="workCalendarId" formControlName="workCalendarId">
+                @for (option of workGroupList(); track option) {
+                  <nz-option
+                    [nzLabel]="option.name"
+                    [nzValue]="option.id">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>

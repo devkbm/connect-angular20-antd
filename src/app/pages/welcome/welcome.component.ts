@@ -3,19 +3,15 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
-import { ButtonTemplate, NzButtonsComponent } from 'src/app/third-party/ng-zorro/nz-buttons/nz-buttons.component';
 import { NzInputCkeditorComponent } from 'src/app/third-party/ckeditor/nz-input-ckeditor.component';
-import { NzInputDateTimeComponent } from 'src/app/third-party/ng-zorro/nz-input-datetime/nz-input-datetime.component';
 
-import { NzInputRadioGroupComponent } from 'src/app/third-party/ng-zorro/nz-input-radio-group/nz-input-radio-group.component';
 
 import { DutyDateListComponent } from './duty-date-list.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormItemCustomComponent } from 'src/app/third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-welcome',
@@ -27,14 +23,10 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzFormItemCustomComponent,
-    NzCheckboxModule,
-    NzButtonsComponent,
-    NzInputCkeditorComponent,
-    NzInputDateTimeComponent,
-    NzInputRadioGroupComponent,
-    DutyDateListComponent,
-    NzInputSelectComponent
+    NzSelectModule,    
+    NzCheckboxModule,    
+    NzInputCkeditorComponent,       
+    DutyDateListComponent,    
   ],
   templateUrl: './welcome.component.html',
   styles: `
@@ -73,37 +65,7 @@ export class WelcomeComponent implements OnInit {
       ]
     }
   ];
-
-  btns: ButtonTemplate[] = [{
-    text: 'test',
-    click: (e: MouseEvent) => {
-      console.log('test');
-    },
-    nzType: 'save'
-  },{
-    text: 'test2',
-    click: (e: MouseEvent) => {
-      console.log('test2');
-    },
-    nzType: 'delete',
-    isDanger: true
-  },{
-    text: 'test3',
-    click: (e: MouseEvent) => {
-      console.log('test3');
-    },
-    isDanger: true,
-    popConfirm: {
-      title: 'confirm?',
-      confirmClick: () => {
-        console.log('confirm');
-      },
-      cancelClick: () => {
-        console.log('cancel');
-      }
-    }
-  }];
-
+  
   constructor(private fb: FormBuilder) {
     this.fg = this.fb.group({
       input_text: ['test', [ Validators.required ]],

@@ -14,7 +14,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface HtmlSelectOption {
   label: string;
@@ -31,9 +31,8 @@ export interface HtmlSelectOption {
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzCrudButtonGroupComponent,
-    
-    NzInputSelectComponent
+    NzSelectModule,
+    NzCrudButtonGroupComponent,        
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -67,12 +66,15 @@ export interface HtmlSelectOption {
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="database" nzRequired>database</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="database" itemId="database"
-                [options]="databaseList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="database을 입력해주세요.">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                            
+              <nz-select nzId="database" formControlName="database">
+                @for (option of databaseList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>          
         </div>

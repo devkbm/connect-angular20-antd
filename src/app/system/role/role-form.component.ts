@@ -12,11 +12,12 @@ import { MenuGroup } from '../menu/menu-group.model';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { RoleFormValidatorService } from './validator/role-form-validator.service';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -27,8 +28,7 @@ import { RoleFormValidatorService } from './validator/role-form-validator.servic
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    
-    NzInputSelectComponent
+    NzSelectModule,  
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -64,11 +64,14 @@ import { RoleFormValidatorService } from './validator/role-form-validator.servic
         <nz-form-item>
           <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹</nz-form-label>
           <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-            <nz-input-select required
-              formControlName="menuGroupCode" itemId="menuGroupCode"
-              [options]="menuGroupList" [opt_value]="'menuGroupCode'" [opt_label]="'menuGroupName'"
-              placeholder="Please select"
-            ></nz-input-select>
+            <nz-select nzId="menuGroupCode" formControlName="menuGroupCode">
+                @for (option of menuGroupList; track option) {
+                  <nz-option
+                    [nzLabel]="option.menuGroupName"
+                    [nzValue]="option.menuGroupCode">
+                  </nz-option>
+                }
+              </nz-select>
           </nz-form-control>
         </nz-form-item>                
         

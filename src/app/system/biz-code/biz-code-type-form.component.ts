@@ -17,7 +17,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -29,8 +29,8 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
-    NzCrudButtonGroupComponent,
-    NzInputSelectComponent
+    NzSelectModule,
+    NzCrudButtonGroupComponent,    
 ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -81,12 +81,15 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
         <div nz-col nzSpan="24">
           <nz-form-item>
             <nz-form-label nzFor="bizType" nzRequired>시스템</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="bizType" itemId="bizType"
-                [options]="bizTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="bizType" formControlName="bizType">
+                @for (option of bizTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>

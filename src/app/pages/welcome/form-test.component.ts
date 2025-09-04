@@ -7,16 +7,20 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
-import { NzFormItemCustomComponent } from "../../third-party/ng-zorro/nz-form-item-custom/nz-form-item-custom.component";
 import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
 @Component({
   selector: 'app-form-test',
   imports: [
-    CommonModule, FormsModule, ReactiveFormsModule,
-    NzGridModule, NzFormModule, NzInputModule, NzSelectModule, NzTreeSelectModule,
-    NzFormItemCustomComponent
-],
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule,
+    NzGridModule, 
+    NzFormModule, 
+    NzInputModule, 
+    NzSelectModule, 
+    NzTreeSelectModule,
+  ],
   template: `
     {{fg.getRawValue() | json}}
     <ng-template #errorTpl let-control>
@@ -37,11 +41,12 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
         </div>
 
         <div nz-col nzSpan="8">
-          <nz-form-item-custom for="input_text2" label="input_text2" [required]="true">
+          <nz-form-item>
+            <nz-form-label nzFor="input_text2">input_text2</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="input_text2" formControlName="input_text2" />
             </nz-form-control>
-          </nz-form-item-custom>
+          </nz-form-item>          
         </div>
 
         <div nz-col nzSpan="8">

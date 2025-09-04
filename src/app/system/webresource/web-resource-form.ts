@@ -12,11 +12,11 @@ import { ResouceTypeEnum } from './resource-type-enum';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { WebResourceFormValidatorService } from './validator/web-resource-form-validator.service';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -27,8 +27,9 @@ import { WebResourceFormValidatorService } from './validator/web-resource-form-v
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
+    NzSelectModule,
     
-    NzInputSelectComponent
+    
   ],
   template: `
     {{fg.getRawValue()| json}} - {{fg.valid}}
@@ -71,12 +72,15 @@ import { WebResourceFormValidatorService } from './validator/web-resource-form-v
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="resourceType" nzRequired>리소스타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="resourceType" itemId="resourceType"
-                [options]="resourceTypeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="resourceType" formControlName="resourceType">
+                @for (option of resourceTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>          
         </div>

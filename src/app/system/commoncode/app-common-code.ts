@@ -60,8 +60,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
           <span nz-icon nzType="search"></span>
         </ng-template>
       </div>
-      <div nz-col [nzSpan]="12" style="text-align: right;">
-        <!--<app-nz-buttons [buttons]="buttons"></app-nz-buttons>-->
+      <div nz-col [nzSpan]="12" style="text-align: right;">        
 
         <button nz-button nzType="primary" (click)="getCommonCodeTree()">
           <span nz-icon nzType="search"></span>조회

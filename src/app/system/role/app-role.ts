@@ -16,7 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { ButtonTemplate, NzButtonsComponent } from 'src/app/third-party/ng-zorro/nz-buttons/nz-buttons.component';
+
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -34,8 +34,7 @@ import { RoleListComponent } from './role-list.component';
     NzGridModule,
     NzSelectModule,
     NzInputModule,
-    NzDividerModule,
-    NzButtonsComponent,
+    NzDividerModule,    
     NzPageHeaderCustomComponent,
     NzSearchAreaComponent,
     RoleGridComponent,
@@ -67,8 +66,20 @@ import { RoleListComponent } from './role-list.component';
         </nz-input-group>
       </div>
 
-      <div nz-col [nzSpan]="12" style="text-align: right;">
-        <app-nz-buttons [buttons]="buttons"></app-nz-buttons>
+      <div nz-col [nzSpan]="12" style="text-align: right;">        
+        <button nz-button (click)="getRoleList()">
+          <span nz-icon nzType="search"></span>조회
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button (click)="initForm()">
+          <span nz-icon nzType="form" nzTheme="outline"></span>신규
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>                
+        <button nz-button nzDanger="true"
+          nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
+          (nzOnConfirm)="delete()" (nzOnCancel)="false">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
+        </button>
       </div>
     </div>
   </app-nz-search-area>
@@ -156,31 +167,7 @@ export class RoleApp implements AfterViewInit {
   } = {
     role: { visible: false, formDataId: null }
   }
-
-  buttons: ButtonTemplate[] = [{
-    text: '조회',
-    nzType: 'search',
-    click: (e: MouseEvent) => {
-      this.getRoleList();
-    }
-  },{
-    text: '신규',
-    nzType: 'form',
-    click: (e: MouseEvent) => {
-      this.initForm();
-    }
-  },{
-    text: '삭제',
-    nzType: 'delete',
-    isDanger: true,
-    popConfirm: {
-      title: '삭제하시겠습니까?',
-      confirmClick: () => {
-        this.delete();
-      }
-    }
-  }];
-
+  
   ngAfterViewInit(): void {
   }
 

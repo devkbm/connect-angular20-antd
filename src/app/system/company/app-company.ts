@@ -20,6 +20,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { CompanyListComponent } from './company-list';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   selector: 'app-company',
@@ -31,7 +32,7 @@ import { CompanyListComponent } from './company-list';
     NzFormModule,
     NzSelectModule,
     NzInputModule,
-    NzButtonsComponent,
+    NzDividerModule,
     NzPageHeaderCustomComponent,
     NzSearchAreaComponent,
     ShapeComponent,
@@ -65,8 +66,20 @@ import { CompanyListComponent } from './company-list';
           <span nz-icon nzType="search"></span>
         </ng-template>
       </div>
-      <div nz-col [nzSpan]="12" style="text-align: right;">
-        <app-nz-buttons [buttons]="buttons"></app-nz-buttons>
+      <div nz-col [nzSpan]="12" style="text-align: right;">        
+        <button nz-button (click)="getList()">
+          <span nz-icon nzType="search"></span>조회
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button (click)="newResource()">
+          <span nz-icon nzType="form" nzTheme="outline"></span>신규
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>                
+        <button nz-button nzDanger="true"
+          nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
+          (nzOnConfirm)="delete()" (nzOnCancel)="false">
+            <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
+        </button>
       </div>
     </div>
   </app-nz-search-area>
@@ -145,31 +158,7 @@ export class AppCompany implements OnInit {
         {label: '설명', value: 'description'}
       ]
     }
-  }
-
-  buttons: ButtonTemplate[] = [{
-    text: '조회',
-    nzType: 'search',
-    click: (e: MouseEvent) => {
-      this.getList();
-    }
-  },{
-    text: '신규',
-    nzType: 'form',
-    click: (e: MouseEvent) => {
-      this.newResource();
-    }
-  },{
-    text: '삭제',
-    nzType: 'delete',
-    isDanger: true,
-    popConfirm: {
-      title: '삭제하시겠습니까?',
-      confirmClick: () => {
-        this.delete();
-      }
-    }
-  }];
+  }  
 
   drawer: {
     company: { visible: boolean, formDataId: any }

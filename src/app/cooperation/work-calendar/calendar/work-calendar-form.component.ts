@@ -12,8 +12,8 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzInputNgxColorsComponent } from 'src/app/third-party/ngx-colors/nz-input-ngx-colors.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface WorkCalendarMember {
   workGroupId: string;
@@ -36,7 +36,7 @@ export interface WorkCalendar {
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzInputSelectComponent,
+    NzSelectModule,    
     NzInputNgxColorsComponent,
   ],
   template: `
@@ -88,12 +88,15 @@ export interface WorkCalendar {
         <div nz-col nzSpan="12">
         <nz-form-item>
             <nz-form-label nzFor="memberList" nzRequired>팀원</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="memberList" itemId="memberList"
-                [options]="memberList" [opt_value]="'userId'" [opt_label]="'name'" [mode]="'tags'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="memberList" formControlName="memberList" nzMode="tags">
+                @for (option of memberList; track option) {
+                  <nz-option
+                    [nzLabel]="option.name"
+                    [nzValue]="option.userId">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                    
         </div>

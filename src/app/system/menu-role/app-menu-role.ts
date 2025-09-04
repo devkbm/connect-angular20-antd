@@ -18,11 +18,11 @@ import { MenuGroupFormComponent } from '../menu/menu-group-form';
 import { MenuRoleTreeComponent } from './menu-role-tree.component';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -32,9 +32,9 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     FormsModule,
     NzFormModule,
     NzButtonModule,
+    NzSelectModule,
     NzDrawerModule,
-
-    NzInputSelectComponent,
+    
     MenuGroupGridComponent,
     MenuGroupFormComponent,
     MenuGridComponent,
@@ -50,12 +50,15 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzFor="menuGroup" nzRequired>메뉴그룹</nz-form-label>
-        <nz-form-control>
-          <nz-input-select
-            [(ngModel)]="menuGroup.selectedItem" itemId="menuGroup"
-            [options]="menuGroup.list" [opt_value]="'menuGroupCode'" [opt_label]="'menuGroupName'"
-            placeholder="Please select">
-          </nz-input-select>
+        <nz-form-control>          
+          <nz-select nzId="roleList" [(ngModel)]="menuGroup.selectedItem">
+            @for (option of menuGroup.list; track option) {
+              <nz-option
+                [nzLabel]="option.menuGroupName"
+                [nzValue]="option.menuGroupCode">
+              </nz-option>
+            }
+          </nz-select>
         </nz-form-control>
       </nz-form-item>      
     </div>
@@ -63,12 +66,15 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzFor="roleCode" nzRequired>롤</nz-form-label>
-        <nz-form-control>
-          <nz-input-select
-            [(ngModel)]="role.selectedItem" itemId="roleCode"
-            [options]="role.list" [opt_value]="'roleCode'" [opt_label]="'description'"
-            placeholder="Please select">
-          </nz-input-select>
+        <nz-form-control>          
+          <nz-select nzId="roleCode" [(ngModel)]="role.selectedItem">
+            @for (option of menuGroup.list; track option) {
+              <nz-option
+                [nzLabel]="option.description"
+                [nzValue]="option.roleCode">
+              </nz-option>
+            }
+          </nz-select>
         </nz-form-control>
       </nz-form-item>      
     </div>

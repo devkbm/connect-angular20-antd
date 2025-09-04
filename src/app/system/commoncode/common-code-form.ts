@@ -17,8 +17,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
-
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
@@ -31,8 +30,8 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzTreeSelectModule,
-    NzInputSelectComponent,
+    NzSelectModule,
+    NzTreeSelectModule,    
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -54,12 +53,16 @@ import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-se
         <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="systemTypeCode" nzRequired>시스템구분코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required="true"
-                formControlName="systemTypeCode" itemId="systemTypeCode"
-                [options]="systemTypeCodeList" [opt_value]="'value'" [opt_label]="'label'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="systemTypeCode" formControlName="systemTypeCode">
+                @for (option of systemTypeCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.label"
+                    [nzValue]="option.value">
+                  </nz-option>
+                }
+              </nz-select>
+
             </nz-form-control>
           </nz-form-item>
         </div>

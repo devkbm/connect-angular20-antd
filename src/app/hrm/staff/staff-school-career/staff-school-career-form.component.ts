@@ -15,11 +15,11 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-staff-school-career-form',
@@ -31,8 +31,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-
-    NzInputSelectComponent
+    NzSelectModule,    
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -52,12 +51,15 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="schoolCareerType" nzRequired>학력</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="schoolCareerType" itemId="schoolCareerType"
-                [options]="schoolCareerTypeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="schoolCareerType" formControlName="schoolCareerType">
+                @for (option of schoolCareerTypeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                                                            
         </div>
@@ -65,12 +67,15 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="schoolCode" nzRequired>학교</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="schoolCode" itemId="schoolCode"
-                [options]="schoolCodeList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="schoolCode" formControlName="schoolCode">
+                @for (option of schoolCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>                                                                      
         </div>

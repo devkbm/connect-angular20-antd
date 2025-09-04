@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, output, signal, model } from '@angular/core';
+import { Component, ChangeDetectionStrategy, output, signal, model, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,7 +9,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzInputSelectCompanyComponent } from "../../third-party/ng-zorro/nz-input-select-company/nz-input-select-company.component";
+
+import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-select.service';
+
 
 @Component({
   selector: 'app-dept-search',
@@ -24,12 +26,20 @@ import { NzInputSelectCompanyComponent } from "../../third-party/ng-zorro/nz-inp
     NzSelectModule,
     NzDividerModule,
     NzPopconfirmModule,
-    NzInputSelectCompanyComponent
+    CompanySelectService    
 ],
   template: `
     <div nz-row>
       <div nz-col [nzSpan]="12" style="display: flex;">
-        <app-nz-input-select-company (valueChange)="change($event)"></app-nz-input-select-company>
+        
+        <nz-select [(nzModel)]="companyCode" (ngModelChange)="change($event)">
+          @for (option of companySelectService.list; track option) {
+            <nz-option
+              [nzLabel]="option.companyName"
+              [nzValue]="option.companyCode">
+            </nz-option>
+          }
+        </nz-select>
         <nz-input-group nzSearch [nzSuffix]="suffixIconSearch">
           <input type="text" [(ngModel)]="queryValue" nz-input placeholder="input search text">
         </nz-input-group>
@@ -74,10 +84,16 @@ export class DeptSearchComponent {
   queryValue = signal('');
   companyCode = model<string>('001');
 
+  companySelectService = inject(CompanySelectService);
+
   search = output<Object>();
   newForm = output<void>();
   saveForm = output<void>();
   deleteForm = output<void>();
+
+  constructor() {
+    this.companySelectService.getCompanyList();
+  }
 
   change(val: any) {
     this.companyCode.set(val);

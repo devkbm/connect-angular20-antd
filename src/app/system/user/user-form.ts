@@ -164,7 +164,7 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
           <nz-form-item>
             <nz-form-label nzFor="roleList" nzRequired>롤</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-select nzId="roleList" nzMode="tags" formControlName="roleList">
+              <nz-select nzId="roleList" formControlName="roleList" nzMode="tags">
                 @for (option of authList; track option) {
                   <nz-option
                     [nzLabel]="option.description"

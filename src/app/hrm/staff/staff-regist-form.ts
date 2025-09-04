@@ -21,10 +21,10 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzUploadModule, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 
-import { NzInputRadioGroupComponent } from 'src/app/third-party/ng-zorro/nz-input-radio-group/nz-input-radio-group.component';
-import { NzInputRregnoComponent } from 'src/app/third-party/ng-zorro/nz-input-rregno/nz-input-rregno.component';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @Component({
   selector: 'app-staff-regist-form',
@@ -40,9 +40,11 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
     NzAvatarModule,
     NzUploadModule,
     NzDividerModule,
-    NzInputRadioGroupComponent,
-    NzInputRregnoComponent,
-
+    NzRadioModule,
+    NgxMaskDirective,    
+  ],
+  providers: [
+    provideNgxMask()
   ],
   template: `
     <!--{{fg.getRawValue() | json}}-->
@@ -104,13 +106,13 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="gender" nzRequired>성별</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <app-nz-input-radio-group
-                formControlName="gender" itemId="gender"
-                placeholder=""
-                [options]="genderOptions"
-                [required]="false" [nzErrorTip]="errorTpl">성별
-              </app-nz-input-radio-group>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-radio-group
+                formControlName="gender" itemId="gender">
+                @for (o of genderOptions; track o.value) {
+                  <label nz-radio [nzValue]="o.value">{{ o.label }}</label>
+                }
+              </nz-radio-group>
             </nz-form-control>
           </nz-form-item>                                        
         </div>
@@ -140,12 +142,11 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
         <div nz-col nzSpan="12" >
           <nz-form-item>
             <nz-form-label nzFor="residentRegistrationNumber">주민등록번호</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-rregno
-                formControlName="residentRegistrationNumber" itemId="residentRegistrationNumber"
-                placeholder="주민등록번호를 입력해주세요."
-                [required]="true">
-              </nz-input-rregno>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <input nz-input required
+                nzId="residentRegistrationNumber" formControlName="residentRegistrationNumber"
+                mask="000000-0000000"  
+              />              
             </nz-form-control>
           </nz-form-item>                                                            
         </div>

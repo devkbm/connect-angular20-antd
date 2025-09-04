@@ -14,10 +14,10 @@ import { HrmCode } from '../../hrm-code/hrm-code.model';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputSelectComponent } from 'src/app/third-party/ng-zorro/nz-input-select/nz-input-select.component';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
   selector: 'app-staff-family-form',
@@ -27,8 +27,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-
-    NzInputSelectComponent,
+    NzSelectModule,    
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -48,12 +47,15 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="familyRelation" nzRequired>가족관계</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-select required
-                formControlName="familyRelation" itemId="familyRelation"
-                [options]="familyRelationList" [opt_value]="'code'" [opt_label]="'codeName'"
-                placeholder="Please select">
-              </nz-input-select>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+              <nz-select nzId="familyRelation" formControlName="familyRelation">
+                @for (option of familyRelationList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>               
         </div>
