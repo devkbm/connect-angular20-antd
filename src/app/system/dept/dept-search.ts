@@ -9,7 +9,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-
 import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-select.service';
 
 
@@ -26,13 +25,12 @@ import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-selec
     NzSelectModule,
     NzDividerModule,
     NzPopconfirmModule,
-    CompanySelectService    
-],
+  ],
   template: `
     <div nz-row>
       <div nz-col [nzSpan]="12" style="display: flex;">
-        
-        <nz-select [(nzModel)]="companyCode" (ngModelChange)="change($event)">
+
+        <nz-select [(ngModel)]="companyCode" (ngModelChange)="change($event)">
           @for (option of companySelectService.list; track option) {
             <nz-option
               [nzLabel]="option.companyName"

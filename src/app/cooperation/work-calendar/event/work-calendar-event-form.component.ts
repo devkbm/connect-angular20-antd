@@ -21,8 +21,8 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface WorkCalendar {
-  workCalendarId: string | null;
-  workCalendarName: string | null;
+  id: string | null;
+  name: string | null;
   color: string | null;
   memberList: string[];
 }
@@ -57,7 +57,7 @@ export interface NewFormValue {
     NzTimePickerModule,
     NzSwitchModule,
     NzIconModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -74,7 +74,7 @@ export interface NewFormValue {
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="workCalendarId" nzRequired>작업그룹 ID</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="workCalendarId" formControlName="workCalendarId">
                 @for (option of workGroupList(); track option) {
                   <nz-option
@@ -94,7 +94,7 @@ export interface NewFormValue {
               <input nz-input id="id" formControlName="id" required
                 placeholder="일정ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -112,7 +112,7 @@ export interface NewFormValue {
                 ></nz-date-picker>
               }
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -128,7 +128,7 @@ export interface NewFormValue {
                 ></nz-date-picker>
               }
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
@@ -143,7 +143,7 @@ export interface NewFormValue {
                   <ng-template #unCheckedTemplate><span nz-icon nzType="close"></span></ng-template>
               </nz-switch>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
       </div>
@@ -155,7 +155,7 @@ export interface NewFormValue {
             placeholder="제목을 입력해주세요." [rows]="10">
           </textarea>
         </nz-form-control>
-      </nz-form-item>       
+      </nz-form-item>
     </form>
   `,
   styles: []

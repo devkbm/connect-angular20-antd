@@ -2,7 +2,6 @@ import { Component, OnInit, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ButtonTemplate, NzButtonsComponent } from 'src/app/third-party/ng-zorro/nz-buttons/nz-buttons.component';
 import { NzPageHeaderCustomComponent } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component";
 import { NzSearchAreaComponent } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component";
 
@@ -66,7 +65,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
           <span nz-icon nzType="search"></span>
         </ng-template>
       </div>
-      <div nz-col [nzSpan]="12" style="text-align: right;">        
+      <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="getList()">
           <span nz-icon nzType="search"></span>조회
         </button>
@@ -74,7 +73,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
         <button nz-button (click)="newResource()">
           <span nz-icon nzType="form" nzTheme="outline"></span>신규
         </button>
-        <nz-divider nzType="vertical"></nz-divider>                
+        <nz-divider nzType="vertical"></nz-divider>
         <button nz-button nzDanger="true"
           nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
           (nzOnConfirm)="delete()" (nzOnCancel)="false">
@@ -158,7 +157,7 @@ export class AppCompany implements OnInit {
         {label: '설명', value: 'description'}
       ]
     }
-  }  
+  }
 
   drawer: {
     company: { visible: boolean, formDataId: any }

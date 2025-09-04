@@ -52,7 +52,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
 
   calendar2 = viewChild.required(CalendarFullcalendarComponent);
 
-  @Input() fkWorkCalendar: string = '';
+  @Input() workCalendarId = '';
 
   itemSelected = output<any>();
   newDateSelected = output<NewDateSelectedArgs>();
@@ -99,7 +99,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
   }
 
   getWorkScheduleList(): void {
-    const workGroupId: string = this.fkWorkCalendar.toString();
+    const workGroupId: string = this.workCalendarId.toString();
 
     if (workGroupId === "" || workGroupId === null || workGroupId === undefined) {
       this.eventData = [];
@@ -109,7 +109,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
 
     const url =  GlobalProperty.serverUrl() + `/api/grw/workcalendarevent`;
     const options = getHttpOptions({
-        fkWorkCalendar : this.fkWorkCalendar,
+        fkWorkCalendar : this.workCalendarId,
         fromDate: this.from,
         toDate: this.to
       });
@@ -184,7 +184,7 @@ export class WorkCalendarViewComponent implements AfterViewInit {
 
     //console.log(endDate);
 
-    const eventArgs: NewDateSelectedArgs = {workCalendarId: this.fkWorkCalendar, start: params.start, end: endDate, allDay: allDay};
+    const eventArgs: NewDateSelectedArgs = {workCalendarId: this.workCalendarId, start: params.start, end: endDate, allDay: allDay};
     this.newDateSelected.emit(eventArgs);
   }
 

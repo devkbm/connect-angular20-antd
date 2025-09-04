@@ -35,12 +35,6 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.co
       <span nz-icon nzType="form" nzTheme="outline"></span>신규 CALENDAR
     </button>
 
-    <!--
-    <button nz-button (click)="newSchedule()">
-      <span nz-icon nzType="form" nzTheme="outline"></span>신규 일정
-    </button>
-    -->
-
     <div class="grid-wrapper">
       @defer {
       <app-calendar-daypilot-navigator class="navi"
@@ -56,7 +50,7 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.co
 
       @defer {
       <app-work-calendar-view class="calendar"
-        [fkWorkCalendar]="drawer.workGroup.formDataId"
+        [workCalendarId]="drawer.workGroup.formDataId"
         (itemSelected)="editSchedule($event)"
         (newDateSelected)="newScheduleByDateSelect($event)"
         (eventDataChanged)="eventDateChanged($event)"
@@ -137,7 +131,7 @@ export class WorkCalendarApp implements AfterViewInit {
     this.closeWorkGroupDrawer();
     this.closeScheduleDrawer();
 
-    this.workCalendar().fkWorkCalendar = this.drawer.workGroup.formDataId;
+    this.workCalendar().workCalendarId = this.drawer.workGroup.formDataId;
     this.workCalendar().getWorkScheduleList();
   }
 
@@ -148,7 +142,7 @@ export class WorkCalendarApp implements AfterViewInit {
   closeScheduleDrawer() {
     this.drawer.schedule.visible = false;
 
-    this.workCalendar().fkWorkCalendar = this.drawer.workGroup.formDataId;
+    this.workCalendar().workCalendarId = this.drawer.workGroup.formDataId;
     this.workCalendar().getWorkScheduleList();
   }
 
@@ -196,6 +190,7 @@ export class WorkCalendarApp implements AfterViewInit {
     this.newScheduleArgs = {workCalendarId: this.drawer.workGroup.formDataId, start: param.start, end: param.end, allDay: param.allDay};
     this.drawer.schedule.formDataId = '';
 
+    console.log(this.drawer.workGroup.formDataId);
     this.openScheduleDrawer();
   }
 

@@ -7,7 +7,6 @@ import { CommonCodeFormComponent } from './common-code-form';
 import { CommonCodeTreeComponent } from './common-code-tree';
 import { CommonCodeService } from './common-code.service';
 import { SystemTypeEnum } from './system-type-enum.model';
-import { ButtonTemplate, NzButtonsComponent } from 'src/app/third-party/ng-zorro/nz-buttons/nz-buttons.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -60,7 +59,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
           <span nz-icon nzType="search"></span>
         </ng-template>
       </div>
-      <div nz-col [nzSpan]="12" style="text-align: right;">        
+      <div nz-col [nzSpan]="12" style="text-align: right;">
 
         <button nz-button nzType="primary" (click)="getCommonCodeTree()">
           <span nz-icon nzType="search"></span>조회
@@ -145,39 +144,6 @@ export class CommonCodeApp implements OnInit, AfterViewInit {
   systeTypeCode = 'COM';
   queryValue = '';
   selectedCode = '';
-
-  buttons: ButtonTemplate[] = [{
-    text: '조회',
-    nzType: 'search',
-    click: (e: MouseEvent) => {
-      this.getCommonCodeTree();
-    }
-  },{
-    text: '신규',
-    nzType: 'form',
-    click: (e: MouseEvent) => {
-      this.newForm();
-    }
-  },{
-    text: '저장',
-    nzType: 'save',
-    popConfirm: {
-      title: '저장하시겠습니까?',
-      confirmClick: () => {
-        this.saveCommonCode();
-      }
-    }
-  },{
-    text: '삭제',
-    nzType: 'delete',
-    isDanger: true,
-    popConfirm: {
-      title: '삭제하시겠습니까?',
-      confirmClick: () => {
-        this.deleteCommonCode();
-      }
-    }
-  }];
 
   private commonCodeService = inject(CommonCodeService);
 
