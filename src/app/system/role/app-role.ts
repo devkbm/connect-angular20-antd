@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ShapeComponent } from "src/app/core/app/shape.component";
 
-import { RoleGridComponent } from './role-grid.component';
-import { RoleFormDrawerComponent } from './role-form-drawer.component';
+import { RoleGridComponent } from './role-grid';
+import { RoleFormDrawerComponent } from './role-form-drawer';
 import { Role } from './role.model';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -21,7 +21,7 @@ import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-ar
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
-import { RoleListComponent } from './role-list.component';
+import { RoleListComponent } from './role-list';
 
 @Component({
   selector: 'app-role',

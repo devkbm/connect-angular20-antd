@@ -23,7 +23,7 @@ export interface UploadedFile {
 }
 
 @Component({
-  selector: 'app-post-file-upload',
+  selector: 'post-file-upload',
   imports: [
     CommonModule,
     FileUploadModule,

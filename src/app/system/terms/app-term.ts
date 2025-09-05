@@ -2,12 +2,12 @@ import { Component, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TermGridComponent } from './term-grid.component';
-import { DataDomainGridComponent } from './data-domain-grid.component';
-import { WordGridComponent } from './word-grid.component';
-import { DataDomainFormComponent } from './data-domain-form.component';
-import { TermFormComponent } from './term-form.component';
-import { WordFormComponent } from './word-form.component';
+import { TermGridComponent } from './term-grid';
+import { DataDomainGridComponent } from './data-domain-grid';
+import { WordGridComponent } from './word-grid';
+import { DataDomainFormComponent } from './data-domain-form';
+import { TermFormComponent } from './term-form';
+import { WordFormComponent } from './word-form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';

@@ -1,36 +1,30 @@
 import { Component, input, output, viewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NewFormValue, WorkCalendarEventFormComponent } from './work-calendar-event-form.component';
+import { StaffSchoolCareerFormComponent } from './staff-school-career-form';
 
 @Component({
-  selector: 'app-work-calendar-event-form-drawer',
+  selector: 'app-staff-school-career-form-drawer',
   imports: [
-    CommonModule,
     NzDrawerModule,
     NzCrudButtonGroupComponent,
-    WorkCalendarEventFormComponent
+    StaffSchoolCareerFormComponent
   ],
   template: `
-    <nz-drawer
-      [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+  <nz-drawer
+      nzTitle="학력 등록"
+      nzWidth="80%"
       [nzMaskClosable]="true"
-      [nzWidth]="720"
       [nzVisible]="drawer().visible"
-      nzTitle="일정 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-
-      <app-work-calendar-event-form *nzDrawerContent
-        [formDataId]="drawer().formDataId"
-        [newFormValue]="newFormValue()"
-        (formSaved)="closeDrawer($event)"
-        (formDeleted)="closeDrawer($event)"
-        (formClosed)="drawer().visible = false">
-      </app-work-calendar-event-form>
+        <app-staff-school-career-form *nzDrawerContent
+          [formDataId]="drawer().formDataId"
+          [staff]="selectedStaff()"
+          (formSaved)="closeDrawer($event)"
+          (formDeleted)="closeDrawer($event)"
+          (formClosed)="drawer().visible = false">
+        </app-staff-school-career-form>
     </nz-drawer>
 
     <ng-template #footerTpl>
@@ -47,14 +41,14 @@ import { NewFormValue, WorkCalendarEventFormComponent } from './work-calendar-ev
   `,
   styles: []
 })
-export class WorkCalendarEventFormDrawerComponent {
-
-  newFormValue = input<NewFormValue>();
+export class StaffSchoolCareerFormDrawerComponent {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<WorkCalendarEventFormComponent>(WorkCalendarEventFormComponent);
+  form = viewChild.required<StaffSchoolCareerFormComponent>(StaffSchoolCareerFormComponent);
+
+  selectedStaff = input<any>();
 
   save() {
     this.form().save();

@@ -2,10 +2,10 @@ import { Component, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BizCodeTypeGridComponent } from './biz-code-type-grid.component';
-import { BizCodeGridComponent } from './biz-code-grid.component';
-import { BizCodeTypeFormDrawerComponent } from "./biz-code-type-form-drawer.component";
-import { BizCodeFormDrawerComponent } from "./biz-code-form-drawer.component";
+import { BizCodeTypeGridComponent } from './biz-code-type-grid';
+import { BizCodeGridComponent } from './biz-code-grid';
+import { BizCodeTypeFormDrawerComponent } from "./biz-code-type-form-drawer";
+import { BizCodeFormDrawerComponent } from "./biz-code-form-drawer";
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';

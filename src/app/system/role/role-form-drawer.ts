@@ -3,31 +3,30 @@ import { Component, input, output, viewChild } from '@angular/core';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { WorkCalendarFormComponent } from './work-calendar-form.component';
+import { RoleFormComponent } from './role-form';
 
 @Component({
-  selector: 'app-work-calendar-form-drawer',
+  selector: 'app-role-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
-    WorkCalendarFormComponent
+    RoleFormComponent
   ],
   template: `
     <nz-drawer
-      [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+      [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px'}"
       [nzMaskClosable]="true"
       [nzWidth]="720"
       [nzVisible]="drawer().visible"
-      nzTitle="CALENDAR 등록"
+      nzTitle="롤 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-
-      <app-work-calendar-form *nzDrawerContent
-        [formDataId]="drawer().formDataId"
-        (formSaved)="closeDrawer($event)"
-        (formDeleted)="closeDrawer($event)"
-        (formClosed)="drawer().visible = false">
-      </app-work-calendar-form>
+        <app-role-form *nzDrawerContent
+          [formDataId]="drawer().formDataId"
+          (formSaved)="closeDrawer($event)"
+          (formDeleted)="closeDrawer($event)"
+          (formClosed)="drawer().visible = false">
+        </app-role-form>
     </nz-drawer>
 
     <ng-template #footerTpl>
@@ -43,13 +42,14 @@ import { WorkCalendarFormComponent } from './work-calendar-form.component';
     </ng-template>
   `,
   styles: []
+
 })
-export class WorkCalendarFormDrawerComponent {
+export class RoleFormDrawerComponent {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<WorkCalendarFormComponent>(WorkCalendarFormComponent);
+  form = viewChild.required<RoleFormComponent>(RoleFormComponent);
 
   save() {
     this.form().save();

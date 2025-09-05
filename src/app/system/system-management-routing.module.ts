@@ -18,7 +18,7 @@ export const routes: Routes = [
       {path: 'dept',          loadComponent: () => import('./dept/app-dept').then(m => m.DeptApp)},
       {path: 'term',          loadComponent: () => import('./terms/app-term').then(m => m.TermApp)},
       {path: 'holiday',       loadComponent: () => import('./holiday/app-holiday').then(m => m.HolidayApp)},
-      {path: 'bizcode',       loadComponent: () => import('./biz-code/biz-code-app').then(m => m.BizCodeApp)}
+      {path: 'bizcode',       loadComponent: () => import('./biz-code/app-biz-code').then(m => m.BizCodeApp)}
     ]
   }
 ];

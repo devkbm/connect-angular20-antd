@@ -18,7 +18,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 
 //import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import { PostFileUploadComponent } from './post-file-upload.component';
+import { PostFileUploadComponent } from './post-file-upload';
 import { SessionManager } from 'src/app/core/session-manager';
 import { HttpClient } from '@angular/common/http';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -38,7 +38,7 @@ export interface Post {
 
 
 @Component({
-  selector: 'app-post-form',
+  selector: 'post-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -86,11 +86,11 @@ export interface Post {
         </nz-form-control>
       </nz-form-item>
 
-      <app-post-file-upload
+      <post-file-upload
         [attachedFileList]="attachedFileList"
         [(uploadedFileList)]="uploadedfileList"
         (uploadCompleted)="closeForm()">
-      </app-post-file-upload>
+      </post-file-upload>
 
     </form>
 

@@ -11,7 +11,7 @@ import { StaffLicense } from './staff-license/staff-license.model';
 import { StaffLicenseGridComponent } from './staff-license/staff-license-grid';
 import { StaffAppointmentRecord } from './staff-appointment-record/staff-appointment-record.model';
 import { StaffSchoolCareer } from './staff-school-career/staff-school-career.model';
-import { StaffSchoolCareerGridComponent } from './staff-school-career/staff-school-career-grid.component';
+import { StaffSchoolCareerGridComponent } from './staff-school-career/staff-school-career-grid';
 import { StaffCurrentAppointmentDescriptionComponent } from './staff-current-appointment-description';
 import { StaffCardListComponent } from './staff-card/staff-card-list';
 import { StaffContactFormComponent } from './staff-contact/staff-contact-form';
@@ -34,7 +34,7 @@ import { StaffAppointmentRecordFormDrawerComponent } from './staff-appointment-r
 import { StaffDutyResponsibilityFormDrawerComponent } from './staff-duty-responsibility/staff-duty-responsibility-form-drawer';
 import { StaffFamilyFormDrawerComponent } from './staff-family/staff-family-form-drawer';
 import { StaffLicenseFormDrawerComponent } from './staff-license/staff-license-form-drawer';
-import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staff-school-career-form-drawer.component';
+import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staff-school-career-form-drawer';
 
 @Component({
   selector: 'staff-management-app',

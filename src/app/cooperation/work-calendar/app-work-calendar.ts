@@ -1,18 +1,18 @@
 import { Component, viewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WorkCalendarEventFormDrawerComponent } from './event/work-calendar-event-form-drawer.component';
-import { WorkCalendarFormDrawerComponent } from './calendar/work-calendar-form-drawer.component';
-import { NewDateSelectedArgs, WorkCalendarViewComponent } from './calendar-view/work-calendar-view.component';
-import { NewFormValue, WorkCalendarEventFormComponent } from './event/work-calendar-event-form.component';
-import { WorkCalendarFormComponent } from './calendar/work-calendar-form.component';
+import { WorkCalendarEventFormDrawerComponent } from './event/work-calendar-event-form-drawer';
+import { WorkCalendarFormDrawerComponent } from './calendar/work-calendar-form-drawer';
+import { NewDateSelectedArgs, WorkCalendarViewComponent } from './calendar-view/work-calendar-view';
+import { NewFormValue, WorkCalendarEventFormComponent } from './event/work-calendar-event-form';
+import { WorkCalendarFormComponent } from './calendar/work-calendar-form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
-import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list.component";
+import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list";
 
 @Component({
   selector: 'work-calendar-app',

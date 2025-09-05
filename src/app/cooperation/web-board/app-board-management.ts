@@ -6,9 +6,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
-import { BoardFormComponent } from './board-form';
-import { BoardTreeComponent } from '../board-hierarcy/board-tree';
-import { NzButtonExcelUploadComponent } from "../../../third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
+import { BoardFormComponent } from './board/board-form';
+import { BoardTreeComponent } from './board/board-tree';
+import { NzButtonExcelUploadComponent } from "../../third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
 
 
 @Component({
@@ -41,18 +41,18 @@ import { NzButtonExcelUploadComponent } from "../../../third-party/ng-zorro/nz-b
     -->
 
     <div class="app-layout">
-      <app-board-tree id="boardTree" #boardTree
+      <board-tree id="boardTree" #boardTree
         [searchValue]="queryValue"
         (itemSelected)="boardTreeItemClick($event)"
         (itemDbClicked)="modifyBoard($event)">
-      </app-board-tree>
+      </board-tree>
 
-      <app-board-form #boardForm
+      <board-form #boardForm
         [formDataId]="this.drawerBoard.formDataId"
         (formSaved)="getBoardTree()"
         (formDeleted)="getBoardTree()"
         (formClosed)="drawerBoard.visible = false">
-      </app-board-form>
+      </board-form>
     </div>
 
     <!--
@@ -63,12 +63,12 @@ import { NzButtonExcelUploadComponent } from "../../../third-party/ng-zorro/nz-b
       [nzVisible]="drawerBoard.visible"
       nzTitle="게시판 등록"
       (nzOnClose)="drawerBoard.visible = false">
-        <app-board-form #boardForm *nzDrawerContent
+        <board-form #boardForm *nzDrawerContent
           [initLoadId]="this.drawerBoard.initLoadId"
           (formSaved)="getBoardTree()"
           (formDeleted)="getBoardTree()"
           (formClosed)="drawerBoard.visible = false">
-        </app-board-form>
+        </board-form>
     </nz-drawer>
 -->
   `,

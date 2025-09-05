@@ -8,14 +8,14 @@ import { MenuGroup } from '../menu/menu-group.model';
 import { Role } from '../role/role.model';
 
 import { MenuGroupGridComponent } from '../menu/menu-group-grid';
-import { RoleGridComponent } from '../role/role-grid.component';
-import { RoleFormComponent } from '../role/role-form.component';
+import { RoleGridComponent } from '../role/role-grid';
+import { RoleFormComponent } from '../role/role-form';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { MenuGridComponent } from '../menu/menu-grid.';
 import { MenuFormComponent } from '../menu/menu-form';
 import { MenuGroupFormComponent } from '../menu/menu-group-form';
-import { MenuRoleTreeComponent } from './menu-role-tree.component';
+import { MenuRoleTreeComponent } from './menu-role-tree';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 

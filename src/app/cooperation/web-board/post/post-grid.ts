@@ -38,7 +38,7 @@ export interface Post {
 }
 
 @Component({
-  selector: 'app-post-grid',
+  selector: 'post-grid',
   imports: [
     CommonModule,
     AgGridAngular

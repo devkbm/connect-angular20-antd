@@ -8,7 +8,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
-  selector: 'app-post-list-row',
+  selector: 'post-list-row',
   imports: [
     NzAvatarModule,
     NzButtonModule,

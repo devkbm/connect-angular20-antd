@@ -1,32 +1,36 @@
 import { Component, input, output, viewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
-import { BizCodeTypeFormComponent } from './biz-code-type-form.component';
+import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NewFormValue, WorkCalendarEventFormComponent } from './work-calendar-event-form';
 
 @Component({
-  selector: 'app-biz-code-type-form-drawer',
+  selector: 'app-work-calendar-event-form-drawer',
   imports: [
+    CommonModule,
     NzDrawerModule,
-    BizCodeTypeFormComponent,
-    NzCrudButtonGroupComponent
+    NzCrudButtonGroupComponent,
+    WorkCalendarEventFormComponent
   ],
   template: `
     <nz-drawer
       [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
       [nzMaskClosable]="true"
-      nzWidth="80%"
+      [nzWidth]="720"
       [nzVisible]="drawer().visible"
-      nzTitle="업무코드분류 등록"
+      nzTitle="일정 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-biz-code-type-form *nzDrawerContent
-          [formDataId]="drawer().formDataId"
-          (formSaved)="closeDrawer($event)"
-          (formDeleted)="closeDrawer($event)"
-          (formClosed)="drawer().visible = false">
-      </app-biz-code-type-form>
+
+      <app-work-calendar-event-form *nzDrawerContent
+        [formDataId]="drawer().formDataId"
+        [newFormValue]="newFormValue()"
+        (formSaved)="closeDrawer($event)"
+        (formDeleted)="closeDrawer($event)"
+        (formClosed)="drawer().visible = false">
+      </app-work-calendar-event-form>
     </nz-drawer>
 
     <ng-template #footerTpl>
@@ -41,16 +45,16 @@ import { BizCodeTypeFormComponent } from './biz-code-type-form.component';
       </div>
     </ng-template>
   `,
-  styles: [
-
-  ]
+  styles: []
 })
-export class BizCodeTypeFormDrawerComponent {
+export class WorkCalendarEventFormDrawerComponent {
+
+  newFormValue = input<NewFormValue>();
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<BizCodeTypeFormComponent>(BizCodeTypeFormComponent);
+  form = viewChild.required<WorkCalendarEventFormComponent>(WorkCalendarEventFormComponent);
 
   save() {
     this.form().save();
@@ -65,4 +69,5 @@ export class BizCodeTypeFormDrawerComponent {
 
     this.drawerClosed.emit(params);
   }
+
 }

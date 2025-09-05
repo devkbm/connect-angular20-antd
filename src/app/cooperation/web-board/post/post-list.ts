@@ -11,14 +11,14 @@ import { ResponseSpringslice } from 'src/app/core/model/response-springslice';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { PostListRowComponent } from './post-list-row.component';
+import { PostListRowComponent } from './post-list-row';
 import { PostList } from './post-list.model';
 
 // 무한 스크롤 적용 필요
 // https://www.npmjs.com/package/ngx-infinite-scroll
 
 @Component({
-  selector: 'app-post-list',
+  selector: 'post-list',
   imports: [
     CommonModule,
     NzListModule,
@@ -42,11 +42,11 @@ import { PostList } from './post-list.model';
     >
       <!--{{this.pageable | json}}-->
       @for (post of posts; track post.postId; let idx = $index) {
-        <app-post-list-row
+        <post-list-row
           [post]="post"
           (viewClicked)="onViewClicked(post)"
           (editClicked)="onEditClicked(post)">
-        </app-post-list-row>
+        </post-list-row>
 
         @if (idx < posts.length - 1) {
           <hr class="hr-line">

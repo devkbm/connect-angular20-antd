@@ -31,9 +31,10 @@ export interface BoardHierarchy {
 }
 
 @Component({
-  selector: 'app-board-tree',
+  selector: 'board-tree',
   imports: [
-    CommonModule, NzTreeModule
+    CommonModule, 
+    NzTreeModule
   ],
   template: `
     <!--{{items | json}}-->

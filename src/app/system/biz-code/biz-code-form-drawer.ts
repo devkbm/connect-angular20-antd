@@ -2,7 +2,7 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { BizCodeFormComponent } from "./biz-code-form.component";
+import { BizCodeFormComponent } from "./biz-code-form";
 import { NzCrudButtonGroupComponent } from "src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component";
 
 @Component({

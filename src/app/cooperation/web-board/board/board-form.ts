@@ -50,7 +50,7 @@ export interface BoardHierarchy {
 
 
 @Component({
-  selector: 'app-board-form',
+  selector: 'board-form',
   imports: [
     CommonModule,
     FormsModule,

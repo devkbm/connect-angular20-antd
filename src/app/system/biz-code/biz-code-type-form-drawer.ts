@@ -1,30 +1,32 @@
 import { Component, input, output, viewChild } from '@angular/core';
+
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { StaffSchoolCareerFormComponent } from './staff-school-career-form.component';
+
+import { BizCodeTypeFormComponent } from './biz-code-type-form';
 
 @Component({
-  selector: 'app-staff-school-career-form-drawer',
+  selector: 'app-biz-code-type-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffSchoolCareerFormComponent
+    BizCodeTypeFormComponent,
+    NzCrudButtonGroupComponent
   ],
   template: `
-  <nz-drawer
-      nzTitle="학력 등록"
-      nzWidth="80%"
+    <nz-drawer
+      [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
       [nzMaskClosable]="true"
+      nzWidth="80%"
       [nzVisible]="drawer().visible"
+      nzTitle="업무코드분류 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-staff-school-career-form *nzDrawerContent
+      <app-biz-code-type-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
-          [staff]="selectedStaff()"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-staff-school-career-form>
+      </app-biz-code-type-form>
     </nz-drawer>
 
     <ng-template #footerTpl>
@@ -39,16 +41,16 @@ import { StaffSchoolCareerFormComponent } from './staff-school-career-form.compo
       </div>
     </ng-template>
   `,
-  styles: []
+  styles: [
+
+  ]
 })
-export class StaffSchoolCareerFormDrawerComponent {
+export class BizCodeTypeFormDrawerComponent {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<StaffSchoolCareerFormComponent>(StaffSchoolCareerFormComponent);
-
-  selectedStaff = input<any>();
+  form = viewChild.required<BizCodeTypeFormComponent>(BizCodeTypeFormComponent);
 
   save() {
     this.form().save();
@@ -63,5 +65,4 @@ export class StaffSchoolCareerFormDrawerComponent {
 
     this.drawerClosed.emit(params);
   }
-
 }

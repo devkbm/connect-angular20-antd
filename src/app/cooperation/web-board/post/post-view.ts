@@ -10,7 +10,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzFileDownloadComponent } from 'src/app/third-party/ng-zorro/nz-file-download/nz-file-download.component';
 
-import { PostFileUploadComponent } from './post-file-upload.component';
+import { PostFileUploadComponent } from './post-file-upload';
 
 
 export interface Post {
@@ -32,7 +32,7 @@ export interface Post {
 }
 
 @Component({
-  selector: 'app-post-view',
+  selector: 'post-view',
   imports: [
     TrustHtmlPipe,
     NzPageHeaderModule,
@@ -49,10 +49,10 @@ export interface Post {
 <!--<app-nz-file-upload [fileList]="fileList"></app-nz-file-upload>-->
 <app-nz-file-download [fileList]="fileList" [height]="'100px'"></app-nz-file-download>
 
-<app-post-file-upload
+<post-file-upload
   [isUploadBtnVisible]="false"
   [(uploadedFileList)]="fileList">
-</app-post-file-upload>
+</post-file-upload>
 
 <div [innerHTML]="post()?.contents | trustHtml"></div>
   `,

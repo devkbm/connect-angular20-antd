@@ -12,12 +12,12 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 
-import { BoardTreeComponent } from './board-hierarcy/board-tree';
+import { BoardTreeComponent } from './board/board-tree';
 
-import { PostFormComponent } from './post/post-form.component';
-import { PostViewComponent } from './post/post-view.component';
-import { PostGridComponent } from './post/post-grid.component';
-import { PostListComponent } from './post/post-list.component';
+import { PostFormComponent } from './post/post-form';
+import { PostViewComponent } from './post/post-view';
+import { PostGridComponent } from './post/post-grid';
+import { PostListComponent } from './post/post-list';
 import { PostList } from './post/post-list.model';
 import { WindowRef } from 'src/app/core/window-ref';
 
@@ -71,25 +71,25 @@ export interface TabInfo {
     <ng-template #suffixIconSearch><span nz-icon nzType="search"></span></ng-template>
   </nz-input-group>
 
-  <app-board-tree id="boardTree" #boardTree
+  <board-tree id="boardTree" #boardTree
     [searchValue]="queryValue"
     (itemSelected)="setBoardSelect($event)">
-  </app-board-tree>
+  </board-tree>
 </div>
 
 
 <nz-tabset [(nzSelectedIndex)]="tabIndex" nzType="editable-card" nzHideAdd (nzClose)="closeTab($event)">
   <nz-tab [nzTitle]="tabTitle">
-    <app-post-list
+    <post-list
       [boardId]="drawer.board.formDataId"
       (editClicked)="editPost($event)"
       (viewClicked)="viewPost($event)">
-    </app-post-list>
+    </post-list>
   </nz-tab>
   @for (tab of tabs; track tab.postId) {
   <nz-tab [nzClosable]="$index >= 0" [nzTitle]="tab.tabName">
-    <app-post-view [postId]="tab.postId">
-    </app-post-view>
+    <post-view [postId]="tab.postId">
+    </post-view>
   </nz-tab>
   }
 </nz-tabset>
@@ -101,13 +101,13 @@ export interface TabInfo {
     [nzVisible]="drawer.postForm.visible"
     nzTitle="게시글 등록"
     (nzOnClose)="drawer.postForm.visible = false">
-    <app-post-form #articleForm *nzDrawerContent
+    <post-form #articleForm *nzDrawerContent
       [boardId]="drawer.postForm.boardId"
       [formDataId]="this.drawer.postForm.formDataId"
       (formSaved)="getArticleGridData()"
       (formDeleted)="getArticleGridData()"
       (formClosed)="drawer.postForm.visible = false">
-    </app-post-form>
+    </post-form>
 </nz-drawer>
 
 <nz-drawer
@@ -117,8 +117,8 @@ export interface TabInfo {
     [nzVisible]="drawer.postView.visible"
     nzTitle="게시글 조회"
     (nzOnClose)="drawer.postView.visible = false">
-    <app-post-view [id]="drawer.postView.id" *nzDrawerContent>
-    </app-post-view>
+    <post-view [id]="drawer.postView.id" *nzDrawerContent>
+    </post-view>
 </nz-drawer>
 
 
