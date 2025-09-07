@@ -20,7 +20,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
-  selector: 'app-web-resource-form',
+  selector: 'web-resource-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -28,8 +28,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    
-    
+
+
   ],
   template: `
     {{fg.getRawValue()| json}} - {{fg.valid}}
@@ -54,7 +54,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="resourceId" formControlName="resourceId" required
                 placeholder="리소스ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -63,7 +63,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="resourceName" formControlName="resourceName" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -72,7 +72,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="resourceType" nzRequired>리소스타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="resourceType" formControlName="resourceType">
                 @for (option of resourceTypeList; track option) {
                   <nz-option
@@ -82,7 +82,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -92,7 +92,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="url" formControlName="url" required
                 placeholder="URL 정보를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="설명를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 

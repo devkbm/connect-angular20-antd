@@ -22,7 +22,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { HrmCodeTypeFormDrawerComponent } from './hrm-code-type-form-drawer';
 import { HrmCodeFormDrawerComponent } from './hrm-code-form-drawer';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 
 
 @Component({
@@ -44,7 +44,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     HrmCodeTypeFormDrawerComponent,
     HrmCodeGridComponent,
     HrmCodeFormDrawerComponent,
-    ShapeComponent
+    NzPageComponent
 ],
   template: `
 <ng-template #header>
@@ -72,7 +72,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
   </div>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="grid-2row-2col">
       <h3 class="header1">코드 분류 목록 {{drawer.codeType | json}}</h3>
       <app-hrm-code-type-grid #gridHrmType
@@ -90,7 +90,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
         (editButtonClicked)="editHrmCode($event)">
       </app-hrm-code-grid>
   </div>
-</app-shape>
+</nz-page>
 
 <app-hrm-code-type-form-drawer
   [drawer]="drawer.codeType"

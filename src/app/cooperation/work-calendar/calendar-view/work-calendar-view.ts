@@ -27,7 +27,7 @@ export interface NewDateSelectedArgs {
 }
 
 @Component({
-  selector: 'app-work-calendar-view',
+  selector: 'work-calendar-view',
   imports: [
     CommonModule,
     CalendarFullcalendarComponent

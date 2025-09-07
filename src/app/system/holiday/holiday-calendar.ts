@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NzCalendarModule } from 'ng-zorro-antd/calendar';
 
 @Component({
-  selector: 'app-holiday-calendar',
+  selector: 'holiday-calendar',
   imports: [
     CommonModule,
     FormsModule,

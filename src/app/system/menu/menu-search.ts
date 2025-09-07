@@ -11,7 +11,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-menu-search',
+  selector: 'menu-search',
   imports: [
     CommonModule,
     FormsModule,

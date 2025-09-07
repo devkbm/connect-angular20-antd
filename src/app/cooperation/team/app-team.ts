@@ -44,10 +44,10 @@ import { TeamFormComponent } from './team-form.component';
 
 <div style="height:300px">
   @defer {
-  <app-team-grid [data]="gridList"
+  <team-grid [data]="gridList"
     (editButtonClicked)="editTeam($event)"
     (rowDoubleClicked)="editTeam($event)">
-  </app-team-grid>
+  </team-grid>
   }
 </div>
 
@@ -59,12 +59,12 @@ import { TeamFormComponent } from './team-form.component';
     nzTitle="코드분류 등록"
     (nzOnClose)="drawer.team.visible = false">
 
-    <app-team-form *nzDrawerContent
+    <team-form *nzDrawerContent
       [formDataId]="drawer.team.formDataId"
       (formSaved)="getGridList('d')"
       (formDeleted)="getGridList('d')"
       (formClosed)="drawer.team.visible = false">
-    </app-team-form>
+    </team-form>
     <!--
     <app-hrm-code-type-form #formHrmType *nzDrawerContent
       [initLoadId]="drawerCodeType.initLoadId"

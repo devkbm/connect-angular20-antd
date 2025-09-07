@@ -15,7 +15,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 
 @Component({
   selector: 'menu-app',
@@ -35,7 +35,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     MenuGridComponent,
     MenuGroupFormDrawerComponent,
     MenuFormDrawerComponent,
-    ShapeComponent
+    NzPageComponent
 ],
   template: `
 <ng-template #header>
@@ -43,7 +43,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="8">
         <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
@@ -94,39 +94,39 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
 
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="page-content">
     <h3 class="header1">메뉴 그룹 목록</h3>
     @defer {
-    <app-menu-group-grid class="grid1"
+    <menu-group-grid class="grid1"
       (rowClicked)="menuGroupGridRowClicked($event)"
       (editButtonClicked)="editMenuGroup($event)"
       (rowDoubleClicked)="editMenuGroup($event)">
-    </app-menu-group-grid>
+    </menu-group-grid>
     }
     <h3 class="header2">메뉴 목록</h3>
     @defer {
-    <app-menu-grid class="grid2"
+    <menu-grid class="grid2"
       (rowClicked)="menuGridRowClicked($event)"
       (editButtonClicked)="editMenu($event)"
       (rowDoubleClicked)="editMenu($event)">
-    </app-menu-grid>
+    </menu-grid>
     }
   </div>
-</app-shape>
+</nz-page>
 
-<app-menu-group-form-drawer
+<menu-group-form-drawer
   [drawer]="drawer.menuGroup"
   (drawerClosed)="getMenuGroupList()">
-</app-menu-group-form-drawer>
+</menu-group-form-drawer>
 
-<app-menu-form-drawer
+<menu-form-drawer
   [drawer]="drawer.menu"
   (drawerClosed)="getMenuList()">
-</app-menu-form-drawer>
+</menu-form-drawer>
   `,
   styles: `
 :host {

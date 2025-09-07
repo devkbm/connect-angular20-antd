@@ -21,14 +21,14 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
-  selector: 'app-role-form',
+  selector: 'role-form',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzSelectModule,  
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -51,7 +51,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <input nz-input id="roleCode" formControlName="roleCode" required
               placeholder="롤 코드를 입력해주세요."/>
           </nz-form-control>
-        </nz-form-item>        
+        </nz-form-item>
 
         <nz-form-item>
           <nz-form-label nzFor="roleName" nzRequired>롤 명</nz-form-label>
@@ -59,7 +59,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <input nz-input id="roleName" formControlName="roleName" required
               placeholder="롤 명을 입력해주세요."/>
           </nz-form-control>
-        </nz-form-item>                
+        </nz-form-item>
 
         <nz-form-item>
           <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹</nz-form-label>
@@ -73,8 +73,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
           </nz-form-control>
-        </nz-form-item>                
-        
+        </nz-form-item>
+
         <nz-form-item>
           <nz-form-label nzFor="description">설명</nz-form-label>
           <nz-form-control>
@@ -82,7 +82,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             placeholder="권한에 대한 설명을 입력해주세요." [rows]="10">
             </textarea>
           </nz-form-control>
-        </nz-form-item>                        
+        </nz-form-item>
       </div>
     </form>
   `,

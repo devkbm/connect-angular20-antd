@@ -34,7 +34,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzButtonModule,
     NzSelectModule,
     NzDrawerModule,
-    
+
     MenuGroupGridComponent,
     MenuGroupFormComponent,
     MenuGridComponent,
@@ -50,7 +50,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzFor="menuGroup" nzRequired>메뉴그룹</nz-form-label>
-        <nz-form-control>          
+        <nz-form-control>
           <nz-select nzId="roleList" [(ngModel)]="menuGroup.selectedItem">
             @for (option of menuGroup.list; track option) {
               <nz-option
@@ -60,13 +60,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             }
           </nz-select>
         </nz-form-control>
-      </nz-form-item>      
+      </nz-form-item>
     </div>
 
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-label nzFor="roleCode" nzRequired>롤</nz-form-label>
-        <nz-form-control>          
+        <nz-form-control>
           <nz-select nzId="roleCode" [(ngModel)]="role.selectedItem">
             @for (option of menuGroup.list; track option) {
               <nz-option
@@ -76,29 +76,29 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             }
           </nz-select>
         </nz-form-control>
-      </nz-form-item>      
+      </nz-form-item>
     </div>
 
     <div class="page-content">
       @defer {
-      <app-menu-group-grid class="grid1"
+      <menu-group-grid class="grid1"
         (rowClicked)="menuGroupClicked($event)"
         (editButtonClicked)="editMenuGroup($event)"
         (rowDoubleClicked)="editMenuGroup($event)">
-      </app-menu-group-grid>
+      </menu-group-grid>
       }
       @defer {
-      <app-menu-grid class="grid2"
+      <menu-grid class="grid2"
         (rowClicked)="menuClicked($event)"
         (editButtonClicked)="editMenu($event)"
         (rowDoubleClicked)="editMenu($event)">
-      </app-menu-grid>
+      </menu-grid>
       }
-      <app-role-grid class="grid3"
+      <role-grid class="grid3"
         (rowClicked)="roleClicked($event)"
         (editButtonClicked)="editRole($event)"
         (rowDoubleClicked)="editRole($event)">
-      </app-role-grid>
+      </role-grid>
 
       <app-menu-role-tree class="tree"
         [menuGroupCode]="menuGroup.selectedItem"
@@ -114,12 +114,12 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
       [nzVisible]="drawer.role.visible"
       nzTitle="롤 등록"
       (nzOnClose)="closeDrawer('role')">
-        <app-role-form #form *nzDrawerContent
+        <role-form #form *nzDrawerContent
           [formDataId]="drawer.role.formDataId"
           (formSaved)="getRoleList()"
           (formDeleted)="getRoleList()"
           (formClosed)="closeDrawer('role')">
-        </app-role-form>
+        </role-form>
     </nz-drawer>
 
     <nz-drawer
@@ -129,12 +129,12 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
       [nzVisible]="drawer.menuGroup.visible"
       nzTitle="메뉴그룹 등록"
       (nzOnClose)="drawer.menuGroup.visible = false">
-        <app-menu-group-form #menuGroupForm *nzDrawerContent
+        <menu-group-form #menuGroupForm *nzDrawerContent
           [formDataId]="drawer.menuGroup.formDataId"
           (formSaved)="getMenuGroupList()"
           (formDeleted)="getMenuGroupList()"
           (formClosed)="drawer.menuGroup.visible = false">
-        </app-menu-group-form>
+        </menu-group-form>
     </nz-drawer>
 
     <nz-drawer
@@ -144,12 +144,12 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
       [nzVisible]="drawer.menu.visible"
       nzTitle="메뉴 등록"
       (nzOnClose)="drawer.menu.visible = false">
-        <app-menu-form #menuForm *nzDrawerContent
+        <menu-form #menuForm *nzDrawerContent
           [formDataId]="drawer.menu.formDataId"
           (formSaved)="getMenuList()"
           (formDeleted)="getMenuList()"
           (formClosed)="drawer.menu.visible = false">
-        </app-menu-form>
+        </menu-form>
     </nz-drawer>
   `,
   styles: `

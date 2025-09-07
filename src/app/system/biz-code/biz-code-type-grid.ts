@@ -22,7 +22,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { BizCodeType } from './biz-code-type.model';
 
 @Component({
-  selector: 'app-biz-type-grid',
+  selector: 'biz-type-grid',
   imports: [
     CommonModule,
     AgGridAngular

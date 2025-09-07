@@ -18,7 +18,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
 
 @Component({
-  selector: 'app-biz-code-form',
+  selector: 'biz-code-form',
   imports: [
     CommonModule,
     FormsModule,

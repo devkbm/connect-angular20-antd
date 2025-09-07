@@ -22,7 +22,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { Role } from './role.model';
 
 @Component({
-  selector: 'app-role-grid',
+  selector: 'role-grid',
   imports: [
     CommonModule,
     AgGridAngular

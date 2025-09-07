@@ -29,14 +29,14 @@ export interface WorkCalendar {
 
 
 @Component({
-  selector: 'app-work-calendar-form',
+  selector: 'work-calendar-form',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzSelectModule,    
+    NzSelectModule,
     NzInputNgxColorsComponent,
   ],
   template: `
@@ -59,7 +59,7 @@ export interface WorkCalendar {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="workCalendarId" formControlName="workCalendarId" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -68,7 +68,7 @@ export interface WorkCalendar {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="workCalendarName" formControlName="workCalendarName" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -82,13 +82,13 @@ export interface WorkCalendar {
                 [colorPalette]="preset_colors">
               </nz-input-ngx-colors>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
         <nz-form-item>
             <nz-form-label nzFor="memberList" nzRequired>팀원</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="memberList" formControlName="memberList" nzMode="tags">
                 @for (option of memberList; track option) {
                   <nz-option
@@ -98,7 +98,7 @@ export interface WorkCalendar {
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
       </div>

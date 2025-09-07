@@ -23,7 +23,7 @@ export interface WebResource {
 
 
 @Component({
-  selector: 'app-web-resource-list',
+  selector: 'web-resource-list',
   imports: [
     CommonModule,
     NzListModule,

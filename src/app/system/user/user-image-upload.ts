@@ -13,7 +13,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-user-image-upload',
+  selector: 'user-image-upload',
   imports: [
     CommonModule,
     NzButtonModule,

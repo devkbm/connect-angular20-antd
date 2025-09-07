@@ -23,7 +23,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 
 
 @Component({
-  selector: 'app-holiday-grid',
+  selector: 'holiday-grid',
   imports: [
     CommonModule,
     AgGridAngular

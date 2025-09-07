@@ -24,7 +24,7 @@ export interface HtmlSelectOption {
 
 
 @Component({
-  selector: 'app-data-domain-form',
+  selector: 'data-domain-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -32,7 +32,7 @@ export interface HtmlSelectOption {
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzCrudButtonGroupComponent,        
+    NzCrudButtonGroupComponent,
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -57,7 +57,7 @@ export interface HtmlSelectOption {
               <input nz-input id="domainId" formControlName="domainId" required
                 placeholder="도메인Id를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -66,7 +66,7 @@ export interface HtmlSelectOption {
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="database" nzRequired>database</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                            
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="database" formControlName="database">
                 @for (option of databaseList; track option) {
                   <nz-option
@@ -76,7 +76,7 @@ export interface HtmlSelectOption {
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -86,7 +86,7 @@ export interface HtmlSelectOption {
               <input nz-input id="domainName" formControlName="domainName" required
                 placeholder="도메인명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -96,7 +96,7 @@ export interface HtmlSelectOption {
               <input nz-input id="dataType" formControlName="dataType" required
                 placeholder="dataType을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export interface HtmlSelectOption {
                 placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
       </div>
 

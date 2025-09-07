@@ -23,7 +23,7 @@ import { BizCode } from './biz-code.model';
 
 
 @Component({
-  selector: 'app-biz-code-grid',
+  selector: 'biz-code-grid',
   imports: [
     CommonModule,
     AgGridAngular

@@ -13,7 +13,7 @@ import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-selec
 
 
 @Component({
-  selector: 'app-dept-search',
+  selector: 'dept-search',
   imports: [
     CommonModule,
     FormsModule,

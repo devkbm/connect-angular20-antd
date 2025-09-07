@@ -43,20 +43,20 @@ export interface TodoModel {
 
 <div class="todo-body">
   <div class="todo-group">
-    <app-todo-group-list
+    <todo-group-list
       (onSelectedTodoGroup)="getTodoList($event)"
       (onDeletedTodoGroup)="deleteTodoGroup($event)">
-    </app-todo-group-list>
+    </todo-group-list>
   </div>
 
   <div class="todo">
-    <app-todo-add-input
+    <todo-add-input
       [pkTodoGroup]="selectedPkTodoGroup"
       (onTodoAdded)="addTodo($event)">
-    </app-todo-add-input>
+    </todo-add-input>
 
     @for (todo of todos(); track todo.todoId) {
-      <app-todo-text [todo]="todo" (stateChanged)="toggleTodo($event)" (deleteClicked)="deleteTodo($event)"></app-todo-text>
+      <todo-text [todo]="todo" (stateChanged)="toggleTodo($event)" (deleteClicked)="deleteTodo($event)"></todo-text>
     }
   </div>
 

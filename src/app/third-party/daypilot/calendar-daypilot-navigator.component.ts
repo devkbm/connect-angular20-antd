@@ -17,7 +17,7 @@ interface NavigatorRangeChangedArgs {
 }
 
 @Component({
-  selector: 'app-calendar-daypilot-navigator',
+  selector: 'calendar-daypilot-navigator',
   imports: [
     DayPilotModule
   ],

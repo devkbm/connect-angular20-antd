@@ -24,7 +24,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
 @Component({
-  selector: 'app-user-form',
+  selector: 'user-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -57,10 +57,10 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
       <!-- 1 row -->
       <div nz-row>
         <div nz-col nzSpan="4">
-          <app-user-image-upload
+          <user-image-upload
             [userId]="this.fg.controls.userId.value!"
             [pictureFileId]="imageBase64">
-          </app-user-image-upload>
+          </user-image-upload>
         </div>
       </div>
 

@@ -23,7 +23,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-web-resource-grid',
+  selector: 'web-resource-grid',
   imports: [
     CommonModule,
     AgGridAngular

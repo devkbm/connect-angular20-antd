@@ -14,7 +14,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
@@ -34,7 +34,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzSearchAreaComponent,
     CommonCodeTreeComponent,
     CommonCodeFormComponent,
-    ShapeComponent
+    NzPageComponent
 ],
   template: `
 <ng-template #header>
@@ -42,7 +42,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
@@ -83,28 +83,28 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="pgm-title">공통코드 목록</h3>
     </div>
 
     <div class="grid-wrapper">
-      <app-common-code-tree #commonCodeTree
+      <common-code-tree #commonCodeTree
         [searchValue]="queryValue"
         (itemSelected)="selectedItem($event)">
-      </app-common-code-tree>
+      </common-code-tree>
 
-      <app-common-code-form #commonCodeForm
+      <common-code-form #commonCodeForm
         (formSaved)="getCommonCodeTree()"
         (formDeleted)="getCommonCodeTree()">
-      </app-common-code-form>
+      </common-code-form>
     </div>
   </div>
-</app-shape>
+</nz-page>
   `,
   styles: `
 :host {

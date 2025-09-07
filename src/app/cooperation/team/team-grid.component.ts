@@ -16,7 +16,7 @@ ModuleRegistry.registerModules([
 ]);
 
 @Component({
-  selector: 'app-team-grid',
+  selector: 'team-grid',
   imports: [
     CommonModule,
     AgGridAngular

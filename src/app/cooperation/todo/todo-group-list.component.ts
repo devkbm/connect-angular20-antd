@@ -21,7 +21,7 @@ export interface TodoGroupModel {
 
 
 @Component({
-  selector: 'app-todo-group-list',
+  selector: 'todo-group-list',
   imports: [
     CommonModule,
     FormsModule,

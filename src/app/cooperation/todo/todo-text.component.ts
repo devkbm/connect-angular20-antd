@@ -15,7 +15,7 @@ export interface TodoModel {
 }
 
 @Component({
-  selector: 'app-todo-text',
+  selector: 'todo-text',
   imports: [CommonModule, FormsModule, NzCheckboxModule, NzButtonModule, NzIconModule],
   template: `
     <label nz-checkbox [(ngModel)]="todo().completed" (change)="changeState()"></label>

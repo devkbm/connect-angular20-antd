@@ -18,7 +18,7 @@ export interface Role {
 }
 
 @Component({
-  selector: 'app-role-list',
+  selector: 'role-list',
   imports: [
     CommonModule,
     NzListModule,

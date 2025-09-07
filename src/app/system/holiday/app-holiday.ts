@@ -3,7 +3,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { NotifyService } from 'src/app/core/service/notify.service';
 
 import { HolidayFormDrawerComponent } from './holiday-form-drawer';
@@ -43,7 +43,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     HolidayGridComponent,
     HolidayFormDrawerComponent,
     CalendarDaypilotNavigatorComponent,
-    ShapeComponent,
+    NzPageComponent,
     CalendarFullcalendarComponent
 ],
   template: `
@@ -52,7 +52,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="1" style="text-align: left;">
         <nz-date-picker nzMode="year" [(ngModel)]="query.holiday.year" nzAllowClear="false" (ngModelChange)="getHolidayList()" style="width: 80px;"></nz-date-picker>
@@ -74,10 +74,10 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
         </button>
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <nz-tabset [(nzSelectedIndex)]="tab.index">
     <nz-tab nzTitle="달력">
     <ng-template nz-tab>
@@ -95,28 +95,28 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       <ng-template nz-tab>
         <h3 class="grid-title">공휴일 목록</h3>
         <div class="grid-wrapper" >
-          <app-holiday-grid
+          <holiday-grid
             (rowClicked)="holidayGridRowClicked($event)"
             (editButtonClicked)="edit($event)"
             (rowDoubleClicked)="edit($event)">
-          </app-holiday-grid>
+          </holiday-grid>
 
 
-          <app-calendar-daypilot-navigator
+          <calendar-daypilot-navigator
             [events]="grid().filteredList()"
             (selectChanged)="navigatorSelectChanged($event)">
-          </app-calendar-daypilot-navigator>
+          </calendar-daypilot-navigator>
 
         </div>
       </ng-template>
     </nz-tab>
   </nz-tabset>
-</app-shape>
+</nz-page>
 
-<app-holiday-form-drawer
+<holiday-form-drawer
   [drawer]="drawer.holiday"
   (drawerClosed)="getHolidayList()">
-</app-holiday-form-drawer>
+</holiday-form-drawer>
 
   `,
   styles: `

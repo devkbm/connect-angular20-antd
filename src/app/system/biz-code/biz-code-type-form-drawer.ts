@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { BizCodeTypeFormComponent } from './biz-code-type-form';
 
 @Component({
-  selector: 'app-biz-code-type-form-drawer',
+  selector: 'biz-code-type-form-drawer',
   imports: [
     NzDrawerModule,
     BizCodeTypeFormComponent,
@@ -21,12 +21,12 @@ import { BizCodeTypeFormComponent } from './biz-code-type-form';
       nzTitle="업무코드분류 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-biz-code-type-form *nzDrawerContent
+      <biz-code-type-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </app-biz-code-type-form>
+      </biz-code-type-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

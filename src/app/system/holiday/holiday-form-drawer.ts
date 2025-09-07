@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { HolidayFormComponent } from './holiday-form';
 
 @Component({
-  selector: 'app-holiday-form-drawer',
+  selector: 'holiday-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { HolidayFormComponent } from './holiday-form';
       nzTitle="휴일 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-holiday-form *nzDrawerContent
+      <holiday-form *nzDrawerContent
         [formDataId]="drawer().formDataId"
         (formSaved)="closeDrawer($event)"
         (formDeleted)="closeDrawer($event)"
         (formClosed)="drawer().visible = false">
-      </app-holiday-form>
+      </holiday-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

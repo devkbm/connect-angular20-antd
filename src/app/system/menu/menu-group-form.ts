@@ -16,7 +16,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { MenuGroupFormValidatorService } from './validator/menu-group-form-validator.service';
 
 @Component({
-  selector: 'app-menu-group-form',
+  selector: 'menu-group-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -48,7 +48,7 @@ import { MenuGroupFormValidatorService } from './validator/menu-group-form-valid
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupCode" formControlName="menuGroupCode" placeholder="메뉴그룹코드를 입력해주세요." />
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -57,7 +57,7 @@ import { MenuGroupFormValidatorService } from './validator/menu-group-form-valid
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupName" formControlName="menuGroupName" placeholder="메뉴그룹명을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -66,7 +66,7 @@ import { MenuGroupFormValidatorService } from './validator/menu-group-form-valid
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="menuGroupUrl" formControlName="menuGroupUrl" placeholder="메뉴그룹URL을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -75,7 +75,7 @@ import { MenuGroupFormValidatorService } from './validator/menu-group-form-valid
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="sequence" formControlName="sequence" placeholder="순번을 입력해주세요." />
             </nz-form-control>
-          </nz-form-item>                                      
+          </nz-form-item>
         </div>
       </div>
 
@@ -89,7 +89,7 @@ import { MenuGroupFormValidatorService } from './validator/menu-group-form-valid
               placeholder="비고" [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                
+          </nz-form-item>
         </div>
       </div>
 

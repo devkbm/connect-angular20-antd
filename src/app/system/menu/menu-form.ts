@@ -22,7 +22,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-menu-form',
+  selector: 'menu-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -31,7 +31,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzInputNumberModule,
     NzTreeSelectModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -52,7 +52,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="menuGroupCode" nzRequired>메뉴그룹코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="menuGroupCode" formControlName="menuGroupCode" (ngModelChange)="selectMenuGroup($event)">
                 @for (option of menuGroupList; track option) {
                   <nz-option
@@ -108,7 +108,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="menuType" nzRequired>메뉴타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                          
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="menuType" formControlName="menuType">
                 @for (option of menuTypeList; track option) {
                   <nz-option
@@ -149,7 +149,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="appIconType" nzRequired>APP ICON TYPE</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="appIconType" formControlName="appIconType">
                 @for (option of appIconTypeList; track option) {
                   <nz-option
@@ -166,7 +166,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
           <nz-form-item>
             <nz-form-label nzFor="appIcon" nzRequired>APP ICON</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-            @if (this.fg.controls.appIconType.value === 'RESOURCE') {              
+            @if (this.fg.controls.appIconType.value === 'RESOURCE') {
               <nz-select nzId="appIcon" formControlName="appIcon">
                 @for (option of resourceList; track option) {
                   <nz-option

@@ -14,7 +14,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { GlobalProperty } from 'src/app/core/global-property';
 
 @Component({
-  selector: 'app-my-work-calendar-list',
+  selector: 'my-work-calendar-list',
   imports: [ CommonModule, NzGridModule, FormsModule, NzCheckboxModule, NzIconModule ],
   template: `
     <!--

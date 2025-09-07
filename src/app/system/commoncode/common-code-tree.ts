@@ -9,7 +9,7 @@ import { CommonCodeService } from './common-code.service';
 
 
 @Component({
-  selector: 'app-common-code-tree',
+  selector: 'common-code-tree',
   imports: [ CommonModule, NzTreeModule ],
   template: `
     {{searchValue}}

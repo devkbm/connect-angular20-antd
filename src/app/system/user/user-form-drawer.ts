@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { UserFormComponent } from './user-form';
 
 @Component({
-  selector: 'app-user-form-drawer',
+  selector: 'user-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { UserFormComponent } from './user-form';
       nzTitle="사용자 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-user-form *nzDrawerContent
+        <user-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-user-form>
+        </user-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

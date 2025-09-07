@@ -7,7 +7,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { NewFormValue, WorkCalendarEventFormComponent } from './work-calendar-event-form';
 
 @Component({
-  selector: 'app-work-calendar-event-form-drawer',
+  selector: 'work-calendar-event-form-drawer',
   imports: [
     CommonModule,
     NzDrawerModule,
@@ -24,13 +24,13 @@ import { NewFormValue, WorkCalendarEventFormComponent } from './work-calendar-ev
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
 
-      <app-work-calendar-event-form *nzDrawerContent
+      <work-calendar-event-form *nzDrawerContent
         [formDataId]="drawer().formDataId"
         [newFormValue]="newFormValue()"
         (formSaved)="closeDrawer($event)"
         (formDeleted)="closeDrawer($event)"
         (formClosed)="drawer().visible = false">
-      </app-work-calendar-event-form>
+      </work-calendar-event-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

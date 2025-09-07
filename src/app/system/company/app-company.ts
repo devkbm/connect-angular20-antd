@@ -13,7 +13,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { CompanyFormDrawerComponent } from "./company-form-drawer";
 
 import { CompanyGridComponent } from './company-grid';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -34,7 +34,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     NzDividerModule,
     NzPageHeaderCustomComponent,
     NzSearchAreaComponent,
-    ShapeComponent,
+    NzPageComponent,
     CompanyGridComponent,
     CompanyListComponent,
     CompanyFormDrawerComponent,
@@ -46,7 +46,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
@@ -81,10 +81,10 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
         </button>
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">회사 목록 {{drawer| json}} </h3>
@@ -92,25 +92,25 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     <div style="flex: 1">
     @defer {
       @if (view === 'grid') {
-        <app-company-grid #grid
+        <company-grid #grid
           (rowClicked)="resourceGridRowClicked($event)"
           (editButtonClicked)="editResource($event)"
           (rowDoubleClicked)="editResource($event)">
-        </app-company-grid>
+        </company-grid>
       }
       @else if (view === 'list') {
-        <app-company-list (editButtonClicked)="editResource($event)">
-        </app-company-list>
+        <company-list (editButtonClicked)="editResource($event)">
+        </company-list>
       }
     }
     </div>
   </div>
-</app-shape>
+</nz-page>
 
-<app-company-form-drawer
+<company-form-drawer
   [drawer]="drawer.company"
   (drawerClosed)="getList()">
-</app-company-form-drawer>
+</company-form-drawer>
 
   `,
   styles: `

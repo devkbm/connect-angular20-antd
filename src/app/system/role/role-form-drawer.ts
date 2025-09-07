@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { RoleFormComponent } from './role-form';
 
 @Component({
-  selector: 'app-role-form-drawer',
+  selector: 'role-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { RoleFormComponent } from './role-form';
       nzTitle="롤 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-role-form *nzDrawerContent
+        <role-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-role-form>
+        </role-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

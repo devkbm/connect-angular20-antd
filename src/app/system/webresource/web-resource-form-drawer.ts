@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { WebResourceFormComponent } from './web-resource-form';
 
 @Component({
-  selector: 'app-web-resource-form-drawer',
+  selector: 'web-resource-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { WebResourceFormComponent } from './web-resource-form';
       nzTitle="리소스 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-web-resource-form *nzDrawerContent
+        <web-resource-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-web-resource-form>
+        </web-resource-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

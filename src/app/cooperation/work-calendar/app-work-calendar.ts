@@ -37,39 +37,39 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list";
 
     <div class="grid-wrapper">
       @defer {
-      <app-calendar-daypilot-navigator class="navi"
+      <calendar-daypilot-navigator class="navi"
         [events]="this.eventData"
         (selectChanged)="navigatorSelectChanged($event)">
-      </app-calendar-daypilot-navigator>
+      </calendar-daypilot-navigator>
       }
-      <app-my-work-calendar-list
+      <my-work-calendar-list
         (rowClicked)="workGroupSelect($event)"
         (rowDoubleClicked)="modifyWorkGroup($event)">
-      </app-my-work-calendar-list>
+      </my-work-calendar-list>
 
 
       @defer {
-      <app-work-calendar-view class="calendar"
+      <work-calendar-view class="calendar"
         [workCalendarId]="drawer.workGroup.formDataId"
         (itemSelected)="editSchedule($event)"
         (newDateSelected)="newScheduleByDateSelect($event)"
         (eventDataChanged)="eventDateChanged($event)"
         (visibleRangeChanged)="calendarVisibleRangeChanged($event)"
         (modeChanged)="modeChanged($event)">
-      </app-work-calendar-view>
+      </work-calendar-view>
       }
     </div>
 
-    <app-work-calendar-event-form-drawer
+    <work-calendar-event-form-drawer
       [drawer]="drawer.schedule"
       [newFormValue]="this.newScheduleArgs"
       (drawerClosed)="getScheduleList()">
-    </app-work-calendar-event-form-drawer>
+    </work-calendar-event-form-drawer>
 
-    <app-work-calendar-form-drawer
+    <work-calendar-form-drawer
       [drawer]="drawer.workGroup"
       (drawerClosed)="getMyWorkGroupList()">
-    </app-work-calendar-form-drawer>
+    </work-calendar-form-drawer>
   `,
   styles: `
     .grid-wrapper {

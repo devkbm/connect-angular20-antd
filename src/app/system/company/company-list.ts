@@ -37,7 +37,7 @@ export interface Company {
 }
 
 @Component({
-  selector: 'app-company-list',
+  selector: 'company-list',
   imports: [
     CommonModule,
     NzListModule,

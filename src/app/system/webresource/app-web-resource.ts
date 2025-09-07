@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
@@ -37,7 +37,7 @@ import { WebResourceListComponent } from './web-resource-list';
     WebResourceGridComponent,
     WebResourceFormDrawerComponent,
     WebResourceSearchComponent,
-    ShapeComponent,
+    NzPageComponent,
     WebResourceListComponent
 ],
   template: `
@@ -46,16 +46,16 @@ import { WebResourceListComponent } from './web-resource-list';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
-    <app-web-resource-search
+  <nz-search-area>
+    <web-resource-search
       (search)="getList($event)"
       (newForm)="newResource()"
       (deleteForm)="delete()"
     />
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">웹서버 리소스 목록</h3>
@@ -64,26 +64,26 @@ import { WebResourceListComponent } from './web-resource-list';
     <div style="flex: 1">
     @defer {
       @if (view === 'grid') {
-        <app-web-resource-grid #grid
+        <web-resource-grid #grid
           (rowClicked)="resourceGridRowClicked($event)"
           (editButtonClicked)="editResource($event)"
           (rowDoubleClicked)="editResource($event)">
-        </app-web-resource-grid>
+        </web-resource-grid>
       }
       @else if (view === 'list') {
-        <app-web-resource-list (editButtonClicked)="editResource($event)">
-        </app-web-resource-list>
+        <web-resource-list (editButtonClicked)="editResource($event)">
+        </web-resource-list>
       }
     }
     </div>
   </div>
-</app-shape>
+</nz-page>
 
 
-<app-web-resource-form-drawer
+<web-resource-form-drawer
   [drawer]="drawer.resource"
   (drawerClosed)="getList('1')">
-</app-web-resource-form-drawer>
+</web-resource-form-drawer>
   `,
   styles: `
 :host {

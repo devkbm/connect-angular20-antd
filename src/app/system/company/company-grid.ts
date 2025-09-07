@@ -47,7 +47,7 @@ export interface Company {
 }
 
 @Component({
-  selector: 'app-company-grid',
+  selector: 'company-grid',
   imports: [
     CommonModule,
     AgGridAngular

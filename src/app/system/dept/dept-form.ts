@@ -21,7 +21,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { DeptFormValidatorService } from './validator/dept-form-validator.service';
 
 @Component({
-  selector: 'app-dept-form',
+  selector: 'dept-form',
   imports: [
     CommonModule,
     FormsModule,

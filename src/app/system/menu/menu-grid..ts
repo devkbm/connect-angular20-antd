@@ -22,7 +22,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { Menu } from './menu.model';
 
 @Component({
-  selector: 'app-menu-grid',
+  selector: 'menu-grid',
   imports: [
     CommonModule,
     AgGridAngular

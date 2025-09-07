@@ -13,7 +13,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 
 
 @Component({
@@ -32,7 +32,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     BizCodeGridComponent,
     BizCodeFormDrawerComponent,
     BizCodeTypeFormDrawerComponent,
-    ShapeComponent
+    NzPageComponent
 ],
   template: `
 <ng-template #header>
@@ -40,7 +40,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="24" style="text-align: right">
         <button nz-button (click)="selectBizCodeTypeList()">
@@ -56,39 +56,39 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
         </button>
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <h3 class="header1">업무코드분류</h3>
     @defer {
-    <app-biz-type-grid class="grid1"
-      (rowClicked)="codeTypeGridRowClicked($event)"
-      (editButtonClicked)="editCodeType($event)"
-      (rowDoubleClicked)="editCodeType($event)">
-    </app-biz-type-grid>
+      <biz-type-grid class="grid1"
+        (rowClicked)="codeTypeGridRowClicked($event)"
+        (editButtonClicked)="editCodeType($event)"
+        (rowDoubleClicked)="editCodeType($event)">
+      </biz-type-grid>
     }
     <h3 class="header2">업무코드</h3>
     @defer {
-    <app-biz-code-grid class="grid2"
-      (rowClicked)="codeGridRowClicked($event)"
-      (editButtonClicked)="editCode($event)"
-      (rowDoubleClicked)="editCode($event)">
-    </app-biz-code-grid>
+      <biz-code-grid class="grid2"
+        (rowClicked)="codeGridRowClicked($event)"
+        (editButtonClicked)="editCode($event)"
+        (rowDoubleClicked)="editCode($event)">
+      </biz-code-grid>
     }
   </div>
-</app-shape>
+</nz-page>
 
-<app-biz-code-type-form-drawer
+<biz-code-type-form-drawer
   [drawer]="drawer.codeType"
   (drawerClosed)="selectBizCodeTypeList()">
-</app-biz-code-type-form-drawer>
+</biz-code-type-form-drawer>
 
-<app-biz-code-form-drawer
+<biz-code-form-drawer
   [drawer]="drawer.code"
   (drawerClosed)="selectBizCodeList()">
-</app-biz-code-form-drawer>
+</biz-code-form-drawer>
 
   `,
   styles: `

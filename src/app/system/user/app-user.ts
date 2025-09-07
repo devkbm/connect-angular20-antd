@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
@@ -42,7 +42,7 @@ import { UserListComponent } from './user-list';
     NzSearchAreaComponent,
     UserGridComponent,
     UserFormDrawerComponent,
-    ShapeComponent,
+    NzPageComponent,
     UesrSearchComponent,
     UserListComponent
 ],
@@ -52,17 +52,17 @@ import { UserListComponent } from './user-list';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
-    <app-uesr-search
+  <nz-search-area>
+    <uesr-search
       (search)="getUserList($event)"
       (newForm)="newForm()"
       (deleteForm)="deleteUser()"
     >
-    </app-uesr-search>
-  </app-nz-search-area>
+    </uesr-search>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">사용자 목록</h3>
@@ -71,25 +71,25 @@ import { UserListComponent } from './user-list';
     <div style="flex: 1">
       @defer {
         @if (view === 'grid') {
-          <app-user-grid #userGrid
+          <user-grid #userGrid
             (rowClicked)="userGridSelected($event)"
             (editButtonClicked)="editForm($event)"
             (rowDoubleClicked)="editForm($event)">
-          </app-user-grid>
+          </user-grid>
         }
         @else if (view === 'list') {
-          <app-user-list (editButtonClicked)="editForm($event)">
-          </app-user-list>
+          <user-list (editButtonClicked)="editForm($event)">
+          </user-list>
         }
       }
     </div>
   </div>
-</app-shape>
+</nz-page>
 
-<app-user-form-drawer
+<user-form-drawer
   [drawer]="drawer.user"
   (drawerClosed)="getUserList('')">
-</app-user-form-drawer>
+</user-form-drawer>
   `,
   styles: `
 :host {

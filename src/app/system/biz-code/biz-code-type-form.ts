@@ -21,7 +21,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
-  selector: 'app-biz-code-type-form',
+  selector: 'biz-code-type-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -30,7 +30,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzInputNumberModule,
     NzSelectModule,
-    NzCrudButtonGroupComponent,    
+    NzCrudButtonGroupComponent,
 ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -81,7 +81,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="24">
           <nz-form-item>
             <nz-form-label nzFor="bizType" nzRequired>시스템</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="bizType" formControlName="bizType">
                 @for (option of bizTypeList; track option) {
                   <nz-option

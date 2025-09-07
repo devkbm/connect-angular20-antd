@@ -14,7 +14,7 @@ export interface TodoModel {
 
 
 @Component({
-  selector: 'app-todo-add-input',
+  selector: 'todo-add-input',
   imports: [
     CommonModule,
     FormsModule,

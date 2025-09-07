@@ -29,7 +29,7 @@ export interface User {
 }
 
 @Component({
-  selector: 'app-user-list',
+  selector: 'user-list',
   imports: [
     CommonModule,
     NzListModule,

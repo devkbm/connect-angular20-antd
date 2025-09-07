@@ -45,7 +45,7 @@ export interface NewFormValue {
 }
 
 @Component({
-  selector: 'app-work-calendar-event-form',
+  selector: 'work-calendar-event-form',
   imports: [
     CommonModule,
     FormsModule,

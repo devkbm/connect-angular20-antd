@@ -25,7 +25,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzButtonExcelUploadComponent } from "src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
 
@@ -66,7 +66,7 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
     StaffGridComponent,
     StaffCurrentAppointmentDescriptionComponent,
     StaffCardListComponent,
-    ShapeComponent,
+    NzPageComponent,
     NzButtonExcelUploadComponent
 ],
   template: `
@@ -96,7 +96,7 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
   </div>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="app-grid">
     <app-staff-grid
       (rowClicked)="staffGridRowClicked($event)">
@@ -206,7 +206,7 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
     </div>
 
   </div>
-</app-shape>
+</nz-page>
 
 <app-new-staff-form-drawer
   [drawer]="drawer.newStaff"

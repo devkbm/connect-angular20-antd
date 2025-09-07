@@ -21,7 +21,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
-  selector: 'app-common-code-form',
+  selector: 'common-code-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -31,7 +31,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputNumberModule,
     NzDatePickerModule,
     NzSelectModule,
-    NzTreeSelectModule,    
+    NzTreeSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -53,7 +53,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="systemTypeCode" nzRequired>시스템구분코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="systemTypeCode" formControlName="systemTypeCode">
                 @for (option of systemTypeCodeList; track option) {
                   <nz-option

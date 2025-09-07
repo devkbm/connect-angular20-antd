@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 
 @Component({
-  selector: 'app-nz-search-area',
+  selector: 'nz-search-area',
   imports: [CommonModule],
   template: `
     <div class="search-area" [style.height]="height()">

@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { MenuGroupFormComponent } from './menu-group-form';
 
 @Component({
-  selector: 'app-menu-group-form-drawer',
+  selector: 'menu-group-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { MenuGroupFormComponent } from './menu-group-form';
       nzTitle="메뉴그룹 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-menu-group-form  *nzDrawerContent
+        <menu-group-form  *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-menu-group-form>
+        </menu-group-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

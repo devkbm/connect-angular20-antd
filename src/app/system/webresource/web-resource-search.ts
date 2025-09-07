@@ -11,7 +11,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
-  selector: 'app-web-resource-search',
+  selector: 'web-resource-search',
   imports: [
     CommonModule,
     FormsModule,

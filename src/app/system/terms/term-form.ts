@@ -21,7 +21,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-term-form',
+  selector: 'term-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -29,7 +29,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    
+
     NzCrudButtonGroupComponent
   ],
   template: `
@@ -51,7 +51,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="termId" formControlName="termId" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -67,7 +67,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 
@@ -76,7 +76,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="term" nzRequired>용어</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">                            
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="term" formControlName="term" nzMode="multiple">
                 @for (option of wordList; track option) {
                   <nz-option
@@ -86,7 +86,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -95,13 +95,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="columnName" formControlName="columnName" required/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="dataDomainId" nzRequired>도메인</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="dataDomainId" formControlName="dataDomainId" >
                 @for (option of dataDomainList; track option) {
                   <nz-option
@@ -111,7 +111,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -121,7 +121,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="termEng" formControlName="termEng"
                 placeholder="용어(영문)를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
       </div>
 
@@ -135,7 +135,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="설명을 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -146,7 +146,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                                                
+          </nz-form-item>
         </div>
       </div>
 

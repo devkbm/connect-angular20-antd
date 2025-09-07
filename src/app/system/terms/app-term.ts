@@ -19,7 +19,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 
 @Component({
   selector: 'term-app',
@@ -43,7 +43,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     TermGridComponent,
     WordFormComponent,
     WordGridComponent,
-    ShapeComponent
+    NzPageComponent
 ],
   template: `
 <ng-template #header>
@@ -51,7 +51,7 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
@@ -86,19 +86,19 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
         </button>
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <nz-tabset [nzSelectedIndex]="tabIndex">
     <nz-tab nzTitle="용어사전">
       <div [style.height]="'calc(100vh - var(--page-header-height) - var(--page-search-height) - 155px)'">
         @defer {
-        <app-term-grid
+        <term-grid
           (rowClicked)="termGridSelected($event)"
           (editButtonClicked)="editTerm($event)"
           (rowDoubleClicked)="editTerm($event)">
-        </app-term-grid>
+        </term-grid>
         }
       </div>
     </nz-tab>
@@ -118,16 +118,16 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
     <nz-tab nzTitle="도메인">
       <div [style.height]="'calc(100vh - var(--page-header-height) - var(--page-search-height) - 155px)'">
         @defer {
-        <app-data-domain-grid
+        <data-domain-grid
           (rowClicked)="domainGridSelected($event)"
           (editButtonClicked)="this.drawer.domain.visible = true"
           (rowDoubleClicked)="this.drawer.domain.visible = true">
-        </app-data-domain-grid>
+        </data-domain-grid>
         }
       </div>
     </nz-tab>
   </nz-tabset>
-</app-shape>
+</nz-page>
 
 <nz-drawer
   [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
@@ -136,13 +136,13 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
   [nzVisible]="drawer.term.visible"
   nzTitle="용어 등록"
   (nzOnClose)="this.drawer.term.visible = false">
-    <app-term-form *nzDrawerContent
+    <term-form *nzDrawerContent
       #termForm
       [formDataId]="drawer.term.formDataId"
       (formSaved)="getTermList()"
       (formDeleted)="getTermList()"
       (formClosed)="this.drawer.term.visible = false">
-    </app-term-form>
+    </term-form>
 </nz-drawer>
 
 <nz-drawer
@@ -152,12 +152,12 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
   [nzVisible]="drawer.word.visible"
   nzTitle="단어 등록"
   (nzOnClose)="this.drawer.word.visible = false">
-    <app-word-form *nzDrawerContent #wordForm
+    <word-form *nzDrawerContent #wordForm
       [formDataId]="drawer.word.formDataId"
       (formSaved)="getWordList()"
       (formDeleted)="getWordList()"
       (formClosed)="drawer.word.visible = false">
-    </app-word-form>
+    </word-form>
 </nz-drawer>
 
 <nz-drawer
@@ -167,12 +167,12 @@ import { ShapeComponent } from "src/app/core/app/shape.component";
   [nzVisible]="drawer.domain.visible"
   nzTitle="도메인 등록"
   (nzOnClose)="drawer.domain.visible = false">
-    <app-data-domain-form *nzDrawerContent #doaminForm
+    <data-domain-form *nzDrawerContent #doaminForm
       [formDataId]="drawer.domain.formDataId"
       (formSaved)="getDomainList()"
       (formDeleted)="getDomainList()"
       (formClosed)="drawer.domain.visible = false">
-    </app-data-domain-form>
+    </data-domain-form>
 </nz-drawer>
 
   `,

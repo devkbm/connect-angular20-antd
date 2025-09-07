@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { CompanyFormComponent } from './company-form';
 
 @Component({
-  selector: 'app-company-form-drawer',
+  selector: 'company-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,

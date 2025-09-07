@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 
 import { RoleGridComponent } from './role-grid';
 import { RoleFormDrawerComponent } from './role-form-drawer';
@@ -34,12 +34,12 @@ import { RoleListComponent } from './role-list';
     NzGridModule,
     NzSelectModule,
     NzInputModule,
-    NzDividerModule,    
+    NzDividerModule,
     NzPageHeaderCustomComponent,
     NzSearchAreaComponent,
     RoleGridComponent,
     RoleFormDrawerComponent,
-    ShapeComponent,
+    NzPageComponent,
     RoleListComponent
 ],
   template: `
@@ -48,7 +48,7 @@ import { RoleListComponent } from './role-list';
 </ng-template>
 
 <ng-template #search>
-  <app-nz-search-area>
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
@@ -66,7 +66,7 @@ import { RoleListComponent } from './role-list';
         </nz-input-group>
       </div>
 
-      <div nz-col [nzSpan]="12" style="text-align: right;">        
+      <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="getRoleList()">
           <span nz-icon nzType="search"></span>조회
         </button>
@@ -74,7 +74,7 @@ import { RoleListComponent } from './role-list';
         <button nz-button (click)="initForm()">
           <span nz-icon nzType="form" nzTheme="outline"></span>신규
         </button>
-        <nz-divider nzType="vertical"></nz-divider>                
+        <nz-divider nzType="vertical"></nz-divider>
         <button nz-button nzDanger="true"
           nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
           (nzOnConfirm)="delete()" (nzOnCancel)="false">
@@ -82,10 +82,10 @@ import { RoleListComponent } from './role-list';
         </button>
       </div>
     </div>
-  </app-nz-search-area>
+  </nz-search-area>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">롤 목록</h3>
@@ -94,25 +94,25 @@ import { RoleListComponent } from './role-list';
     <div style="flex: 1">
       @defer {
         @if (view === 'grid') {
-          <app-role-grid #authGrid
+          <role-grid #authGrid
             (rowClicked)="selectedItem($event)"
             (editButtonClicked)="editDrawOpen($event)"
             (rowDoubleClicked)="editDrawOpen($event)">
-          </app-role-grid>
+          </role-grid>
         }
         @else if (view === 'list') {
-          <app-role-list (editButtonClicked)="editDrawOpen($event)">
-          </app-role-list>
+          <role-list (editButtonClicked)="editDrawOpen($event)">
+          </role-list>
         }
       }
     </div>
   </div>
-</app-shape>
+</nz-page>
 
-<app-role-form-drawer
+<role-form-drawer
   [drawer]="drawer.role"
   (drawerClosed)="getRoleList()">
-</app-role-form-drawer>
+</role-form-drawer>
 
   `,
   styles: `
@@ -167,7 +167,7 @@ export class RoleApp implements AfterViewInit {
   } = {
     role: { visible: false, formDataId: null }
   }
-  
+
   ngAfterViewInit(): void {
   }
 

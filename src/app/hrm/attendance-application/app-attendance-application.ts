@@ -8,7 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-import { ShapeComponent } from "src/app/core/app/shape.component";
+import { NzPageComponent } from "src/app/core/app/nz-page";
 import { SessionManager } from 'src/app/core/session-manager';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -35,7 +35,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
     NzPageHeaderCustomComponent,
     AttendanceApplicationGridComponent,
     AttendanceApplicationFormComponent,
-    ShapeComponent,
+    NzPageComponent,
     CalendarFullcalendarComponent
 ],
   template: `
@@ -55,7 +55,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
   </div>
 </ng-template>
 
-<app-shape [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="grid-wrapper">
 
   <nz-tabset [(nzSelectedIndex)]="tab.index">
@@ -83,7 +83,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
     >
     </app-attendance-application-form>
   </div>
-</app-shape>
+</nz-page>
   `,
   styles: `
 :host {

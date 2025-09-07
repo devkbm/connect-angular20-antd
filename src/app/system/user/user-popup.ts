@@ -9,7 +9,7 @@ import { NzModalRef } from 'ng-zorro-antd/modal';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 @Component({
-  selector: 'app-user-popup',
+  selector: 'user-popup',
   imports: [
     CommonModule, NzCardModule, NzAvatarModule
   ],

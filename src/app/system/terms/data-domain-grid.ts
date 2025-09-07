@@ -23,7 +23,7 @@ import { DataDomain } from './data-domain.model';
 
 
 @Component({
-  selector: 'app-data-domain-grid',
+  selector: 'data-domain-grid',
   imports: [
     CommonModule,
     AgGridAngular

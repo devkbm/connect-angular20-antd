@@ -16,14 +16,14 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
 @Component({
-  selector: 'app-word-form',
+  selector: 'word-form',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-        
+
     NzCrudButtonGroupComponent
   ],
   template: `
@@ -58,7 +58,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
               <input nz-input id="physicalName" formControlName="physicalName" required
                 placeholder="physicalName 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -68,7 +68,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
               <input nz-input id="logicalNameEng" formControlName="logicalNameEng"
                 placeholder="logicalNameEng 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 
@@ -82,7 +82,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
                 placeholder="비고를 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 

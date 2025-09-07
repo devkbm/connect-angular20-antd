@@ -15,7 +15,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-team-form',
+  selector: 'team-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -53,13 +53,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="teamName" formControlName="teamName" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="memberList" nzRequired>팀원</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="memberList" formControlName="memberList" nzMode="multiple">
                 @for (option of members; track option) {
                   <nz-option
@@ -69,7 +69,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
     </form>

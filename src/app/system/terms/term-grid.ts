@@ -23,7 +23,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-term-grid',
+  selector: 'term-grid',
   imports: [
     CommonModule,
     AgGridAngular

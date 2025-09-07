@@ -17,7 +17,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 
 @Component({
-  selector: 'app-holiday-form',
+  selector: 'holiday-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -50,7 +50,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
               <nz-date-picker nzId="date" formControlName="date" style="width: 150px">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -61,7 +61,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="휴일명을 입력해주세요."
               />
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
       </div>
@@ -76,7 +76,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
                 placeholder="설명을 입력해주세요." [rows]="13">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 

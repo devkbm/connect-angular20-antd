@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { MenuFormComponent } from './menu-form';
 
 @Component({
-  selector: 'app-menu-form-drawer',
+  selector: 'menu-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -21,12 +21,12 @@ import { MenuFormComponent } from './menu-form';
       nzTitle="메뉴 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-menu-form #menuForm *nzDrawerContent
+        <menu-form #menuForm *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-menu-form>
+        </menu-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

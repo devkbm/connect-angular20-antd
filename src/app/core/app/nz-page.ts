@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, TemplateRef, AfterViewInit }
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-shape',
+  selector: 'nz-page',
   imports: [
     CommonModule
   ],
@@ -43,7 +43,7 @@ import { CommonModule } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShapeComponent implements AfterViewInit {
+export class NzPageComponent implements AfterViewInit {
 
   header = input<{template: TemplateRef<{}> | null, height: string | null}>({
     template: null, height: '0px'

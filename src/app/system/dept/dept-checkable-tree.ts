@@ -11,7 +11,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 
 @Component({
-  selector: 'app-checkable-dept-tree',
+  selector: 'checkable-dept-tree',
   imports: [
     CommonModule, NzTreeModule
   ],

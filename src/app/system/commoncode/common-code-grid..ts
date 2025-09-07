@@ -24,7 +24,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 
 
 @Component({
-  selector: 'app-common-code-grid',
+  selector: 'common-code-grid',
   imports: [
     CommonModule,
     AgGridAngular

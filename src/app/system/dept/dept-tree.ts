@@ -11,7 +11,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 
 @Component({
-  selector: 'app-dept-tree',
+  selector: 'dept-tree',
   imports: [ NzTreeModule ],
   template: `
     <!--

@@ -6,7 +6,7 @@ import { BizCodeFormComponent } from "./biz-code-form";
 import { NzCrudButtonGroupComponent } from "src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component";
 
 @Component({
-  selector: 'app-biz-code-form-drawer',
+  selector: 'biz-code-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -20,12 +20,12 @@ import { NzCrudButtonGroupComponent } from "src/app/third-party/ng-zorro/nz-crud
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-biz-code-form *nzDrawerContent
+      <biz-code-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </app-biz-code-form>
+      </biz-code-form>
     </nz-drawer>
 
   <ng-template #footerTpl>

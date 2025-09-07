@@ -22,7 +22,7 @@ import { MenuGroup } from './menu-group.model';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
 
 @Component({
-  selector: 'app-menu-group-grid',
+  selector: 'menu-group-grid',
   imports: [
     CommonModule,
     AgGridAngular
