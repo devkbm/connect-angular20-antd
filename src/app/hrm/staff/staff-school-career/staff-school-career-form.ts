@@ -22,7 +22,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-staff-school-career-form',
+  selector: 'staff-school-career-form',
   imports: [
     CommonModule,
     FormsModule,

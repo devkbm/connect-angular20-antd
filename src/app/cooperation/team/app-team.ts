@@ -66,12 +66,12 @@ import { TeamFormComponent } from './team-form.component';
       (formClosed)="drawer.team.visible = false">
     </team-form>
     <!--
-    <app-hrm-code-type-form #formHrmType *nzDrawerContent
+    <hrm-code-type-form #formHrmType *nzDrawerContent
       [initLoadId]="drawerCodeType.initLoadId"
       (formSaved)="getGridHrmCodeType()"
       (formDeleted)="getGridHrmCodeType()"
       (formClosed)="drawerCodeType.visible = false">
-    </app-hrm-code-type-form>
+    </hrm-code-type-form>
     -->
 </nz-drawer>
 

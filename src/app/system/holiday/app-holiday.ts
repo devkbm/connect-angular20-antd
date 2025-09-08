@@ -77,7 +77,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <nz-tabset [(nzSelectedIndex)]="tab.index">
     <nz-tab nzTitle="달력">
     <ng-template nz-tab>
@@ -111,7 +111,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
       </ng-template>
     </nz-tab>
   </nz-tabset>
-</nz-page>
+</ng-page>
 
 <holiday-form-drawer
   [drawer]="drawer.holiday"

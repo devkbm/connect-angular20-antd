@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { StaffContactFormComponent } from './staff-contact-form';
 
 @Component({
-  selector: 'app-staff-contact-form-drawer',
+  selector: 'staff-contact-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -20,12 +20,12 @@ import { StaffContactFormComponent } from './staff-contact-form';
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-staff-contact-form *nzDrawerContent
+      <staff-contact-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </app-staff-contact-form>
+      </staff-contact-form>
     </nz-drawer>
 
   <ng-template #footerTpl>

@@ -23,7 +23,7 @@ import { Staff } from './staff.model';
 
 
 @Component({
-  selector: 'app-staff-grid',
+  selector: 'staff-grid',
   imports: [
     CommonModule,
     AgGridAngular

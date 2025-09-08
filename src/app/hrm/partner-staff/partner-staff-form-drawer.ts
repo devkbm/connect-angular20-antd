@@ -8,7 +8,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { PartnerStaffFormComponent } from "./partner-staff-form";
 
 @Component({
-  selector: 'app-partner-staff-form-drawer',
+  selector: 'partner-staff-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -23,12 +23,12 @@ import { PartnerStaffFormComponent } from "./partner-staff-form";
       nzTitle="협력직원 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-partner-staff-form *nzDrawerContent
+        <partner-staff-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-partner-staff-form>
+        </partner-staff-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

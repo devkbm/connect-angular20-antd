@@ -27,7 +27,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 
 @Component({
-  selector: 'app-staff-regist-form',
+  selector: 'staff-regist-form',
   imports: [
     CommonModule,
     FormsModule,

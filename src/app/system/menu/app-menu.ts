@@ -97,7 +97,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="page-content">
     <h3 class="header1">메뉴 그룹 목록</h3>
     @defer {
@@ -116,7 +116,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     </menu-grid>
     }
   </div>
-</nz-page>
+</ng-page>
 
 <menu-group-form-drawer
   [drawer]="drawer.menuGroup"

@@ -26,7 +26,7 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
 
 
 @Component({
-  selector: 'app-staff-appointment-record-form',
+  selector: 'staff-appointment-record-form',
   imports: [
     CommonModule,
     FormsModule,

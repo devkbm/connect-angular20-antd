@@ -85,7 +85,7 @@ import { RoleListComponent } from './role-list';
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">롤 목록</h3>
@@ -107,7 +107,7 @@ import { RoleListComponent } from './role-list';
       }
     </div>
   </div>
-</nz-page>
+</ng-page>
 
 <role-form-drawer
   [drawer]="drawer.role"

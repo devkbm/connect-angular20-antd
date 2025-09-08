@@ -27,7 +27,7 @@ import { StaffSelectService } from 'src/app/third-party/ng-zorro/stafff-select.s
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-attendance-application-form',
+  selector: 'attendance-application-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -137,8 +137,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
       <!-- 4 row -->
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="12">
-          <app-duty-date-list [data]="this.fg.get('selectedDate')?.value!" [height]="'100px'">
-          </app-duty-date-list>
+          <duty-date-list [data]="this.fg.get('selectedDate')?.value!" [height]="'100px'">
+          </duty-date-list>
         </div>
       </div>
     </form>

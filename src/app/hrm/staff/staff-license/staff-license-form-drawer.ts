@@ -4,7 +4,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { StaffLicenseFormComponent } from './staff-license-form';
 
 @Component({
-  selector: 'app-staff-license-form-drawer',
+  selector: 'staff-license-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -18,13 +18,13 @@ import { StaffLicenseFormComponent } from './staff-license-form';
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-staff-license-form *nzDrawerContent
+        <staff-license-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           [staff]="selectedStaff()"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-staff-license-form>
+        </staff-license-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

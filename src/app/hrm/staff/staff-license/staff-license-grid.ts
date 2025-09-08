@@ -22,7 +22,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { StaffLicense } from './staff-license.model';
 
 @Component({
-  selector: 'app-staff-license-grid',
+  selector: 'staff-license-grid',
   imports: [
     CommonModule,
     AgGridAngular

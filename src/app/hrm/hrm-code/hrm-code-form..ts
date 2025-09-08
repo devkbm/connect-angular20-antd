@@ -26,7 +26,7 @@ import { HrmCodeFormValidatorService } from './validator/hrm-code-form-validator
 import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
 
 @Component({
-  selector: 'app-hrm-code-form',
+  selector: 'hrm-code-form',
   imports: [
     CommonModule,
     FormsModule,

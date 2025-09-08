@@ -4,7 +4,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { HrmTypeCodeFormComponent } from './hrm-code-form.';
 
 @Component({
-  selector: 'app-hrm-code-form-drawer',
+  selector: 'hrm-code-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -18,12 +18,12 @@ import { HrmTypeCodeFormComponent } from './hrm-code-form.';
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-hrm-code-form *nzDrawerContent
+      <hrm-code-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </app-hrm-code-form>
+      </hrm-code-form>
     </nz-drawer>
 
   <ng-template #footerTpl>

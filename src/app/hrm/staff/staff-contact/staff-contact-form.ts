@@ -19,7 +19,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { StaffContact } from './staff-contact-form.model';
 
 @Component({
-  selector: 'app-staff-contact-form',
+  selector: 'staff-contact-form',
   imports: [
     CommonModule,
     FormsModule,

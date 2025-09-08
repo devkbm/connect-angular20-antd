@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { StaffDutyResponsibilityFormComponent } from './staff-duty-responsibility-form';
 
 @Component({
-  selector: 'app-staff-duty-responsibility-form-drawer',
+  selector: 'staff-duty-responsibility-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -20,13 +20,13 @@ import { StaffDutyResponsibilityFormComponent } from './staff-duty-responsibilit
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-staff-duty-responsibility-form *nzDrawerContent
+        <staff-duty-responsibility-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           [staff]="selectedStaff()"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-staff-duty-responsibility-form>
+        </staff-duty-responsibility-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

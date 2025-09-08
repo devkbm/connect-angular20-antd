@@ -59,7 +59,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <h3 class="header1">업무코드분류</h3>
     @defer {
@@ -78,7 +78,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
       </biz-code-grid>
     }
   </div>
-</nz-page>
+</ng-page>
 
 <biz-code-type-form-drawer
   [drawer]="drawer.codeType"

@@ -76,7 +76,7 @@ import { DeptSearchComponent } from "./dept-search";
 </ng-template>
 
 <!-- <nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}"> -->
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}">
   <dept-search
     #deptsearch
     (search)="getDeptTree()"
@@ -123,7 +123,7 @@ import { DeptSearchComponent } from "./dept-search";
     </div>
   </div>
 -->
-</nz-page>
+</ng-page>
   `,
   styles: `
 :host {

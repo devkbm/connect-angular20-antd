@@ -5,7 +5,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { HrmCodeTypeFormComponent } from './hrm-code-type-form';
 
 @Component({
-  selector: 'app-hrm-code-type-form-drawer',
+  selector: 'hrm-code-type-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -20,12 +20,12 @@ import { HrmCodeTypeFormComponent } from './hrm-code-type-form';
       nzTitle="코드분류 등록"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <app-hrm-code-type-form *nzDrawerContent
+      <hrm-code-type-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </app-hrm-code-type-form>
+      </hrm-code-type-form>
     </nz-drawer>
 
   <ng-template #footerTpl>

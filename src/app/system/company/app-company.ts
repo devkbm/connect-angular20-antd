@@ -84,7 +84,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">회사 목록 {{drawer| json}} </h3>
@@ -105,7 +105,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     }
     </div>
   </div>
-</nz-page>
+</ng-page>
 
 <company-form-drawer
   [drawer]="drawer.company"

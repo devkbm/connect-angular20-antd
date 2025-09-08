@@ -72,35 +72,35 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
   </div>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="grid-2row-2col">
       <h3 class="header1">코드 분류 목록 {{drawer.codeType | json}}</h3>
-      <app-hrm-code-type-grid #gridHrmType
+      <hrm-code-type-grid #gridHrmType
         [list]="gridHrmCodeTypeList"
         (rowClicked)="rowClickHrmCodeType($event)"
         (rowDoubleClicked)="editHrmCodeType($event)"
         (editButtonClicked)="editHrmCodeType($event)">
-      </app-hrm-code-type-grid>
+      </hrm-code-type-grid>
 
       <h3 class="header2">코드 목록 {{drawer.code | json}}</h3>
-      <app-hrm-code-grid #gridHrmTypeCode
+      <hrm-code-grid #gridHrmTypeCode
         [list]="gridHrmCodeList"
         (rowClicked)="rowClickHrmCode($event)"
         (rowDoubleClicked)="editHrmCode($event)"
         (editButtonClicked)="editHrmCode($event)">
-      </app-hrm-code-grid>
+      </hrm-code-grid>
   </div>
-</nz-page>
+</ng-page>
 
-<app-hrm-code-type-form-drawer
+<hrm-code-type-form-drawer
   [drawer]="drawer.codeType"
   (drawerClosed)="getGridHrmCodeType()">
-</app-hrm-code-type-form-drawer>
+</hrm-code-type-form-drawer>
 
-<app-hrm-code-form-drawer
+<hrm-code-form-drawer
   [drawer]="drawer.code"
   (drawerClosed)="getGridHrmCode()">
-</app-hrm-code-form-drawer>
+</hrm-code-form-drawer>
   `,
   styles: `
 .btn-group {

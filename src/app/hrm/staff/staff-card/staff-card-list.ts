@@ -7,13 +7,13 @@ import { StaffCardModel } from './staff-card.model';
 import { StaffCardService } from './staff-card.service';
 
 @Component({
-  selector: 'app-staff-card-list',
+  selector: 'staff-card-list',
   imports: [
     CommonModule, StaffCardComponent
   ],
   template: `
     @for (item of _list; track item.staffId) {
-      <app-staff-card [data]="item"></app-staff-card>
+      <staff-card [data]="item"></staff-card>
     }
   `,
   styles: []

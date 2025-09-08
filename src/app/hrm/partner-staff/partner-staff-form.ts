@@ -31,7 +31,7 @@ export interface PartnerStaff {
 }
 
 @Component({
-  selector: 'app-partner-staff-form',
+  selector: 'partner-staff-form',
   imports: [
     CommonModule,
     FormsModule,

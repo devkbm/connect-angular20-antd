@@ -23,7 +23,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-staff-family-grid',
+  selector: 'staff-family-grid',
   imports: [
     CommonModule,
     AgGridAngular

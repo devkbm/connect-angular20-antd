@@ -55,7 +55,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
   </div>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="grid-wrapper">
 
   <nz-tabset [(nzSelectedIndex)]="tab.index">
@@ -70,20 +70,20 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
     </nz-tab>
     <nz-tab nzTitle="리스트">
       <div style="height: calc(100vh - 272px)">
-        <app-attendance-application-grid (rowClicked)="gridRowClicked($event)">
-        </app-attendance-application-grid>
+        <attendance-application-grid (rowClicked)="gridRowClicked($event)">
+        </attendance-application-grid>
       </div>
     </nz-tab>
   </nz-tabset>
 
-    <app-attendance-application-form
+    <attendance-application-form
       (formClosed)="getList()"
       (formDeleted)="getList()"
       (formSaved)="getList()"
     >
-    </app-attendance-application-form>
+    </attendance-application-form>
   </div>
-</nz-page>
+</ng-page>
   `,
   styles: `
 :host {

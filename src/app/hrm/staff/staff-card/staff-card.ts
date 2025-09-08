@@ -7,7 +7,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { StaffCardModel } from './staff-card.model';
 
 @Component({
-  selector: 'app-staff-card',
+  selector: 'staff-card',
   imports: [
     CommonModule, NzCardModule, NzAvatarModule
   ],

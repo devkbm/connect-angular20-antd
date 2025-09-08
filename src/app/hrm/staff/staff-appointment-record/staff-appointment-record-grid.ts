@@ -22,7 +22,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-staff-appointment-record-grid',
+  selector: 'staff-appointment-record-grid',
   imports: [
     CommonModule,
     AgGridAngular

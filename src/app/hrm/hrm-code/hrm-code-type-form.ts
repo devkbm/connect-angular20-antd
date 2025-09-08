@@ -19,7 +19,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-hrm-code-type-form',
+  selector: 'hrm-code-type-form',
   imports: [
     CommonModule,
     FormsModule,

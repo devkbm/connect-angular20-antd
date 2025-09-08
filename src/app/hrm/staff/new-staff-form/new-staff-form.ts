@@ -16,7 +16,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { NewStaff } from './new-staff-form.model';
 
 @Component({
-  selector: 'app-new-staff-form',
+  selector: 'new-staff-form',
   imports: [
     CommonModule,
     FormsModule,

@@ -20,7 +20,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-staff-family-form',
+  selector: 'staff-family-form',
   imports: [
     CommonModule,
     FormsModule,

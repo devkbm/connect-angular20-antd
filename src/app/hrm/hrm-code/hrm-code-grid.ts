@@ -17,7 +17,7 @@ ModuleRegistry.registerModules([
 import { HrmCode } from './hrm-code.model';
 
 @Component({
-  selector: 'app-hrm-code-grid',
+  selector: 'hrm-code-grid',
   imports: [
     CommonModule,
     AgGridAngular

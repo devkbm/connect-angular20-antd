@@ -13,7 +13,7 @@ import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
 
 
 @Component({
-  selector: 'app-staff-duty-responsibility-list',
+  selector: 'staff-duty-responsibility-list',
   imports: [
     CommonModule, NzListModule
   ],

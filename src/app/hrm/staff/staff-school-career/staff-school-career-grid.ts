@@ -22,7 +22,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { StaffSchoolCareer } from './staff-school-career.model';
 
 @Component({
-  selector: 'app-staff-school-career-grid',
+  selector: 'staff-school-career-grid',
   imports: [
     CommonModule,
     AgGridAngular

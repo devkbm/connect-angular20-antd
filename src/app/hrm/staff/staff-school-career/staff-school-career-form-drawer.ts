@@ -4,7 +4,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { StaffSchoolCareerFormComponent } from './staff-school-career-form';
 
 @Component({
-  selector: 'app-staff-school-career-form-drawer',
+  selector: 'staff-school-career-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -18,13 +18,13 @@ import { StaffSchoolCareerFormComponent } from './staff-school-career-form';
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-staff-school-career-form *nzDrawerContent
+        <staff-school-career-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           [staff]="selectedStaff()"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-staff-school-career-form>
+        </staff-school-career-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

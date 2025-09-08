@@ -22,7 +22,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 @Component({
-  selector: 'app-staff-duty-responsibility-form',
+  selector: 'staff-duty-responsibility-form',
   imports: [
     CommonModule,
     FormsModule,

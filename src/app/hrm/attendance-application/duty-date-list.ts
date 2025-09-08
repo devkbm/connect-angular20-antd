@@ -6,7 +6,7 @@ import { AttendanceDate } from './attendance-application.model';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-duty-date-list',
+  selector: 'duty-date-list',
   imports: [
     CommonModule, FormsModule, NzCheckboxModule
   ],

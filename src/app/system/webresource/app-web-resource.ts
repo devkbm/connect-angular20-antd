@@ -55,7 +55,7 @@ import { WebResourceListComponent } from './web-resource-list';
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">웹서버 리소스 목록</h3>
@@ -77,7 +77,7 @@ import { WebResourceListComponent } from './web-resource-list';
     }
     </div>
   </div>
-</nz-page>
+</ng-page>
 
 
 <web-resource-form-drawer

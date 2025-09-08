@@ -21,7 +21,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @Component({
-  selector: 'app-staff-license-form',
+  selector: 'staff-license-form',
   imports: [
     CommonModule,
     FormsModule,

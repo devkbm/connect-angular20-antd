@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, TemplateRef, AfterViewInit }
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'nz-page',
+  selector: 'ng-page',
   imports: [
     CommonModule
   ],

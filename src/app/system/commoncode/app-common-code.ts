@@ -86,7 +86,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="pgm-title">공통코드 목록</h3>
@@ -104,7 +104,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
       </common-code-form>
     </div>
   </div>
-</nz-page>
+</ng-page>
   `,
   styles: `
 :host {

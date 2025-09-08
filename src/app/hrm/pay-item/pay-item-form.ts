@@ -28,7 +28,7 @@ export interface PayItem {
 }
 
 @Component({
-  selector: 'app-pay-item-form',
+  selector: 'pay-item-form',
   imports: [
     CommonModule,
     FormsModule,

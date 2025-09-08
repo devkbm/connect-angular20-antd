@@ -12,7 +12,7 @@ export interface DutyDate {
 
 
 @Component({
-  selector: 'app-duty-date-list',
+  selector: 'duty-date-list',
   imports: [ CommonModule, FormsModule ],
   template: `
     {{this._data | json}}

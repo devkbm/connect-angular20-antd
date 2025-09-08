@@ -30,7 +30,7 @@ export interface StaffCurrentAppointment {
 }
 
 @Component({
-  selector: 'app-staff-current-appointment-description',
+  selector: 'staff-current-appointment-description',
   imports: [
     CommonModule, NzDescriptionsModule
   ],

@@ -6,7 +6,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { StaffAppointmentRecordFormComponent } from './staff-appointment-record-form';
 
 @Component({
-  selector: 'app-staff-appointment-record-form-drawer',
+  selector: 'staff-appointment-record-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroupComponent,
@@ -20,13 +20,13 @@ import { StaffAppointmentRecordFormComponent } from './staff-appointment-record-
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-        <app-staff-appointment-record-form *nzDrawerContent
+        <staff-appointment-record-form *nzDrawerContent
           [staff]="selectedStaff()"
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-        </app-staff-appointment-record-form>
+        </staff-appointment-record-form>
     </nz-drawer>
 
     <ng-template #footerTpl>

@@ -23,7 +23,7 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
 
 
 @Component({
-  selector: 'app-attendance-application-grid',
+  selector: 'attendance-application-grid',
   imports: [
     CommonModule,
     AgGridAngular

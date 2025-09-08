@@ -89,7 +89,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
   </nz-search-area>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <nz-tabset [nzSelectedIndex]="tabIndex">
     <nz-tab nzTitle="용어사전">
       <div [style.height]="'calc(100vh - var(--page-header-height) - var(--page-search-height) - 155px)'">
@@ -127,7 +127,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
       </div>
     </nz-tab>
   </nz-tabset>
-</nz-page>
+</ng-page>
 
 <nz-drawer
   [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"

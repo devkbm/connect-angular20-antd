@@ -96,25 +96,25 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
   </div>
 </ng-template>
 
-<nz-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="app-grid">
-    <app-staff-grid
+    <staff-grid
       (rowClicked)="staffGridRowClicked($event)">
-    </app-staff-grid>
+    </staff-grid>
 
     <div>
-      <app-staff-regist-form [staffNo]="selectedStaff?.staffNo">
-      </app-staff-regist-form>
+      <staff-regist-form [staffNo]="selectedStaff?.staffNo">
+      </staff-regist-form>
       <nz-collapse>
         <nz-collapse-panel [nzHeader]="'발령'">
-          <app-staff-current-appointment-description [staffNo]="selectedStaff?.staffNo">
-          </app-staff-current-appointment-description>
+          <staff-current-appointment-description [staffNo]="selectedStaff?.staffNo">
+          </staff-current-appointment-description>
         </nz-collapse-panel>
         <nz-collapse-panel [nzHeader]="'보직'">
           <div style="height:100px; padding: 0px; margin: 0px;">
-            <app-staff-duty-responsibility-list
+            <staff-duty-responsibility-list
               [staffNo]="selectedStaff?.staffNo">
-            </app-staff-duty-responsibility-list>
+            </staff-duty-responsibility-list>
           </div>
         </nz-collapse-panel>
       </nz-collapse>
@@ -124,12 +124,12 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
       <nz-tabset [nzAnimated]="false">
         <nz-tab nzTitle="연락처">
           <div class="tab-grid">
-            <app-staff-contact-form
+            <staff-contact-form
               [staff]="selectedStaff"
               (formSaved)="selectGridAppointment()"
               (formDeleted)="selectGridAppointment()"
               (formClosed)="drawer.contact.visible = false">
-            </app-staff-contact-form>
+            </staff-contact-form>
           </div>
         </nz-tab>
 
@@ -139,11 +139,11 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
           </button>
           @defer (on idle) {
           <div class="tab-grid">
-            <app-staff-appointment-record-grid
+            <staff-appointment-record-grid
               [staffNo]="selectedStaff?.staffNo"
               (editButtonClicked)="editAppointment($event)"
               (rowDoubleClicked)="editAppointment($event)">
-            </app-staff-appointment-record-grid>
+            </staff-appointment-record-grid>
           </div>
           }
         </nz-tab>
@@ -154,11 +154,11 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
           </button>
           @defer {
           <div class="tab-grid">
-            <app-staff-family-grid
+            <staff-family-grid
               [staffNo]="selectedStaff?.staffNo"
               (editButtonClicked)="editFamily($event)"
               (rowDoubleClicked)="editFamily($event)">
-            </app-staff-family-grid>
+            </staff-family-grid>
           </div>
           }
         </nz-tab>
@@ -169,11 +169,11 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
           </button>
           @defer (on idle) {
           <div class="tab-grid">
-            <app-staff-school-career-grid
+            <staff-school-career-grid
               [staffNo]="selectedStaff?.staffNo"
               (editButtonClicked)="editSchoolCareer($event)"
               (rowDoubleClicked)="editSchoolCareer($event)">
-            </app-staff-school-career-grid>
+            </staff-school-career-grid>
           </div>
           }
         </nz-tab>
@@ -184,11 +184,11 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
           </button>
           @defer (on idle) {
           <div class="tab-grid">
-            <app-staff-license-grid
+            <staff-license-grid
               [staffNo]="selectedStaff?.staffNo"
               (editButtonClicked)="editLicense($event)"
               (rowDoubleClicked)="editLicense($event)">
-            </app-staff-license-grid>
+            </staff-license-grid>
           </div>
           }
         </nz-tab>
@@ -196,8 +196,8 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
         <nz-tab nzTitle="카드명단">
         @defer (on idle) {
           <div class="tab-grid">
-            <app-staff-card-list>
-            </app-staff-card-list>
+            <staff-card-list>
+            </staff-card-list>
           </div>
         }
         </nz-tab>
@@ -206,49 +206,49 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
     </div>
 
   </div>
-</nz-page>
+</ng-page>
 
-<app-new-staff-form-drawer
+<new-staff-form-drawer
   [drawer]="drawer.newStaff"
   (drawerClosed)="selectGridStaff()">
-</app-new-staff-form-drawer>
+</new-staff-form-drawer>
 
-<app-staff-appointment-record-form-drawer
+<staff-appointment-record-form-drawer
   [drawer]="drawer.appointment"
   [selectedStaff]="selectedStaff"
   (drawerClosed)="selectGridAppointment()">
-</app-staff-appointment-record-form-drawer>
+</staff-appointment-record-form-drawer>
 
 <!-- (drawerClosed)="selectGridAppointment()" -->
-<app-staff-duty-responsibility-form-drawer
+<staff-duty-responsibility-form-drawer
   [drawer]="drawer.dutyResponsibility"
   [selectedStaff]="selectedStaff">
-</app-staff-duty-responsibility-form-drawer>
+</staff-duty-responsibility-form-drawer>
 
-<app-staff-duty-responsibility-form-drawer
+<staff-duty-responsibility-form-drawer
   [drawer]="drawer.contact"
   [selectedStaff]="selectedStaff"
   (drawerClosed)="selectGridAppointment()">
-</app-staff-duty-responsibility-form-drawer>
+</staff-duty-responsibility-form-drawer>
 
-<app-staff-family-form-drawer
+<staff-family-form-drawer
   [drawer]="drawer.family"
   [selectedStaff]="selectedStaff"
   (drawerClosed)="selectGridFaimly()">
-</app-staff-family-form-drawer>
+</staff-family-form-drawer>
 
-<app-staff-school-career-form-drawer
+<staff-school-career-form-drawer
   [drawer]="drawer.schoolCareer"
   [selectedStaff]="selectedStaff"
   (drawerClosed)="selectGridSchoolCareer()">
-</app-staff-school-career-form-drawer>
+</staff-school-career-form-drawer>
 
-<app-staff-license-form-drawer
+<staff-license-form-drawer
   [drawer]="drawer.license"
   [selectedStaff]="selectedStaff"
   (drawerClosed)="selectGridLicense()">
 
-</app-staff-license-form-drawer>
+</staff-license-form-drawer>
   `,
   styles: `
 :host {
