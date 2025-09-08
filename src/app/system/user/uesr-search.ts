@@ -12,7 +12,7 @@ import { NzButtonExcelUploadComponent } from 'src/app/third-party/ng-zorro/nz-bu
 
 
 @Component({
-  selector: 'uesr-search',
+  selector: 'user-search',
   imports: [
     CommonModule,
     FormsModule,

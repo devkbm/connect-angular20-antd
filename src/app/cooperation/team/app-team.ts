@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { TeamFormComponent } from './team-form.component';
 
 
@@ -25,7 +25,7 @@ import { TeamFormComponent } from './team-form.component';
 
     TeamFormComponent,
     TeamGridComponent,
-    NzPageHeaderCustomComponent
+    NzPageHeaderCustom
   ],
   template: `
 <nz-page-header-custom title="팀 정보" subtitle="팀 정보 관리"></nz-page-header-custom>

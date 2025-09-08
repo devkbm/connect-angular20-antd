@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
@@ -12,7 +12,7 @@ import { WebResourceGridComponent } from './web-resource-grid';
 import { WebResource } from './web-resource.model';
 import { WebResourceFormDrawerComponent } from './web-resource-form-drawer';
 
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -32,12 +32,12 @@ import { WebResourceListComponent } from './web-resource-list';
     NzFormModule,
     NzSelectModule,
     NzInputModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     WebResourceGridComponent,
     WebResourceFormDrawerComponent,
     WebResourceSearchComponent,
-    NzPageComponent,
+    NgPage,
     WebResourceListComponent
 ],
   template: `
@@ -55,7 +55,9 @@ import { WebResourceListComponent } from './web-resource-list';
   </nz-search-area>
 </ng-template>
 
-<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page
+  [header]="{template: header, height: 'var(--page-header-height)'}"
+  [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">웹서버 리소스 목록</h3>

@@ -11,9 +11,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 
 
 @Component({
@@ -26,13 +26,13 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     NzButtonModule,
     NzIconModule,
     NzDividerModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     BizCodeTypeGridComponent,
     BizCodeGridComponent,
     BizCodeFormDrawerComponent,
     BizCodeTypeFormDrawerComponent,
-    NzPageComponent
+    NgPage
 ],
   template: `
 <ng-template #header>

@@ -8,11 +8,11 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 import { SessionManager } from 'src/app/core/session-manager';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { CalendarFullcalendarComponent } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
 
 import { ResponseList } from 'src/app/core/model/response-list';
@@ -32,10 +32,10 @@ import { AttendanceApplicationGrid } from './attendance-application-grid.model';
     NzGridModule,
     NzButtonModule,
     NzTabsModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     AttendanceApplicationGridComponent,
     AttendanceApplicationFormComponent,
-    NzPageComponent,
+    NgPage,
     CalendarFullcalendarComponent
 ],
   template: `

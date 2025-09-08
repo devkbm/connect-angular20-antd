@@ -1,25 +1,22 @@
 import { Component, OnInit, inject, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
-import { NzPageHeaderCustomComponent } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component";
+import { NzPageHeaderCustom } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component";
 import { NzSearchAreaComponent } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component";
 
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzSelectModule } from 'ng-zorro-antd/select';
 
-import { CompanyFormDrawerComponent } from "./company-form-drawer";
+import { NgPage } from "src/app/core/app/nz-page";
 
-import { CompanyGridComponent } from './company-grid';
-import { NzPageComponent } from "src/app/core/app/nz-page";
-import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
+
 import { CompanyListComponent } from './company-list';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { CompanySeacrhComponent } from "./company-seacrh";
+import { CompanyGridComponent } from './company-grid';
+import { CompanyFormDrawerComponent } from "./company-form-drawer";
 
 @Component({
   selector: 'app-company',
@@ -27,17 +24,20 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    /*
     NzIconModule,
     NzFormModule,
     NzSelectModule,
     NzInputModule,
     NzDividerModule,
-    NzPageHeaderCustomComponent,
+    */
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
-    NzPageComponent,
+    NgPage,
     CompanyGridComponent,
     CompanyListComponent,
     CompanyFormDrawerComponent,
+    CompanySeacrhComponent
 ],
   template: `
 
@@ -47,40 +47,11 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 <ng-template #search>
   <nz-search-area>
-    <div nz-row>
-      <div nz-col [nzSpan]="12">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <input type="text" [(ngModel)]="query.company.value" nz-input placeholder="input search text" (keyup.enter)="getList()">
-        </nz-input-group>
-
-        <ng-template #addOnBeforeTemplate>
-          <nz-select [(ngModel)]="query.company.key">
-            @for (option of query.company.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-            }
-          </nz-select>
-        </ng-template>
-
-        <ng-template #suffixIconSearch>
-          <span nz-icon nzType="search"></span>
-        </ng-template>
-      </div>
-      <div nz-col [nzSpan]="12" style="text-align: right;">
-        <button nz-button (click)="getList()">
-          <span nz-icon nzType="search"></span>조회
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button (click)="newResource()">
-          <span nz-icon nzType="form" nzTheme="outline"></span>신규
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button nzDanger="true"
-          nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
-          (nzOnConfirm)="delete()" (nzOnCancel)="false">
-            <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
-        </button>
-      </div>
-    </div>
+    <company-seacrh
+      (search)="getList($event)"
+      (newForm)="newResource()"
+      (deleteForm)="delete()">
+    </company-seacrh>
   </nz-search-area>
 </ng-template>
 
@@ -109,7 +80,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 <company-form-drawer
   [drawer]="drawer.company"
-  (drawerClosed)="getList()">
+  (drawerClosed)="getList('')">
 </company-form-drawer>
 
   `,
@@ -142,7 +113,7 @@ export class AppCompany implements OnInit {
   grid = viewChild.required(CompanyGridComponent);
   list = viewChild.required(CompanyListComponent);
 
-  view: 'grid' | 'list' = 'list';
+  view: 'grid' | 'list' = 'grid';
 
   query: {
     company : { key: string, value: string, list: {label: string, value: string}[] }
@@ -168,12 +139,7 @@ export class AppCompany implements OnInit {
   ngOnInit(): void {
   }
 
-  getList(): void {
-    let params: any = new Object();
-    if ( this.query.company.value !== '') {
-      params[this.query.company.key] = this.query.company.value;
-    }
-
+  getList(params: any): void {
     this.drawer.company.visible = false;
 
     this.grid().gridQuery.set(params);
@@ -201,7 +167,7 @@ export class AppCompany implements OnInit {
         )
         .subscribe(
           (model: ResponseObject<void>) => {
-            this.getList();
+            this.getList('');
           }
       )
   }

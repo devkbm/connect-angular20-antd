@@ -13,9 +13,9 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 
 @Component({
   selector: 'menu-app',
@@ -29,13 +29,13 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     NzDividerModule,
     NzButtonModule,
     NzIconModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     MenuGroupGridComponent,
     MenuGridComponent,
     MenuGroupFormDrawerComponent,
     MenuFormDrawerComponent,
-    NzPageComponent
+    NgPage
 ],
   template: `
 <ng-template #header>

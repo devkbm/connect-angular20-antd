@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
@@ -21,7 +21,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 import { UserListComponent } from './user-list';
 
@@ -38,11 +38,11 @@ import { UserListComponent } from './user-list';
     NzDividerModule,
     NzButtonModule,
     NzPopconfirmModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     UserGridComponent,
     UserFormDrawerComponent,
-    NzPageComponent,
+    NgPage,
     UesrSearchComponent,
     UserListComponent
 ],
@@ -53,16 +53,18 @@ import { UserListComponent } from './user-list';
 
 <ng-template #search>
   <nz-search-area>
-    <uesr-search
+    <user-search
       (search)="getUserList($event)"
       (newForm)="newForm()"
       (deleteForm)="deleteUser()"
     >
-    </uesr-search>
+    </user-search>
   </nz-search-area>
 </ng-template>
 
-<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+<ng-page
+  [header]="{template: header, height: 'var(--page-header-height)'}"
+  [search]="{template: search, height: 'var(--page-search-height)'}">
   <div class="container">
     <div>
       <h3 class="grid-title">사용자 목록</h3>

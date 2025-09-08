@@ -43,7 +43,7 @@ import { CommonModule } from '@angular/common';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NzPageComponent implements AfterViewInit {
+export class NgPage implements AfterViewInit {
 
   header = input<{template: TemplateRef<{}> | null, height: string | null}>({
     template: null, height: '0px'

@@ -17,9 +17,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 
 @Component({
   selector: 'term-app',
@@ -35,7 +35,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     NzInputModule,
     NzButtonModule,
     NzIconModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     DataDomainFormComponent,
     DataDomainGridComponent,
@@ -43,7 +43,7 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     TermGridComponent,
     WordFormComponent,
     WordGridComponent,
-    NzPageComponent
+    NgPage
 ],
   template: `
 <ng-template #header>

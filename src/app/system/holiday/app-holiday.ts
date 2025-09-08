@@ -3,7 +3,7 @@ import { CommonModule, formatDate } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 import { NotifyService } from 'src/app/core/service/notify.service';
 
 import { HolidayFormDrawerComponent } from './holiday-form-drawer';
@@ -16,7 +16,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
@@ -38,12 +38,12 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
     NzTabsModule,
     NzDatePickerModule,
     NzDividerModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     NzSearchAreaComponent,
     HolidayGridComponent,
     HolidayFormDrawerComponent,
     CalendarDaypilotNavigatorComponent,
-    NzPageComponent,
+    NgPage,
     CalendarFullcalendarComponent
 ],
   template: `

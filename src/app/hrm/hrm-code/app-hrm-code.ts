@@ -19,10 +19,10 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { HrmCodeTypeFormDrawerComponent } from './hrm-code-type-form-drawer';
 import { HrmCodeFormDrawerComponent } from './hrm-code-form-drawer';
-import { NzPageComponent } from "src/app/core/app/nz-page";
+import { NgPage } from "src/app/core/app/nz-page";
 
 
 @Component({
@@ -39,12 +39,12 @@ import { NzPageComponent } from "src/app/core/app/nz-page";
     NzSelectModule,
     NzPageHeaderModule,
     NzInputModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     HrmCodeTypeGridComponent,
     HrmCodeTypeFormDrawerComponent,
     HrmCodeGridComponent,
     HrmCodeFormDrawerComponent,
-    NzPageComponent
+    NgPage
 ],
   template: `
 <ng-template #header>

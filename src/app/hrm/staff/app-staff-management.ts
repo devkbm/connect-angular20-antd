@@ -25,8 +25,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
-import { NzPageComponent } from "src/app/core/app/nz-page";
-import { NzPageHeaderCustomComponent } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NgPage } from "src/app/core/app/nz-page";
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzButtonExcelUploadComponent } from "src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
 
 import { NewStaffFormDrawerComponent } from './new-staff-form/new-staff-form-drawer';
@@ -49,7 +49,7 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
     NzGridModule,
     NzButtonModule,
     NzIconModule,
-    NzPageHeaderCustomComponent,
+    NzPageHeaderCustom,
     StaffAppointmentRecordFormDrawerComponent,
     StaffAppointmentRecordGridComponent,
     StaffFamilyFormDrawerComponent,
@@ -66,7 +66,7 @@ import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staf
     StaffGridComponent,
     StaffCurrentAppointmentDescriptionComponent,
     StaffCardListComponent,
-    NzPageComponent,
+    NgPage,
     NzButtonExcelUploadComponent
 ],
   template: `
