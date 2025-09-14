@@ -14,7 +14,18 @@ ModuleRegistry.registerModules([
   RowSelectionModule,
 ]);
 
-import { HrmCode } from './hrm-code.model';
+export interface HrmCode {
+  typeId: string | null;
+  code: string | null;
+  codeName: string | null;
+  useYn: boolean | null;
+  sequence: number | null;
+  comment: string | null;
+  fieldConfig: string | null;
+  extraInfo: any;
+}
+
+
 
 @Component({
   selector: 'hrm-code-grid',

@@ -8,7 +8,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 
 import { HolidayFormDrawerComponent } from './holiday-form-drawer';
 import { HolidayGridComponent } from './holiday-grid';
-import { Holiday } from './holiday.model';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -25,6 +24,23 @@ import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+
+export interface DateInfo {
+  date: Date | null;
+  dayOfWeek: string | null;
+  holiday: Holiday | null;
+  saturDay: boolean;
+  sunday: boolean;
+  weekend: boolean;
+}
+
+export interface Holiday {
+  date: Date | null;
+  holidayName: string | null;
+  comment: string | null;
+}
+
 
 @Component({
   selector: 'holiday-app',

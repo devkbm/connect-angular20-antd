@@ -5,8 +5,6 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
-import { MenuGroup } from './menu-group.model';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
@@ -14,6 +12,15 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { MenuGroupFormValidatorService } from './validator/menu-group-form-validator.service';
+
+export interface MenuGroup {
+  menuGroupCode: string | null;
+  menuGroupName: string | null;
+  menuGroupUrl: string | null;
+  description: string | null;
+  sequence: number | null;
+}
+
 
 @Component({
   selector: 'menu-group-form',

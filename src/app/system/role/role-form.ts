@@ -6,9 +6,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { Role } from './role.model';
-import { MenuGroup } from '../menu/menu-group.model';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
@@ -18,6 +15,21 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { RoleFormValidatorService } from './validator/role-form-validator.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+
+export interface Role {
+  roleCode: string | null;
+  roleName: string | null;
+  description: string | null;
+  menuGroupCode: string | null;
+}
+
+export interface MenuGroup {
+  menuGroupCode: string | null;
+  menuGroupName: string | null;
+  menuGroupUrl: string | null;
+  description: string | null;
+  sequence: number | null;
+}
 
 
 @Component({

@@ -11,9 +11,7 @@ import { ResponseMap } from 'src/app/core/model/response-map';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { StaffAppointmentRecord } from './staff-appointment-record.model';
-import { HrmCode } from '../../hrm-code/hrm-code.model';
-import { HrmCodeService } from '../../shared/hrm-code.service';
+import { HrmCodeService, HrmCode } from '../../shared/hrm-code.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -23,6 +21,28 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
+
+export interface StaffAppointmentRecord {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  appointmentTypeCode: string | null;
+  applyType: string | null;
+  appointmentDate: Date | null;
+  appointmentEndDate: Date | null;
+  recordName: string | null;
+  comment: string | null;
+  isCompleted: boolean | null;
+  blngDeptCode: string | null;
+  workDeptCode: string | null;
+  jobGroupCode: string | null;
+  jobPositionCode: string | null;
+  occupationCode: string | null;
+  jobGradeCode: string | null;
+  payStepCode: string | null;
+  jobCode: string | null;
+  dutyResponsibilityCode: string | null;
+}
 
 
 @Component({

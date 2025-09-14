@@ -3,7 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanActivateChildFn, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs/internal/Observable";
 import { LoginService } from "src/app/login/login.service";
-import { UserToken } from "src/app/login/user-token.model";
+import { UserToken } from "../session-manager";
 
 @Injectable()
 export class AuthGuardService implements CanActivate,CanActivateChild {

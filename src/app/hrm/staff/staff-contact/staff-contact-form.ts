@@ -16,7 +16,17 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-import { StaffContact } from './staff-contact-form.model';
+export interface StaffContact {
+  staffNo: string | null;
+  staffName: string | null;
+  homeAddressType: string | null;
+  homePostNumber: string | null;
+  homeMainAddress: string | null;
+  homeSubAddress: string | null;
+  extensionNumber: string | null;
+  mobileNumber: string | null;
+}
+
 
 @Component({
   selector: 'staff-contact-form',
@@ -62,7 +72,7 @@ import { StaffContact } from './staff-contact-form.model';
               <input nz-input id="contact_homePostNumber" formControlName="homePostNumber"
                 placeholder="우편번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -72,7 +82,7 @@ import { StaffContact } from './staff-contact-form.model';
               <input nz-input id="contact_homeMainAddress" formControlName="homeMainAddress"
                 placeholder="기본주소를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -82,7 +92,7 @@ import { StaffContact } from './staff-contact-form.model';
               <input nz-input id="contact_homeSubAddress" formControlName="homeSubAddress"
                 placeholder="상세주소를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
       </div>
 
@@ -95,7 +105,7 @@ import { StaffContact } from './staff-contact-form.model';
               <input nz-input id="contact_extensionNumber" formControlName="extensionNumber"
                 placeholder="내선번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                                                
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -105,7 +115,7 @@ import { StaffContact } from './staff-contact-form.model';
               <input nz-input id="contact_mobileNumber" formControlName="mobileNumber"
                 placeholder="휴대번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                                                          
+          </nz-form-item>
         </div>
       </div>
 

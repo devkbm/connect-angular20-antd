@@ -6,8 +6,15 @@ import { map, tap, catchError } from 'rxjs/operators';
 import { DataService } from 'src/app/core/service/data.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { DataDomain } from './data-domain.model';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+export interface DataDomain {
+  domainId: string | null;
+  database: string | null;
+  domainName: string | null;
+  dataType: string | null;
+  comment: string | null;
+}
 
 
 export interface HtmlSelectOption {

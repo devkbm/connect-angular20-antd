@@ -6,11 +6,7 @@ import { StaffRegistFormComponent } from './staff-regist-form';
 import { StaffGridComponent } from './staff-grid';
 import { StaffAppointmentRecordGridComponent } from './staff-appointment-record/staff-appointment-record-grid';
 import { StaffFamilyGridComponent } from './staff-family/staff-family-grid';
-import { StaffFamily } from './staff-family/staff-family.model';
-import { StaffLicense } from './staff-license/staff-license.model';
 import { StaffLicenseGridComponent } from './staff-license/staff-license-grid';
-import { StaffAppointmentRecord } from './staff-appointment-record/staff-appointment-record.model';
-import { StaffSchoolCareer } from './staff-school-career/staff-school-career.model';
 import { StaffSchoolCareerGridComponent } from './staff-school-career/staff-school-career-grid';
 import { StaffCurrentAppointmentDescriptionComponent } from './staff-current-appointment-description';
 import { StaffCardListComponent } from './staff-card/staff-card-list';
@@ -35,6 +31,67 @@ import { StaffDutyResponsibilityFormDrawerComponent } from './staff-duty-respons
 import { StaffFamilyFormDrawerComponent } from './staff-family/staff-family-form-drawer';
 import { StaffLicenseFormDrawerComponent } from './staff-license/staff-license-form-drawer';
 import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staff-school-career-form-drawer';
+
+export interface StaffAppointmentRecord {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  appointmentTypeCode: string | null;
+  applyType: string | null;
+  appointmentDate: Date | null;
+  appointmentEndDate: Date | null;
+  recordName: string | null;
+  comment: string | null;
+  isCompleted: boolean | null;
+  blngDeptCode: string | null;
+  workDeptCode: string | null;
+  jobGroupCode: string | null;
+  jobPositionCode: string | null;
+  occupationCode: string | null;
+  jobGradeCode: string | null;
+  payStepCode: string | null;
+  jobCode: string | null;
+  dutyResponsibilityCode: string | null;
+}
+
+export interface StaffFamily {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+	familyName: string | null;
+	familyRRN: string | null;
+	familyRelation: string | null;
+	occupation: string | null;
+	schoolCareerType: string | null;
+	comment: string | null;
+}
+
+export interface StaffLicense {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  licenseType: string | null;
+	licenseNumber: string | null;
+	dateOfAcquisition: Date | null;
+  certificationAuthority: string | null;
+	comment: string | null;
+}
+
+export interface StaffSchoolCareer {
+	staffNo: string | null;
+	staffName: string | null;
+  seq: string | null;
+	schoolCareerType: string | null;
+	schoolCode: string | null;
+	fromDate: Date | null;
+	toDate: Date | null;
+	majorName: string | null;
+	pluralMajorName: string | null;
+	location: string | null;
+	lessonYear: number | null;
+	comment: string | null;
+}
+
 
 @Component({
   selector: 'staff-management-app',

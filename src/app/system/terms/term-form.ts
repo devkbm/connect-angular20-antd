@@ -8,10 +8,7 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { TermService } from './term.service';
-import { Term } from './term.model';
 import { WordService } from './word.service';
-import { Word } from './word.model';
-import { DataDomain } from './data-domain.model';
 import { DataDomainService } from './data-domain.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -19,6 +16,37 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+
+
+export interface Term {
+  termId: string | null;
+  system: string | null;
+  term: string | null;
+  termEng: string | null;
+  columnName: string | null;
+  dataDomainId: string | null;
+  domainName?: string | null;
+  description: string | null;
+  comment: string | null;
+}
+
+export interface DataDomain {
+  domainId: string | null;
+  database: string | null;
+  domainName: string | null;
+  dataType: string | null;
+  comment: string | null;
+}
+
+
+export interface Word {
+  logicalName: string | null;
+  logicalNameEng: string | null;
+  physicalName: string | null;
+  comment: string | null;
+}
+
+
 
 @Component({
   selector: 'term-form',

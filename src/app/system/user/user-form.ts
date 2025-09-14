@@ -11,9 +11,6 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { User } from './user.model';
-import { Role } from '../role/role.model';
-import { DeptHierarchy } from '../dept/dept-hierarchy.model';
 import { UserFormValidatorService } from './validator/user-form-validator.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -22,6 +19,46 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
+
+export interface User {
+  userId: string | null;
+  companyCode: string | null;
+  staffNo: string | null;
+  password?: string | null;
+  name: string | null;
+  deptCode: string | null;
+  mobileNum: string | null;
+  email: string | null;
+  imageBase64: string | null;
+  enabled: boolean | null;
+  roleList: string[] | null;
+}
+
+export interface Role {
+  roleCode: string | null;
+  roleName: string | null;
+  description: string | null;
+  menuGroupCode: string | null;
+}
+
+
+export interface DeptHierarchy {
+  parentDeptCode: string;
+  deptCode: string;
+  deptNameKorean: string;
+  deptAbbreviationKorean: string;
+  deptNameEnglish: string;
+  deptAbbreviationEnglish: string;
+  fromDate: string;
+  toDate: string;
+  seq: number;
+  comment: string;
+
+  title: string;
+  key: string;
+  isLeaf: boolean;
+  children: DeptHierarchy[];
+}
 
 @Component({
   selector: 'user-form',

@@ -6,9 +6,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
-import { StaffLicense } from './staff-license.model';
-import { HrmCode } from '../../hrm-code/hrm-code.model';
-import { HrmCodeService } from '../../shared/hrm-code.service';
+
+import { HrmCodeService, HrmCode } from '../../shared/hrm-code.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -20,6 +19,17 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface StaffLicense {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  licenseType: string | null;
+	licenseNumber: string | null;
+	dateOfAcquisition: Date | null;
+  certificationAuthority: string | null;
+	comment: string | null;
+}
+
 @Component({
   selector: 'staff-license-form',
   imports: [
@@ -29,7 +39,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzFormModule,
     NzInputModule,
     NzDatePickerModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -49,7 +59,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="licenseType" nzRequired>자격면허</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="licenseType" formControlName="licenseType">
                 @for (option of licenseTypeList; track option) {
                   <nz-option
@@ -59,7 +69,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -69,7 +79,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="licenseNumber" formControlName="licenseNumber" required
                 placeholder="자격면허 번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -79,7 +89,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="dateOfAcquisition" formControlName="dateOfAcquisition">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                   
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -89,7 +99,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="certificationAuthority" formControlName="certificationAuthority"
                 placeholder="인증기관을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                             
+          </nz-form-item>
         </div>
 
       </div>
@@ -104,7 +114,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="비고를 입력해주세요." [rows]="23">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                       
+          </nz-form-item>
         </div>
       </div>
 

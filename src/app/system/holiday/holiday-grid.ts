@@ -15,11 +15,25 @@ ModuleRegistry.registerModules([
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { DateInfo } from './holiday.model';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
+
+export interface DateInfo {
+  date: Date | null;
+  dayOfWeek: string | null;
+  holiday: Holiday | null;
+  saturDay: boolean;
+  sunday: boolean;
+  weekend: boolean;
+}
+
+export interface Holiday {
+  date: Date | null;
+  holidayName: string | null;
+  comment: string | null;
+}
 
 
 @Component({

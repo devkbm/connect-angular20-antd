@@ -2,13 +2,30 @@ import { CommonModule } from '@angular/common';
 
 import { Component, OnInit, inject, viewChild, output, input } from '@angular/core';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { DeptHierarchy } from './dept-hierarchy.model';
 
 import { NzFormatEmitEvent, NzTreeComponent, NzTreeModule } from 'ng-zorro-antd/tree';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
+
+export interface DeptHierarchy {
+  parentDeptCode: string;
+  deptCode: string;
+  deptNameKorean: string;
+  deptAbbreviationKorean: string;
+  deptNameEnglish: string;
+  deptAbbreviationEnglish: string;
+  fromDate: string;
+  toDate: string;
+  seq: number;
+  comment: string;
+
+  title: string;
+  key: string;
+  isLeaf: boolean;
+  children: DeptHierarchy[];
+}
 
 @Component({
   selector: 'checkable-dept-tree',

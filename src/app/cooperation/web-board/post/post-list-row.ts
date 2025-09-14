@@ -1,11 +1,25 @@
 import { Component, computed, input, output } from '@angular/core';
 
-import { PostList } from './post-list.model';
 import { GlobalProperty } from 'src/app/core/global-property';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+
+export interface PostList {
+  boardId: string;
+  postId: string;
+  writerId: string;
+  writerName: string;
+  writerImage: string;
+  title: string;
+  hitCount: number;
+  editable: boolean;
+  isAttachedFile: boolean;
+  fileCount: number;
+  isRead: boolean;
+}
+
 
 @Component({
   selector: 'post-list-row',

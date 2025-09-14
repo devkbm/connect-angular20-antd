@@ -8,9 +8,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
 
-import { HrmCode } from '../hrm-code/hrm-code.model';
-import { HrmCodeService } from '../shared/hrm-code.service';
-import { AttendanceDate, AttendanceApplication } from './attendance-application.model';
+import { HrmCodeService, HrmCode } from '../shared/hrm-code.service';
 import { DutyDateListComponent } from './duty-date-list';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -26,6 +24,26 @@ import { HttpClient } from '@angular/common/http';
 import { StaffSelectService } from 'src/app/third-party/ng-zorro/stafff-select.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface AttendanceApplication {
+  dutyId: string | null;
+  staffNo: string | null;
+  dutyCode: string | null;
+	dutyReason: string | null;
+	fromDate: string | null;
+	toDate: string | null;
+	selectedDate: AttendanceDate[] | null;
+	dutyTime: number | null;
+}
+
+export interface AttendanceDate {
+  date: string;
+  isSelected: boolean;
+  isHoliday: boolean;
+  isSaturday: boolean;
+  isSunday: boolean;
+}
+
+
 @Component({
   selector: 'attendance-application-form',
   imports: [
@@ -36,8 +54,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzSelectModule,
     NzDividerModule,
-    NzDatePickerModule,    
-    
+    NzDatePickerModule,
+
     NzCrudButtonGroupComponent,
     DutyDateListComponent,
   ],
@@ -63,13 +81,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="dutyId" formControlName="dutyId" readonly placeholder="신규"/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="staffNo" nzRequired>직원</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="staffNo" formControlName="staffNo">
                 @for (option of staffSelectService.list; track option) {
                   <nz-option
@@ -77,9 +95,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                     [nzValue]="option.staffNo">
                   </nz-option>
                 }
-              </nz-select>              
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
       </div>
 
@@ -88,7 +106,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="12">
           <nz-form-item>
             <nz-form-label nzFor="dutyCode" nzRequired>근태코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="dutyCode" formControlName="dutyCode">
                 @for (option of dutyCodeList; track option) {
                   <nz-option
@@ -96,9 +114,9 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                     [nzValue]="option.code">
                   </nz-option>
                 }
-              </nz-select>              
+              </nz-select>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -107,7 +125,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="dutyReason" formControlName="dutyReason"/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
       </div>
 
@@ -120,7 +138,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="fromDate" formControlName="fromDate" [nzFormat]="'yyyy-MM-dd'">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -130,7 +148,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
       </div>
 

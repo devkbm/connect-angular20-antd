@@ -19,7 +19,13 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { Role } from './role.model';
+export interface Role {
+  roleCode: string | null;
+  roleName: string | null;
+  description: string | null;
+  menuGroupCode: string | null;
+}
+
 
 @Component({
   selector: 'role-grid',

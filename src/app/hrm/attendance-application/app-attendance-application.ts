@@ -19,8 +19,8 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { DateSelectArg, EventClickArg } from '@fullcalendar/core/index.js';
 
 import { AttendanceApplicationFormComponent } from './attendance-application-form';
-import { AttendanceApplicationGridComponent } from './attendance-application-grid';
-import { AttendanceApplicationGrid } from './attendance-application-grid.model';
+import { AttendanceApplicationGridComponent, AttendanceApplicationGrid } from './attendance-application-grid';
+
 
 @Component({
   selector: 'duty-application-app',

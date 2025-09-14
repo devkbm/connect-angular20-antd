@@ -9,8 +9,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { HrmCode } from './hrm-code.model';
-
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -24,6 +22,18 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 
 import { HrmCodeFormValidatorService } from './validator/hrm-code-form-validator.service';
 import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
+
+export interface HrmCode {
+  typeId: string | null;
+  code: string | null;
+  codeName: string | null;
+  useYn: boolean | null;
+  sequence: number | null;
+  comment: string | null;
+  fieldConfig: string | null;
+  extraInfo: any;
+}
+
 
 @Component({
   selector: 'hrm-code-form',
@@ -62,7 +72,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="typeId" formControlName="typeId" required/>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
@@ -72,7 +82,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
               <input nz-input id="code" formControlName="code" required
                 placeholder="코드를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -82,7 +92,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
               <input nz-input id="codeName" formControlName="codeName" required
                 placeholder="코드명를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
@@ -92,8 +102,8 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
               <nz-input-number nzId="sequence" formControlName="sequence" required
                 [nzMin]="0" [nzMax]="9999"
               ></nz-input-number>
-            </nz-form-control>          
-          </nz-form-item>                                                          
+            </nz-form-control>
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="2">
@@ -102,7 +112,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <label nz-checkbox nzId="useYn" formControlName="useYn"></label>
             </nz-form-control>
-          </nz-form-item>                                                                    
+          </nz-form-item>
         </div>
       </div>
 
@@ -116,7 +126,7 @@ import { AutoFocusDirective } from 'src/app/core/form/auto-focus.directive';
                 placeholder="설명을 입력해주세요." [rows]="10">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                                              
+          </nz-form-item>
         </div>
       </div>
 

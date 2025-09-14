@@ -2,8 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { Component, Input, OnInit } from '@angular/core';
-import { AttendanceDate } from './attendance-application.model';
 import { FormsModule } from '@angular/forms';
+
+
+export interface AttendanceDate {
+  date: string;
+  isSelected: boolean;
+  isHoliday: boolean;
+  isSaturday: boolean;
+  isSunday: boolean;
+}
+
 
 @Component({
   selector: 'duty-date-list',

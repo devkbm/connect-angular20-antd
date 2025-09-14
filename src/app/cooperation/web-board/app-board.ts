@@ -18,13 +18,28 @@ import { PostFormComponent } from './post/post-form';
 import { PostViewComponent } from './post/post-view';
 import { PostGridComponent } from './post/post-grid';
 import { PostListComponent } from './post/post-list';
-import { PostList } from './post/post-list.model';
+
 import { WindowRef } from 'src/app/core/window-ref';
 
 export interface TabInfo {
   tabName: string;
   postId: string;
 }
+
+export interface PostList {
+  boardId: string;
+  postId: string;
+  writerId: string;
+  writerName: string;
+  writerImage: string;
+  title: string;
+  hitCount: number;
+  editable: boolean;
+  isAttachedFile: boolean;
+  fileCount: number;
+  isRead: boolean;
+}
+
 
 @Component({
   selector: 'board-app',

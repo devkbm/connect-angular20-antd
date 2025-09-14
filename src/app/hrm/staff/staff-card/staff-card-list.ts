@@ -3,8 +3,20 @@ import { StaffCardComponent } from './staff-card';
 
 import { Component, OnInit, inject } from '@angular/core';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { StaffCardModel } from './staff-card.model';
 import { StaffCardService } from './staff-card.service';
+
+export interface StaffCardModel {
+  staffId: string | null;
+  staffNo: string | null;
+  staffName: string | null;
+  profilePicture: string | null;
+  extensionNumber: string | null;
+  mobileNumber: string | null;
+  blngDeptName: string | null;
+  workDeptName: string | null;
+  jobPositionName: string | null;
+}
+
 
 @Component({
   selector: 'staff-card-list',

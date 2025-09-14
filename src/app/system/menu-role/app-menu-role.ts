@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { MenuGroup } from '../menu/menu-group.model';
-import { Role } from '../role/role.model';
-
 import { MenuGroupGridComponent } from '../menu/menu-group-grid';
 import { RoleGridComponent } from '../role/role-grid';
 import { RoleFormComponent } from '../role/role-form';
@@ -24,6 +21,21 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+
+export interface Role {
+  roleCode: string | null;
+  roleName: string | null;
+  description: string | null;
+  menuGroupCode: string | null;
+}
+
+export interface MenuGroup {
+  menuGroupCode: string | null;
+  menuGroupName: string | null;
+  menuGroupUrl: string | null;
+  description: string | null;
+  sequence: number | null;
+}
 
 @Component({
   selector: 'menu-role-app',

@@ -9,7 +9,16 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
+export interface StaffDutyResponsibility {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  dutyResponsibilityCode: string | null;
+  dutyResponsibilityName: string | null;
+  fromDate: Date | null;
+  toDate: Date | null;
+  isPayApply: boolean | null;
+}
 
 
 @Component({

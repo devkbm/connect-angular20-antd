@@ -7,8 +7,20 @@ import { DataService } from 'src/app/core/service/data.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { Term } from './term.model';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+
+export interface Term {
+  termId: string | null;
+  system: string | null;
+  term: string | null;
+  termEng: string | null;
+  columnName: string | null;
+  dataDomainId: string | null;
+  domainName?: string | null;
+  description: string | null;
+  comment: string | null;
+}
 
 @Injectable({
   providedIn: 'root'

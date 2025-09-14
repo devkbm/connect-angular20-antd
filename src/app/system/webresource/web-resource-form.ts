@@ -6,9 +6,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { WebResource } from './web-resource.model';
-import { ResouceTypeEnum } from './resource-type-enum';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
@@ -18,6 +15,18 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { WebResourceFormValidatorService } from './validator/web-resource-form-validator.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface ResouceTypeEnum {
+  label: string;
+  value: string;
+}
+
+export interface WebResource {
+  resourceId: string | null;
+  resourceName: string | null;
+  resourceType: string | null;
+  url: string | null;
+  description: string | null;
+}
 
 @Component({
   selector: 'web-resource-form',

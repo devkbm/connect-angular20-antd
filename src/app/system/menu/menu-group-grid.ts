@@ -18,8 +18,16 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { MenuGroup } from './menu-group.model';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
+
+export interface MenuGroup {
+  menuGroupCode: string | null;
+  menuGroupName: string | null;
+  menuGroupUrl: string | null;
+  description: string | null;
+  sequence: number | null;
+}
+
 
 @Component({
   selector: 'menu-group-grid',

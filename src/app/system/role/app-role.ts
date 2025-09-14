@@ -7,7 +7,6 @@ import { NgPage } from "src/app/core/app/nz-page";
 
 import { RoleGridComponent } from './role-grid';
 import { RoleFormDrawerComponent } from './role-form-drawer';
-import { Role } from './role.model';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -22,6 +21,14 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
 import { RoleListComponent } from './role-list';
+
+export interface Role {
+  roleCode: string | null;
+  roleName: string | null;
+  description: string | null;
+  menuGroupCode: string | null;
+}
+
 
 @Component({
   selector: 'app-role',

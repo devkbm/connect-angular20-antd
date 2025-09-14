@@ -16,11 +16,23 @@ ModuleRegistry.registerModules([
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { StaffFamily } from './staff-family.model';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
+
+export interface StaffFamily {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+	familyName: string | null;
+	familyRRN: string | null;
+	familyRelation: string | null;
+	occupation: string | null;
+	schoolCareerType: string | null;
+	comment: string | null;
+}
+
 
 @Component({
   selector: 'staff-family-grid',

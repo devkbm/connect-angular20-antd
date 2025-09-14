@@ -16,12 +16,25 @@ ModuleRegistry.registerModules([
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { CommonCode } from './common-code.model';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
 
+export interface CommonCode {
+  systemTypeCode: string | null;
+  codeId: string | null;
+  parentId: string | null;
+  code: string | null;
+  codeName: string | null;
+  codeNameAbbreviation: string | null;
+  fromDate: Date | null;
+  toDate: Date | null;
+  seq: number | null;
+  hierarchyLevel: number | null;
+  lowLevelCodeLength: number | null;
+  cmt: string | null;
+}
 
 @Component({
   selector: 'common-code-grid',

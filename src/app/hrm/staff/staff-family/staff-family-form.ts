@@ -7,9 +7,7 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { StaffFamily } from './staff-family.model';
-import { HrmCodeService } from '../../shared/hrm-code.service';
-import { HrmCode } from '../../hrm-code/hrm-code.model';
+import { HrmCodeService, HrmCode } from '../../shared/hrm-code.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -19,6 +17,18 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface StaffFamily {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+	familyName: string | null;
+	familyRRN: string | null;
+	familyRelation: string | null;
+	occupation: string | null;
+	schoolCareerType: string | null;
+	comment: string | null;
+}
+
 @Component({
   selector: 'staff-family-form',
   imports: [
@@ -27,7 +37,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -47,7 +57,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="familyRelation" nzRequired>가족관계</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="familyRelation" formControlName="familyRelation">
                 @for (option of familyRelationList; track option) {
                   <nz-option
@@ -57,7 +67,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -67,7 +77,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="familyName" formControlName="familyName" required
                 placeholder="가족명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -77,7 +87,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="familyRRN" formControlName="familyRRN" required
                 placeholder="가족 주민번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                   
+          </nz-form-item>
         </div>
       </div>
 
@@ -90,7 +100,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="occupation" formControlName="occupation"
                 placeholder="직업을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                             
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -100,7 +110,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="schoolCareerType" formControlName="schoolCareerType"
                 placeholder="학력을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                                       
+          </nz-form-item>
         </div>
       </div>
 
@@ -114,7 +124,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="비고를 입력해주세요." [rows]="23">
                 </textarea>
               </nz-form-control>
-            </nz-form-item>                                                                   
+            </nz-form-item>
           </div>
         </div>
     </form>

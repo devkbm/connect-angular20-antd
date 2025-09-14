@@ -19,7 +19,23 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { Staff } from './staff.model';
+export interface Staff {
+  companyCode: string | null;
+  staffNo: string | null;
+  name: string | null;
+  nameEng: string | null;
+  nameChi: string | null;
+  residentRegistrationNumber: string | null;
+  gender: string | null;
+  birthday: Date | null;
+  workCondition: string | null;
+  imagePath: string | null;
+  deptHistory?: any;
+  jobHistory?: any;
+  deptChangeHistory?: any;
+  jobChangeHistory?: any;
+  statusChangeHistory?: any;
+}
 
 
 @Component({

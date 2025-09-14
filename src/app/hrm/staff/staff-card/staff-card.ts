@@ -4,7 +4,19 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 
 import { Component, Input, OnInit } from '@angular/core';
 import { GlobalProperty } from 'src/app/core/global-property';
-import { StaffCardModel } from './staff-card.model';
+
+export interface StaffCardModel {
+  staffId: string | null;
+  staffNo: string | null;
+  staffName: string | null;
+  profilePicture: string | null;
+  extensionNumber: string | null;
+  mobileNumber: string | null;
+  blngDeptName: string | null;
+  workDeptName: string | null;
+  jobPositionName: string | null;
+}
+
 
 @Component({
   selector: 'staff-card',

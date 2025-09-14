@@ -9,8 +9,6 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { GlobalProperty } from 'src/app/core/global-property';
 
-import { Staff } from './staff.model';
-
 import { saveAs } from 'file-saver';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -25,6 +23,24 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
+
+export interface Staff {
+  companyCode: string | null;
+  staffNo: string | null;
+  name: string | null;
+  nameEng: string | null;
+  nameChi: string | null;
+  residentRegistrationNumber: string | null;
+  gender: string | null;
+  birthday: Date | null;
+  workCondition: string | null;
+  imagePath: string | null;
+  deptHistory?: any;
+  jobHistory?: any;
+  deptChangeHistory?: any;
+  jobChangeHistory?: any;
+  statusChangeHistory?: any;
+}
 
 @Component({
   selector: 'staff-regist-form',
@@ -41,7 +57,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
     NzUploadModule,
     NzDividerModule,
     NzRadioModule,
-    NgxMaskDirective,    
+    NgxMaskDirective,
   ],
   providers: [
     provideNgxMask()
@@ -91,7 +107,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="staffNo" formControlName="staffNo" required readonly/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -100,13 +116,13 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="name" formControlName="name" required/>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="gender" nzRequired>성별</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-radio-group
                 formControlName="gender" itemId="gender">
                 @for (o of genderOptions; track o.value) {
@@ -114,7 +130,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
                 }
               </nz-radio-group>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
       </div>
 
@@ -125,7 +141,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="nameEng" formControlName="nameEng"/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -134,7 +150,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="nameChi" formControlName="nameChi"/>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
       </div>
 
@@ -142,13 +158,13 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
         <div nz-col nzSpan="12" >
           <nz-form-item>
             <nz-form-label nzFor="residentRegistrationNumber">주민등록번호</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input required
                 nzId="residentRegistrationNumber" formControlName="residentRegistrationNumber"
-                mask="000000-0000000"  
-              />              
+                mask="000000-0000000"
+              />
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="12">
@@ -158,7 +174,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
               <nz-date-picker nzId="birthday" formControlName="birthday">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
       </div>
     </form>

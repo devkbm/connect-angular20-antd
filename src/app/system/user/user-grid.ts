@@ -16,11 +16,24 @@ ModuleRegistry.registerModules([
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { User } from './user.model';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { HttpClient } from '@angular/common/http';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
+
+export interface User {
+  userId: string | null;
+  companyCode: string | null;
+  staffNo: string | null;
+  password?: string | null;
+  name: string | null;
+  deptCode: string | null;
+  mobileNum: string | null;
+  email: string | null;
+  imageBase64: string | null;
+  enabled: boolean | null;
+  roleList: string[] | null;
+}
 
 @Component({
   selector: 'user-grid',

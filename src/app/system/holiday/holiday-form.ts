@@ -5,8 +5,6 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
 
-import { Holiday } from './holiday.model';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -14,6 +12,21 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+export interface DateInfo {
+  date: Date | null;
+  dayOfWeek: string | null;
+  holiday: Holiday | null;
+  saturDay: boolean;
+  sunday: boolean;
+  weekend: boolean;
+}
+
+export interface Holiday {
+  date: Date | null;
+  holidayName: string | null;
+  comment: string | null;
+}
 
 
 @Component({

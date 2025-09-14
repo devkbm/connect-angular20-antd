@@ -9,10 +9,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { Menu } from './menu.model';
-import { MenuHierarchy } from './menu-hierarchy.model';
-import { MenuGroup } from './menu-group.model';
-
 import { MenuFormValidatorService } from './validator/menu-form-validator.service';
 
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
@@ -20,6 +16,46 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+
+export interface MenuGroup {
+  menuGroupCode: string | null;
+  menuGroupName: string | null;
+  menuGroupUrl: string | null;
+  description: string | null;
+  sequence: number | null;
+}
+
+export interface MenuHierarchy {
+  createdDt: Date;
+  createdBy: string;
+  modifiedDt: Date;
+  modifiedBy: string;
+  key: string;
+  title: string;
+  menuGroupId: string;
+  menuId: string;
+  menuName: string;
+  parentMenuId: string;
+  menuType: string;
+  sequence: number;
+  level: number;
+  url: string;
+  selected: boolean;
+  expanded: boolean;
+  children: MenuHierarchy[]
+}
+
+export interface Menu {
+  menuGroupCode: string | null;
+  menuCode: string | null;
+  menuName: string | null;
+  menuType: string | null;
+  parentMenuCode: string | null;
+  sequence: number | null;
+  appUrl: string | null;
+  appIconType: string | null;
+  appIcon: string | null;
+}
 
 @Component({
   selector: 'menu-form',

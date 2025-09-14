@@ -6,11 +6,52 @@ import { DataService } from 'src/app/core/service/data.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { CommonCode } from './common-code.model';
-import { CommonCodeHierarchy } from './common-code-hierarchy.model';
 import { GlobalProperty } from 'src/app/core/global-property';
-import { SystemTypeEnum } from './system-type-enum.model';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+export interface CommonCode {
+  systemTypeCode: string | null;
+  codeId: string | null;
+  parentId: string | null;
+  code: string | null;
+  codeName: string | null;
+  codeNameAbbreviation: string | null;
+  fromDate: Date | null;
+  toDate: Date | null;
+  seq: number | null;
+  hierarchyLevel: number | null;
+  lowLevelCodeLength: number | null;
+  cmt: string | null;
+}
+
+
+export class SystemTypeEnum {
+  constructor(
+    public label: string,
+    public value: string) {}
+}
+
+
+export class CommonCodeHierarchy {
+  constructor(
+    public id: string,
+    public systemTypeCode: string,
+    public code: string,
+    public codeName: string,
+    public codeNameAbbreviation: string,
+    public fromDate: string,
+    public toDate: string,
+    public hierarchyLevel: number,
+    public fixedLengthYn: boolean,
+    public codeLength: number,
+    public cmt: string,
+    public parentId: string,
+    public title: string,
+    public key: string,
+    public isLeaf: boolean,
+    public children: CommonCodeHierarchy[]) { }
+}
+
 
 
 @Injectable({

@@ -19,7 +19,12 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { Word } from './word.model';
+export interface Word {
+  logicalName: string | null;
+  logicalNameEng: string | null;
+  physicalName: string | null;
+  comment: string | null;
+}
 
 
 @Component({

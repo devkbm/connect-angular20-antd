@@ -6,8 +6,6 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
-import { Dept } from './dept.model';
-import { DeptHierarchy } from './dept-hierarchy.model';
 
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -19,6 +17,39 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { DeptFormValidatorService } from './validator/dept-form-validator.service';
+
+export interface Dept {
+  parentDeptCode: string | null;
+  //deptId: string | null;
+  deptCode: string | null;
+  deptNameKorean: string | null;
+  deptAbbreviationKorean: string | null;
+  deptNameEnglish: string | null;
+  deptAbbreviationEnglish: string | null;
+  fromDate: Date | null;
+  toDate: Date | null;
+  seq: number | null;
+  comment: string | null;
+}
+
+export interface DeptHierarchy {
+  parentDeptCode: string;
+  deptCode: string;
+  deptNameKorean: string;
+  deptAbbreviationKorean: string;
+  deptNameEnglish: string;
+  deptAbbreviationEnglish: string;
+  fromDate: string;
+  toDate: string;
+  seq: number;
+  comment: string;
+
+  title: string;
+  key: string;
+  isLeaf: boolean;
+  children: DeptHierarchy[];
+}
+
 
 @Component({
   selector: 'dept-form',

@@ -6,7 +6,6 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { CommonCodeFormComponent } from './common-code-form';
 import { CommonCodeTreeComponent } from './common-code-tree';
 import { CommonCodeService } from './common-code.service';
-import { SystemTypeEnum } from './system-type-enum.model';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -17,6 +16,15 @@ import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-ar
 import { NgPage } from "src/app/core/app/nz-page";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+
+
+
+export class SystemTypeEnum {
+  constructor(
+    public label: string,
+    public value: string) {}
+}
+
 
 @Component({
   selector: 'common-code-app',

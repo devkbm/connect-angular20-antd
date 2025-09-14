@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 
 import { DataService } from '../core/service/data.service';
 
-import { UserToken } from './user-token.model';
-
 import { Observable } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { getHttpOptions } from '../core/http/http-utils';
 import { GlobalProperty } from '../core/global-property';
+import { UserToken } from '../core/session-manager';
+
 
 @Injectable({
   providedIn: 'root'

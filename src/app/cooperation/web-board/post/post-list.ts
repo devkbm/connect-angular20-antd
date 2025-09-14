@@ -12,10 +12,24 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { PostListRowComponent } from './post-list-row';
-import { PostList } from './post-list.model';
 
 // 무한 스크롤 적용 필요
 // https://www.npmjs.com/package/ngx-infinite-scroll
+
+export interface PostList {
+  boardId: string;
+  postId: string;
+  writerId: string;
+  writerName: string;
+  writerImage: string;
+  title: string;
+  hitCount: number;
+  editable: boolean;
+  isAttachedFile: boolean;
+  fileCount: number;
+  isRead: boolean;
+}
+
 
 @Component({
   selector: 'post-list',

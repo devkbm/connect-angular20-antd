@@ -9,8 +9,10 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { WebResourceGridComponent } from './web-resource-grid';
-import { WebResource } from './web-resource.model';
 import { WebResourceFormDrawerComponent } from './web-resource-form-drawer';
+import { WebResourceSearchComponent } from './web-resource-search';
+import { WebResourceListComponent } from './web-resource-list';
+
 
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
@@ -19,8 +21,15 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { WebResourceSearchComponent } from './web-resource-search';
-import { WebResourceListComponent } from './web-resource-list';
+
+
+export interface WebResource {
+  resourceId: string | null;
+  resourceName: string | null;
+  resourceType: string | null;
+  url: string | null;
+  description: string | null;
+}
 
 @Component({
   selector: 'web-resource-app',

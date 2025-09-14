@@ -9,12 +9,19 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { BizCode } from './biz-code.model';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+
+export interface BizCode {
+  typeId: string | null;
+  code: string | null;
+  codeName: string | null;
+  useYn: boolean | null;
+  sequence: number | null;
+  comment: string | null;
+}
 
 
 @Component({

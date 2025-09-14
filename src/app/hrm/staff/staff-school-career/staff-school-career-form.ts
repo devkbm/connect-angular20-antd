@@ -5,11 +5,9 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
-import { StaffSchoolCareer } from './staff-school-career.model';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { HrmCode } from '../../hrm-code/hrm-code.model';
-import { HrmCodeService } from '../../shared/hrm-code.service';
+import { HrmCodeService, HrmCode } from '../../shared/hrm-code.service';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -21,6 +19,21 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface StaffSchoolCareer {
+	staffNo: string | null;
+	staffName: string | null;
+  seq: string | null;
+	schoolCareerType: string | null;
+	schoolCode: string | null;
+	fromDate: Date | null;
+	toDate: Date | null;
+	majorName: string | null;
+	pluralMajorName: string | null;
+	location: string | null;
+	lessonYear: number | null;
+	comment: string | null;
+}
+
 @Component({
   selector: 'staff-school-career-form',
   imports: [
@@ -31,7 +44,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -51,7 +64,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="schoolCareerType" nzRequired>학력</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="schoolCareerType" formControlName="schoolCareerType">
                 @for (option of schoolCareerTypeList; track option) {
                   <nz-option
@@ -61,13 +74,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                            
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="schoolCode" nzRequired>학교</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="schoolCode" formControlName="schoolCode">
                 @for (option of schoolCodeList; track option) {
                   <nz-option
@@ -77,7 +90,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                                                                      
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -87,7 +100,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="fromDate" formControlName="fromDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                                                
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -97,7 +110,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                                                                          
+          </nz-form-item>
         </div>
       </div>
 
@@ -110,7 +123,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="majorName" formControlName="majorName"
                 placeholder="전공을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -120,7 +133,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="pluralMajorName" formControlName="pluralMajorName"
                 placeholder="부전공을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -130,7 +143,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="location" formControlName="location"
                 placeholder="지역을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                   
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -141,7 +154,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 [nzMin]="0" [nzMax]="9999">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item>                                             
+          </nz-form-item>
         </div>
       </div>
 
@@ -155,7 +168,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 placeholder="비고를 입력해주세요." [rows]="23">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                       
+          </nz-form-item>
         </div>
       </div>
 

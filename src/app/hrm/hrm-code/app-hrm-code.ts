@@ -7,9 +7,7 @@ import { HrmCodeGridComponent } from './hrm-code-grid';
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { HrmCodeService } from '../shared/hrm-code.service';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { HrmCode } from './hrm-code.model';
 import { HrmCodeTypeService } from '../shared/hrm-code-type.service';
-import { HrmType } from './hrm-type.model';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -23,6 +21,36 @@ import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-
 import { HrmCodeTypeFormDrawerComponent } from './hrm-code-type-form-drawer';
 import { HrmCodeFormDrawerComponent } from './hrm-code-form-drawer';
 import { NgPage } from "src/app/core/app/nz-page";
+
+
+export interface HrmType {
+  typeId: string | null;
+  typeName: string | null;
+  sequence: number | null;
+  comment: string | null;
+  fieldConfig: string | null;
+  /*
+  the1AddInfoDesc: string | null;
+	the2AddInfoDesc: string | null;
+	the3AddInfoDesc: string | null;
+	the4AddInfoDesc: string | null;
+	the5AddInfoDesc: string | null;
+  */
+}
+
+export interface HrmCode {
+  typeId: string | null;
+  code: string | null;
+  codeName: string | null;
+  useYn: boolean | null;
+  sequence: number | null;
+  comment: string | null;
+  fieldConfig: string | null;
+  extraInfo: any;
+}
+
+
+
 
 
 @Component({

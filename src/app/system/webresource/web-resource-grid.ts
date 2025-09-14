@@ -16,11 +16,18 @@ ModuleRegistry.registerModules([
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { WebResource } from './web-resource.model';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
+
+export interface WebResource {
+  resourceId: string | null;
+  resourceName: string | null;
+  resourceType: string | null;
+  url: string | null;
+  description: string | null;
+}
 
 @Component({
   selector: 'web-resource-grid',

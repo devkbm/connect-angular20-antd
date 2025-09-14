@@ -4,7 +4,6 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 
 import { TeamGridComponent } from './team-grid.component';
-import { Team, TeamModel } from './team.model';
 import { TeamService } from './team.service';
 
 import { CommonModule } from '@angular/common';
@@ -13,6 +12,24 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { TeamFormComponent } from './team-form.component';
+
+
+export interface TeamModel {
+  teamId: string | null;
+  teamName: string | null;
+  memberList: string[] | null;
+}
+
+export interface TeamJoinableUserModel {
+  userId: string;
+  userName: string;
+}
+
+export interface Team {
+  teamId: string;
+  teamName: string;
+  memberList: string[];
+}
 
 
 @Component({

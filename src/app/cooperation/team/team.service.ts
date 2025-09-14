@@ -6,8 +6,25 @@ import { catchError } from 'rxjs/operators';
 import { DataService } from 'src/app/core/service/data.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { TeamJoinableUserModel, TeamModel } from './team.model';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+export interface TeamModel {
+  teamId: string | null;
+  teamName: string | null;
+  memberList: string[] | null;
+}
+
+export interface TeamJoinableUserModel {
+  userId: string;
+  userName: string;
+}
+
+export interface Team {
+  teamId: string;
+  teamName: string;
+  memberList: string[];
+}
+
 
 @Injectable({
   providedIn: 'root'

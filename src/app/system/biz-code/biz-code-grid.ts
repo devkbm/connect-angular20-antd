@@ -18,7 +18,14 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { BizCode } from './biz-code.model';
+export interface BizCode {
+  typeId: string | null;
+  code: string | null;
+  codeName: string | null;
+  useYn: boolean | null;
+  sequence: number | null;
+  comment: string | null;
+}
 
 
 

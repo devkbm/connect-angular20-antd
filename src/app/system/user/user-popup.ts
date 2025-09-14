@@ -1,17 +1,20 @@
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { SystemUserProfile, UserSessionService } from 'src/app/core/service/user-session.service';
+import { ResponseObject } from 'src/app/core/model/response-object';
+
+import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzCardModule } from 'ng-zorro-antd/card';
 
-import { Component, OnInit, Output, EventEmitter, inject, TemplateRef } from '@angular/core';
-import { SystemUserProfile, UserSessionService } from 'src/app/core/service/user-session.service';
-import { NzModalRef } from 'ng-zorro-antd/modal';
-
-import { ResponseObject } from 'src/app/core/model/response-object';
 
 @Component({
   selector: 'user-popup',
   imports: [
-    CommonModule, NzCardModule, NzAvatarModule
+    CommonModule,
+    NzCardModule,
+    NzAvatarModule
   ],
   template: `
     <nz-card [nzBordered]="false">

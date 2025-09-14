@@ -4,14 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { SessionManager } from 'src/app/core/session-manager';
+import { SessionManager, UserToken } from 'src/app/core/session-manager';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { WindowRef } from 'src/app/core/window-ref';
 import { GlobalProperty } from 'src/app/core/global-property';
 
-import { LoginService } from './login.service';
-import { UserToken } from './user-token.model';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
-
 
 
 @Component({
@@ -133,7 +131,6 @@ export class LoginComponent implements OnInit {
 
   private http = inject(HttpClient);
 
-  private loginService = inject(LoginService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private winRef = inject(WindowRef);
@@ -168,18 +165,9 @@ export class LoginComponent implements OnInit {
     if (token != null) {
       sessionStorage.setItem('token', token);
 
-      this.loginService.getAuthToken('001')
-          .subscribe(
-            (model: UserToken) => {
-              this.setItemSessionStorage(model);
-
-              this.router.navigate([this.FIRST_PAGE_URL]);
-            }
-          );
+      this.validAuth('001');
     }
   }
-
-
 
   submitForm(): void {
 
@@ -200,6 +188,22 @@ export class LoginComponent implements OnInit {
             this.setItemSessionStorage(model);
 
             this.router.navigate([this.FIRST_PAGE_URL, {isForwarding: true}]);
+          }
+        );
+  }
+
+  validAuth(companyCode: string) {
+    const url =  GlobalProperty.serverUrl() + '/api/system/user/auth?companyCode='+companyCode;
+    const options = getHttpOptions();
+
+    this.http.get<UserToken>(url, options).pipe(
+        //  catchError(this.handleError<UserToken>('getAuthToken', undefined))
+        )
+        .subscribe(
+          (model: UserToken) => {
+            this.setItemSessionStorage(model);
+
+            this.router.navigate([this.FIRST_PAGE_URL]);
           }
         );
   }

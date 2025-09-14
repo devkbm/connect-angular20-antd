@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { TeamService } from './team.service';
-import { TeamJoinableUserModel, TeamModel } from './team.model';
 import { ResponseList } from 'src/app/core/model/response-list';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -13,6 +12,24 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
 import { NzSelectModule } from 'ng-zorro-antd/select';
+
+export interface TeamModel {
+  teamId: string | null;
+  teamName: string | null;
+  memberList: string[] | null;
+}
+
+export interface TeamJoinableUserModel {
+  userId: string;
+  userName: string;
+}
+
+export interface Team {
+  teamId: string;
+  teamName: string;
+  memberList: string[];
+}
+
 
 @Component({
   selector: 'team-form',

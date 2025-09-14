@@ -7,13 +7,25 @@ import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag
 import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
 import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
 
-import { TeamModel } from './team.model';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
   RowSelectionModule,
 ]);
+
+export interface TeamModel {
+  teamId: string | null;
+  teamName: string | null;
+  memberList: string[] | null;
+}
+
+export interface Team {
+  teamId: string;
+  teamName: string;
+  memberList: string[];
+}
+
 
 @Component({
   selector: 'team-grid',

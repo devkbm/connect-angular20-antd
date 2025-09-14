@@ -15,11 +15,19 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
-import { HrmCode } from '../../hrm-code/hrm-code.model';
-import { HrmCodeService } from '../../shared/hrm-code.service';
-import { StaffDutyResponsibility } from './staff-duty-responsibility.model';
+import { HrmCodeService, HrmCode } from '../../shared/hrm-code.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
+export interface StaffDutyResponsibility {
+  staffNo: string | null;
+  staffName: string | null;
+  seq: string | null;
+  dutyResponsibilityCode: string | null;
+  dutyResponsibilityName: string | null;
+  fromDate: Date | null;
+  toDate: Date | null;
+  isPayApply: boolean | null;
+}
 
 @Component({
   selector: 'staff-duty-responsibility-form',
@@ -31,7 +39,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzDatePickerModule,
     NzCheckboxModule,
-    NzSelectModule,    
+    NzSelectModule,
   ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -54,7 +62,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="duty_staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -64,7 +72,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <input nz-input id="duty_staffName" formControlName="staffName" required
                 placeholder="직원명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
       </div>
 
@@ -77,13 +85,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="seq" formControlName="seq" required/>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
           <nz-form-item>
             <nz-form-label nzFor="dutyResponsibilityCode" nzRequired>직책</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="dutyResponsibilityCode" formControlName="dutyResponsibilityCode">
                 @for (option of dutyResponsibilityCodeList; track option) {
                   <nz-option
@@ -93,7 +101,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
                 }
               </nz-select>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -103,7 +111,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="fromDate" formControlName="fromDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>                                   
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="6">
@@ -113,7 +121,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
               <nz-date-picker nzId="toDate" formControlName="toDate">
               </nz-date-picker>
             </nz-form-control>
-          </nz-form-item>               
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="2">
@@ -122,7 +130,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <label nz-checkbox nzId="isPayApply" formControlName="isPayApply"></label>
             </nz-form-control>
-          </nz-form-item>                         
+          </nz-form-item>
         </div>
 
       </div>

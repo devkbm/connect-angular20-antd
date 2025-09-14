@@ -14,7 +14,6 @@ import ko from '@fullcalendar/core/locales/ko';
 import { createEventId, INITIAL_EVENTS } from './event-util';
 import { HolidayService } from 'src/app/system/holiday/holiday.service';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { DateInfo } from 'src/app/system/holiday/holiday.model';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
@@ -27,6 +26,22 @@ export interface WorkCalendarEvent {
   workCalendarId: number | null;
   color?: string;
 }
+
+export interface DateInfo {
+  date: Date | null;
+  dayOfWeek: string | null;
+  holiday: Holiday | null;
+  saturDay: boolean;
+  sunday: boolean;
+  weekend: boolean;
+}
+
+export interface Holiday {
+  date: Date | null;
+  holidayName: string | null;
+  comment: string | null;
+}
+
 
 @Component({
   selector: 'app-calendar-fullcalendar',

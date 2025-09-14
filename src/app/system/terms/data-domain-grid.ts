@@ -19,7 +19,13 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { GlobalProperty } from 'src/app/core/global-property';
 
-import { DataDomain } from './data-domain.model';
+export interface DataDomain {
+  domainId: string | null;
+  database: string | null;
+  domainName: string | null;
+  dataType: string | null;
+  comment: string | null;
+}
 
 
 @Component({

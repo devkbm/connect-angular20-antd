@@ -6,15 +6,33 @@ import { NzFormatEmitEvent } from 'ng-zorro-antd/tree';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { MenuRoleHierarchy } from '../menu/menu-role-hierarchy.model';
-import { MenuRoleMapping } from '../menu/menu-role-mapping.model';
-
 import { NzTreeNodeKey } from 'ng-zorro-antd/core/tree';
 import { NzButtonComponent } from 'ng-zorro-antd/button';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
+
+export interface MenuRoleHierarchy {
+  title: string;
+  key: string;
+  checked: boolean;
+  expanded: boolean;
+  selected: boolean;
+  isLeaf: boolean;
+  children: MenuRoleHierarchy[];
+
+  halfChecked: boolean;
+  menuGroupCode: string;
+  menuCode: string;
+  roleCode: string;
+}
+
+export interface MenuRoleMapping {
+  menuGroupCode: string;
+  menuCode: string;
+  roleCode: string;
+}
 
 function convert(tree: MenuRoleHierarchy[]) {
   return tree.reduce(function(acc: string[], o) {

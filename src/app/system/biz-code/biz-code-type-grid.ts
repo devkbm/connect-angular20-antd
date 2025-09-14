@@ -19,7 +19,14 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { BizCodeType } from './biz-code-type.model';
+export interface BizCodeType {
+  typeId: string | null;
+  typeName: string | null;
+  sequence: number | null;
+  bizType: string | null;
+  comment: string | null;
+}
+
 
 @Component({
   selector: 'biz-type-grid',

@@ -11,7 +11,6 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { UesrSearchComponent } from './uesr-search';
 import { UserGridComponent } from './user-grid';
 import { UserFormDrawerComponent } from './user-form-drawer';
-import { User } from './user.model';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -24,6 +23,20 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
 import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
 import { UserListComponent } from './user-list';
+
+export interface User {
+  userId: string | null;
+  companyCode: string | null;
+  staffNo: string | null;
+  password?: string | null;
+  name: string | null;
+  deptCode: string | null;
+  mobileNum: string | null;
+  email: string | null;
+  imageBase64: string | null;
+  enabled: boolean | null;
+  roleList: string[] | null;
+}
 
 @Component({
   selector: 'user-app',

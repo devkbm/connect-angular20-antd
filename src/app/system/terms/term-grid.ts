@@ -15,12 +15,25 @@ ModuleRegistry.registerModules([
 import { ResponseList } from 'src/app/core/model/response-list';
 import { NotifyService } from 'src/app/core/service/notify.service';
 
-import { Term } from './term.model';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { rxResource } from '@angular/core/rxjs-interop';
+
+
+export interface Term {
+  termId: string | null;
+  system: string | null;
+  term: string | null;
+  termEng: string | null;
+  columnName: string | null;
+  dataDomainId: string | null;
+  domainName?: string | null;
+  description: string | null;
+  comment: string | null;
+}
+
 
 @Component({
   selector: 'term-grid',

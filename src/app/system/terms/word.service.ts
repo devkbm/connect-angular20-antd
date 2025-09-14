@@ -6,8 +6,15 @@ import { map, tap, catchError } from 'rxjs/operators';
 import { DataService } from 'src/app/core/service/data.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
-import { Word } from './word.model';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+export interface Word {
+  logicalName: string | null;
+  logicalNameEng: string | null;
+  physicalName: string | null;
+  comment: string | null;
+}
+
 
 @Injectable({
   providedIn: 'root'

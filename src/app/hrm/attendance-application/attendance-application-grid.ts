@@ -19,7 +19,17 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { AttendanceApplicationGrid } from './attendance-application-grid.model';
+
+export interface AttendanceApplicationGrid {
+  id: string | null;
+  staffNo: string | null;
+  staffName: string | null;
+  dutyCode: string | null;
+  dutyName: string | null;
+  dutyReason: string | null;
+  fromDate: string | null;
+  toDate: string | null;
+}
 
 
 @Component({

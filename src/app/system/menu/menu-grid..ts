@@ -19,7 +19,18 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { Menu } from './menu.model';
+export interface Menu {
+  menuGroupCode: string | null;
+  menuCode: string | null;
+  menuName: string | null;
+  menuType: string | null;
+  parentMenuCode: string | null;
+  sequence: number | null;
+  appUrl: string | null;
+  appIconType: string | null;
+  appIcon: string | null;
+}
+
 
 @Component({
   selector: 'menu-grid',

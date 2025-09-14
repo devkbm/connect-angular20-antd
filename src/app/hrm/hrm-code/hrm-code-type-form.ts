@@ -6,8 +6,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NotifyService } from 'src/app/core/service/notify.service';
 
-import { HrmType } from './hrm-type.model';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -17,6 +15,22 @@ import { HrmCodeTypeFormValidatorService } from './validator/hrm-code-type-form-
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
+
+export interface HrmType {
+  typeId: string | null;
+  typeName: string | null;
+  sequence: number | null;
+  comment: string | null;
+  fieldConfig: string | null;
+  /*
+  the1AddInfoDesc: string | null;
+	the2AddInfoDesc: string | null;
+	the3AddInfoDesc: string | null;
+	the4AddInfoDesc: string | null;
+	the5AddInfoDesc: string | null;
+  */
+}
+
 
 @Component({
   selector: 'hrm-code-type-form',
@@ -52,7 +66,7 @@ import { HttpClient } from '@angular/common/http';
               <input nz-input id="typeId" formControlName="typeId" required
                 placeholder="구분ID를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="10">
@@ -62,7 +76,7 @@ import { HttpClient } from '@angular/common/http';
               <input nz-input id="typeName" formControlName="typeName" required
                 placeholder="구분명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="4">
@@ -73,7 +87,7 @@ import { HttpClient } from '@angular/common/http';
                 [nzMin]="0" [nzMax]="9999"
               ></nz-input-number>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
       </div>
 
@@ -87,7 +101,7 @@ import { HttpClient } from '@angular/common/http';
               placeholder="설명을 입력해주세요." [rows]="8">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
       </div>
 
@@ -100,7 +114,7 @@ import { HttpClient } from '@angular/common/http';
               placeholder="" [rows]="8">
               </textarea>
             </nz-form-control>
-          </nz-form-item>                                                  
+          </nz-form-item>
         </div>
       </div>
 

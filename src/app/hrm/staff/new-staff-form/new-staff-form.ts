@@ -13,7 +13,14 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
-import { NewStaff } from './new-staff-form.model';
+export interface NewStaff {
+  staffNo: string | null;
+  name: string | null;
+  residentRegistrationNumber: string | null;
+  nameEng: string | null;
+  nameChi: string | null;
+}
+
 
 @Component({
   selector: 'new-staff-form',
@@ -51,7 +58,7 @@ import { NewStaff } from './new-staff-form.model';
               <input nz-input id="staffNo" formControlName="staffNo" required
                 placeholder="직원번호를 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -61,17 +68,17 @@ import { NewStaff } from './new-staff-form.model';
               <input nz-input id="name" formControlName="name" required
                 placeholder="직원명을 입력해주세요."/>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzFor="residentRegistrationNumber" nzRequired>주민등록번호</nz-form-label>                        
+            <nz-form-label nzFor="residentRegistrationNumber" nzRequired>주민등록번호</nz-form-label>
             <input nz-input required
               nzId="residentRegistrationNumber" formControlName="residentRegistrationNumber"
-              mask="000000-0000000"  
-            />              
-          </nz-form-item>                                        
+              mask="000000-0000000"
+            />
+          </nz-form-item>
 
         </div>
       </div>

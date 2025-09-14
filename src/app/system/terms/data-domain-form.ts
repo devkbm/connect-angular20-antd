@@ -8,7 +8,6 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { DataDomainService } from './data-domain.service';
-import { DataDomain } from './data-domain.model';
 
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
@@ -21,6 +20,15 @@ export interface HtmlSelectOption {
   value: string | number;
   [key: string]: any;
 }
+
+export interface DataDomain {
+  domainId: string | null;
+  database: string | null;
+  domainName: string | null;
+  dataType: string | null;
+  comment: string | null;
+}
+
 
 
 @Component({

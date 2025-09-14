@@ -7,13 +7,20 @@ import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { WordService } from './word.service';
-import { Word } from './word.model';
-
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+
+
+export interface Word {
+  logicalName: string | null;
+  logicalNameEng: string | null;
+  physicalName: string | null;
+  comment: string | null;
+}
+
 
 @Component({
   selector: 'word-form',

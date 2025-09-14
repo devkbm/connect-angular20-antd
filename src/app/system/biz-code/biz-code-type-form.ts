@@ -10,7 +10,6 @@ import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { BizCodeType } from './biz-code-type.model';
 import { SelectControlModel } from 'src/app/core/model/select-control.model.ts';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -18,6 +17,15 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+
+
+export interface BizCodeType {
+  typeId: string | null;
+  typeName: string | null;
+  sequence: number | null;
+  bizType: string | null;
+  comment: string | null;
+}
 
 
 @Component({
