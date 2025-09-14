@@ -55,7 +55,7 @@ export interface PostList {
       (scrolledUp)="onScrollUp($event)"
     >
       <!--{{this.pageable | json}}-->
-      @for (post of posts; track post.postId; let idx = $index) {
+      @for (post of posts(); track post.postId; let idx = $index) {
         <post-list-row
           [post]="post"
           (viewClicked)="onViewClicked(post)"
@@ -78,7 +78,7 @@ export class PostListComponent {
 
   private http = inject(HttpClient);
 
-  posts: PostList[] = [];
+  posts = signal<PostList[]>([]);
 
   boardId = input<string>();
   height = signal<string>('calc(100vh - 154px)');
@@ -108,13 +108,14 @@ export class PostListComponent {
         )
         .subscribe(
           (model: ResponseSpringslice<PostList>) => {
-            if (model.numberOfElements > 0) {
-              if (model.first) this.posts = [];
 
-              this.posts.push(...model.content);
+            if (model.numberOfElements > 0) {
+              if (model.first) this.posts.set([]);
+
+              this.posts().push(...model.content);
               this.pageable ={page: model.number, isLast: model.last};
             } else {
-              this.posts = [];
+              this.posts.set([]);
             }
             //this.notifyService.changeMessage(model.message);
           }

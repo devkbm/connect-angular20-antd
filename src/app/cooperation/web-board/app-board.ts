@@ -212,11 +212,13 @@ export class BoardApp implements AfterViewInit {
 
   constructor() {
     window.addEventListener('message', (event) => {
+
       // 팝업에서 온 메시지가 아니라면 아무 작업도 하지 않는다.
       if (event.origin !== 'http://localhost:4200' && event.origin !== 'https://localhost:4200') {
         return;
       }
-      //console.log(event);
+
+      //console.log(event.data);
 
       // BoardId가 저장한 게시글의 boardId가 일치하면 재조회
       if (btoa(this.drawer.board.formDataId) === event.data) {
