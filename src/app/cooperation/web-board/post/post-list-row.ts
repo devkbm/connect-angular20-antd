@@ -2,23 +2,11 @@ import { Component, computed, input, output } from '@angular/core';
 
 import { GlobalProperty } from 'src/app/core/global-property';
 
+import { PostList } from './post-list';
+
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
-export interface PostList {
-  boardId: string;
-  postId: string;
-  writerId: string;
-  writerName: string;
-  writerImage: string;
-  title: string;
-  hitCount: number;
-  editable: boolean;
-  isAttachedFile: boolean;
-  fileCount: number;
-  isRead: boolean;
-}
 
 
 @Component({
@@ -31,18 +19,20 @@ export interface PostList {
   template: `
   <div>
     <nz-avatar class="avatar" nzShape="square" [nzSize]='24' [nzSrc]="imageSrc()"/>
-    {{post()?.writerName}} ·
-    <span nz-icon nzType="eye" nzTheme="outline"></span> {{post()?.hitCount}}
+
+    {{post()?.writerName}} · <span nz-icon nzType="eye" nzTheme="outline"></span> {{post()?.hitCount}}
+
     @if (post()?.fileCount ?? false) {
       · <span nz-icon nzType="file" nzTheme="outline"></span> {{post()?.fileCount}}
     }
+
     <br/>
     <!--
     {{article()?.isRead}} -
     {{article()?.articleId}} -
     -->
-    <a [class.text-bold]="!post()?.isRead" (click)="onViewClicked(post)">{{post()?.title}}</a>
-    &nbsp;
+    <a [class.text-bold]="!post()?.isRead" (click)="onViewClicked(post)">{{post()?.title}}</a> &nbsp;
+
     @if (post()?.editable) {
       <button nz-button nzShape="circle" (click)="onEditClicked(post)"><span nz-icon nzType="edit" nzTheme="outline"></span></button>
     }

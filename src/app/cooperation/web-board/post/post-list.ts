@@ -30,7 +30,6 @@ export interface PostList {
   isRead: boolean;
 }
 
-
 @Component({
   selector: 'post-list',
   imports: [

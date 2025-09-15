@@ -211,19 +211,19 @@ export class BoardApp implements AfterViewInit {
   private router = inject(Router);
 
   constructor() {
+
+    const origin = window.location.origin;
+
     window.addEventListener('message', (event) => {
 
-      // 팝업에서 온 메시지가 아니라면 아무 작업도 하지 않는다.
-      if (event.origin !== 'http://localhost:4200' && event.origin !== 'https://localhost:4200') {
-        return;
-      }
-
-      //console.log(event.data);
+      // 다른 origin에서 호출할 경우 무시함
+      if (event.origin !== origin) return;
 
       // BoardId가 저장한 게시글의 boardId가 일치하면 재조회
       if (btoa(this.drawer.board.formDataId) === event.data) {
         this.getArticleGridData();
       }
+
     }, false);
   }
 

@@ -61,7 +61,7 @@ export interface BoardHierarchy {
     NzButtonModule,
     NzDividerModule,
     NzTreeSelectModule,
-    NzSelectModule,    
+    NzSelectModule,
 ],
   template: `
     <div>{{fg.getRawValue() | json}}</div>
@@ -114,11 +114,11 @@ export interface BoardHierarchy {
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="boardType" nzRequired>게시판타입</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">              
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-select nzId="boardType" formControlName="boardType">
                 @for (option of boardTypeList; track option) {
                   <nz-option
-                    [nzLabel]="option.descriplabeltion"
+                    [nzLabel]="option.label"
                     [nzValue]="option.value">
                   </nz-option>
                 }
