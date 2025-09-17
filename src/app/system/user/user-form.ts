@@ -20,7 +20,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
 
-export interface User {
+export interface UserFormData {
   userId: string | null;
   companyCode: string | null;
   staffNo: string | null;
@@ -323,7 +323,7 @@ export class UserFormComponent implements OnInit {
     this.focusInput();
   }
 
-  modifyForm(formData: User): void {
+  modifyForm(formData: UserFormData): void {
     this.fg.controls.userId.setAsyncValidators(null);
     this.fg.controls.staffNo.disable();
 
@@ -339,11 +339,11 @@ export class UserFormComponent implements OnInit {
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<User>>(url, options).pipe(
+        .get<ResponseObject<UserFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<User>>('getUser', undefined))
         )
         .subscribe(
-          (model: ResponseObject<User>) => {
+          (model: ResponseObject<UserFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm();
 
             if (model.data?.imageBase64 != null) {
@@ -382,11 +382,11 @@ export class UserFormComponent implements OnInit {
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<User>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<UserFormData>>(url, this.fg.getRawValue(), options).pipe(
         //  catchError(this.handleError<ResponseObject<User>>('registerUser', undefined))
         )
         .subscribe(
-          (model: ResponseObject<User>) => {
+          (model: ResponseObject<UserFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -398,11 +398,11 @@ export class UserFormComponent implements OnInit {
     const options = getHttpOptions()
 
     this.http
-        .delete<ResponseObject<User>>(url, options).pipe(
+        .delete<ResponseObject<UserFormData>>(url, options).pipe(
      //     catchError(this.handleError<ResponseObject<User>>('deleteUser', undefined))
         )
         .subscribe(
-          (model: ResponseObject<User>) => {
+          (model: ResponseObject<UserFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
           }

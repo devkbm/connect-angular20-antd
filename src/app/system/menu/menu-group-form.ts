@@ -13,7 +13,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { MenuGroupFormValidatorService } from './validator/menu-group-form-validator.service';
 
-export interface MenuGroup {
+export interface MenuGroupFormData {
   menuGroupCode: string | null;
   menuGroupName: string | null;
   menuGroupUrl: string | null;
@@ -155,7 +155,7 @@ export class MenuGroupFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: MenuGroup): void {
+  modifyForm(formData: MenuGroupFormData): void {
     this.fg.controls.menuGroupCode.disable();
 
     this.fg.patchValue(formData);
@@ -170,11 +170,11 @@ export class MenuGroupFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<MenuGroup>>(url, options).pipe(
+        .get<ResponseObject<MenuGroupFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<MenuGroup>) => {
+          (model: ResponseObject<MenuGroupFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm()
           }
         )
@@ -195,11 +195,11 @@ export class MenuGroupFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<MenuGroup>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<MenuGroupFormData>>(url, this.fg.getRawValue(), options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<MenuGroup>) => {
+          (model: ResponseObject<MenuGroupFormData>) => {
             this.formSaved.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }
@@ -211,11 +211,11 @@ export class MenuGroupFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .delete<ResponseObject<MenuGroup>>(url, options).pipe(
+        .delete<ResponseObject<MenuGroupFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<MenuGroup>) => {
+          (model: ResponseObject<MenuGroupFormData>) => {
             this.formDeleted.emit(this.fg.getRawValue());
           }
         )

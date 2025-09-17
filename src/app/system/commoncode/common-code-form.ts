@@ -17,7 +17,7 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
-export interface CommonCode {
+export interface CommonCodeFormData {
   systemTypeCode: string | null;
   codeId: string | null;
   parentId: string | null;
@@ -339,7 +339,7 @@ export class CommonCodeFormComponent implements OnInit {
     this.focusInput();
   }
 
-  modifyForm(formData: CommonCode): void {
+  modifyForm(formData: CommonCodeFormData): void {
     this.fg.controls.codeId.disable();
     this.fg.controls.code.disable();
     this.fg.controls.systemTypeCode.disable();
@@ -356,7 +356,7 @@ export class CommonCodeFormComponent implements OnInit {
     this.commonCodeService
         .getCode(systemTypeCode, codeId)
         .subscribe(
-          (model: ResponseObject<CommonCode>) => {
+          (model: ResponseObject<CommonCodeFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             }
@@ -379,7 +379,7 @@ export class CommonCodeFormComponent implements OnInit {
     this.commonCodeService
         .save(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<CommonCode>) => {
+          (model: ResponseObject<CommonCodeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -390,7 +390,7 @@ export class CommonCodeFormComponent implements OnInit {
     this.commonCodeService
         .remove(this.fg.controls.systemTypeCode.value!, this.fg.controls.codeId.value!)
         .subscribe(
-          (model: ResponseObject<CommonCode>) => {
+          (model: ResponseObject<CommonCodeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
           }

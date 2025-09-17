@@ -18,7 +18,7 @@ import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
-export interface Term {
+export interface TermFormData {
   termId: string | null;
   system: string | null;
   term: string | null;
@@ -272,7 +272,7 @@ export class TermFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: Term) {
+  modifyForm(formData: TermFormData) {
     this.fg.controls.termId.disable();
     this.fg.controls.columnName.disable();
     this.fg.controls.system.disable();
@@ -289,7 +289,7 @@ export class TermFormComponent implements OnInit, AfterViewInit {
     this.service
         .get(id)
         .subscribe(
-          (model: ResponseObject<Term>) => {
+          (model: ResponseObject<TermFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             } else {
@@ -314,7 +314,7 @@ export class TermFormComponent implements OnInit, AfterViewInit {
     this.service
         .save(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<Term>) => {
+          (model: ResponseObject<TermFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -325,7 +325,7 @@ export class TermFormComponent implements OnInit, AfterViewInit {
     this.service
         .delete(this.fg.controls.termId.value!)
         .subscribe(
-          (model: ResponseObject<Term>) => {
+          (model: ResponseObject<TermFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
           }

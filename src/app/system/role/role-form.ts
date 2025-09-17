@@ -16,7 +16,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { RoleFormValidatorService } from './validator/role-form-validator.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
-export interface Role {
+export interface RoleFormData {
   roleCode: string | null;
   roleName: string | null;
   description: string | null;
@@ -255,7 +255,7 @@ export class RoleFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: Role): void {
+  modifyForm(formData: RoleFormData): void {
     this.fg.controls.roleCode.setAsyncValidators(null);
     this.fg.controls.roleCode.disable();
 
@@ -271,12 +271,12 @@ export class RoleFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<Role>>(url, options)
+        .get<ResponseObject<RoleFormData>>(url, options)
         .pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Role>) => {
+          (model: ResponseObject<RoleFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm()
           }
         )
@@ -297,11 +297,11 @@ export class RoleFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<Role>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<RoleFormData>>(url, this.fg.getRawValue(), options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('registerAuthority', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Role>) => {
+          (model: ResponseObject<RoleFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -313,11 +313,11 @@ export class RoleFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .delete<ResponseObject<Role>>(url, options).pipe(
+        .delete<ResponseObject<RoleFormData>>(url, options).pipe(
         //  catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Role>) => {
+          (model: ResponseObject<RoleFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
           }

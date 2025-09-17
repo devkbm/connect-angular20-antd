@@ -12,7 +12,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
-export interface Company {
+export interface CompanyFormData {
   /**
    * 회사코드
    */
@@ -180,7 +180,7 @@ export class CompanyFormComponent  {
     this.focusInput();
   }
 
-  modifyForm(formData: Company) {
+  modifyForm(formData: CompanyFormData) {
     this.fg.patchValue(formData);
 
     this.fg.controls.companyCode.disable();
@@ -194,11 +194,11 @@ export class CompanyFormComponent  {
     const url = GlobalProperty.serverUrl() + `/api/system/company/${id}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<Company>>(url, options).pipe(
+    this.http.get<ResponseObject<CompanyFormData>>(url, options).pipe(
         //  catchError(this.handleError<ResponseObject<Company>>('get', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Company>) => {
+          (model: ResponseObject<CompanyFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm()
           }
         )
@@ -219,11 +219,11 @@ export class CompanyFormComponent  {
     const url = GlobalProperty.serverUrl() + `/api/system/company`;
     const options = getHttpOptions();
 
-    this.http.post<ResponseObject<Company>>(url, this.fg.getRawValue(), options).pipe(
+    this.http.post<ResponseObject<CompanyFormData>>(url, this.fg.getRawValue(), options).pipe(
          // catchError(this.handleError<ResponseObject<Company>>('save', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Company>) => {
+          (model: ResponseObject<CompanyFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -234,11 +234,11 @@ export class CompanyFormComponent  {
     const url = GlobalProperty.serverUrl() + `/api/system/company/${this.fg.controls.companyCode.value!}`;
     const options = getHttpOptions();
 
-    this.http.delete<ResponseObject<Company>>(url, options).pipe(
+    this.http.delete<ResponseObject<CompanyFormData>>(url, options).pipe(
        //   catchError(this.handleError<ResponseObject<Company>>('delete', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Company>) => {
+          (model: ResponseObject<CompanyFormData>) => {
           this.notifyService.changeMessage(model.message);
           this.formDeleted.emit(this.fg.getRawValue());
           }

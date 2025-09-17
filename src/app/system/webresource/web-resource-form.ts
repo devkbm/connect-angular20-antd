@@ -20,7 +20,7 @@ export interface ResouceTypeEnum {
   value: string;
 }
 
-export interface WebResource {
+export interface WebResourceFormData {
   resourceId: string | null;
   resourceName: string | null;
   resourceType: string | null;
@@ -177,7 +177,7 @@ export class WebResourceFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: WebResource): void {
+  modifyForm(formData: WebResourceFormData): void {
     this.fg.controls.resourceId.disable();
 
     this.fg.patchValue(formData);
@@ -191,10 +191,10 @@ export class WebResourceFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/webresource/${id}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<WebResource>>(url, options).pipe(
+    this.http.get<ResponseObject<WebResourceFormData>>(url, options).pipe(
       //catchError((err) => Observable.throw(err))
     ).subscribe(
-      (model: ResponseObject<WebResource>) => {
+      (model: ResponseObject<WebResourceFormData>) => {
         model.data ? this.modifyForm(model.data) : this.newForm();
       }
     );
@@ -214,10 +214,10 @@ export class WebResourceFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/webresource`;
     const options = getHttpOptions();
 
-    this.http.post<ResponseObject<WebResource>>(url, this.fg.getRawValue(), options).pipe(
+    this.http.post<ResponseObject<WebResourceFormData>>(url, this.fg.getRawValue(), options).pipe(
       //catchError((err) => Observable.throw(err))
     ).subscribe(
-      (model: ResponseObject<WebResource>) => {
+      (model: ResponseObject<WebResourceFormData>) => {
         this.notifyService.changeMessage(model.message);
         this.formSaved.emit(this.fg.getRawValue());
       }
@@ -229,10 +229,10 @@ export class WebResourceFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/webresource/${id}`;
     const options = getHttpOptions();
 
-    this.http.delete<ResponseObject<WebResource>>(url, options).pipe(
+    this.http.delete<ResponseObject<WebResourceFormData>>(url, options).pipe(
       //catchError((err) => Observable.throw(err))
     ).subscribe(
-      (model: ResponseObject<WebResource>) => {
+      (model: ResponseObject<WebResourceFormData>) => {
         this.notifyService.changeMessage(model.message);
         this.formDeleted.emit(this.fg.getRawValue());
       }

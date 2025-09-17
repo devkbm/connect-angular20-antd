@@ -21,7 +21,7 @@ export interface HtmlSelectOption {
   [key: string]: any;
 }
 
-export interface DataDomain {
+export interface DataDomainFormData {
   domainId: string | null;
   database: string | null;
   domainName: string | null;
@@ -188,7 +188,7 @@ export class DataDomainFormComponent implements OnInit, AfterViewInit, OnChanges
     this.focusInput();
   }
 
-  modifyForm(formData: DataDomain) {
+  modifyForm(formData: DataDomainFormData) {
     this.fg.controls.database.disable();
     this.fg.controls.domainName.disable();
 
@@ -203,7 +203,7 @@ export class DataDomainFormComponent implements OnInit, AfterViewInit, OnChanges
     this.service
         .get(id)
         .subscribe(
-          (model: ResponseObject<DataDomain>) => {
+          (model: ResponseObject<DataDomainFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             } else {
@@ -229,7 +229,7 @@ export class DataDomainFormComponent implements OnInit, AfterViewInit, OnChanges
     this.service
         .save(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<DataDomain>) => {
+          (model: ResponseObject<DataDomainFormData>) => {
             this.formSaved.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }
@@ -240,7 +240,7 @@ export class DataDomainFormComponent implements OnInit, AfterViewInit, OnChanges
     this.service
         .delete(this.fg.controls.domainId.value!)
         .subscribe(
-          (model: ResponseObject<DataDomain>) => {
+          (model: ResponseObject<DataDomainFormData>) => {
             this.formDeleted.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }

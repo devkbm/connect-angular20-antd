@@ -18,7 +18,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { DeptFormValidatorService } from './validator/dept-form-validator.service';
 
-export interface Dept {
+export interface DeptFormData {
   parentDeptCode: string | null;
   //deptId: string | null;
   deptCode: string | null;
@@ -340,7 +340,7 @@ export class DeptFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: Dept): void {
+  modifyForm(formData: DeptFormData): void {
     this.getDeptHierarchy();
 
     //this.fg.get('deptId')?.setAsyncValidators(null);
@@ -357,11 +357,11 @@ export class DeptFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/dept/${id}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<Dept>>(url, options).pipe(
+    this.http.get<ResponseObject<DeptFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Dept>>('getDept', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Dept>) => {
+          (model: ResponseObject<DeptFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             } else {
@@ -386,11 +386,11 @@ export class DeptFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/dept`;
     const options = getHttpOptions();
 
-    this.http.post<ResponseObject<Dept>>(url, this.fg.getRawValue(), options).pipe(
+    this.http.post<ResponseObject<DeptFormData>>(url, this.fg.getRawValue(), options).pipe(
         //  catchError(this.handleError<ResponseObject<Dept>>('saveDept', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Dept>) => {
+          (model: ResponseObject<DeptFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -401,11 +401,11 @@ export class DeptFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/dept/${this.fg.controls.deptCode.value!}`;
     const options = getHttpOptions();
 
-    this.http.delete<ResponseObject<Dept>>(url, options).pipe(
+    this.http.delete<ResponseObject<DeptFormData>>(url, options).pipe(
         //  catchError(this.handleError<ResponseObject<Dept>>('saveDept', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Dept>) => {
+          (model: ResponseObject<DeptFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }

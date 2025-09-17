@@ -16,13 +16,13 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 export interface DateInfo {
   date: Date | null;
   dayOfWeek: string | null;
-  holiday: Holiday | null;
+  holiday: HolidayFormData | null;
   saturDay: boolean;
   sunday: boolean;
   weekend: boolean;
 }
 
-export interface Holiday {
+export interface HolidayFormData {
   date: Date | null;
   holidayName: string | null;
   comment: string | null;
@@ -139,7 +139,7 @@ export class HolidayFormComponent implements AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: Holiday): void {
+  modifyForm(formData: HolidayFormData): void {
     this.fg.patchValue(formData);
 
     this.focusInput();
@@ -156,11 +156,11 @@ export class HolidayFormComponent implements AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<Holiday>>(url, options).pipe(
+        .get<ResponseObject<HolidayFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Holiday>) => {
+          (model: ResponseObject<HolidayFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm(date);
           }
       )
@@ -181,11 +181,11 @@ export class HolidayFormComponent implements AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<Holiday>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<HolidayFormData>>(url, this.fg.getRawValue(), options).pipe(
           //catchError(this.handleError<ResponseObject<Holiday>>('saveHoliday', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Holiday>) => {
+          (model: ResponseObject<HolidayFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -199,11 +199,11 @@ export class HolidayFormComponent implements AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .delete<ResponseObject<Holiday>>(url, options).pipe(
+        .delete<ResponseObject<HolidayFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Holiday>>('deleteHoliday', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Holiday>) => {
+          (model: ResponseObject<HolidayFormData>) => {
           this.notifyService.changeMessage(model.message);
           this.formDeleted.emit(this.fg.getRawValue());
           }

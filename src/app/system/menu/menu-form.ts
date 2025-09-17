@@ -45,7 +45,7 @@ export interface MenuHierarchy {
   children: MenuHierarchy[]
 }
 
-export interface Menu {
+export interface MenuFormData {
   menuGroupCode: string | null;
   menuCode: string | null;
   menuName: string | null;
@@ -304,7 +304,7 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: Menu): void {
+  modifyForm(formData: MenuFormData): void {
 
     console.log(formData.menuGroupCode!);
     this.getMenuHierarchy(formData.menuGroupCode!);
@@ -322,11 +322,11 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<Menu>>(url, options).pipe(
+        .get<ResponseObject<MenuFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Menu>) => {
+          (model: ResponseObject<MenuFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             } else {
@@ -353,11 +353,11 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<Menu>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<MenuFormData>>(url, this.fg.getRawValue(), options).pipe(
           //catchError((err) => Observable.throw(err))
         )
         .subscribe(
-          (model: ResponseObject<Menu>) => {
+          (model: ResponseObject<MenuFormData>) => {
             this.formSaved.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }
@@ -372,11 +372,11 @@ export class MenuFormComponent implements OnInit, AfterViewInit {
     const options = getHttpOptions();
 
     this.http
-        .delete<ResponseObject<Menu>>(url, options).pipe(
+        .delete<ResponseObject<MenuFormData>>(url, options).pipe(
           //catchError(this.handleError<ResponseObject<Role>>('getRole', undefined))
         )
         .subscribe(
-          (model: ResponseObject<Menu>) => {
+          (model: ResponseObject<MenuFormData>) => {
             this.formDeleted.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }

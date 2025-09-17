@@ -14,7 +14,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
 
 
-export interface Word {
+export interface WordFormData {
   logicalName: string | null;
   logicalNameEng: string | null;
   physicalName: string | null;
@@ -153,7 +153,7 @@ export class WordFormComponent implements OnInit, AfterViewInit, OnChanges {
     this.focusInput();
   }
 
-  modifyForm(formData: Word) {
+  modifyForm(formData: WordFormData) {
 
     this.fg.controls.logicalName.disable();
     this.fg.controls.physicalName.disable();
@@ -169,7 +169,7 @@ export class WordFormComponent implements OnInit, AfterViewInit, OnChanges {
     this.service
         .get(id)
         .subscribe(
-          (model: ResponseObject<Word>) => {
+          (model: ResponseObject<WordFormData>) => {
             if ( model.data ) {
               this.modifyForm(model.data);
             } else {
@@ -194,7 +194,7 @@ export class WordFormComponent implements OnInit, AfterViewInit, OnChanges {
     this.service
         .save(this.fg.getRawValue())
         .subscribe(
-          (model: ResponseObject<Word>) => {
+          (model: ResponseObject<WordFormData>) => {
             this.formSaved.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }
@@ -205,7 +205,7 @@ export class WordFormComponent implements OnInit, AfterViewInit, OnChanges {
     this.service
         .delete(this.fg.controls.logicalName.value!)
         .subscribe(
-          (model: ResponseObject<Word>) => {
+          (model: ResponseObject<WordFormData>) => {
             this.formDeleted.emit(this.fg.getRawValue());
             this.notifyService.changeMessage(model.message);
           }
