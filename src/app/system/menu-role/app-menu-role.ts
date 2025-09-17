@@ -4,15 +4,15 @@ import { FormsModule } from '@angular/forms';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { MenuGroupGridComponent } from '../menu/menu-group-grid';
-import { RoleGridComponent } from '../role/role-grid';
-import { RoleFormComponent } from '../role/role-form';
+import { MenuGroupGrid } from '../menu/menu-group-grid';
+import { RoleGrid } from '../role/role-grid';
+import { RoleForm } from '../role/role-form';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { MenuGridComponent } from '../menu/menu-grid.';
-import { MenuFormComponent } from '../menu/menu-form';
-import { MenuGroupFormComponent } from '../menu/menu-group-form';
-import { MenuRoleTreeComponent } from './menu-role-tree';
+import { MenuGrid } from '../menu/menu-grid.';
+import { MenuForm } from '../menu/menu-form';
+import { MenuGroupForm } from '../menu/menu-group-form';
+import { MenuRoleTree } from './menu-role-tree';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 
@@ -47,13 +47,13 @@ export interface MenuGroup {
     NzSelectModule,
     NzDrawerModule,
 
-    MenuGroupGridComponent,
-    MenuGroupFormComponent,
-    MenuGridComponent,
-    MenuFormComponent,
-    RoleGridComponent,
-    RoleFormComponent,
-    MenuRoleTreeComponent
+    MenuGroupGrid,
+    MenuGroupForm,
+    MenuGrid,
+    MenuForm,
+    RoleGrid,
+    RoleForm,
+    MenuRoleTree
   ],
   template: `
     <button nz-button (click)="newRole()">신규 롤</button>
@@ -231,9 +231,9 @@ export class MenuRoleApp {
 
   private http = inject(HttpClient);
 
-  roleGrid = viewChild.required(RoleGridComponent);
-  menuGroupGrid = viewChild.required(MenuGroupGridComponent);
-  menuGrid = viewChild.required(MenuGridComponent);
+  roleGrid = viewChild.required(RoleGrid);
+  menuGroupGrid = viewChild.required(MenuGroupGrid);
+  menuGrid = viewChild.required(MenuGrid);
 
   drawer: {
     menuGroup: { visible: boolean, formDataId: any },

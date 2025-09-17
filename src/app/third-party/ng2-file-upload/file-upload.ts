@@ -80,7 +80,7 @@ export interface UploadedFile {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FileUploadComponent {
+export class FileUpload {
 
   uploader: FileUploader = new FileUploader({
     url: GlobalProperty.serverUrl() + '/api/system/file',

@@ -46,7 +46,7 @@ export interface DeptHierarchy {
   `,
   styles: ['']
 })
-export class CheckableDeptTreeComponent {
+export class CheckableDeptTree {
 
   private http = inject(HttpClient);
 

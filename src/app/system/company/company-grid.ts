@@ -13,7 +13,7 @@ ModuleRegistry.registerModules([
 ]);
 
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
+import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -68,7 +68,7 @@ export interface Company {
   `,
   styles: []
 })
-export class CompanyGridComponent extends AgGridCommon {
+export class CompanyGrid extends AgGridCommon {
 
   private http = inject(HttpClient);
 
@@ -83,7 +83,7 @@ export class CompanyGridComponent extends AgGridCommon {
       headerName: '',
       width: 40,
       cellStyle: {'text-align': 'center', 'padding': '0px', 'margin': '0px'},
-      cellRenderer: ButtonRendererComponent,
+      cellRenderer: ButtonRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',

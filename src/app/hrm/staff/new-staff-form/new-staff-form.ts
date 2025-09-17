@@ -87,7 +87,7 @@ export interface NewStaff {
   `,
   styles: []
 })
-export class NewStaffFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class NewStaffForm implements OnInit, AfterViewInit, OnChanges {
 
   //staffNo = viewChild.required<NzInputTextComponent>('staffNo');
 

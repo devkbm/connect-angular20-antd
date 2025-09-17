@@ -1,16 +1,16 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { HolidayFormComponent } from './holiday-form';
+import { HolidayForm } from './holiday-form';
 
 @Component({
   selector: 'holiday-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    HolidayFormComponent
+    NzCrudButtonGroup,
+    HolidayForm
   ],
   template: `
     <nz-drawer
@@ -43,12 +43,12 @@ import { HolidayFormComponent } from './holiday-form';
   `,
   styles: []
 })
-export class HolidayFormDrawerComponent {
+export class HolidayFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<HolidayFormComponent>(HolidayFormComponent);
+  form = viewChild.required<HolidayForm>(HolidayForm);
 
   save() {
     this.form().save();

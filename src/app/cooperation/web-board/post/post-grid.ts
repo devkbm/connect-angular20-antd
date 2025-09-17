@@ -10,7 +10,7 @@ ModuleRegistry.registerModules([
   RowSelectionModule,
 ]);
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
+import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
@@ -60,7 +60,7 @@ export interface Post {
     </ag-grid-angular>
   `
 })
-export class PostGridComponent extends AgGridCommon implements OnInit {
+export class PostGrid extends AgGridCommon implements OnInit {
 
   private notifyService = inject(NotifyService);
   private http = inject(HttpClient);
@@ -108,7 +108,7 @@ export class PostGridComponent extends AgGridCommon implements OnInit {
       headerName: '',
       width: 40,
       cellStyle: {'text-align': 'center', 'padding': '0px'},
-      cellRenderer: ButtonRendererComponent,
+      cellRenderer: ButtonRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',

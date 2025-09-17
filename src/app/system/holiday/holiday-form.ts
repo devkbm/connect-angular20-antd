@@ -97,7 +97,7 @@ export interface HolidayFormData {
   `,
   styles: []
 })
-export class HolidayFormComponent implements AfterViewInit {
+export class HolidayForm implements AfterViewInit {
 
   private notifyService = inject(NotifyService);
   private renderer = inject(Renderer2);

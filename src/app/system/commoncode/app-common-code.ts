@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { ResponseList } from 'src/app/core/model/response-list';
 
-import { CommonCodeFormComponent } from './common-code-form';
-import { CommonCodeTreeComponent } from './common-code-tree';
+import { CommonCodeForm } from './common-code-form';
+import { CommonCodeTree } from './common-code-tree';
 import { CommonCodeService } from './common-code.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -39,9 +39,9 @@ export class SystemTypeEnum {
     NzInputModule,
     NzDividerModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    CommonCodeTreeComponent,
-    CommonCodeFormComponent,
+    NzSearchArea,
+    CommonCodeTree,
+    CommonCodeForm,
     NgPage
 ],
   template: `
@@ -144,8 +144,8 @@ export class SystemTypeEnum {
 })
 export class CommonCodeApp implements OnInit, AfterViewInit {
 
-  tree = viewChild.required(CommonCodeTreeComponent);
-  form = viewChild.required(CommonCodeFormComponent);
+  tree = viewChild.required(CommonCodeTree);
+  form = viewChild.required(CommonCodeForm);
 
   systemTypeCodeList: SystemTypeEnum[] = [];
 

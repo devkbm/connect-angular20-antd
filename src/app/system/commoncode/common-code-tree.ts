@@ -41,7 +41,7 @@ export class CommonCodeHierarchy {
   `,
   styles: ['']
 })
-export class CommonCodeTreeComponent implements OnInit {
+export class CommonCodeTree implements OnInit {
 
   treeComponent = viewChild.required(NzTreeComponent);
 

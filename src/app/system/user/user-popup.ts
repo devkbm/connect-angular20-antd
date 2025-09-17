@@ -43,7 +43,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     }
   `]
 })
-export class UserPopupComponent implements OnInit {
+export class UserPopup implements OnInit {
 
     /**
      * 아바타 이미지 경로

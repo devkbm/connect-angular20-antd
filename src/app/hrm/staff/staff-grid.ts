@@ -60,7 +60,7 @@ export interface Staff {
   `,
   styles: []
 })
-export class StaffGridComponent extends AgGridCommon {
+export class StaffGrid extends AgGridCommon {
 
   private http = inject(HttpClient);
 

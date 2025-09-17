@@ -14,7 +14,7 @@ import { DataDomainService } from './data-domain.service';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
@@ -58,7 +58,7 @@ export interface Word {
     NzInputModule,
     NzSelectModule,
 
-    NzCrudButtonGroupComponent
+    NzCrudButtonGroup
   ],
   template: `
     {{fg.value | json}}
@@ -214,7 +214,7 @@ export interface Word {
 
   `]
 })
-export class TermFormComponent implements OnInit, AfterViewInit {
+export class TermForm implements OnInit, AfterViewInit {
   systemTypeList: any;
   wordList: Word[] = [];
   dataDomainList: DataDomain[] = [];

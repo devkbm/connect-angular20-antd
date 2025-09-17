@@ -16,7 +16,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -56,7 +56,7 @@ export interface AttendanceDate {
     NzDividerModule,
     NzDatePickerModule,
 
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
     DutyDateListComponent,
   ],
   template: `

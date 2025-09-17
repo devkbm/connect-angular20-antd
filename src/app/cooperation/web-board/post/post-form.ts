@@ -8,9 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzUploadChangeParam, NzUploadComponent, NzUploadFile } from 'ng-zorro-antd/upload';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { NzInputCkeditorComponent } from 'src/app/third-party/ckeditor/nz-input-ckeditor.component';
-import { NzFileUploadComponent } from 'src/app/third-party/ng-zorro/nz-file-upload/nz-file-upload.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { NzInputCkeditor } from 'src/app/third-party/ckeditor/nz-input-ckeditor';
+import { NzFileUpload } from 'src/app/third-party/ng-zorro/nz-file-upload/nz-file-upload';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -18,7 +18,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 
 //import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
-import { PostFileUploadComponent } from './post-file-upload';
+import { PostFileUpload } from './post-file-upload';
 import { SessionManager } from 'src/app/core/session-manager';
 import { HttpClient } from '@angular/common/http';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -45,10 +45,10 @@ export interface Post {
     ReactiveFormsModule,
     NzFormModule,
     NzInputModule,
-    NzInputCkeditorComponent,
-    NzCrudButtonGroupComponent,
+    NzInputCkeditor,
+    NzCrudButtonGroup,
     //NzFileUploadComponent,
-    PostFileUploadComponent
+    PostFileUpload
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -132,7 +132,7 @@ export interface Post {
 
   `]
 })
-export class PostFormComponent implements AfterViewInit {
+export class PostForm implements AfterViewInit {
   //public Editor = ClassicEditor;
 
   private renderer = inject(Renderer2);
@@ -146,7 +146,7 @@ export class PostFormComponent implements AfterViewInit {
 
   formElement = viewChild.required<ElementRef>('form');
   ckEditor = viewChild.required(CKEditorComponent);
-  uploader = viewChild.required(PostFileUploadComponent);
+  uploader = viewChild.required(PostFileUpload);
   uploaderParams = '';
 
   boardId = input<string>('');

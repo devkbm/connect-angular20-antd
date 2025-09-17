@@ -2,15 +2,15 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { BizCodeFormComponent } from "./biz-code-form";
-import { NzCrudButtonGroupComponent } from "src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component";
+import { BizCodeForm } from "./biz-code-form";
+import { NzCrudButtonGroup } from "src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group";
 
 @Component({
   selector: 'biz-code-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    BizCodeFormComponent
+    NzCrudButtonGroup,
+    BizCodeForm
 ],
   template: `
     <nz-drawer
@@ -42,12 +42,12 @@ import { NzCrudButtonGroupComponent } from "src/app/third-party/ng-zorro/nz-crud
   `,
   styles: []
 })
-export class BizCodeFormDrawerComponent {
+export class BizCodeFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<BizCodeFormComponent>(BizCodeFormComponent);
+  form = viewChild.required<BizCodeForm>(BizCodeForm);
 
   save() {
     this.form().save();

@@ -25,7 +25,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     }
   `]
 })
-export class ButtonRendererComponent implements ICellRendererAngularComp {
+export class ButtonRenderer implements ICellRendererAngularComp {
 
   params: any;
   label: string = '';

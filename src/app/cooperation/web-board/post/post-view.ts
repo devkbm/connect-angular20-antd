@@ -8,9 +8,9 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { SessionManager } from 'src/app/core/session-manager';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
-import { NzFileDownloadComponent } from 'src/app/third-party/ng-zorro/nz-file-download/nz-file-download.component';
+import { NzFileDownload } from 'src/app/third-party/ng-zorro/nz-file-download/nz-file-download';
 
-import { PostFileUploadComponent } from './post-file-upload';
+import { PostFileUpload } from './post-file-upload';
 
 
 export interface Post {
@@ -36,8 +36,8 @@ export interface Post {
   imports: [
     TrustHtmlPipe,
     NzPageHeaderModule,
-    NzFileDownloadComponent,
-    PostFileUploadComponent
+    NzFileDownload,
+    PostFileUpload
   ],
   template: `
 <nz-page-header nzTitle="제목" [nzSubtitle]="post()?.title">
@@ -62,7 +62,7 @@ nz-page-header {
 }
   `
 })
-export class PostViewComponent {
+export class PostView {
 
   private http = inject(HttpClient);
 

@@ -1,16 +1,16 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { MenuFormComponent } from './menu-form';
+import { MenuForm } from './menu-form';
 
 @Component({
   selector: 'menu-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    MenuFormComponent
+    NzCrudButtonGroup,
+    MenuForm
   ],
   template: `
     <nz-drawer
@@ -43,12 +43,12 @@ import { MenuFormComponent } from './menu-form';
   `,
   styles: []
 })
-export class MenuFormDrawerComponent {
+export class MenuFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<MenuFormComponent>(MenuFormComponent);
+  form = viewChild.required<MenuForm>(MenuForm);
 
   save() {
     this.form().save();

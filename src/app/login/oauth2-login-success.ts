@@ -20,7 +20,7 @@ import { getHttpOptions } from '../core/http/http-utils';
     }
   `
 })
-export class Oauth2LoginSuccessComponent implements OnInit {
+export class Oauth2LoginSuccess implements OnInit {
 
   private route = inject(ActivatedRoute);
   private router = inject(Router);

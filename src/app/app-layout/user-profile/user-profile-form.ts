@@ -85,7 +85,7 @@ import { SessionManager } from 'src/app/core/session-manager';
     </button>
   `
 })
-export class UserProfileFormComponent {
+export class UserProfileForm {
 
   private http = inject(HttpClient);
 

@@ -63,7 +63,7 @@ export interface Holiday {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CalendarFullcalendarComponent {
+export class CalendarFullcalendar {
 
   private http = inject(HttpClient);
 

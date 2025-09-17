@@ -143,7 +143,7 @@ export interface StaffFamily {
   `,
   styles: []
 })
-export class StaffFamilyFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class StaffFamilyForm implements OnInit, AfterViewInit, OnChanges {
 
   /**
    * 가족관계 - HR0008

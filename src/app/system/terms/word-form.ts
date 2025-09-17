@@ -11,7 +11,7 @@ import { WordService } from './word.service';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
 
 export interface WordFormData {
@@ -31,7 +31,7 @@ export interface WordFormData {
     NzFormModule,
     NzInputModule,
 
-    NzCrudButtonGroupComponent
+    NzCrudButtonGroup
   ],
   template: `
     {{formDataId | json}} - {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -107,7 +107,7 @@ export interface WordFormData {
   `,
   styles: [``]
 })
-export class WordFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class WordForm implements OnInit, AfterViewInit, OnChanges {
 
   private service = inject(WordService);
   private notifyService = inject(NotifyService);

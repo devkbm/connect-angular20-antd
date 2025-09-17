@@ -2,8 +2,8 @@ import { AfterViewInit, Component, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { DeptTreeComponent } from './dept-tree';
-import { DeptFormComponent } from './dept-form';
+import { DeptTree } from './dept-tree';
+import { DeptForm } from './dept-form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -12,9 +12,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSplitterModule } from 'ng-zorro-antd/splitter';
 
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 import { NgPage } from "src/app/core/app/nz-page";
-import { DeptSearchComponent } from "./dept-search";
+import { DeptSearch } from "./dept-search";
 
 @Component({
   selector: 'dept-app',
@@ -29,10 +29,10 @@ import { DeptSearchComponent } from "./dept-search";
     NzDividerModule,
     NzSplitterModule,
     NzPageHeaderCustom,
-    DeptTreeComponent,
-    DeptFormComponent,
+    DeptTree,
+    DeptForm,
     NgPage,
-    DeptSearchComponent
+    DeptSearch
 ],
   template: `
 <ng-template #header>
@@ -167,8 +167,8 @@ import { DeptSearchComponent } from "./dept-search";
 })
 export class DeptApp implements OnInit, AfterViewInit {
 
-  tree = viewChild.required(DeptTreeComponent);
-  form = viewChild.required(DeptFormComponent);
+  tree = viewChild.required(DeptTree);
+  form = viewChild.required(DeptForm);
 
   queryValue = '';
 

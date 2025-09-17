@@ -136,7 +136,7 @@ export interface CompanyFormData {
   styles: `
   `
 })
-export class CompanyFormComponent  {
+export class CompanyForm  {
 
   private notifyService = inject(NotifyService);
   private renderer = inject(Renderer2);

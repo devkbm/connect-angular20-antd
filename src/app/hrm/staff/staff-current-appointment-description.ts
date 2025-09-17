@@ -47,7 +47,7 @@ export interface StaffCurrentAppointment {
   `,
   styles: []
 })
-export class StaffCurrentAppointmentDescriptionComponent {
+export class StaffCurrentAppointmentDescription {
 
   staffNo = input<string | undefined>('');
 

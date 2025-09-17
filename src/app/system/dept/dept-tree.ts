@@ -46,7 +46,7 @@ export interface DeptHierarchy {
   `,
   styles: ['']
 })
-export class DeptTreeComponent {
+export class DeptTree {
 
   treeComponent = viewChild.required(NzTreeComponent);
 

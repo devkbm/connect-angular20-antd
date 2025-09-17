@@ -29,7 +29,7 @@ import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
   `,
   imports: [NzUploadModule]
 })
-export class NzFileDownloadComponent {
+export class NzFileDownload {
   height = input<string>('100%');
   fileList = input<NzUploadFile[]>([]);
 

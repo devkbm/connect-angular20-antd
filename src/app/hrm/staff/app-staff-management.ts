@@ -2,16 +2,16 @@ import { Component, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { StaffRegistFormComponent } from './staff-regist-form';
-import { StaffGridComponent } from './staff-grid';
-import { StaffAppointmentRecordGridComponent } from './staff-appointment-record/staff-appointment-record-grid';
-import { StaffFamilyGridComponent } from './staff-family/staff-family-grid';
-import { StaffLicenseGridComponent } from './staff-license/staff-license-grid';
-import { StaffSchoolCareerGridComponent } from './staff-school-career/staff-school-career-grid';
-import { StaffCurrentAppointmentDescriptionComponent } from './staff-current-appointment-description';
-import { StaffCardListComponent } from './staff-card/staff-card-list';
-import { StaffContactFormComponent } from './staff-contact/staff-contact-form';
-import { StaffDutyResponsibilityListComponent } from './staff-duty-responsibility/staff-duty-responsibility-list';
+import { StaffRegistForm } from './staff-regist-form';
+import { StaffGrid } from './staff-grid';
+import { StaffAppointmentRecordGrid } from './staff-appointment-record/staff-appointment-record-grid';
+import { StaffFamilyGrid } from './staff-family/staff-family-grid';
+import { StaffLicenseGrid } from './staff-license/staff-license-grid';
+import { StaffSchoolCareerGrid } from './staff-school-career/staff-school-career-grid';
+import { StaffCurrentAppointmentDescription } from './staff-current-appointment-description';
+import { StaffCardList } from './staff-card/staff-card-list';
+import { StaffContactForm } from './staff-contact/staff-contact-form';
+import { StaffDutyResponsibilityList } from './staff-duty-responsibility/staff-duty-responsibility-list';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -22,15 +22,15 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 import { NgPage } from "src/app/core/app/nz-page";
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzButtonExcelUploadComponent } from "src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzButtonExcelUpload } from "src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload";
 
-import { NewStaffFormDrawerComponent } from './new-staff-form/new-staff-form-drawer';
-import { StaffAppointmentRecordFormDrawerComponent } from './staff-appointment-record/staff-appointment-record-form-drawer';
-import { StaffDutyResponsibilityFormDrawerComponent } from './staff-duty-responsibility/staff-duty-responsibility-form-drawer';
-import { StaffFamilyFormDrawerComponent } from './staff-family/staff-family-form-drawer';
-import { StaffLicenseFormDrawerComponent } from './staff-license/staff-license-form-drawer';
-import { StaffSchoolCareerFormDrawerComponent } from './staff-school-career/staff-school-career-form-drawer';
+import { NewStaffFormDrawer } from './new-staff-form/new-staff-form-drawer';
+import { StaffAppointmentRecordFormDrawer } from './staff-appointment-record/staff-appointment-record-form-drawer';
+import { StaffDutyResponsibilityFormDrawer } from './staff-duty-responsibility/staff-duty-responsibility-form-drawer';
+import { StaffFamilyFormDrawer } from './staff-family/staff-family-form-drawer';
+import { StaffLicenseFormDrawer } from './staff-license/staff-license-form-drawer';
+import { StaffSchoolCareerFormDrawer } from './staff-school-career/staff-school-career-form-drawer';
 
 export interface StaffAppointmentRecord {
   staffNo: string | null;
@@ -107,24 +107,24 @@ export interface StaffSchoolCareer {
     NzButtonModule,
     NzIconModule,
     NzPageHeaderCustom,
-    StaffAppointmentRecordFormDrawerComponent,
-    StaffAppointmentRecordGridComponent,
-    StaffFamilyFormDrawerComponent,
-    StaffFamilyGridComponent,
-    NewStaffFormDrawerComponent,
-    StaffContactFormComponent,
-    StaffDutyResponsibilityFormDrawerComponent,
-    StaffDutyResponsibilityListComponent,
-    StaffLicenseFormDrawerComponent,
-    StaffLicenseGridComponent,
-    StaffSchoolCareerFormDrawerComponent,
-    StaffSchoolCareerGridComponent,
-    StaffRegistFormComponent,
-    StaffGridComponent,
-    StaffCurrentAppointmentDescriptionComponent,
-    StaffCardListComponent,
+    StaffAppointmentRecordFormDrawer,
+    StaffAppointmentRecordGrid,
+    StaffFamilyFormDrawer,
+    StaffFamilyGrid,
+    NewStaffFormDrawer,
+    StaffContactForm,
+    StaffDutyResponsibilityFormDrawer,
+    StaffDutyResponsibilityList,
+    StaffLicenseFormDrawer,
+    StaffLicenseGrid,
+    StaffSchoolCareerFormDrawer,
+    StaffSchoolCareerGrid,
+    StaffRegistForm,
+    StaffGrid,
+    StaffCurrentAppointmentDescription,
+    StaffCardList,
     NgPage,
-    NzButtonExcelUploadComponent
+    NzButtonExcelUpload
 ],
   template: `
 <ng-template #header>
@@ -343,13 +343,13 @@ export interface StaffSchoolCareer {
 })
 export class StaffManagementApp implements OnInit {
 
-  gridStaff = viewChild.required(StaffGridComponent);
-  formStaff = viewChild.required(StaffRegistFormComponent);
-  staffDesc = viewChild.required(StaffCurrentAppointmentDescriptionComponent);
-  gridAppointment = viewChild.required(StaffAppointmentRecordGridComponent);
-  gridFamily = viewChild.required(StaffFamilyGridComponent);
-  gridLicense = viewChild.required(StaffLicenseGridComponent);
-  gridSchoolcareer = viewChild.required(StaffSchoolCareerGridComponent);
+  gridStaff = viewChild.required(StaffGrid);
+  formStaff = viewChild.required(StaffRegistForm);
+  staffDesc = viewChild.required(StaffCurrentAppointmentDescription);
+  gridAppointment = viewChild.required(StaffAppointmentRecordGrid);
+  gridFamily = viewChild.required(StaffFamilyGrid);
+  gridLicense = viewChild.required(StaffLicenseGrid);
+  gridSchoolcareer = viewChild.required(StaffSchoolCareerGrid);
 
   selectedStaff?: {companyCode: string, staffNo: string, staffName: string};
 

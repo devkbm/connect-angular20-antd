@@ -14,7 +14,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 
-export interface BizCode {
+export interface BizCodeFormData {
   typeId: string | null;
   code: string | null;
   codeName: string | null;
@@ -119,7 +119,7 @@ export interface BizCode {
   `,
   styles: []
 })
-export class BizCodeFormComponent implements AfterViewInit {
+export class BizCodeForm implements AfterViewInit {
 
   private notifyService = inject(NotifyService);
   private renderer = inject(Renderer2);
@@ -168,7 +168,7 @@ export class BizCodeFormComponent implements AfterViewInit {
     this.focusInput();
   }
 
-  modifyForm(formData: BizCode): void {
+  modifyForm(formData: BizCodeFormData): void {
     this.fg.controls.code.disable();
     this.fg.patchValue(formData);
   }
@@ -181,11 +181,11 @@ export class BizCodeFormComponent implements AfterViewInit {
     const url =  GlobalProperty.serverUrl() + `/api/system/bizcodetype/${typeId}/bizcode/${code}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<BizCode>>(url, options).pipe(
+    this.http.get<ResponseObject<BizCodeFormData>>(url, options).pipe(
          // catchError(this.handleError<ResponseObject<BizCode>>('get', undefined))
         )
         .subscribe(
-          (model: ResponseObject<BizCode>) => {
+          (model: ResponseObject<BizCodeFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm(typeId)
             this.notifyService.changeMessage(model.message);
           }
@@ -206,11 +206,11 @@ export class BizCodeFormComponent implements AfterViewInit {
     const url =  GlobalProperty.serverUrl() + `/api/system/bizcodetype/bizcode`;
     const options = getHttpOptions();
 
-    this.http.post<ResponseObject<BizCode>>(url, this.fg.getRawValue(), options).pipe(
+    this.http.post<ResponseObject<BizCodeFormData>>(url, this.fg.getRawValue(), options).pipe(
           //catchError(this.handleError<ResponseObject<BizCode>>('save', undefined))
         )
         .subscribe(
-          (model: ResponseObject<BizCode>) => {
+          (model: ResponseObject<BizCodeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -221,11 +221,11 @@ export class BizCodeFormComponent implements AfterViewInit {
     const url =  GlobalProperty.serverUrl() + `/api/system/bizcodetype/${this.fg.controls.typeId.value!}/bizcode/${this.fg.controls.code.value!}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<BizCode>>(url, options).pipe(
+    this.http.get<ResponseObject<BizCodeFormData>>(url, options).pipe(
          // catchError(this.handleError<ResponseObject<BizCode>>('get', undefined))
         )
         .subscribe(
-          (model: ResponseObject<BizCode>) => {
+          (model: ResponseObject<BizCodeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formDeleted.emit(this.fg.getRawValue());
           }

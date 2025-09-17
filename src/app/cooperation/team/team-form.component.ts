@@ -9,7 +9,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
@@ -40,7 +40,7 @@ export interface Team {
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical">

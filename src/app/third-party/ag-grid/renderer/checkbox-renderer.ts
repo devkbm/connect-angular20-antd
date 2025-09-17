@@ -14,7 +14,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
   `,
   styles: []
 })
-export class CheckboxRendererComponent implements ICellRendererAngularComp {
+export class CheckboxRenderer implements ICellRendererAngularComp {
 
   params: any;
   disabled: boolean = false;

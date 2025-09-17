@@ -195,7 +195,7 @@ export interface Staff {
   `,
   styles: [``]
 })
-export class StaffRegistFormComponent implements OnInit {
+export class StaffRegistForm implements OnInit {
 
   @Input() staffNo?: string;
 

@@ -62,7 +62,7 @@ export interface Role {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoleListComponent {
+export class RoleList {
 
   editButtonClicked = output<Role>();
 

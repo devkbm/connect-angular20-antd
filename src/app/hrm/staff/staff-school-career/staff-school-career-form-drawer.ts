@@ -1,14 +1,14 @@
 import { Component, input, output, viewChild } from '@angular/core';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { StaffSchoolCareerFormComponent } from './staff-school-career-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { StaffSchoolCareerForm } from './staff-school-career-form';
 
 @Component({
   selector: 'staff-school-career-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffSchoolCareerFormComponent
+    NzCrudButtonGroup,
+    StaffSchoolCareerForm
   ],
   template: `
   <nz-drawer
@@ -41,12 +41,12 @@ import { StaffSchoolCareerFormComponent } from './staff-school-career-form';
   `,
   styles: []
 })
-export class StaffSchoolCareerFormDrawerComponent {
+export class StaffSchoolCareerFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<StaffSchoolCareerFormComponent>(StaffSchoolCareerFormComponent);
+  form = viewChild.required<StaffSchoolCareerForm>(StaffSchoolCareerForm);
 
   selectedStaff = input<any>();
 

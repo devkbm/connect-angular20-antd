@@ -2,17 +2,17 @@ import { Component, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { BizCodeTypeGridComponent } from './biz-code-type-grid';
-import { BizCodeGridComponent } from './biz-code-grid';
-import { BizCodeTypeFormDrawerComponent } from "./biz-code-type-form-drawer";
-import { BizCodeFormDrawerComponent } from "./biz-code-form-drawer";
+import { BizCodeTypeGrid } from './biz-code-type-grid';
+import { BizCodeGrid } from './biz-code-grid';
+import { BizCodeTypeFormDrawer } from "./biz-code-type-form-drawer";
+import { BizCodeFormDrawer } from "./biz-code-form-drawer";
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
 
 
@@ -27,11 +27,11 @@ import { NgPage } from "src/app/core/app/nz-page";
     NzIconModule,
     NzDividerModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    BizCodeTypeGridComponent,
-    BizCodeGridComponent,
-    BizCodeFormDrawerComponent,
-    BizCodeTypeFormDrawerComponent,
+    NzSearchArea,
+    BizCodeTypeGrid,
+    BizCodeGrid,
+    BizCodeFormDrawer,
+    BizCodeTypeFormDrawer,
     NgPage
 ],
   template: `
@@ -142,8 +142,8 @@ import { NgPage } from "src/app/core/app/nz-page";
 })
 export class BizCodeApp {
 
-  gridCodeType = viewChild.required(BizCodeTypeGridComponent);
-  gridCode = viewChild.required(BizCodeGridComponent);
+  gridCodeType = viewChild.required(BizCodeTypeGrid);
+  gridCode = viewChild.required(BizCodeGrid);
 
   drawer: {
     codeType: { visible: boolean, formDataId: any },

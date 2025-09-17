@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
-import { NzInputCkeditorComponent } from 'src/app/third-party/ckeditor/nz-input-ckeditor.component';
+import { NzInputCkeditor } from 'src/app/third-party/ckeditor/nz-input-ckeditor';
 
 
 import { DutyDateListComponent } from './duty-date-list.component';
@@ -23,10 +23,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     NzInputModule,
     NzInputNumberModule,
     NzDatePickerModule,
-    NzSelectModule,    
-    NzCheckboxModule,    
-    NzInputCkeditorComponent,       
-    DutyDateListComponent,    
+    NzSelectModule,
+    NzCheckboxModule,
+    NzInputCkeditor,
+    DutyDateListComponent,
   ],
   templateUrl: './welcome.component.html',
   styles: `
@@ -65,7 +65,7 @@ export class WelcomeComponent implements OnInit {
       ]
     }
   ];
-  
+
   constructor(private fb: FormBuilder) {
     this.fg = this.fb.group({
       input_text: ['test', [ Validators.required ]],

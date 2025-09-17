@@ -6,8 +6,8 @@ import type { ColDef, RowClickedEvent, RowDoubleClickedEvent } from 'ag-grid-com
 import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag-grid-community';
 import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
-import { CheckboxRendererComponent } from 'src/app/third-party/ag-grid/renderer/checkbox-renderer.component';
+import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
+import { CheckboxRenderer } from 'src/app/third-party/ag-grid/renderer/checkbox-renderer';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -56,7 +56,7 @@ export interface User {
   </ag-grid-angular>
   `
 })
-export class UserGridComponent extends AgGridCommon {
+export class UserGrid extends AgGridCommon {
 
   private http = inject(HttpClient);
 
@@ -71,7 +71,7 @@ export class UserGridComponent extends AgGridCommon {
       headerName: '',
       width: 40,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer: ButtonRendererComponent,
+      cellRenderer: ButtonRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',
@@ -94,7 +94,7 @@ export class UserGridComponent extends AgGridCommon {
       field: 'enabled',
       width: 80,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer: CheckboxRendererComponent,
+      cellRenderer: CheckboxRenderer,
       cellRendererParams: {
         label: '',
         disabled: true
@@ -105,7 +105,7 @@ export class UserGridComponent extends AgGridCommon {
       field: 'accountNonLocked',
       width: 120,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer: CheckboxRendererComponent,
+      cellRenderer: CheckboxRenderer,
       cellRendererParams: {
         label: '',
         disabled: true
@@ -116,7 +116,7 @@ export class UserGridComponent extends AgGridCommon {
       field: 'accountNonExpired',
       width: 120,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer:CheckboxRendererComponent,
+      cellRenderer:CheckboxRenderer,
       cellRendererParams: {
         label: '',
         disabled: true
@@ -127,7 +127,7 @@ export class UserGridComponent extends AgGridCommon {
       field: 'credentialsNonExpired',
       width: 120,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer: CheckboxRendererComponent,
+      cellRenderer: CheckboxRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, input, output, viewChild } from '@a
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { WebResourceFormComponent } from 'src/app/system/webresource/web-resource-form';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { WebResourceForm } from 'src/app/system/webresource/web-resource-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
 import { PartnerStaffFormComponent } from "./partner-staff-form";
 
@@ -11,7 +11,7 @@ import { PartnerStaffFormComponent } from "./partner-staff-form";
   selector: 'partner-staff-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
     PartnerStaffFormComponent
 ],
   template: `
@@ -52,7 +52,7 @@ export class PartnerStaffFormDrawerComponent {
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required(WebResourceFormComponent);
+  form = viewChild.required(WebResourceForm);
 
   save() {
     this.form().save();

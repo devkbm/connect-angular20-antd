@@ -2,15 +2,15 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { StaffContactFormComponent } from './staff-contact-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { StaffContactForm } from './staff-contact-form';
 
 @Component({
   selector: 'staff-contact-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffContactFormComponent
+    NzCrudButtonGroup,
+    StaffContactForm
   ],
   template: `
     <nz-drawer
@@ -47,7 +47,7 @@ export class StaffContactFormDrawerComponent {
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<StaffContactFormComponent>(StaffContactFormComponent);
+  form = viewChild.required<StaffContactForm>(StaffContactForm);
 
   save() {
     this.form().save();

@@ -50,7 +50,7 @@ export interface StaffCardModel {
     }
   `]
 })
-export class StaffCardComponent implements OnInit {
+export class StaffCard implements OnInit {
 
   @Input() data?: StaffCardModel;
 

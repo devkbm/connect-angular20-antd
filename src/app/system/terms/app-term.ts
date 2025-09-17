@@ -2,12 +2,12 @@ import { Component, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { TermGridComponent } from './term-grid';
-import { DataDomainGridComponent } from './data-domain-grid';
-import { WordGridComponent } from './word-grid';
-import { DataDomainFormComponent } from './data-domain-form';
-import { TermFormComponent } from './term-form';
-import { WordFormComponent } from './word-form';
+import { TermGrid } from './term-grid';
+import { DataDomainGrid } from './data-domain-grid';
+import { WordGrid } from './word-grid';
+import { DataDomainForm } from './data-domain-form';
+import { TermForm } from './term-form';
+import { WordForm } from './word-form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -17,8 +17,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
 
 @Component({
@@ -36,13 +36,13 @@ import { NgPage } from "src/app/core/app/nz-page";
     NzButtonModule,
     NzIconModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    DataDomainFormComponent,
-    DataDomainGridComponent,
-    TermFormComponent,
-    TermGridComponent,
-    WordFormComponent,
-    WordGridComponent,
+    NzSearchArea,
+    DataDomainForm,
+    DataDomainGrid,
+    TermForm,
+    TermGrid,
+    WordForm,
+    WordGrid,
     NgPage
 ],
   template: `
@@ -198,9 +198,9 @@ import { NgPage } from "src/app/core/app/nz-page";
 })
 export class TermApp implements OnInit {
 
-  termGrid = viewChild.required(TermGridComponent);
-  wordGrid = viewChild.required(WordGridComponent);
-  domainGrid = viewChild.required(DataDomainGridComponent);
+  termGrid = viewChild.required(TermGrid);
+  wordGrid = viewChild.required(WordGrid);
+  domainGrid = viewChild.required(DataDomainGrid);
 
   query: {
     term : { key: string, value: string, list: {label: string, value: string}[] }

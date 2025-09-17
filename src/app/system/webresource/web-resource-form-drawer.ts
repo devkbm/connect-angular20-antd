@@ -1,16 +1,16 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { WebResourceFormComponent } from './web-resource-form';
+import { WebResourceForm } from './web-resource-form';
 
 @Component({
   selector: 'web-resource-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    WebResourceFormComponent
+    NzCrudButtonGroup,
+    WebResourceForm
   ],
   template: `
     <nz-drawer
@@ -43,12 +43,12 @@ import { WebResourceFormComponent } from './web-resource-form';
   `,
   styles: []
 })
-export class WebResourceFormDrawerComponent {
+export class WebResourceFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required(WebResourceFormComponent);
+  form = viewChild.required(WebResourceForm);
 
   save() {
     this.form().save();

@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 
-import { AppLayoutComponent } from '../app-layout/app-layout.component';
+import { AppLayout } from '../app-layout/app-layout';
 
 import { AuthGuardService } from '../core/service/auth-guard.service';
 
 export const routes: Routes = [
   {
-    path: '', component: AppLayoutComponent, //canActivateChild: [AuthGuardService],
+    path: '', component: AppLayout, //canActivateChild: [AuthGuardService],
     children: [
       {path: 'company',       loadComponent: () => import('./company/app-company').then(m => m.AppCompany)},
       {path: 'user',          loadComponent: () => import('./user/app-user').then(m => m.UserApp), data: {breadcrumb: 'user'}},

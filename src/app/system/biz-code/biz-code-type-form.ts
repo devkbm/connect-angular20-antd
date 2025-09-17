@@ -15,11 +15,11 @@ import { SelectControlModel } from 'src/app/core/model/select-control.model.ts';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
-export interface BizCodeType {
+export interface BizCodeTypeFormData {
   typeId: string | null;
   typeName: string | null;
   sequence: number | null;
@@ -38,7 +38,7 @@ export interface BizCodeType {
     NzInputModule,
     NzInputNumberModule,
     NzSelectModule,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
 ],
   template: `
     {{fg.getRawValue() | json}} - {{fg.valid}}
@@ -159,7 +159,7 @@ export interface BizCodeType {
 
   `]
 })
-export class BizCodeTypeFormComponent implements OnInit, AfterViewInit {
+export class BizCodeTypeForm implements OnInit, AfterViewInit {
 
   bizTypeList: SelectControlModel[] = [];
 
@@ -207,7 +207,7 @@ export class BizCodeTypeFormComponent implements OnInit, AfterViewInit {
   newForm(): void {
   }
 
-  modifyForm(formData: BizCodeType): void {
+  modifyForm(formData: BizCodeTypeFormData): void {
     this.fg.controls.typeId.disable();
 
     this.fg.patchValue(formData);
@@ -221,11 +221,11 @@ export class BizCodeTypeFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/bizcodetype/${id}`;
     const options = getHttpOptions();
 
-    this.http.get<ResponseObject<BizCodeType>>(url, options).pipe(
+    this.http.get<ResponseObject<BizCodeTypeFormData>>(url, options).pipe(
         //  catchError(this.handleError<ResponseObject<BizCodeType>>('get', undefined))
         )
         .subscribe(
-          (model: ResponseObject<BizCodeType>) => {
+          (model: ResponseObject<BizCodeTypeFormData>) => {
             model.data ? this.modifyForm(model.data) : this.newForm()
             this.notifyService.changeMessage(model.message);
           }
@@ -246,11 +246,11 @@ export class BizCodeTypeFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/bizcodetype`;
     const options = getHttpOptions();
 
-    this.http.post<ResponseObject<BizCodeType>>(url, this.fg.getRawValue(), options).pipe(
+    this.http.post<ResponseObject<BizCodeTypeFormData>>(url, this.fg.getRawValue(), options).pipe(
     //      catchError(this.handleError<ResponseObject<BizCodeType>>('save', undefined))
         )
         .subscribe(
-          (model: ResponseObject<BizCodeType>) => {
+          (model: ResponseObject<BizCodeTypeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
@@ -261,11 +261,11 @@ export class BizCodeTypeFormComponent implements OnInit, AfterViewInit {
     const url = GlobalProperty.serverUrl() + `/api/system/bizcodetype/${this.fg.controls.typeId.value!}`;
     const options = getHttpOptions();
 
-    this.http.delete<ResponseObject<BizCodeType>>(url, options).pipe(
+    this.http.delete<ResponseObject<BizCodeTypeFormData>>(url, options).pipe(
             //catchError(this.handleError<ResponseObject<BizCodeType>>('delete', undefined))
           )
           .subscribe(
-            (model: ResponseObject<BizCodeType>) => {
+            (model: ResponseObject<BizCodeTypeFormData>) => {
               this.notifyService.changeMessage(model.message);
               this.formDeleted.emit(this.fg.getRawValue());
             }

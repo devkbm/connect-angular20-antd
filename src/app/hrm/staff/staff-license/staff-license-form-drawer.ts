@@ -1,14 +1,14 @@
 import { Component, input, output, viewChild } from '@angular/core';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { StaffLicenseFormComponent } from './staff-license-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { StaffLicenseForm } from './staff-license-form';
 
 @Component({
   selector: 'staff-license-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffLicenseFormComponent
+    NzCrudButtonGroup,
+    StaffLicenseForm
   ],
   template: `
     <nz-drawer
@@ -41,12 +41,12 @@ import { StaffLicenseFormComponent } from './staff-license-form';
   `,
   styles: []
 })
-export class StaffLicenseFormDrawerComponent {
+export class StaffLicenseFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<StaffLicenseFormComponent>(StaffLicenseFormComponent);
+  form = viewChild.required<StaffLicenseForm>(StaffLicenseForm);
 
   selectedStaff = input<any>();
 

@@ -77,7 +77,7 @@ import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-selec
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DeptSearchComponent {
+export class DeptSearch {
 
   queryValue = signal('');
   companyCode = model<string>('001');

@@ -43,7 +43,7 @@ import { NzCalendarModule } from 'ng-zorro-antd/calendar';
   `,
   styleUrls: []
 })
-export class HolidayCalendarComponent {
+export class HolidayCalendar {
   selectedDate: Date = new Date();
   mode: 'month' | 'year' = 'month';
 

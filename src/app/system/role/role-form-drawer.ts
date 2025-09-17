@@ -2,15 +2,15 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { RoleFormComponent } from './role-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { RoleForm } from './role-form';
 
 @Component({
   selector: 'role-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    RoleFormComponent
+    NzCrudButtonGroup,
+    RoleForm
   ],
   template: `
     <nz-drawer
@@ -44,12 +44,12 @@ import { RoleFormComponent } from './role-form';
   styles: []
 
 })
-export class RoleFormDrawerComponent {
+export class RoleFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<RoleFormComponent>(RoleFormComponent);
+  form = viewChild.required<RoleForm>(RoleForm);
 
   save() {
     this.form().save();

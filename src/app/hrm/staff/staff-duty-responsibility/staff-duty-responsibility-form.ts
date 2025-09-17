@@ -138,7 +138,7 @@ export interface StaffDutyResponsibility {
   `,
   styles: []
 })
-export class StaffDutyResponsibilityFormComponent implements OnInit, AfterViewInit {
+export class StaffDutyResponsibilityForm implements OnInit, AfterViewInit {
 
   /**
    * 직책코드 - HR0007

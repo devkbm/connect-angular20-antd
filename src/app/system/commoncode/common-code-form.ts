@@ -286,7 +286,7 @@ export class CommonCodeHierarchy {
 
   `]
 })
-export class CommonCodeFormComponent implements OnInit {
+export class CommonCodeForm implements OnInit {
 
   nodeItems: CommonCodeHierarchy[] = [];
   systemTypeCodeList: SystemTypeEnum[] = [];

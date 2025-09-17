@@ -134,7 +134,7 @@ export interface StaffLicense {
   `,
   styles: []
 })
-export class StaffLicenseFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class StaffLicenseForm implements OnInit, AfterViewInit, OnChanges {
 
   /**
    * 자격면허 - HR0011

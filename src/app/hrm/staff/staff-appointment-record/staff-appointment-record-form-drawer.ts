@@ -1,16 +1,16 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { StaffAppointmentRecordFormComponent } from './staff-appointment-record-form';
+import { StaffAppointmentRecordForm } from './staff-appointment-record-form';
 
 @Component({
   selector: 'staff-appointment-record-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffAppointmentRecordFormComponent
+    NzCrudButtonGroup,
+    StaffAppointmentRecordForm
   ],
   template: `
     <nz-drawer
@@ -43,14 +43,14 @@ import { StaffAppointmentRecordFormComponent } from './staff-appointment-record-
   `,
   styles: []
 })
-export class StaffAppointmentRecordFormDrawerComponent {
+export class StaffAppointmentRecordFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
   selectedStaff = input<any>();
 
-  form = viewChild.required<StaffAppointmentRecordFormComponent>(StaffAppointmentRecordFormComponent);
+  form = viewChild.required<StaffAppointmentRecordForm>(StaffAppointmentRecordForm);
 
   save() {
     this.form().save();

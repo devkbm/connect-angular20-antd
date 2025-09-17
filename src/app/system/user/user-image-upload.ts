@@ -88,7 +88,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
     }
   `]
 })
-export class UserImageUploadComponent implements OnInit, OnChanges {
+export class UserImageUpload implements OnInit, OnChanges {
 
   upload: {url: string, headers: any, data: any} = {
     url: GlobalProperty.serverUrl() + '/api/system/user/image',

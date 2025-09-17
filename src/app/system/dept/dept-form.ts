@@ -272,7 +272,7 @@ export interface DeptHierarchy {
 
   `]
 })
-export class DeptFormComponent implements OnInit, AfterViewInit {
+export class DeptForm implements OnInit, AfterViewInit {
 
   //deptCode = viewChild.required<NzInputTextComponent>('deptCode');
 

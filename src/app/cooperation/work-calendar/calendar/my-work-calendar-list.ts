@@ -43,7 +43,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
     }
   `]
 })
-export class MyWorkCalendarListComponent implements OnInit {
+export class MyWorkCalendarList implements OnInit {
 
   workGroupList = signal<any[]>([]);
 

@@ -2,15 +2,15 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { StaffDutyResponsibilityFormComponent } from './staff-duty-responsibility-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { StaffDutyResponsibilityForm } from './staff-duty-responsibility-form';
 
 @Component({
   selector: 'staff-duty-responsibility-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    StaffDutyResponsibilityFormComponent
+    NzCrudButtonGroup,
+    StaffDutyResponsibilityForm
   ],
   template: `
     <nz-drawer
@@ -43,14 +43,14 @@ import { StaffDutyResponsibilityFormComponent } from './staff-duty-responsibilit
   `,
   styles: []
 })
-export class StaffDutyResponsibilityFormDrawerComponent {
+export class StaffDutyResponsibilityFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
   selectedStaff = input<any>();
 
-  form = viewChild.required<StaffDutyResponsibilityFormComponent>(StaffDutyResponsibilityFormComponent);
+  form = viewChild.required<StaffDutyResponsibilityForm>(StaffDutyResponsibilityForm);
 
   save() {
     this.form().save();

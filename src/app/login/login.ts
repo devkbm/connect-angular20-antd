@@ -127,7 +127,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
   `
 })
-export class LoginComponent implements OnInit {
+export class Login implements OnInit {
 
   private http = inject(HttpClient);
 

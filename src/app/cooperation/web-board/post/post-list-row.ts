@@ -2,7 +2,7 @@ import { Component, computed, input, output } from '@angular/core';
 
 import { GlobalProperty } from 'src/app/core/global-property';
 
-import { PostList } from './post-list';
+import { PostListData } from './post-list';
 
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -57,9 +57,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   }
   `
 })
-export class PostListRowComponent {
+export class PostListRow {
 
-  post = input<PostList>();
+  post = input<PostListData>();
 
   imageSrc = computed(() => {
     if (this.post()?.writerImage) {
@@ -74,8 +74,8 @@ export class PostListRowComponent {
     }
   });
 
-  viewClicked = output<PostList>();
-  editClicked = output<PostList>();
+  viewClicked = output<PostListData>();
+  editClicked = output<PostListData>();
 
   onViewClicked(post: any) {
     this.viewClicked.emit(post);

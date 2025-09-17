@@ -93,7 +93,7 @@ export interface User {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserListComponent {
+export class UserList {
 
   editButtonClicked = output<User>();
 

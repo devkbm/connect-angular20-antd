@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-import { NzPageHeaderCustom } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component";
-import { NzSearchAreaComponent } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component";
+import { NzPageHeaderCustom } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom";
+import { NzSearchArea } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area";
 
 
 import { NgPage } from "src/app/core/app/nz-page";
@@ -13,10 +13,10 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
-import { CompanyListComponent } from './company-list';
-import { CompanySeacrhComponent } from "./company-seacrh";
-import { CompanyGridComponent } from './company-grid';
-import { CompanyFormDrawerComponent } from "./company-form-drawer";
+import { CompanyList } from './company-list';
+import { CompanySeacrh } from "./company-seacrh";
+import { CompanyGrid } from './company-grid';
+import { CompanyFormDrawer } from "./company-form-drawer";
 
 @Component({
   selector: 'app-company',
@@ -32,12 +32,12 @@ import { CompanyFormDrawerComponent } from "./company-form-drawer";
     NzDividerModule,
     */
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
+    NzSearchArea,
     NgPage,
-    CompanyGridComponent,
-    CompanyListComponent,
-    CompanyFormDrawerComponent,
-    CompanySeacrhComponent
+    CompanyGrid,
+    CompanyList,
+    CompanyFormDrawer,
+    CompanySeacrh
 ],
   template: `
 
@@ -110,8 +110,8 @@ export class AppCompany implements OnInit {
 
   private http = inject(HttpClient);
 
-  grid = viewChild.required(CompanyGridComponent);
-  list = viewChild.required(CompanyListComponent);
+  grid = viewChild.required(CompanyGrid);
+  list = viewChild.required(CompanyList);
 
   view: 'grid' | 'list' = 'grid';
 

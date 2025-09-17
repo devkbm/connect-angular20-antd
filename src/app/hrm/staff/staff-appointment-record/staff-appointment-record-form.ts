@@ -349,7 +349,7 @@ export interface StaffAppointmentRecord {
   `,
   styles: []
 })
-export class StaffAppointmentRecordFormComponent implements OnInit {
+export class StaffAppointmentRecordForm implements OnInit {
 
   bizTypeList = [{code:'code', name:'name'},{code:'code2', name:'name2'}];
 

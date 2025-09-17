@@ -8,7 +8,7 @@ import type { ColDef, RowDoubleClickedEvent } from 'ag-grid-community';
 import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag-grid-community';
 import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
+import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -53,7 +53,7 @@ export interface Menu {
   </ag-grid-angular>
   `
 })
-export class MenuGridComponent extends AgGridCommon {
+export class MenuGrid extends AgGridCommon {
 
   private http = inject(HttpClient);
 
@@ -68,7 +68,7 @@ export class MenuGridComponent extends AgGridCommon {
       headerName: '',
       width: 40,
       cellStyle: {'text-align': 'center', 'padding': '0px'},
-      cellRenderer: ButtonRendererComponent,
+      cellRenderer: ButtonRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',

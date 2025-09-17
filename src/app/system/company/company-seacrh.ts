@@ -57,7 +57,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompanySeacrhComponent {
+export class CompanySeacrh {
   search = output<Object>();
   newForm = output<void>();
   deleteForm = output<void>();

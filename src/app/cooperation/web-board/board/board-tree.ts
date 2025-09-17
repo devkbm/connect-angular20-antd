@@ -33,7 +33,7 @@ export interface BoardHierarchy {
 @Component({
   selector: 'board-tree',
   imports: [
-    CommonModule, 
+    CommonModule,
     NzTreeModule
   ],
   template: `
@@ -53,7 +53,7 @@ export interface BoardHierarchy {
   styles: `
   `
 })
-export class BoardTreeComponent {
+export class BoardTree {
 
   private http = inject(HttpClient);
   treeCom = viewChild.required(NzTreeComponent);

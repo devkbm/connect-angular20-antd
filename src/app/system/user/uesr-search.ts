@@ -8,7 +8,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzButtonExcelUploadComponent } from 'src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component';
+import { NzButtonExcelUpload } from 'src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload';
 
 
 @Component({
@@ -23,7 +23,7 @@ import { NzButtonExcelUploadComponent } from 'src/app/third-party/ng-zorro/nz-bu
     NzInputModule,
     NzSelectModule,
     NzDividerModule,
-    NzButtonExcelUploadComponent,
+    NzButtonExcelUpload,
   ],
   template: `
     <div nz-row>
@@ -67,7 +67,7 @@ import { NzButtonExcelUploadComponent } from 'src/app/third-party/ng-zorro/nz-bu
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UesrSearchComponent {
+export class UesrSearch {
 
   search = output<Object>();
   newForm = output<void>();

@@ -103,7 +103,7 @@ import { filter } from 'rxjs';
     }
   `]
 })
-export class SideMenuComponent {
+export class SideMenu {
 
   private router = inject(Router);
   private http = inject(HttpClient);

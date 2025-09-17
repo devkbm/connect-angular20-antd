@@ -9,7 +9,7 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { DataDomainService } from './data-domain.service';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -40,7 +40,7 @@ export interface DataDomainFormData {
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -136,7 +136,7 @@ export interface DataDomainFormData {
   `,
   styles: [``]
 })
-export class DataDomainFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class DataDomainForm implements OnInit, AfterViewInit, OnChanges {
 
   databaseList: HtmlSelectOption[] = [];
 

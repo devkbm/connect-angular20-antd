@@ -123,7 +123,7 @@ export interface WebResourceFormData {
   `,
   styles: []
 })
-export class WebResourceFormComponent implements OnInit, AfterViewInit {
+export class WebResourceForm implements OnInit, AfterViewInit {
 
   resourceTypeList: ResouceTypeEnum[] = [];
 

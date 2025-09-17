@@ -224,7 +224,7 @@ export interface MenuFormData {
   `,
   styles: []
 })
-export class MenuFormComponent implements OnInit, AfterViewInit {
+export class MenuForm implements OnInit, AfterViewInit {
 
   appIconTypeList :{value: string, label: string}[] = [
     {value: 'NZ_ICON', label: 'NZ ICON'},

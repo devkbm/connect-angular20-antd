@@ -188,7 +188,7 @@ export interface StaffSchoolCareer {
   `,
   styles: []
 })
-export class StaffSchoolCareerFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class StaffSchoolCareerForm implements OnInit, AfterViewInit, OnChanges {
 
   /**
    * 학력 - HR0009

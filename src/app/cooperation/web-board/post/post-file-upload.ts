@@ -168,7 +168,7 @@ export interface UploadedFile {
     }
   `
 })
-export class PostFileUploadComponent {
+export class PostFileUpload {
 
   postId = signal<string>('');
 

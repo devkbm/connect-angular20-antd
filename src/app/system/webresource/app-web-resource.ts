@@ -8,14 +8,14 @@ import { NgPage } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { WebResourceGridComponent } from './web-resource-grid';
-import { WebResourceFormDrawerComponent } from './web-resource-form-drawer';
-import { WebResourceSearchComponent } from './web-resource-search';
-import { WebResourceListComponent } from './web-resource-list';
+import { WebResourceGrid } from './web-resource-grid';
+import { WebResourceFormDrawer } from './web-resource-form-drawer';
+import { WebResourceSearch } from './web-resource-search';
+import { WebResourceList } from './web-resource-list';
 
 
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -42,12 +42,12 @@ export interface WebResource {
     NzSelectModule,
     NzInputModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    WebResourceGridComponent,
-    WebResourceFormDrawerComponent,
-    WebResourceSearchComponent,
+    NzSearchArea,
+    WebResourceGrid,
+    WebResourceFormDrawer,
+    WebResourceSearch,
     NgPage,
-    WebResourceListComponent
+    WebResourceList
 ],
   template: `
 <ng-template #header>
@@ -122,8 +122,8 @@ export class WebResourceApp implements OnInit {
 
   private http = inject(HttpClient);
 
-  grid = viewChild.required(WebResourceGridComponent);
-  list = viewChild.required(WebResourceListComponent);
+  grid = viewChild.required(WebResourceGrid);
+  list = viewChild.required(WebResourceList);
 
   view: 'grid' | 'list' = 'list';
 

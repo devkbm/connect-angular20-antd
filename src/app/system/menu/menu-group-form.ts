@@ -104,7 +104,7 @@ export interface MenuGroupFormData {
   `,
   styles: []
 })
-export class MenuGroupFormComponent implements OnInit, AfterViewInit {
+export class MenuGroupForm implements OnInit, AfterViewInit {
 
   private notifyService = inject(NotifyService);
   private renderer = inject(Renderer2);

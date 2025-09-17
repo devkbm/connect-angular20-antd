@@ -29,7 +29,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
   `,
   imports: [NzUploadModule, NzButtonModule, NzIconModule]
 })
-export class NzButtonExcelUploadComponent  implements OnInit {
+export class NzButtonExcelUpload implements OnInit {
 
   fileList = input<NzUploadFile[]>([]);
   urn = input<string>();

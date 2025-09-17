@@ -83,7 +83,7 @@ export interface Company {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CompanyListComponent {
+export class CompanyList {
   editButtonClicked = output<Company>();
 
   private http = inject(HttpClient);

@@ -37,7 +37,7 @@ export interface StaffDutyResponsibility {
   `,
   styles: []
 })
-export class StaffDutyResponsibilityListComponent {
+export class StaffDutyResponsibilityList {
 
   private http = inject(HttpClient);
 

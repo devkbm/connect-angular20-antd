@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { AppLayoutComponent } from '../app-layout/app-layout.component';
+import { AppLayout } from '../app-layout/app-layout';
 import { AuthGuardChildFunction, AuthGuardService } from '../core/service/auth-guard.service';
 import { ConfigOption, FormlyModule } from '@ngx-formly/core';
 import { EnvironmentProviders, importProvidersFrom } from '@angular/core';
@@ -11,7 +11,7 @@ export const provideFormlyConfig = (config: ConfigOption): EnvironmentProviders 
 
 export const routes: Routes = [
   {
-    path: '', component: AppLayoutComponent/*, canActivateChild: [AuthGuardService]*/,
+    path: '', component: AppLayout/*, canActivateChild: [AuthGuardService]*/,
     children: [
       {path: 'hrmtype',           loadComponent: () => import('./hrm-code/app-hrm-code').then(m => m.HrmCodeApp), providers: [provideFormlyConfig({})]},
       {path: 'dutyapplication',   loadComponent: () => import('./attendance-application/app-attendance-application').then(m => m.AttendanceApplicationApp)},

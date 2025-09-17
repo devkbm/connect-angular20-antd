@@ -1,18 +1,18 @@
 import { Component, viewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { WorkCalendarEventFormDrawerComponent } from './event/work-calendar-event-form-drawer';
-import { WorkCalendarFormDrawerComponent } from './calendar/work-calendar-form-drawer';
-import { NewDateSelectedArgs, WorkCalendarViewComponent } from './calendar-view/work-calendar-view';
-import { NewFormValue, WorkCalendarEventFormComponent } from './event/work-calendar-event-form';
-import { WorkCalendarFormComponent } from './calendar/work-calendar-form';
+import { WorkCalendarEventFormDrawer } from './event/work-calendar-event-form-drawer';
+import { WorkCalendarFormDrawer } from './calendar/work-calendar-form-drawer';
+import { NewDateSelectedArgs, WorkCalendarView } from './calendar-view/work-calendar-view';
+import { NewFormValue, WorkCalendarEventForm } from './event/work-calendar-event-form';
+import { WorkCalendarForm } from './calendar/work-calendar-form';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { ModeChangedArgs } from 'src/app/third-party/daypilot/calendar-daypilot.component';
-import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list";
+import { MyWorkCalendarList } from "./calendar/my-work-calendar-list";
 
 @Component({
   selector: 'work-calendar-app',
@@ -20,11 +20,11 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list";
     CommonModule,
     NzButtonModule,
     NzIconModule,
-    WorkCalendarViewComponent,
+    WorkCalendarView,
     CalendarDaypilotNavigatorComponent,
-    WorkCalendarEventFormDrawerComponent,
-    WorkCalendarFormDrawerComponent,
-    MyWorkCalendarListComponent
+    WorkCalendarEventFormDrawer,
+    WorkCalendarFormDrawer,
+    MyWorkCalendarList
 ],
   template: `
     <button nz-button (click)="getMyWorkGroupList()">
@@ -98,12 +98,12 @@ import { MyWorkCalendarListComponent } from "./calendar/my-work-calendar-list";
 })
 export class WorkCalendarApp implements AfterViewInit {
 
-  myWorkGroupList = viewChild.required(MyWorkCalendarListComponent);
-  workGroupForm = viewChild.required(WorkCalendarFormComponent);
+  myWorkGroupList = viewChild.required(MyWorkCalendarList);
+  workGroupForm = viewChild.required(WorkCalendarForm);
 
   navigator = viewChild.required(CalendarDaypilotNavigatorComponent);
-  workCalendar = viewChild.required(WorkCalendarViewComponent);
-  workEventForm = viewChild.required(WorkCalendarEventFormComponent);
+  workCalendar = viewChild.required(WorkCalendarView);
+  workEventForm = viewChild.required(WorkCalendarEventForm);
 
   mode: "Day" | "Week" | "Month" | "None" = 'Month';
 

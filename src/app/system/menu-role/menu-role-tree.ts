@@ -89,7 +89,7 @@ function convert(tree: MenuRoleHierarchy[]) {
     }
   `
 })
-export class MenuRoleTreeComponent {
+export class MenuRoleTree {
 
   treeComponent = viewChild.required(NzTreeComponent);
 

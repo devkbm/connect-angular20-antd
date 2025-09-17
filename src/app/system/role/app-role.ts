@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NgPage } from "src/app/core/app/nz-page";
 
-import { RoleGridComponent } from './role-grid';
-import { RoleFormDrawerComponent } from './role-form-drawer';
+import { RoleGrid } from './role-grid';
+import { RoleFormDrawer } from './role-form-drawer';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -14,13 +14,13 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
-import { RoleListComponent } from './role-list';
+import { RoleList } from './role-list';
 
 export interface Role {
   roleCode: string | null;
@@ -43,11 +43,11 @@ export interface Role {
     NzInputModule,
     NzDividerModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    RoleGridComponent,
-    RoleFormDrawerComponent,
+    NzSearchArea,
+    RoleGrid,
+    RoleFormDrawer,
     NgPage,
-    RoleListComponent
+    RoleList
 ],
   template: `
 <ng-template #header>
@@ -151,8 +151,8 @@ export class RoleApp implements AfterViewInit {
 
   private http = inject(HttpClient);
 
-  grid = viewChild.required(RoleGridComponent);
-  list = viewChild.required(RoleListComponent);
+  grid = viewChild.required(RoleGrid);
+  list = viewChild.required(RoleList);
 
   view: 'grid' | 'list' = 'list';
 

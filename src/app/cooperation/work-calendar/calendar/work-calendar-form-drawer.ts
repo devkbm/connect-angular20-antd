@@ -2,15 +2,15 @@ import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
-import { WorkCalendarFormComponent } from './work-calendar-form';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
+import { WorkCalendarForm } from './work-calendar-form';
 
 @Component({
   selector: 'work-calendar-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    WorkCalendarFormComponent
+    NzCrudButtonGroup,
+    WorkCalendarForm
   ],
   template: `
     <nz-drawer
@@ -44,12 +44,12 @@ import { WorkCalendarFormComponent } from './work-calendar-form';
   `,
   styles: []
 })
-export class WorkCalendarFormDrawerComponent {
+export class WorkCalendarFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<WorkCalendarFormComponent>(WorkCalendarFormComponent);
+  form = viewChild.required<WorkCalendarForm>(WorkCalendarForm);
 
   save() {
     this.form().save();

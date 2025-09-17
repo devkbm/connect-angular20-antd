@@ -12,8 +12,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { UserProfileComponent } from 'src/app/app-layout/user-profile/user-profile.component';
-import { SideMenuComponent } from 'src/app/app-layout/side-menu/side-menu.component';
+import { UserProfile } from 'src/app/app-layout/user-profile/user-profile';
+import { SideMenu } from 'src/app/app-layout/side-menu/side-menu';
 
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
@@ -33,8 +33,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzSelectModule,
     NzDropDownModule,
     NzButtonModule,
-    UserProfileComponent,
-    SideMenuComponent
+    UserProfile,
+    SideMenu
  ],
   template: `
 <nz-layout>
@@ -163,7 +163,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 }
   `
 })
-export class AppLayoutComponent implements OnInit  {
+export class AppLayout implements OnInit  {
 
   profileAvatarSrc: string | undefined;
 

@@ -63,7 +63,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WebResourceSearchComponent {
+export class WebResourceSearch {
 
   search = output<Object>();
   newForm = output<void>();

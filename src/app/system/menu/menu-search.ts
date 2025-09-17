@@ -80,7 +80,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuSearchComponent {
+export class MenuSearch {
 
   search = output<Object>();
   newFormMenuGroup = output<void>();

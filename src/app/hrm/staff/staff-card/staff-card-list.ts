@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { StaffCardComponent } from './staff-card';
+import { StaffCard } from './staff-card';
 
 import { Component, OnInit, inject } from '@angular/core';
 import { ResponseList } from 'src/app/core/model/response-list';
@@ -21,7 +21,7 @@ export interface StaffCardModel {
 @Component({
   selector: 'staff-card-list',
   imports: [
-    CommonModule, StaffCardComponent
+    CommonModule, StaffCard
   ],
   template: `
     @for (item of _list; track item.staffId) {
@@ -30,7 +30,7 @@ export interface StaffCardModel {
   `,
   styles: []
 })
-export class StaffCardListComponent implements OnInit {
+export class StaffCardList implements OnInit {
   _list: StaffCardModel[] = [];
 
   private service = inject(StaffCardService);

@@ -11,12 +11,12 @@ import { ResponseSpringslice } from 'src/app/core/model/response-springslice';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { PostListRowComponent } from './post-list-row';
+import { PostListRow } from './post-list-row';
 
 // 무한 스크롤 적용 필요
 // https://www.npmjs.com/package/ngx-infinite-scroll
 
-export interface PostList {
+export interface PostListData {
   boardId: string;
   postId: string;
   writerId: string;
@@ -37,7 +37,7 @@ export interface PostList {
     NzListModule,
     NzButtonModule,
     InfiniteScrollDirective,
-    PostListRowComponent
+    PostListRow
   ],
   template: `
     <!-- [style.background-color]="'grey'" -->
@@ -73,17 +73,17 @@ export interface PostList {
     }
   `
 })
-export class PostListComponent {
+export class PostList {
 
   private http = inject(HttpClient);
 
-  posts = signal<PostList[]>([]);
+  posts = signal<PostListData[]>([]);
 
   boardId = input<string>();
   height = signal<string>('calc(100vh - 154px)');
 
-  editClicked = output<PostList>();
-  viewClicked = output<PostList>();
+  editClicked = output<PostListData>();
+  viewClicked = output<PostListData>();
 
   pageable: {page: number, isLast: boolean} = {page: 0, isLast: false};
 
@@ -102,11 +102,11 @@ export class PostListComponent {
     url = url + '&page='+ page + '&size='+ size;
 
     this.http
-        .get<ResponseSpringslice<PostList>>(url, options).pipe(
+        .get<ResponseSpringslice<PostListData>>(url, options).pipe(
         //  catchError((err) => Observable.throw(err))
         )
         .subscribe(
-          (model: ResponseSpringslice<PostList>) => {
+          (model: ResponseSpringslice<PostListData>) => {
 
             if (model.numberOfElements > 0) {
               if (model.first) this.posts.set([]);

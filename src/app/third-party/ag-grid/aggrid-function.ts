@@ -1,6 +1,6 @@
 import { HostListener, Injectable, output } from '@angular/core';
-import { ButtonRendererComponent } from './renderer/button-renderer.component';
-import { CheckboxRendererComponent } from './renderer/checkbox-renderer.component';
+import { ButtonRenderer } from './renderer/button-renderer';
+import { CheckboxRenderer } from './renderer/checkbox-renderer';
 
 import { ColDef } from 'ag-grid-community';
 
@@ -15,8 +15,8 @@ export class AggridFunction {
   gridApi: any;
   gridColumnApi: any;
   frameworkComponents = {
-    buttonRenderer: ButtonRendererComponent,
-    checkboxRenderer: CheckboxRendererComponent
+    buttonRenderer: ButtonRenderer,
+    checkboxRenderer: CheckboxRenderer
   };
 
   columnDefs: ColDef[] = [];

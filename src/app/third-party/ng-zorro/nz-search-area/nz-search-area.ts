@@ -23,7 +23,7 @@ import { Component, input } from '@angular/core';
     }
   `]
 })
-export class NzSearchAreaComponent {
+export class NzSearchArea {
   height = input<any>('46px');
 
 }

@@ -1,14 +1,14 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 import { HrmCodeTypeFormComponent } from './hrm-code-type-form';
 
 @Component({
   selector: 'hrm-code-type-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
     HrmCodeTypeFormComponent
   ],
   template: `

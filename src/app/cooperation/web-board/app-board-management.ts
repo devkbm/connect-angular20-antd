@@ -6,9 +6,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzTreeNodeOptions } from 'ng-zorro-antd/tree';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
-import { BoardFormComponent } from './board/board-form';
-import { BoardTreeComponent } from './board/board-tree';
-import { NzButtonExcelUploadComponent } from "../../third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload.component";
+import { BoardForm } from './board/board-form';
+import { BoardTree } from './board/board-tree';
+import { NzButtonExcelUpload } from "../../third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload";
 
 
 @Component({
@@ -18,9 +18,9 @@ import { NzButtonExcelUploadComponent } from "../../third-party/ng-zorro/nz-butt
     NzButtonModule,
     NzIconModule,
     NzGridModule,
-    BoardTreeComponent,
-    BoardFormComponent,
-    NzButtonExcelUploadComponent
+    BoardTree,
+    BoardForm,
+    NzButtonExcelUpload
 ],
   template: `
     <div nz-row class="search-div">
@@ -98,7 +98,7 @@ import { NzButtonExcelUploadComponent } from "../../third-party/ng-zorro/nz-butt
 })
 export class BoardManagementApp implements AfterViewInit {
 
-  boardTree = viewChild.required(BoardTreeComponent);
+  boardTree = viewChild.required(BoardTree);
 
   drawerBoard: { visible: boolean, formDataId: any } = {
     visible: false,

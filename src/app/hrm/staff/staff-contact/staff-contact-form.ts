@@ -9,7 +9,7 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 import { NzListRoadAddressComponent } from 'src/app/third-party/ng-zorro/nz-list-road-address/nz-list-road-address.component';
 
 import { NzInputModule } from 'ng-zorro-antd/input';
@@ -38,7 +38,7 @@ export interface StaffContact {
     NzInputModule,
     NzDividerModule,
     NzListRoadAddressComponent,
-    NzCrudButtonGroupComponent,
+    NzCrudButtonGroup,
 
   ],
   template: `
@@ -143,7 +143,7 @@ export interface StaffContact {
     }
   `]
 })
-export class StaffContactFormComponent implements OnInit, AfterViewInit, OnChanges {
+export class StaffContactForm implements OnInit, AfterViewInit, OnChanges {
 
   private notifyService = inject(NotifyService);
   private http = inject(HttpClient);

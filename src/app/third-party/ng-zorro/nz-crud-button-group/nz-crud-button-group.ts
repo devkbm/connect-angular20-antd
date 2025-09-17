@@ -76,7 +76,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     }
   `
 })
-export class NzCrudButtonGroupComponent implements OnInit {
+export class NzCrudButtonGroup implements OnInit {
 
   isSavePopupConfirm = input<boolean>(true);
   isDeletePopupConfirm = input<boolean>(true);

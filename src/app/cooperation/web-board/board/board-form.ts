@@ -212,7 +212,7 @@ export interface BoardHierarchy {
 
   `]
 })
-export class BoardFormComponent implements OnInit, AfterViewInit {
+export class BoardForm implements OnInit, AfterViewInit {
 
   parentBoardItems: BoardHierarchy[] = [];
 

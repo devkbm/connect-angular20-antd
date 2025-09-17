@@ -12,12 +12,12 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTreeModule } from 'ng-zorro-antd/tree';
 
-import { BoardTreeComponent } from './board/board-tree';
+import { BoardTree } from './board/board-tree';
 
-import { PostFormComponent } from './post/post-form';
-import { PostViewComponent } from './post/post-view';
-import { PostGridComponent } from './post/post-grid';
-import { PostListComponent } from './post/post-list';
+import { PostForm } from './post/post-form';
+import { PostView } from './post/post-view';
+import { PostGrid } from './post/post-grid';
+import { PostList, PostListData } from './post/post-list';
 
 import { WindowRef } from 'src/app/core/window-ref';
 
@@ -25,21 +25,6 @@ export interface TabInfo {
   tabName: string;
   postId: string;
 }
-
-export interface PostList {
-  boardId: string;
-  postId: string;
-  writerId: string;
-  writerName: string;
-  writerImage: string;
-  title: string;
-  hitCount: number;
-  editable: boolean;
-  isAttachedFile: boolean;
-  fileCount: number;
-  isRead: boolean;
-}
-
 
 @Component({
   selector: 'board-app',
@@ -57,12 +42,13 @@ export interface PostList {
     NzIconModule,
 
     //ArticleGridComponent,
-    BoardTreeComponent,
-    PostViewComponent,
-    PostFormComponent,
+    BoardTree,
+    PostView,
+    PostForm,
+    PostList
     //BoardFormComponent,
     //BoardManagementComponent,
-    PostListComponent
+
   ],
   template: `
 <div nz-row>
@@ -179,9 +165,9 @@ export interface PostList {
 })
 export class BoardApp implements AfterViewInit {
 
-  boardTree = viewChild.required(BoardTreeComponent);
-  postGrid = viewChild.required(PostGridComponent);
-  postList =  viewChild.required(PostListComponent);
+  boardTree = viewChild.required(BoardTree);
+  postGrid = viewChild.required(PostGrid);
+  postList =  viewChild.required(PostList);
 
   drawer: {
     board: { visible: boolean, formDataId: any },
@@ -294,7 +280,7 @@ export class BoardApp implements AfterViewInit {
     }
   }
 
-  editPostPopup(post: PostList) {
+  editPostPopup(post: PostListData) {
     const boardId = btoa(this.drawer.board.formDataId);
     const postId = btoa(post.postId);
 
@@ -318,7 +304,7 @@ export class BoardApp implements AfterViewInit {
     this.drawer.postForm.visible = true;
   }
 
-  viewPost(article: PostList) {
+  viewPost(article: PostListData) {
     this.drawer.postView.id = article.postId;
     this.drawer.postView.title = article.title;
 

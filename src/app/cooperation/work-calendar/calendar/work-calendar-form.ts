@@ -12,7 +12,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { NzInputNgxColorsComponent } from 'src/app/third-party/ngx-colors/nz-input-ngx-colors.component';
+import { NzInputNgxColors } from 'src/app/third-party/ngx-colors/nz-input-ngx-colors';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface WorkCalendarMember {
@@ -37,7 +37,7 @@ export interface WorkCalendar {
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzInputNgxColorsComponent,
+    NzInputNgxColors,
   ],
   template: `
     {{fg.getRawValue() | json}}
@@ -107,7 +107,7 @@ export interface WorkCalendar {
   `,
   styles: []
 })
-export class WorkCalendarFormComponent implements OnInit {
+export class WorkCalendarForm implements OnInit {
 
   workGroupList: any;
   memberList: any;

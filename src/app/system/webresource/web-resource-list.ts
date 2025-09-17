@@ -79,7 +79,7 @@ export interface WebResource {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WebResourceListComponent {
+export class WebResourceList {
 
   editButtonClicked = output<WebResource>();
 

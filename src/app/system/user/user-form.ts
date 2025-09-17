@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { UserImageUploadComponent } from './user-image-upload';
+import { UserImageUpload } from './user-image-upload';
 
 import { NotifyService } from 'src/app/core/service/notify.service';
 import { ResponseList } from 'src/app/core/model/response-list';
@@ -66,7 +66,7 @@ export interface DeptHierarchy {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    UserImageUploadComponent,
+    UserImageUpload,
 
     NzFormModule,
     NzInputModule,
@@ -217,7 +217,7 @@ export interface DeptHierarchy {
   `,
   styles: []
 })
-export class UserFormComponent implements OnInit {
+export class UserForm implements OnInit {
 
   public authList: any;
   public deptHierarchy: DeptHierarchy[] = [];

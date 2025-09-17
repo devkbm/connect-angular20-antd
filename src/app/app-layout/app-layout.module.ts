@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 
-import { AppLayoutComponent } from '../app-layout/app-layout.component';
+import { AppLayout } from './app-layout';
 
 export const routes: Routes = [
   {
-    path: '', component: AppLayoutComponent/*, canActivateChild: [AuthGuardService]*/,
+    path: '', component: AppLayout/*, canActivateChild: [AuthGuardService]*/,
     children: [
-      {path: 'edit',             loadComponent: () => import('./user-profile/user-profile-form.component').then(m => m.UserProfileFormComponent)}
+      {path: 'edit',             loadComponent: () => import('./user-profile/user-profile-form').then(m => m.UserProfileForm)}
     ]
   }
 ];

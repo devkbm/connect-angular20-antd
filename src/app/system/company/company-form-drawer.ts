@@ -1,16 +1,16 @@
 import { Component, input, output, viewChild } from '@angular/core';
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
-import { NzCrudButtonGroupComponent } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group.component';
+import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { CompanyFormComponent } from './company-form';
+import { CompanyForm } from './company-form';
 
 @Component({
   selector: 'company-form-drawer',
   imports: [
     NzDrawerModule,
-    NzCrudButtonGroupComponent,
-    CompanyFormComponent
+    NzCrudButtonGroup,
+    CompanyForm
   ],
   template: `
     <nz-drawer
@@ -42,11 +42,11 @@ import { CompanyFormComponent } from './company-form';
   `,
   styles:[]
 })
-export class CompanyFormDrawerComponent {
+export class CompanyFormDrawer {
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<CompanyFormComponent>(CompanyFormComponent);
+  form = viewChild.required<CompanyForm>(CompanyForm);
 
   save() {
     this.form().save();

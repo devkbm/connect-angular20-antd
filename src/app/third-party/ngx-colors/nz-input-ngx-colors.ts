@@ -20,7 +20,7 @@ import { NgxColorsModule } from 'ngx-colors';
   `,
   styles: []
 })
-export class NzInputNgxColorsComponent implements ControlValueAccessor, OnInit {
+export class NzInputNgxColors implements ControlValueAccessor, OnInit {
 
   element = viewChild.required<ElementRef>('input');
 

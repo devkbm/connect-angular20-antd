@@ -12,8 +12,8 @@ import { NgPage } from "src/app/core/app/nz-page";
 import { SessionManager } from 'src/app/core/session-manager';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { CalendarFullcalendarComponent } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { CalendarFullcalendar } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar";
 
 import { ResponseList } from 'src/app/core/model/response-list';
 import { DateSelectArg, EventClickArg } from '@fullcalendar/core/index.js';
@@ -36,7 +36,7 @@ import { AttendanceApplicationGridComponent, AttendanceApplicationGrid } from '.
     AttendanceApplicationGridComponent,
     AttendanceApplicationFormComponent,
     NgPage,
-    CalendarFullcalendarComponent
+    CalendarFullcalendar
 ],
   template: `
 

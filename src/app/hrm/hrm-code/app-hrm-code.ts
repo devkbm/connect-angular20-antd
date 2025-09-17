@@ -17,7 +17,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 import { HrmCodeTypeFormDrawerComponent } from './hrm-code-type-form-drawer';
 import { HrmCodeFormDrawerComponent } from './hrm-code-form-drawer';
 import { NgPage } from "src/app/core/app/nz-page";

@@ -197,7 +197,7 @@ export interface MenuGroup {
 
   `]
 })
-export class RoleFormComponent implements OnInit, AfterViewInit {
+export class RoleForm implements OnInit, AfterViewInit {
 
   //roleCode = viewChild.required<NzInputTextComponent>('roleCode');
 

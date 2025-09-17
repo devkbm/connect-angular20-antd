@@ -6,8 +6,8 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { NgPage } from "src/app/core/app/nz-page";
 import { NotifyService } from 'src/app/core/service/notify.service';
 
-import { HolidayFormDrawerComponent } from './holiday-form-drawer';
-import { HolidayGridComponent } from './holiday-grid';
+import { HolidayFormDrawer } from './holiday-form-drawer';
+import { HolidayGrid } from './holiday-grid';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
@@ -15,11 +15,11 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { CalendarFullcalendarComponent } from "../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar.component";
+import { CalendarFullcalendar } from "../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar";
 import { DateSelectArg } from '@fullcalendar/core/index.js';
 import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -55,12 +55,12 @@ export interface Holiday {
     NzDatePickerModule,
     NzDividerModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    HolidayGridComponent,
-    HolidayFormDrawerComponent,
+    NzSearchArea,
+    HolidayGrid,
+    HolidayFormDrawer,
     CalendarDaypilotNavigatorComponent,
     NgPage,
-    CalendarFullcalendarComponent
+    CalendarFullcalendar
 ],
   template: `
 <ng-template #header>
@@ -167,8 +167,8 @@ export class HolidayApp implements AfterViewInit {
   private notifyService = inject(NotifyService);
   private http = inject(HttpClient);
 
-  grid = viewChild.required(HolidayGridComponent);
-  calendar = viewChild.required(CalendarFullcalendarComponent);
+  grid = viewChild.required(HolidayGrid);
+  calendar = viewChild.required(CalendarFullcalendar);
 
   query: {
     holiday : { key: string, value: string, list: {label: string, value: string}[], year: Date },

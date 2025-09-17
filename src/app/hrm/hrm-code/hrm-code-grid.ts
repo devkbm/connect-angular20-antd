@@ -6,8 +6,8 @@ import type { ColDef, RowDoubleClickedEvent } from 'ag-grid-community';
 import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag-grid-community';
 import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { ButtonRendererComponent } from 'src/app/third-party/ag-grid/renderer/button-renderer.component';
-import { CheckboxRendererComponent } from 'src/app/third-party/ag-grid/renderer/checkbox-renderer.component';
+import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
+import { CheckboxRenderer } from 'src/app/third-party/ag-grid/renderer/checkbox-renderer';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -62,7 +62,7 @@ export class HrmCodeGridComponent extends AgGridCommon {
       headerName: '',
       width: 40,
       cellStyle: {'text-align': 'center', 'padding': '0px'},
-      cellRenderer: ButtonRendererComponent,
+      cellRenderer: ButtonRenderer,
       cellRendererParams: {
         onClick: this.onEditButtonClick.bind(this),
         label: '',
@@ -83,7 +83,7 @@ export class HrmCodeGridComponent extends AgGridCommon {
       field: 'useYn',
       width: 80,
       cellStyle: {'text-align': 'center', padding: '0px'},
-      cellRenderer: CheckboxRendererComponent,
+      cellRenderer: CheckboxRenderer,
       cellRendererParams: {
         label: '',
         disabled: true

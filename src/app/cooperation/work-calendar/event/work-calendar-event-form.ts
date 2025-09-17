@@ -160,7 +160,7 @@ export interface NewFormValue {
   `,
   styles: []
 })
-export class WorkCalendarEventFormComponent implements OnInit, OnChanges {
+export class WorkCalendarEventForm implements OnInit, OnChanges {
 
   newFormValue = input<NewFormValue>();
 

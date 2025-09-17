@@ -37,7 +37,7 @@ import { CkeditorUploadAdapter } from './ckeditor-upload-adapter';
     }
   `]
 })
-export class NzInputCkeditorComponent implements ControlValueAccessor {
+export class NzInputCkeditor implements ControlValueAccessor {
 
   ckEditor = viewChild.required(CKEditorComponent);
 

@@ -2,10 +2,10 @@ import { Component, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MenuGroupGridComponent } from './menu-group-grid';
-import { MenuGridComponent } from './menu-grid.';
-import { MenuFormDrawerComponent } from './menu-form-drawer';
-import { MenuGroupFormDrawerComponent } from './menu-group-form-drawer';
+import { MenuGroupGrid } from './menu-group-grid';
+import { MenuGrid } from './menu-grid.';
+import { MenuFormDrawer } from './menu-form-drawer';
+import { MenuGroupFormDrawer } from './menu-group-form-drawer';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -13,8 +13,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
 
 @Component({
@@ -30,11 +30,11 @@ import { NgPage } from "src/app/core/app/nz-page";
     NzButtonModule,
     NzIconModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    MenuGroupGridComponent,
-    MenuGridComponent,
-    MenuGroupFormDrawerComponent,
-    MenuFormDrawerComponent,
+    NzSearchArea,
+    MenuGroupGrid,
+    MenuGrid,
+    MenuGroupFormDrawer,
+    MenuFormDrawer,
     NgPage
 ],
   template: `
@@ -195,8 +195,8 @@ import { NgPage } from "src/app/core/app/nz-page";
 })
 export class MenuApp {
 
-  gridMenuGroup = viewChild.required(MenuGroupGridComponent);
-  gridMenu = viewChild.required(MenuGridComponent);
+  gridMenuGroup = viewChild.required(MenuGroupGrid);
+  gridMenu = viewChild.required(MenuGrid);
 
   query: {
     menuGroup : { key: string, value: string, list: {label: string, value: string}[] },

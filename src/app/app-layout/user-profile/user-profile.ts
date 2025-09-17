@@ -101,7 +101,7 @@ import { ResponseList } from 'src/app/core/model/response-list';
     }
   `]
 })
-export class UserProfileComponent {
+export class UserProfile {
 
   profilePictureSrc: any;
   profile?: SystemUserProfile;

@@ -8,9 +8,9 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
-import { UesrSearchComponent } from './uesr-search';
-import { UserGridComponent } from './user-grid';
-import { UserFormDrawerComponent } from './user-form-drawer';
+import { UesrSearch } from './uesr-search';
+import { UserGrid } from './user-grid';
+import { UserFormDrawer } from './user-form-drawer';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -20,9 +20,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom.component';
-import { NzSearchAreaComponent } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area.component';
-import { UserListComponent } from './user-list';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
+import { UserList } from './user-list';
 
 export interface User {
   userId: string | null;
@@ -52,12 +52,12 @@ export interface User {
     NzButtonModule,
     NzPopconfirmModule,
     NzPageHeaderCustom,
-    NzSearchAreaComponent,
-    UserGridComponent,
-    UserFormDrawerComponent,
+    NzSearchArea,
+    UserGrid,
+    UserFormDrawer,
     NgPage,
-    UesrSearchComponent,
-    UserListComponent
+    UesrSearch,
+    UserList
 ],
   template: `
 <ng-template #header>
@@ -134,8 +134,8 @@ export class UserApp implements OnInit {
 
   private http = inject(HttpClient);
 
-  grid = viewChild.required(UserGridComponent);
-  list = viewChild.required(UserListComponent);
+  grid = viewChild.required(UserGrid);
+  list = viewChild.required(UserList);
 
   view: 'grid' | 'list' = 'grid';
 
