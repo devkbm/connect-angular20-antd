@@ -153,7 +153,7 @@ export class Login implements OnInit {
           GlobalProperty._serverUrl = 'https://localhost:8090'
           sessionStorage.setItem('serverUrl', 'https://localhost:8090');
         } else if (this.serverType() === 'PROD') {
-          sessionStorage.setItem('serverUrl', 'https://connect-one.zapto.org');
+          sessionStorage.setItem('serverUrl', 'https://connect-one.kro.kr');
         }
       }
     })
