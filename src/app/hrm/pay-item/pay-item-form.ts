@@ -56,7 +56,7 @@ export interface PayItem {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="itemCode" formControlName="itemCode" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -65,7 +65,7 @@ export interface PayItem {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="itemName" formControlName="itemName" required/>
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -74,7 +74,7 @@ export interface PayItem {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="type" formControlName="type"/>
             </nz-form-control>
-          </nz-form-item>                    
+          </nz-form-item>
         </div>
       </div>
 
@@ -85,7 +85,7 @@ export interface PayItem {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <nz-switch nzId="usePayTable" formControlName="usePayTable"></nz-switch>
             </nz-form-control>
-          </nz-form-item>                              
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -96,7 +96,7 @@ export interface PayItem {
                 [nzMin]="0" [nzMax]="9999" placeholder="순번을 입력해주세요.">
               </nz-input-number>
             </nz-form-control>
-          </nz-form-item>                                        
+          </nz-form-item>
         </div>
 
       </div>
@@ -107,63 +107,63 @@ export interface PayItem {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayItemFormComponent {
+export class PayItemForm {
   private http = inject(HttpClient);
 
-    formSaved = output<any>();
-    formDeleted = output<any>();
-    formClosed = output<any>();
+  formSaved = output<any>();
+  formDeleted = output<any>();
+  formClosed = output<any>();
 
-    fg = inject(FormBuilder).group({
-      companyCode       : new FormControl<string | null>(null, { validators: Validators.required }),
-      itemCode          : new FormControl<string | null>(null, { validators: Validators.required }),
-      itemName          : new FormControl<string | null>(null),
-      type              : new FormControl<string | null>(null),
-      usePayTable       : new FormControl<boolean | null>(null),
-      seq               : new FormControl<number | null>(null),
-      comment           : new FormControl<string | null>(null)
-    });
+  fg = inject(FormBuilder).group({
+    companyCode       : new FormControl<string | null>(null, { validators: Validators.required }),
+    itemCode          : new FormControl<string | null>(null, { validators: Validators.required }),
+    itemName          : new FormControl<string | null>(null),
+    type              : new FormControl<string | null>(null),
+    usePayTable       : new FormControl<boolean | null>(null),
+    seq               : new FormControl<number | null>(null),
+    comment           : new FormControl<string | null>(null)
+  });
 
-    newForm(): void {
-      this.fg.reset();
-    }
+  newForm(): void {
+    this.fg.reset();
+  }
 
-    modifyForm(formData: PayItem): void {
-      this.fg.patchValue(formData);
-    }
+  modifyForm(formData: PayItem): void {
+    this.fg.patchValue(formData);
+  }
 
-    closeForm() {
-      this.formClosed.emit(this.fg.getRawValue());
-    }
+  closeForm() {
+    this.formClosed.emit(this.fg.getRawValue());
+  }
 
-    get(id: string): void {
-      const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
-      const options = getHttpOptions();
+  get(id: string): void {
+    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
+    const options = getHttpOptions();
 
-      this.http
-          .get<ResponseObject<PayItem>>(url, options).pipe(
-          //  catchError(this.handleError<ResponseObject<Staff>>('get', undefined))
-          )
-          .subscribe(
-            (model: ResponseObject<PayItem>) => {
-              model.data ? this.modifyForm(model.data) : this.newForm();
-            }
+    this.http
+        .get<ResponseObject<PayItem>>(url, options).pipe(
+        //  catchError(this.handleError<ResponseObject<Staff>>('get', undefined))
         )
-      }
+        .subscribe(
+          (model: ResponseObject<PayItem>) => {
+            model.data ? this.modifyForm(model.data) : this.newForm();
+          }
+    )
+  }
 
-      save(): void {
-        const url = GlobalProperty.serverUrl() + `/api/hrm/payitem`;
-        const options = getHttpOptions();
+  save(): void {
+    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem`;
+    const options = getHttpOptions();
 
-        this.http
-            .post<ResponseObject<PayItem>>(url, this.fg.getRawValue(), options).pipe(
-            //  catchError(this.handleError<ResponseObject<Staff>>('save', undefined))
-            )
-            .subscribe(
-              (model: ResponseObject<PayItem>) => {
-                //this.notifyService.changeMessage(model.message);
-                this.formSaved.emit(this.fg.getRawValue());
-              }
-            )
-      }
+    this.http
+        .post<ResponseObject<PayItem>>(url, this.fg.getRawValue(), options).pipe(
+        //  catchError(this.handleError<ResponseObject<Staff>>('save', undefined))
+        )
+        .subscribe(
+          (model: ResponseObject<PayItem>) => {
+            //this.notifyService.changeMessage(model.message);
+            this.formSaved.emit(this.fg.getRawValue());
+          }
+        )
+  }
 }
