@@ -1,13 +1,19 @@
-import { Component, Input, output } from '@angular/core';
+import { Component, inject, Input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AgGridAngular } from 'ag-grid-angular';
 import type { ColDef, RowDoubleClickedEvent } from 'ag-grid-community';
 import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag-grid-community';
 import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
+
 import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
 import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
 import { CheckboxRenderer } from 'src/app/third-party/ag-grid/renderer/checkbox-renderer';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { HttpClient } from '@angular/common/http';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { ResponseList } from 'src/app/core/model/response-list';
 
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
@@ -18,11 +24,10 @@ export interface PayItem {
   companyCode: string | null;
   itemCode: string | null;
   itemName: string | null;
-  useYn: boolean | null;
-  sequence: number | null;
+  type: string | null;
+  usePayTable: boolean | null;
+  seq: number | null;
   comment: string | null;
-  fieldConfig: string | null;
-  extraInfo: any;
 }
 
 @Component({
@@ -34,7 +39,7 @@ export interface PayItem {
   template: `
     <ag-grid-angular
       [theme]="theme"
-      [rowData]="list"
+      [rowData]="gridResource.value()?.data ?? []"
       [style.height]="'100%'"
       [rowSelection]="rowSelection"
       [columnDefs]="columnDefs"
@@ -48,8 +53,7 @@ export interface PayItem {
 })
 export class PayItemGrid extends AgGridCommon {
 
-  @Input() list: PayItem[] = [];
-  @Input() appointmentCode: any = '';
+  private http = inject(HttpClient);
 
   rowClicked = output<PayItem>();
   rowDoubleClicked = output<PayItem>();
@@ -73,12 +77,12 @@ export class PayItemGrid extends AgGridCommon {
       width: 70,
       cellStyle: {'text-align': 'center'}
     },
-    { headerName: '코드',         field: 'code',        width: 150, filter: 'agTextColumnFilter' },
-    { headerName: '코드명',       field: 'codeName',    width: 200, filter: 'agTextColumnFilter' },
+    { headerName: '코드',         field: 'itemCode',        width: 150, filter: 'agTextColumnFilter' },
+    { headerName: '코드명',       field: 'itemName',    width: 200, filter: 'agTextColumnFilter' },
     { headerName: '설명',         field: 'comment',     width: 200, filter: 'agTextColumnFilter' },
     {
       headerName: '사용여부',
-      field: 'useYn',
+      field: 'usePayTable',
       width: 80,
       cellStyle: {'text-align': 'center', padding: '0px'},
       cellRenderer: CheckboxRenderer,
@@ -87,12 +91,26 @@ export class PayItemGrid extends AgGridCommon {
         disabled: true
       }
     },
-    { headerName: '순번',         field: 'sequence',    width: 80,  filter: 'agNumberColumnFilter' }
+    { headerName: '순번',         field: 'seq',    width: 80,  filter: 'agNumberColumnFilter' }
   ];
 
   getRowId: GetRowIdFunc<PayItem> = (params: GetRowIdParams<PayItem>) => {
     return params.data.companyCode! + params.data.itemCode!;
   };
+
+  constructor() {
+    super();
+    this.gridResource.reload();
+  }
+
+  gridQuery = signal<any>('');
+  gridResource = rxResource({
+    params: () => this.gridQuery(),
+    stream: ({params}) => this.http.get<ResponseList<PayItem>>(
+      GlobalProperty.serverUrl() + `/api/hrm/payitem`,
+      getHttpOptions(params)
+    )
+  })
 
 
   selectionChanged(event: any) {

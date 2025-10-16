@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -34,6 +34,7 @@ export interface PayItem {
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
+    NzInputModule,
     NzInputNumberModule,
 
   ],
@@ -78,7 +79,9 @@ export interface PayItem {
         </div>
       </div>
 
+
       <div nz-row nzGutter="8">
+        <!--
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="usePayTable">급여테이블Y/N</nz-form-label>
@@ -87,6 +90,7 @@ export interface PayItem {
             </nz-form-control>
           </nz-form-item>
         </div>
+      -->
 
         <div nz-col nzSpan="8">
           <nz-form-item>
@@ -123,6 +127,8 @@ export class PayItemForm {
     seq               : new FormControl<number | null>(null),
     comment           : new FormControl<string | null>(null)
   });
+
+  formDataId = input<string>();
 
   newForm(): void {
     this.fg.reset();
@@ -165,5 +171,9 @@ export class PayItemForm {
             this.formSaved.emit(this.fg.getRawValue());
           }
         )
+  }
+
+  remove() {
+
   }
 }

@@ -20,6 +20,7 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
+import { PayItemFormDrawer } from "./pay-item-form-drawer";
 
 export class SystemTypeEnum {
   constructor(
@@ -43,11 +44,12 @@ export class SystemTypeEnum {
     NzPageHeaderCustom,
     NzSearchArea,
     NgPage,
-    PayItemGrid
+    PayItemGrid,
+    PayItemFormDrawer
 ],
   template: `
 <ng-template #header>
-  <nz-page-header-custom title="회사 등록" subtitle="This is a subtitle"></nz-page-header-custom>
+  <nz-page-header-custom title="급여항목 등록" subtitle="This is a subtitle"></nz-page-header-custom>
 </ng-template>
 
 <ng-template #search>
@@ -67,24 +69,22 @@ export class SystemTypeEnum {
     <div>
       <h3 class="grid-title">회사 목록 {{drawer| json}} </h3>
     </div>
-    <div style="flex: 1">
-      @defer {
-        <pay-item-grid #grid
-          (rowClicked)="resourceGridRowClicked($event)"
-          (editButtonClicked)="editResource($event)"
-          (rowDoubleClicked)="editResource($event)">
-        </pay-item-grid>
-      }
+    <div style="height: 500px">
+      <pay-item-grid #grid
+        (rowClicked)="resourceGridRowClicked($event)"
+        (editButtonClicked)="editResource($event)"
+        (rowDoubleClicked)="editResource($event)">
+      </pay-item-grid>
     </div>
   </div>
 </ng-page>
 
-<!--
-<company-form-drawer
-  [drawer]="drawer.company"
+
+<pay-item-form-drawer
+  [drawer]="drawer.payitem"
   (drawerClosed)="getList('')">
-</company-form-drawer>
-    -->
+</pay-item-form-drawer>
+
 
   `,
   styles: `
@@ -116,18 +116,15 @@ export class SystemTypeEnum {
   `
 })
 export class AppPayItem implements OnInit, AfterViewInit {
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
   private http = inject(HttpClient);
 
   grid = viewChild.required(PayItemGrid);
 
   query: {
-    company : { key: string, value: string, list: {label: string, value: string}[] }
+    payitem : { key: string, value: string, list: {label: string, value: string}[] }
   } = {
-    company : {
+    payitem : {
       key: 'resourceCode',
       value: '',
       list: [
@@ -140,28 +137,32 @@ export class AppPayItem implements OnInit, AfterViewInit {
   }
 
   drawer: {
-    company: { visible: boolean, formDataId: any }
+    payitem: { visible: boolean, formDataId: any }
   } = {
-    company: { visible: false, formDataId: null }
+    payitem: { visible: false, formDataId: null }
   }
 
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    //throw new Error('Method not implemented.');
+  }
+
   getList(params: any): void {
-    this.drawer.company.visible = false;
+    this.drawer.payitem.visible = false;
 
     //this.grid().gridQuery.set(params);
   }
 
   newResource(): void {
-    this.drawer.company.formDataId = null;
-    this.drawer.company.visible = true;
+    this.drawer.payitem.formDataId = null;
+    this.drawer.payitem.visible = true;
   }
 
   editResource(item: any): void {
-    this.drawer.company.formDataId = item.companyCode;
-    this.drawer.company.visible = true;
+    this.drawer.payitem.formDataId = item.companyCode;
+    this.drawer.payitem.visible = true;
   }
 
   delete(): void {
@@ -182,6 +183,6 @@ export class AppPayItem implements OnInit, AfterViewInit {
   }
 
   resourceGridRowClicked(item: any): void {
-    this.drawer.company.formDataId = item.companyCode;
+    this.drawer.payitem.formDataId = item.companyCode;
   }
 }
