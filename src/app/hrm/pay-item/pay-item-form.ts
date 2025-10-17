@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, inject, output, input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, output, input, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -19,10 +20,10 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 
 export interface PayItem {
   companyCode: string | null;
-  itemCode: string | null;
-  itemName: string | null;
+  payItemCode: string | null;
+  payItemName: string | null;
   type: string | null;
-  usePayTable: boolean | null;
+  usePayTable: string;
   seq: number | null;
   comment: string | null;
 }
@@ -36,6 +37,7 @@ export interface PayItem {
     NzFormModule,
     NzInputModule,
     NzInputNumberModule,
+    NzCheckboxModule,
 
   ],
   template: `
@@ -53,18 +55,18 @@ export interface PayItem {
       <div nz-row nzGutter="8">
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzFor="itemCode" nzRequired>급여항목코드</nz-form-label>
+            <nz-form-label nzFor="payItemCode" nzRequired>급여항목코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="itemCode" formControlName="itemCode" required/>
+              <input nz-input id="payItemCode" formControlName="payItemCode" required/>
             </nz-form-control>
           </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
           <nz-form-item>
-            <nz-form-label nzFor="itemName" nzRequired>급여항목명</nz-form-label>
+            <nz-form-label nzFor="payItemName" nzRequired>급여항목명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="itemName" formControlName="itemName" required/>
+              <input nz-input id="payItemName" formControlName="payItemName" required/>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -81,7 +83,7 @@ export interface PayItem {
 
 
       <div nz-row nzGutter="8">
-        <!--
+
         <div nz-col nzSpan="8">
           <nz-form-item>
             <nz-form-label nzFor="usePayTable">급여테이블Y/N</nz-form-label>
@@ -90,7 +92,6 @@ export interface PayItem {
             </nz-form-control>
           </nz-form-item>
         </div>
-      -->
 
         <div nz-col nzSpan="8">
           <nz-form-item>
@@ -120,15 +121,25 @@ export class PayItemForm {
 
   fg = inject(FormBuilder).group({
     companyCode       : new FormControl<string | null>(null, { validators: Validators.required }),
-    itemCode          : new FormControl<string | null>(null, { validators: Validators.required }),
-    itemName          : new FormControl<string | null>(null),
+    payItemCode       : new FormControl<string | null>(null, { validators: Validators.required }),
+    payItemName       : new FormControl<string | null>(null),
     type              : new FormControl<string | null>(null),
-    usePayTable       : new FormControl<boolean | null>(null),
+    usePayTable       : new FormControl<string>(''),
     seq               : new FormControl<number | null>(null),
     comment           : new FormControl<string | null>(null)
   });
 
   formDataId = input<string>();
+
+  constructor() {
+    effect(() => {
+      if (this.formDataId()) {
+        this.get(this.formDataId()!);
+      } else {
+        this.fg.reset();
+      }
+    })
+  }
 
   newForm(): void {
     this.fg.reset();

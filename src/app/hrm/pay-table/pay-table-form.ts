@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -7,12 +7,13 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
-import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { HrmCode, HrmCodeService } from '../shared/hrm-code.service';
 import { ResponseList } from 'src/app/core/model/response-list';
 import { ResponseMap } from 'src/app/core/model/response-map';
+
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 export interface PayTable {
   id: string | null;
@@ -28,7 +29,7 @@ export interface PayTable {
 }
 
 @Component({
-  selector: 'app-pay-table-form',
+  selector: 'pay-table-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -113,7 +114,7 @@ export interface PayTable {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayTableFormComponent {
+export class PayTableForm {
   private http = inject(HttpClient);
   private hrmCodeService = inject(HrmCodeService);
 
@@ -148,6 +149,8 @@ export class PayTableFormComponent {
     comment           : new FormControl<string | null>(null),
   });
 
+  formDataId = input<string>();
+
   constructor() {
     this.getCodeMap([
       {typeId: 'HR0003', propertyName: "occupationCodeList"},
@@ -155,6 +158,7 @@ export class PayTableFormComponent {
       {typeId: 'HR0005', propertyName: "payStepCodeList"},
     ]);
   }
+
 
   newForm(): void {
     this.fg.reset();
@@ -200,26 +204,25 @@ export class PayTableFormComponent {
   }
 
   getCodeMap(objs: {typeId: string,  propertyName: string}[]): void {
+    const params = {
+      typeIds : objs.map(e => e.typeId)
+    };
 
-      const params = {
-        typeIds : objs.map(e => e.typeId)
-      };
+    this.hrmCodeService
+        .getMapList(params)
+        .subscribe(
+          (model: ResponseMap<HrmCode>) => {
+            if ( model.data ) {
+              let data: any = model.data;
 
-      this.hrmCodeService
-          .getMapList(params)
-          .subscribe(
-            (model: ResponseMap<HrmCode>) => {
-              if ( model.data ) {
-                let data: any = model.data;
-
-                for (const obj of objs) {
-                  this[obj.propertyName] = data[obj.typeId];
-                }
-              } else {
-                //list = [];
+              for (const obj of objs) {
+                this[obj.propertyName] = data[obj.typeId];
               }
+            } else {
+              //list = [];
             }
-        );
+          }
+      );
+  }
 
-    }
 }

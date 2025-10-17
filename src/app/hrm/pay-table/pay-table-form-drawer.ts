@@ -3,30 +3,30 @@ import { Component, input, output, viewChild } from '@angular/core';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { PayItemForm } from "./pay-item-form";
+import { PayTableForm } from "./pay-table-form";
 
 @Component({
-  selector: 'pay-item-form-drawer',
+  selector: 'pay-table-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroup,
 
-    PayItemForm
+    PayTableForm
 ],
   template: `
     <nz-drawer
-      nzTitle="급여항목코드 등록"
+      nzTitle="업무코드 등록"
       nzWidth="80%"
       [nzMaskClosable]="true"
       [nzVisible]="drawer().visible"
       [nzFooter]="footerTpl"
       (nzOnClose)="drawer().visible = false">
-      <pay-item-form *nzDrawerContent
+      <pay-table-form *nzDrawerContent
           [formDataId]="drawer().formDataId"
           (formSaved)="closeDrawer($event)"
           (formDeleted)="closeDrawer($event)"
           (formClosed)="drawer().visible = false">
-      </pay-item-form>
+      </pay-table-form>
     </nz-drawer>
 
   <ng-template #footerTpl>
@@ -43,19 +43,19 @@ import { PayItemForm } from "./pay-item-form";
   `,
   styles: []
 })
-export class PayItemFormDrawer {
+export class PayTableFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();
 
-  form = viewChild.required<PayItemForm>(PayItemForm);
+  form = viewChild.required<PayTableForm>(PayTableForm);
 
   save() {
     this.form().save();
   }
 
   remove() {
-    this.form().remove();
+    //this.form().remove();
   }
 
   closeDrawer(params?: any) {

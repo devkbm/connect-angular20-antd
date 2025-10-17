@@ -8,9 +8,9 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NgPage } from "src/app/core/app/nz-page";
 
-import { PayItemSearch } from "./pay-item-search";
-import { PayItemGrid } from './pay-item-grid';
-import { PayItemFormDrawer } from "./pay-item-form-drawer";
+import { PayTableSearch } from "./pay-table-search";
+import { PayTableGrid } from './pay-table-grid';
+import { PayTableFormDrawer } from "./pay-table-form-drawer";
 
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
@@ -24,7 +24,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
 
 @Component({
-  selector: 'app-pay-item',
+  selector: 'app-pay-table',
   imports: [
     CommonModule,
     FormsModule,
@@ -38,22 +38,22 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzPageHeaderCustom,
     NzSearchArea,
     NgPage,
-    PayItemGrid,
-    PayItemFormDrawer,
-    PayItemSearch
+    PayTableGrid,
+    PayTableFormDrawer,
+    PayTableSearch
 ],
   template: `
 <ng-template #header>
-  <nz-page-header-custom title="급여항목 등록" subtitle="This is a subtitle"></nz-page-header-custom>
+  <nz-page-header-custom title="급여테이블 등록" subtitle="This is a subtitle"></nz-page-header-custom>
 </ng-template>
 
 <ng-template #search>
   <nz-search-area>
-    <pay-item-search
+    <pay-table-search
       (search)="getList($event)"
       (newForm)="newResource()"
       (deleteForm)="delete()">
-    </pay-item-search>
+    </pay-table-search>
   </nz-search-area>
 </ng-template>
 
@@ -63,19 +63,19 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
       <h3 class="grid-title">급여항목 목록 {{drawer| json}} </h3>
     </div>
     <div style="height: 500px">
-      <pay-item-grid #grid
+      <pay-table-grid #grid
         (rowClicked)="gridRowClicked($event)"
         (editButtonClicked)="editResource($event)"
         (rowDoubleClicked)="editResource($event)">
-      </pay-item-grid>
+      </pay-table-grid>
     </div>
   </div>
 </ng-page>
 
-<pay-item-form-drawer
+<pay-table-form-drawer
   [drawer]="drawer.payitem"
   (drawerClosed)="getList('')">
-</pay-item-form-drawer>
+</pay-table-form-drawer>
   `,
   styles: `
 :host {
@@ -105,11 +105,11 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 
   `
 })
-export class AppPayItem implements OnInit, AfterViewInit {
+export class AppPayTable implements OnInit, AfterViewInit {
 
   private http = inject(HttpClient);
 
-  grid = viewChild.required(PayItemGrid);
+  grid = viewChild.required(PayTableGrid);
 
   drawer: {
     payitem: { visible: boolean, formDataId: any }
