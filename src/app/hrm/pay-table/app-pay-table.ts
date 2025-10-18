@@ -73,7 +73,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 </ng-page>
 
 <pay-table-form-drawer
-  [drawer]="drawer.payitem"
+  [drawer]="drawer.paytable"
   (drawerClosed)="getList('')">
 </pay-table-form-drawer>
   `,
@@ -112,9 +112,9 @@ export class AppPayTable implements OnInit, AfterViewInit {
   grid = viewChild.required(PayTableGrid);
 
   drawer: {
-    payitem: { visible: boolean, formDataId: any }
+    paytable: { visible: boolean, formDataId: any }
   } = {
-    payitem: { visible: false, formDataId: null }
+    paytable: { visible: false, formDataId: null }
   }
 
   ngOnInit(): void {
@@ -125,24 +125,24 @@ export class AppPayTable implements OnInit, AfterViewInit {
   }
 
   getList(params: any): void {
-    this.drawer.payitem.visible = false;
+    this.drawer.paytable.visible = false;
     console.log(params);
     this.grid().gridQuery.set(params);
   }
 
   newResource(): void {
-    this.drawer.payitem.formDataId = null;
-    this.drawer.payitem.visible = true;
+    this.drawer.paytable.formDataId = null;
+    this.drawer.paytable.visible = true;
   }
 
   editResource(item: any): void {
-    this.drawer.payitem.formDataId = item.payItemCode;
-    this.drawer.payitem.visible = true;
+    this.drawer.paytable.formDataId = item.id;
+    this.drawer.paytable.visible = true;
   }
 
   delete(): void {
 
-    const id = this.grid().getSelectedRows()[0].payItemCode;
+    const id = this.grid().getSelectedRows()[0].id;
 
     const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
     const options = getHttpOptions();
@@ -159,7 +159,7 @@ export class AppPayTable implements OnInit, AfterViewInit {
 
   gridRowClicked(item: any): void {
     if (item) {
-      this.drawer.payitem.formDataId = item.payItemCode;
+      this.drawer.paytable.formDataId = item.id;
     }
   }
 

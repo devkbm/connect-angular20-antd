@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -6,14 +6,17 @@ import { HttpClient } from '@angular/common/http';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
+import { ResponseMap } from 'src/app/core/model/response-map';
 
 import { HrmCode, HrmCodeService } from '../shared/hrm-code.service';
-import { ResponseList } from 'src/app/core/model/response-list';
-import { ResponseMap } from 'src/app/core/model/response-map';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { PayItem, PayItemService } from '../shared/pay-item-service';
+import { ResponseList } from 'src/app/core/model/response-list';
 
 export interface PayTable {
   id: string | null;
@@ -36,7 +39,9 @@ export interface PayTable {
     ReactiveFormsModule,
     NzFormModule,
     NzDatePickerModule,
+    NzInputModule,
     NzInputNumberModule,
+    NzSelectModule,
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical" style="padding: 0px; margin: 0px;">
@@ -55,7 +60,15 @@ export interface PayTable {
           <nz-form-item>
             <nz-form-label nzFor="payItemCode" nzRequired>급여항목코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="payItemCode" formControlName="payItemCode" required/>
+              <!--<input nz-input id="payItemCode" formControlName="payItemCode" required/>-->
+              <nz-select nzId="payItemCode" formControlName="payItemCode">
+                @for (option of payItemList; track option) {
+                  <nz-option
+                    [nzLabel]="option.payItemName"
+                    [nzValue]="option.payItemCode">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -64,7 +77,7 @@ export interface PayTable {
           <nz-form-item>
             <nz-form-label nzFor="effectiveDate" nzRequired>적용일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-date-picker nzId="effectiveDate" formControlName="effectiveDate"></nz-date-picker>
+              <nz-date-picker nzId="effectiveDate" formControlName="effectiveDate" required></nz-date-picker>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -75,7 +88,15 @@ export interface PayTable {
           <nz-form-item>
             <nz-form-label nzFor="occupationCode">직종</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="occupationCode" formControlName="occupationCode"/>
+              <!--<input nz-input id="occupationCode" formControlName="occupationCode"/>-->
+              <nz-select nzId="occupationCode" formControlName="occupationCode">
+                @for (option of occupationCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -84,7 +105,15 @@ export interface PayTable {
           <nz-form-item>
             <nz-form-label nzFor="jobGradeCode">직급</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="jobGradeCode" formControlName="jobGradeCode"/>
+              <!--<input nz-input id="jobGradeCode" formControlName="jobGradeCode"/>-->
+              <nz-select nzId="jobGradeCode" formControlName="jobGradeCode">
+                @for (option of jobGradeCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -93,7 +122,15 @@ export interface PayTable {
           <nz-form-item>
             <nz-form-label nzFor="payStepCode">호봉</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="payStepCode" formControlName="payStepCode"/>
+              <!--<input nz-input id="payStepCode" formControlName="payStepCode"/>-->
+              <nz-select nzId="payStepCode" formControlName="payStepCode">
+                @for (option of payStepCodeList; track option) {
+                  <nz-option
+                    [nzLabel]="option.codeName"
+                    [nzValue]="option.code">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -117,6 +154,7 @@ export interface PayTable {
 export class PayTableForm {
   private http = inject(HttpClient);
   private hrmCodeService = inject(HrmCodeService);
+  private payItemService = inject(PayItemService);
 
   [key: string]: any;
   /**
@@ -131,6 +169,8 @@ export class PayTableForm {
    * 호봉코드 - HR0005
    */
   payStepCodeList: HrmCode[] = [];
+
+  payItemList: PayItem[] = [];
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -157,6 +197,14 @@ export class PayTableForm {
       {typeId: 'HR0004', propertyName: "jobGradeCodeList"},
       {typeId: 'HR0005', propertyName: "payStepCodeList"},
     ]);
+
+    this.getPayItemList();
+
+    effect(() => {
+      if (this.formDataId()) {
+        this.get(this.formDataId()!);
+      }
+    })
   }
 
 
@@ -173,7 +221,7 @@ export class PayTableForm {
   }
 
   get(id: string): void {
-    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
+    const url = GlobalProperty.serverUrl() + `/api/hrm/paytable/${id}`;
     const options = getHttpOptions();
 
     this.http
@@ -188,7 +236,7 @@ export class PayTableForm {
   }
 
   save(): void {
-    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem`;
+    const url = GlobalProperty.serverUrl() + `/api/hrm/paytable`;
     const options = getHttpOptions();
 
     this.http
@@ -199,6 +247,22 @@ export class PayTableForm {
           (model: ResponseObject<PayTable>) => {
             //this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
+          }
+        )
+  }
+
+  remove() {
+    const url = GlobalProperty.serverUrl() + `/api/hrm/paytable/${this.fg.controls.id.value}`;
+    const options = getHttpOptions()
+
+    this.http
+        .delete<ResponseObject<PayTable>>(url, options).pipe(
+      //     catchError(this.handleError<ResponseObject<User>>('deleteUser', undefined))
+        )
+        .subscribe(
+          (model: ResponseObject<PayTable>) => {
+            //this.notifyService.changeMessage(model.message);
+            this.formDeleted.emit(this.fg.getRawValue());
           }
         )
   }
@@ -224,5 +288,19 @@ export class PayTableForm {
           }
       );
   }
+
+  getPayItemList() {
+    this.payItemService
+        .getPayItemList('')
+        .subscribe(
+          (model: ResponseList<PayItem>) => {
+            console.log(model);
+            if (model.data) {
+              this.payItemList = model.data;
+            }
+          }
+        );
+  }
+
 
 }

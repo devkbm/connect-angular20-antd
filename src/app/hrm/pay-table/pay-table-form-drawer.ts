@@ -15,7 +15,7 @@ import { PayTableForm } from "./pay-table-form";
 ],
   template: `
     <nz-drawer
-      nzTitle="업무코드 등록"
+      nzTitle="급여테이블 등록"
       nzWidth="80%"
       [nzMaskClosable]="true"
       [nzVisible]="drawer().visible"
@@ -55,7 +55,7 @@ export class PayTableFormDrawer {
   }
 
   remove() {
-    //this.form().remove();
+    this.form().remove();
   }
 
   closeDrawer(params?: any) {
