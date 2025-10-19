@@ -16,7 +16,7 @@ export interface Staff {
     gender: string;
     birthday: Date;
     imagePath: string;
-  
+
     [key:string]:any;
   }
 
@@ -30,19 +30,19 @@ export class StaffSelectService {
   list: Staff[] = [];
 
   getStaffList(): void {
-      const params = {isEnabled: true};
-  
-      const url = GlobalProperty.serverUrl() + `/api/hrm/staff`;
-      const options = getHttpOptions({isEnabled: true});
-  
-      this.http.get<ResponseList<Staff>>(url, options).pipe(
-            //catchError(this.handleError<ResponseList<Staff>>('getList', undefined))
-          )
-          .subscribe(
-            (model: ResponseList<Staff>) => {
-              this.list = model.data;
-            }
-          );
-    }
+    const params = {isEnabled: true};
+
+    const url = GlobalProperty.serverUrl() + `/api/hrm/staff`;
+    const options = getHttpOptions({isEnabled: true});
+
+    this.http.get<ResponseList<Staff>>(url, options).pipe(
+          //catchError(this.handleError<ResponseList<Staff>>('getList', undefined))
+        )
+        .subscribe(
+          (model: ResponseList<Staff>) => {
+            this.list = model.data;
+          }
+        );
+  }
 
 }

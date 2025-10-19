@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 import { Observable } from 'rxjs';
 
@@ -28,9 +29,23 @@ export interface DeptHierarchy {
 @Injectable({
   providedIn: 'root',
 })
-export class DeptQueryService {
+export class DeptResourceService {
 
   private http = inject(HttpClient);
+
+  params = signal<string>('001');
+  resource = rxResource({
+    params: () => this.params(),
+    stream: ({params}) => this.http.get<ResponseList<DeptHierarchy>>(
+      GlobalProperty.serverUrl() + `/api/system/depttree`,
+      //getHttpOptions(params)
+      getHttpOptions({company: params})
+    )
+  })
+
+  getData(): DeptHierarchy[] | undefined {
+    return this.resource.value()?.data;
+  }
 
   getDeptHierarchy(companyCode: string): Observable<ResponseList<DeptHierarchy>> {
     const url = GlobalProperty.serverUrl() + `/api/system/depttree`;

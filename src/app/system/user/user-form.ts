@@ -18,7 +18,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
-import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
+import { DeptResourceService } from 'src/app/shared-service/dept-resource-service';
 
 export interface UserFormData {
   userId: string | null;
@@ -187,7 +187,7 @@ export interface DeptHierarchy {
               <nz-tree-select
                 nzId="deptCode"
                 formControlName="deptCode"
-                [nzNodes]="deptService.nodes()"
+                [nzNodes]="deptResource.getData()!"
                 nzPlaceHolder="부서 없음"
                 >
               </nz-tree-select>
@@ -220,7 +220,6 @@ export interface DeptHierarchy {
 export class UserForm implements OnInit {
 
   public authList: any;
-  public deptHierarchy: DeptHierarchy[] = [];
 
   passwordConfirm: string = '';
   popup: boolean = false;
@@ -246,7 +245,7 @@ export class UserForm implements OnInit {
   private renderer = inject(Renderer2);
   private http = inject(HttpClient);
   private validator = inject(UserFormValidatorService);
-  deptService = inject(DeptTreeSelectService);
+  deptResource = inject(DeptResourceService);
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -274,7 +273,7 @@ export class UserForm implements OnInit {
 
 
   constructor() {
-    this.deptService.getDeptHierarchy();
+    this.deptResource.resource.reload();
 
     effect(() => {
       if (this.formDataId()) {
@@ -293,7 +292,6 @@ export class UserForm implements OnInit {
 
   ngOnInit(): void {
     this.getRoleList();
-    this.getDeptHierarchy();
   }
 
   focusInput() {
@@ -420,20 +418,6 @@ export class UserForm implements OnInit {
         .subscribe(
           (model: ResponseList<Role>) => {
             this.authList = model.data;
-          }
-        )
-  }
-
-  getDeptHierarchy(): void {
-    const url = GlobalProperty.serverUrl() + `/api/system/role`;
-    const options = getHttpOptions()
-
-    this.http.get<ResponseList<DeptHierarchy>>(url, options).pipe(
-        //  catchError(this.handleError<ResponseList<DeptHierarchy>>('getDeptHierarchyList', undefined))
-        )
-        .subscribe(
-          (model: ResponseList<DeptHierarchy>) => {
-            this.deptHierarchy = model.data;
           }
         )
   }

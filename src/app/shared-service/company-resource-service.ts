@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 import { Observable } from 'rxjs';
 
@@ -37,17 +38,21 @@ export interface Company {
 @Injectable({
   providedIn: 'root',
 })
-export class CompanyQueryService {
+export class CompanyResourceService {
 
   private http = inject(HttpClient);
 
-  getCompanyList(params: any): Observable<ResponseList<Company>> {
-    const url = GlobalProperty.serverUrl() + `/api/system/company`;
-    const options = getHttpOptions(params);
+  params = signal<any>('');
+  resource = rxResource({
+    params: () => this.params(),
+    stream: ({params}) => this.http.get<ResponseList<Company>>(
+      GlobalProperty.serverUrl() + `/api/system/company`,
+      getHttpOptions(params)
+    )
+  })
 
-    return this.http.get<ResponseList<Company>>(url, options).pipe(
-        //  catchError(this.handleError<ResponseObject<Dept>>('saveDept', undefined))
-        )
-    }
+  getData(): Company[] | undefined {
+    return this.resource.value()?.data;
+  }
 
 }

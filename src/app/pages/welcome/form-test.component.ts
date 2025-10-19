@@ -7,18 +7,18 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 
-import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
+import { DeptResourceService } from 'src/app/shared-service/dept-resource-service';
 
 @Component({
   selector: 'app-form-test',
   imports: [
-    CommonModule, 
-    FormsModule, 
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    NzGridModule, 
-    NzFormModule, 
-    NzInputModule, 
-    NzSelectModule, 
+    NzGridModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule,
     NzTreeSelectModule,
   ],
   template: `
@@ -46,7 +46,7 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <input nz-input id="input_text2" formControlName="input_text2" />
             </nz-form-control>
-          </nz-form-item>          
+          </nz-form-item>
         </div>
 
         <div nz-col nzSpan="8">
@@ -70,7 +70,7 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
                   <nz-tree-select
                     style="width: 250px"
-                    [nzNodes]="deptService.nodes()"
+                    [nzNodes]="deptService.getData()!"
                     formControlName="input_text4"
                     nzShowSearch
                     nzPlaceHolder="Please select"
@@ -87,7 +87,7 @@ import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-se
 })
 export class FormTestComponent {
 
-  deptService = inject(DeptTreeSelectService);
+  deptService = inject(DeptResourceService);
 
   fg: FormGroup = inject(FormBuilder).group({
     input_text: ['test', [ Validators.required ]],
@@ -97,7 +97,7 @@ export class FormTestComponent {
   });
 
   constructor() {
-    this.deptService.getDeptHierarchy();
+
   }
 
 }

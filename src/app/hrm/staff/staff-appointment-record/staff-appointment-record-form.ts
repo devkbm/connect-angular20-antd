@@ -20,7 +20,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
-import { DeptTreeSelectService } from 'src/app/third-party/ng-zorro/dept-tree-select.service';
+import { DeptResourceService } from 'src/app/shared-service/dept-resource-service';
 
 export interface StaffAppointmentRecord {
   staffNo: string | null;
@@ -195,7 +195,7 @@ export interface StaffAppointmentRecord {
               <nz-tree-select
                 nzId="blngDeptCode"
                 formControlName="blngDeptCode"
-                [nzNodes]="deptService.nodes()"
+                [nzNodes]="deptResource.getData()!"
                 >
               </nz-tree-select>
             </nz-form-control>
@@ -209,7 +209,7 @@ export interface StaffAppointmentRecord {
               <nz-tree-select
                 nzId="workDeptCode"
                 formControlName="workDeptCode"
-                [nzNodes]="deptService.nodes()"
+                [nzNodes]="deptResource.getData()!"
                 >
               </nz-tree-select>
 
@@ -397,7 +397,7 @@ export class StaffAppointmentRecordForm implements OnInit {
   private http = inject(HttpClient);
   private hrmCodeService = inject(HrmCodeService);
   private notifyService = inject(NotifyService);
-  deptService = inject(DeptTreeSelectService);
+  deptResource = inject(DeptResourceService);
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -429,7 +429,6 @@ export class StaffAppointmentRecordForm implements OnInit {
   staff = input<{companyCode: string, staffNo: string, staffName: string}>();
 
   constructor() {
-    this.deptService.getDeptHierarchy();
 
     effect(() => {
       if (this.formDataId()) {

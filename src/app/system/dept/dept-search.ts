@@ -9,8 +9,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-select.service';
 
+import { CompanyResourceService } from 'src/app/shared-service/company-resource-service';
 
 @Component({
   selector: 'dept-search',
@@ -31,7 +31,7 @@ import { CompanySelectService } from 'src/app/third-party/ng-zorro/company-selec
       <div nz-col [nzSpan]="12" style="display: flex;">
 
         <nz-select [(ngModel)]="companyCode" (ngModelChange)="change($event)">
-          @for (option of companySelectService.list; track option) {
+          @for (option of companyResourceService.resource.value()?.data; track option.companyCode) {
             <nz-option
               [nzLabel]="option.companyName"
               [nzValue]="option.companyCode">
@@ -82,7 +82,7 @@ export class DeptSearch {
   queryValue = signal('');
   companyCode = model<string>('001');
 
-  companySelectService = inject(CompanySelectService);
+  companyResourceService = inject(CompanyResourceService);
 
   search = output<Object>();
   newForm = output<void>();
@@ -90,7 +90,7 @@ export class DeptSearch {
   deleteForm = output<void>();
 
   constructor() {
-    this.companySelectService.getCompanyList();
+    this.companyResourceService.resource.reload();
   }
 
   change(val: any) {

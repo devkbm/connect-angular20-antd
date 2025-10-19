@@ -21,7 +21,7 @@ import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-g
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
-import { StaffSelectService } from 'src/app/third-party/ng-zorro/stafff-select.service';
+import { StaffSelectService } from 'src/app/shared-service/stafff-select.service';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
 export interface AttendanceApplication {
