@@ -15,7 +15,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { PayItem, PayItemService } from '../shared/pay-item-service';
+import { PayItem, PayItemResource } from '../shared/pay-item-resource';
 import { ResponseList } from 'src/app/core/model/response-list';
 
 export interface PayTable {
@@ -62,7 +62,7 @@ export interface PayTable {
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
               <!--<input nz-input id="payItemCode" formControlName="payItemCode" required/>-->
               <nz-select nzId="payItemCode" formControlName="payItemCode">
-                @for (option of payItemList; track option) {
+                @for (option of payItemResource.data(); track option) {
                   <nz-option
                     [nzLabel]="option.payItemName"
                     [nzValue]="option.payItemCode">
@@ -154,7 +154,7 @@ export interface PayTable {
 export class PayTableForm {
   private http = inject(HttpClient);
   private hrmCodeService = inject(HrmCodeService);
-  private payItemService = inject(PayItemService);
+  protected payItemResource = new PayItemResource();
 
   [key: string]: any;
   /**
@@ -169,8 +169,6 @@ export class PayTableForm {
    * 호봉코드 - HR0005
    */
   payStepCodeList: HrmCode[] = [];
-
-  payItemList: PayItem[] = [];
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -198,7 +196,7 @@ export class PayTableForm {
       {typeId: 'HR0005', propertyName: "payStepCodeList"},
     ]);
 
-    this.getPayItemList();
+    this.payItemResource.reload();
 
     effect(() => {
       if (this.formDataId()) {
@@ -288,19 +286,5 @@ export class PayTableForm {
           }
       );
   }
-
-  getPayItemList() {
-    this.payItemService
-        .getPayItemList('')
-        .subscribe(
-          (model: ResponseList<PayItem>) => {
-            console.log(model);
-            if (model.data) {
-              this.payItemList = model.data;
-            }
-          }
-        );
-  }
-
 
 }

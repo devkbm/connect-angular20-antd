@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 
 import { GlobalProperty } from 'src/app/core/global-property';
@@ -19,9 +20,26 @@ export interface PayItem {
 @Injectable({
   providedIn: 'root',
 })
-export class PayItemService {
+export class PayItemResource {
 
-  http = inject(HttpClient);
+  readonly http = inject(HttpClient);
+
+  params = signal<any>('');
+  resource = rxResource({
+    params: () => this.params(),
+    stream: ({params}) => this.http.get<ResponseList<PayItem>>(
+      GlobalProperty.serverUrl() + `/api/hrm/payitem`,
+      getHttpOptions(params)
+    )
+  })
+
+  data(): PayItem[] | undefined {
+    return this.resource.value()?.data;
+  }
+
+  reload() {
+    this.resource.reload();
+  }
 
   getPayItemList(params: any): Observable<ResponseList<PayItem>> {
     const url = GlobalProperty.serverUrl() + `/api/hrm/payitem`;
