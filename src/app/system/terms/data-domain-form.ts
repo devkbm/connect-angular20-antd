@@ -209,7 +209,6 @@ export class DataDomainForm implements OnInit, AfterViewInit, OnChanges {
             } else {
               this.newForm();
             }
-            this.notifyService.changeMessage(model.message);
           }
         );
   }

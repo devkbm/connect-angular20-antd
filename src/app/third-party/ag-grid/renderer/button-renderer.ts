@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
+
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-button-renderer',
-  imports: [ NzButtonModule, NzIconModule ],
+  imports: [
+    NzButtonModule,
+    NzIconModule
+  ],
   template: `
-    <button nz-button nzSize="small" (click)="onClick($event)" [style.width]="'24px'" >
-      <!--<span nz-icon [nzType]="iconType" class="icon"></span>-->
+    <!-- [style.width]="'24px'" -->
+    <button nz-button nzSize="small" (click)="onClick($event)"  >
       <nz-icon [nzType]="iconType" class="icon"/>
       {{label}}
     </button>
@@ -17,7 +22,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
   styles: [`
     [nz-button] {
       margin: 0px;
-      padding-left: 3px;
+      padding-left: 2.5px;
+      padding-right: 2.5px;
     }
     .icon {
       font-size: 16px;

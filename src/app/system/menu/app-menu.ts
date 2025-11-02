@@ -14,8 +14,9 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
-import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { MenuSearch } from "./menu-search";
 
 @Component({
   selector: 'menu-app',
@@ -29,13 +30,14 @@ import { NgPage } from "src/app/core/app/nz-page";
     NzDividerModule,
     NzButtonModule,
     NzIconModule,
+    NzSpaceModule,
     NzPageHeaderCustom,
-    NzSearchArea,
     MenuGroupGrid,
     MenuGrid,
     MenuGroupFormDrawer,
     MenuFormDrawer,
-    NgPage
+    NgPage,
+    MenuSearch
 ],
   template: `
 <ng-template #header>
@@ -43,58 +45,12 @@ import { NgPage } from "src/app/core/app/nz-page";
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <div nz-row>
-      <div nz-col [nzSpan]="8">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.menuGroup.key">
-              @for (option of query.menuGroup.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.menuGroup.value" nz-input placeholder="input search text" (keyup.enter)="getMenuGroupList()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
-        </nz-input-group>
-      </div>
-
-      <div nz-col [nzSpan]="8">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate2" [nzSuffix]="suffixIconSearch2">
-          <ng-template #addOnBeforeTemplate2>
-            <nz-select [(ngModel)]="query.menu.key">
-              @for (option of query.menu.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.menu.value" nz-input placeholder="input search text" (keyup.enter)="getMenuList()">
-          <ng-template #suffixIconSearch2>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
-        </nz-input-group>
-      </div>
-
-      <div nz-col [nzSpan]="8" style="text-align: right;">
-        <button nz-button (click)="newMenuGroup()">
-          <span nz-icon nzType="search"></span>메뉴그룹등록
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-
-        <button nz-button (click)="newMenu()">
-          <span nz-icon nzType="form"></span>메뉴등록
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-
-        <button nz-button (click)="getMenuGroupList()">
-          <span nz-icon nzType="form"></span>조회
-        </button>
-
-      </div>
-    </div>
-  </nz-search-area>
+  <menu-search
+    (search)="getMenuGroupList()"
+    (newFormMenu)="newMenu()"
+    (newFormMenuGroup)="newMenuGroup()"
+  >
+  </menu-search>
 </ng-template>
 
 <ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
@@ -197,28 +153,7 @@ export class MenuApp {
 
   gridMenuGroup = viewChild.required(MenuGroupGrid);
   gridMenu = viewChild.required(MenuGrid);
-
-  query: {
-    menuGroup : { key: string, value: string, list: {label: string, value: string}[] },
-    menu: { key: string, value: string, list: {label: string, value: string}[] }
-  } = {
-    menuGroup : {
-      key: 'menuGroupName',
-      value: '',
-      list: [
-        {label: '메뉴그룹ID', value: 'menuGroupCode'},
-        {label: '메뉴그룹명', value: 'menuGroupName'}
-      ]
-    },
-    menu: {
-      key: 'menuName',
-      value: '',
-      list: [
-        {label: '메뉴ID', value: 'menuCode'},
-        {label: '메뉴명', value: 'menuName'}
-      ]
-    }
-  }
+  search = viewChild.required(MenuSearch);
 
   drawer: {
     menuGroup: { visible: boolean, formDataId: any },
@@ -231,8 +166,8 @@ export class MenuApp {
   //#region 메뉴그룹
   getMenuGroupList(): void {
     let params: any = new Object();
-    if ( this.query.menuGroup.value !== '') {
-      params[this.query.menuGroup.key] = this.query.menuGroup.value;
+    if ( this.search().query.menuGroup.value !== '') {
+      params[this.search().query.menuGroup.key] = this.search().query.menuGroup.value;
     }
 
     this.drawer.menuGroup.visible = false;
@@ -262,8 +197,8 @@ export class MenuApp {
     let params: any = new Object();
     params['menuGroupCode'] = this.drawer.menuGroup.formDataId;
 
-    if ( this.query.menu.value !== '') {
-      params[this.query.menu.key] = this.query.menu.value;
+    if ( this.search().query.menu.value !== '') {
+      params[this.search().query.menu.key] = this.search().query.menu.value;
     }
 
     this.drawer.menu.visible = false;

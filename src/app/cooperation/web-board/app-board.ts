@@ -67,10 +67,9 @@ export interface TabInfo {
 
 <div class="tree">
   <h3 class="pgm-title">게시판 목록</h3>
-  <nz-input-group nzSearch [nzSuffix]="suffixIconSearch" style="margin-bottom: 8px">
+  <nz-input-search>
     <input type="text" [(ngModel)]="queryValue" nz-input placeholder="input search text">
-    <ng-template #suffixIconSearch><span nz-icon nzType="search"></span></ng-template>
-  </nz-input-group>
+  </nz-input-search>
 
   <board-tree id="boardTree" #boardTree
     [searchValue]="queryValue"

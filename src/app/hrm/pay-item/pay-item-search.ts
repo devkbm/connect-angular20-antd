@@ -9,6 +9,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 
 @Component({
@@ -23,24 +24,23 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
     NzInputModule,
     NzSelectModule,
     NzDividerModule,
-    NzPopconfirmModule
+    NzPopconfirmModule,
+    NzSpaceModule,
   ],
   template: `
     <div nz-row>
       <div nz-col [nzSpan]="12">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.user.key">
-              @for (option of query.user.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
-        </nz-input-group>
+        <nz-space-compact nzBlock>
+          <nz-select [(ngModel)]="query.user.key">
+            @for (option of query.user.list; track option.value) {
+            <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+            }
+          </nz-select>
+
+          <nz-input-search>
+            <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
+          </nz-input-search>
+        </nz-space-compact>
       </div>
 
       <div nz-col [nzSpan]="12" style="text-align: right;">

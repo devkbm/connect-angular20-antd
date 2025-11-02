@@ -7,28 +7,27 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
+import { PayItemResource } from '../shared/pay-item-resource';
+
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
-export interface PayItem {
+export interface PayExpression {
+  id: string | null;
   companyCode: string | null;
   payItemCode: string | null;
-  payItemName: string | null;
-  type: string | null;
-  usePayTable: string;
+  payCondition: string | null;
+  formula: string | null;
   seq: number | null;
   comment: string | null;
 }
 
 @Component({
-  selector: 'pay-item-form',
+  selector: 'pay-expression-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -37,7 +36,7 @@ export interface PayItem {
     NzInputModule,
     NzInputNumberModule,
     NzCheckboxModule,
-
+    NzSelectModule,
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical" style="padding: 0px; margin: 0px;">
@@ -56,38 +55,14 @@ export interface PayItem {
           <nz-form-item>
             <nz-form-label nzFor="payItemCode" nzRequired>급여항목코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="payItemCode" formControlName="payItemCode" required/>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-
-        <div nz-col nzSpan="8">
-          <nz-form-item>
-            <nz-form-label nzFor="payItemName" nzRequired>급여항목명</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="payItemName" formControlName="payItemName" required/>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-
-        <div nz-col nzSpan="8">
-          <nz-form-item>
-            <nz-form-label nzFor="type" nzRequired>구분</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <input nz-input id="type" formControlName="type"/>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-
-
-      <div nz-row nzGutter="8">
-
-        <div nz-col nzSpan="8">
-          <nz-form-item>
-            <nz-form-label nzFor="usePayTable">급여테이블Y/N</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-switch nzId="usePayTable" formControlName="usePayTable"></nz-switch>
+              <nz-select nzId="payItemCode" formControlName="payItemCode">
+                @for (option of payItemResource.data(); track option) {
+                  <nz-option
+                    [nzLabel]="option.payItemName"
+                    [nzValue]="option.payItemCode">
+                  </nz-option>
+                }
+              </nz-select>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -102,7 +77,38 @@ export interface PayItem {
             </nz-form-control>
           </nz-form-item>
         </div>
+      </div>
 
+
+      <div nz-row nzGutter="8">
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="payCondition" nzRequired>급여조건</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <input nz-input id="payCondition" formControlName="payCondition" required/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="formula" nzRequired>계산식</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <input nz-input id="formula" formControlName="formula" required/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-row nzGutter="8">
+        <div nz-col nzSpan="8">
+          <nz-form-item>
+            <nz-form-label nzFor="comment">비고</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
+              <input nz-input id="comment" formControlName="comment"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
       </div>
 
     </form>
@@ -111,8 +117,9 @@ export interface PayItem {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayItemForm {
+export class PayExpressionForm {
   private http = inject(HttpClient);
+  protected payItemResource = new PayItemResource();
 
   formSaved = output<any>();
   formDeleted = output<any>();
@@ -131,6 +138,8 @@ export class PayItemForm {
   formDataId = input<string>();
 
   constructor() {
+    this.payItemResource.reload();
+
     effect(() => {
       if (this.formDataId()) {
         this.get(this.formDataId()!);
@@ -144,7 +153,7 @@ export class PayItemForm {
     this.fg.reset();
   }
 
-  modifyForm(formData: PayItem): void {
+  modifyForm(formData: PayExpression): void {
     this.fg.patchValue(formData);
   }
 
@@ -153,30 +162,30 @@ export class PayItemForm {
   }
 
   get(id: string): void {
-    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
+    const url = GlobalProperty.serverUrl() + `/api/hrm/payexpression/${id}`;
     const options = getHttpOptions();
 
     this.http
-        .get<ResponseObject<PayItem>>(url, options).pipe(
+        .get<ResponseObject<PayExpression>>(url, options).pipe(
         //  catchError(this.handleError<ResponseObject<Staff>>('get', undefined))
         )
         .subscribe(
-          (model: ResponseObject<PayItem>) => {
+          (model: ResponseObject<PayExpression>) => {
             model.data ? this.modifyForm(model.data) : this.newForm();
           }
     )
   }
 
   save(): void {
-    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem`;
+    const url = GlobalProperty.serverUrl() + `/api/hrm/payexpression`;
     const options = getHttpOptions();
 
     this.http
-        .post<ResponseObject<PayItem>>(url, this.fg.getRawValue(), options).pipe(
+        .post<ResponseObject<PayExpression>>(url, this.fg.getRawValue(), options).pipe(
         //  catchError(this.handleError<ResponseObject<Staff>>('save', undefined))
         )
         .subscribe(
-          (model: ResponseObject<PayItem>) => {
+          (model: ResponseObject<PayExpression>) => {
             //this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }

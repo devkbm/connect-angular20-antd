@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 import { NzPageHeaderCustom } from "src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom";
-import { NzSearchArea } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area";
-
 
 import { NgPage } from "src/app/core/app/nz-page";
 
@@ -14,7 +12,7 @@ import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
 
 import { CompanyList } from './company-list';
-import { CompanySeacrh } from "./company-seacrh";
+import { CompanySearch } from "./company-search";
 import { CompanyGrid } from './company-grid';
 import { CompanyFormDrawer } from "./company-form-drawer";
 
@@ -24,20 +22,12 @@ import { CompanyFormDrawer } from "./company-form-drawer";
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    /*
-    NzIconModule,
-    NzFormModule,
-    NzSelectModule,
-    NzInputModule,
-    NzDividerModule,
-    */
     NzPageHeaderCustom,
-    NzSearchArea,
     NgPage,
     CompanyGrid,
     CompanyList,
     CompanyFormDrawer,
-    CompanySeacrh
+    CompanySearch
 ],
   template: `
 
@@ -46,13 +36,11 @@ import { CompanyFormDrawer } from "./company-form-drawer";
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <company-seacrh
-      (search)="getList($event)"
-      (newForm)="newResource()"
-      (deleteForm)="delete()">
-    </company-seacrh>
-  </nz-search-area>
+  <company-search
+    (search)="getList($event)"
+    (newForm)="newResource()"
+    (deleteForm)="delete()">
+  </company-search>
 </ng-template>
 
 <ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">

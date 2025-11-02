@@ -295,7 +295,6 @@ export class TermForm implements OnInit, AfterViewInit {
             } else {
               this.newForm();
             }
-            this.notifyService.changeMessage(model.message);
           }
         );
   }

@@ -38,13 +38,11 @@ import { CompanyResourceService } from 'src/app/shared-service/company-resource-
             </nz-option>
           }
         </nz-select>
-        <nz-input-group nzSearch [nzSuffix]="suffixIconSearch">
+        <nz-input-search>
           <input type="text" [(ngModel)]="queryValue" nz-input placeholder="input search text">
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-          <span nz-icon nzType="search"></span>
-        </ng-template>
+        </nz-input-search>
       </div>
+
       <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="btnSearchClicked()">
           <span nz-icon nzType="search"></span>조회

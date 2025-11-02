@@ -20,6 +20,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'term-app',
@@ -37,13 +38,15 @@ import { NgPage } from "src/app/core/app/nz-page";
     NzIconModule,
     NzPageHeaderCustom,
     NzSearchArea,
+    NzSpaceModule,
     DataDomainForm,
     DataDomainGrid,
     TermForm,
     TermGrid,
     WordForm,
     WordGrid,
-    NgPage
+    NgPage,
+
 ],
   template: `
 <ng-template #header>
@@ -54,20 +57,18 @@ import { NgPage } from "src/app/core/app/nz-page";
   <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <input type="text" [(ngModel)]="query.term.value" nz-input placeholder="input search text" (keyup.enter)="getTermList()">
-        </nz-input-group>
-        <ng-template #addOnBeforeTemplate>
+        <nz-space-compact nzBlock>
           <nz-select [(ngModel)]="query.term.key">
             @for (option of query.term.list; track option.value) {
             <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
             }
           </nz-select>
-        </ng-template>
-        <ng-template #suffixIconSearch>
-          <span nz-icon nzType="search"></span>
-        </ng-template>
+          <nz-input-search>
+            <input type="text" [(ngModel)]="query.term.value" nz-input placeholder="input search text" (keyup.enter)="getTermList()">
+          </nz-input-search>
+        </nz-space-compact>
       </div>
+
       <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="getTermList()">
           <span nz-icon nzType="search"></span>조회

@@ -51,7 +51,6 @@ export interface BizCodeType {
 })
 export class BizCodeTypeGrid extends AgGridCommon implements OnInit {
 
-  private notifyService = inject(NotifyService);
   private http = inject(HttpClient);
 
   _list: BizCodeType[] = [];
@@ -102,7 +101,6 @@ export class BizCodeTypeGrid extends AgGridCommon implements OnInit {
     ).subscribe(
       (model: ResponseList<BizCodeType>) => {
         this._list = model.data;
-        this.notifyService.changeMessage(model.message);
       }
     );
 

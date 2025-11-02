@@ -41,7 +41,7 @@ export interface Menu {
   template: `
     <ag-grid-angular
       [theme]="theme"
-      [rowData]="gridResource.value()?.data ?? []"
+      [rowData]="gridResource.hasValue() ? gridResource.value().data! : []"
       [style.height]="'100%'"
       [rowSelection]="rowSelection"
       [columnDefs]="columnDefs"
@@ -94,7 +94,7 @@ export class MenuGrid extends AgGridCommon {
       return params.data.menuGroupCode! + params.data.menuCode!;
   };
 
-  gridQuery = signal<any>('');
+  gridQuery = signal<any>({});
   gridResource = rxResource({
     params: () => this.gridQuery(),
     stream: ({params}) => this.http.get<ResponseList<Menu>>(

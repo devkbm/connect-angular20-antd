@@ -360,7 +360,6 @@ export class CommonCodeForm implements OnInit {
             if ( model.data ) {
               this.modifyForm(model.data);
             }
-            this.notifyService.changeMessage(model.message);
           }
         );
   }

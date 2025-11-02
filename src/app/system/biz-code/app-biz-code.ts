@@ -14,6 +14,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { NgPage } from "src/app/core/app/nz-page";
+import { BizCodeSeacrh } from "./biz-code-search";
 
 
 @Component({
@@ -32,7 +33,8 @@ import { NgPage } from "src/app/core/app/nz-page";
     BizCodeGrid,
     BizCodeFormDrawer,
     BizCodeTypeFormDrawer,
-    NgPage
+    NgPage,
+    BizCodeSeacrh
 ],
   template: `
 <ng-template #header>
@@ -41,21 +43,12 @@ import { NgPage } from "src/app/core/app/nz-page";
 
 <ng-template #search>
   <nz-search-area>
-    <div nz-row>
-      <div nz-col [nzSpan]="24" style="text-align: right">
-        <button nz-button (click)="selectBizCodeTypeList()">
-          <span nz-icon nzType="search" nzTheme="outline"></span>조회
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button (click)="newCodeType()">
-          <span nz-icon nzType="form" nzTheme="outline"></span>신규 분류
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button (click)="newCode()">
-          <span nz-icon nzType="form" nzTheme="outline"></span>신규 코드
-        </button>
-      </div>
-    </div>
+    <biz-code-seacrh
+      (search)="selectBizCodeTypeList()"
+      (newCodeTypeForm)="newCodeType()"
+      (newCodeForm)="newCode()"
+    >
+    </biz-code-seacrh>
   </nz-search-area>
 </ng-template>
 

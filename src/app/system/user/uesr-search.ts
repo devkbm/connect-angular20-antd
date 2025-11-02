@@ -2,14 +2,16 @@ import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NzButtonExcelUpload } from 'src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload';
+import { NzSearchArea } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area";
+
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzButtonExcelUpload } from 'src/app/third-party/ng-zorro/nz-button-excel-upload/nz-button-excel-upload';
-
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'user-search',
@@ -24,23 +26,24 @@ import { NzButtonExcelUpload } from 'src/app/third-party/ng-zorro/nz-button-exce
     NzSelectModule,
     NzDividerModule,
     NzButtonExcelUpload,
-  ],
+    NzSpaceModule,
+    NzSearchArea
+],
   template: `
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.user.key">
-              @for (option of query.user.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
-        </nz-input-group>
+        <nz-space-compact nzBlock>
+          <nz-select [(ngModel)]="query.user.key">
+            @for (option of query.user.list; track option.value) {
+            <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
+            }
+          </nz-select>
+
+          <nz-input-search>
+            <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
+          </nz-input-search>
+        </nz-space-compact>
       </div>
 
       <div nz-col [nzSpan]="12" style="text-align: right;">
@@ -62,6 +65,7 @@ import { NzButtonExcelUpload } from 'src/app/third-party/ng-zorro/nz-button-exce
         </button>
       </div>
     </div>
+  </nz-search-area>
   `,
   styles: `
   `,

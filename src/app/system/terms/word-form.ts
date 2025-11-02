@@ -175,7 +175,6 @@ export class WordForm implements OnInit, AfterViewInit, OnChanges {
             } else {
               this.newForm();
             }
-            this.notifyService.changeMessage(model.message);
           }
         );
   }

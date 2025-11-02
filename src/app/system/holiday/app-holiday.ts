@@ -1,30 +1,28 @@
 import { AfterViewInit, Component, inject, viewChild } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { NgPage } from "src/app/core/app/nz-page";
 import { NotifyService } from 'src/app/core/service/notify.service';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
+
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
+import { CalendarFullcalendar } from "src/app/third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar";
 
 import { HolidayFormDrawer } from './holiday-form-drawer';
 import { HolidayGrid } from './holiday-grid';
+import { HolidaySearch } from "./holiday-search";
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
-import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
-import { CalendarDaypilotNavigatorComponent } from 'src/app/third-party/daypilot/calendar-daypilot-navigator.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { CalendarFullcalendar } from "../../third-party/fullcalendar/calendar-fullcalendar/calendar-fullcalendar";
-import { DateSelectArg } from '@fullcalendar/core/index.js';
-import { HttpClient } from '@angular/common/http';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
-
 
 export interface DateInfo {
   date: Date | null;
@@ -55,12 +53,13 @@ export interface Holiday {
     NzDatePickerModule,
     NzDividerModule,
     NzPageHeaderCustom,
-    NzSearchArea,
+
     HolidayGrid,
     HolidayFormDrawer,
     CalendarDaypilotNavigatorComponent,
     NgPage,
-    CalendarFullcalendar
+    CalendarFullcalendar,
+    HolidaySearch,
 ],
   template: `
 <ng-template #header>
@@ -68,29 +67,12 @@ export interface Holiday {
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <div nz-row>
-      <div nz-col [nzSpan]="1" style="text-align: left;">
-        <nz-date-picker nzMode="year" [(ngModel)]="query.holiday.year" nzAllowClear="false" (ngModelChange)="getHolidayList()" style="width: 80px;"></nz-date-picker>
-      </div>
-
-      <div nz-col [nzSpan]="23" style="text-align: right;">
-        <button nz-button (click)="getHolidayList()">
-          <span nz-icon nzType="search"></span>조회
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button (click)="newHoliday()">
-          <span nz-icon nzType="form" nzTheme="outline"></span>신규
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button nzDanger
-          nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
-          (nzOnConfirm)="deleteHoliday()" (nzOnCancel)="false">
-          <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
-        </button>
-      </div>
-    </div>
-  </nz-search-area>
+  <holidary-search
+    (search)="getHolidayList()"
+    (newForm)="newHoliday()"
+    (deleteForm)="deleteHoliday()"
+  >
+  </holidary-search>
 </ng-template>
 
 <ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
@@ -169,20 +151,7 @@ export class HolidayApp implements AfterViewInit {
 
   grid = viewChild.required(HolidayGrid);
   calendar = viewChild.required(CalendarFullcalendar);
-
-  query: {
-    holiday : { key: string, value: string, list: {label: string, value: string}[], year: Date },
-  } = {
-    holiday : {
-      key: 'resourceCode',
-      value: '',
-      list: [
-        {label: '휴일명', value: 'resourceCode'},
-        {label: '비고', value: 'description'}
-      ],
-      year: new Date()
-    }
-  }
+  search = viewChild.required(HolidaySearch);
 
   drawer: {
     holiday: { visible: boolean, formDataId: any }
@@ -212,13 +181,7 @@ export class HolidayApp implements AfterViewInit {
 
     this.closeDrawer();
 
-
-    let params: any = new Object();
-    if ( this.query.holiday.value !== '') {
-      params[this.query.holiday.key] = this.query.holiday.value;
-    }
-
-    const date: Date = this.query.holiday.year;
+    const date: Date = this.search().query.holiday.year;
 
     if ( this.tab.index == 0 ) {
       this.calendar().getHolidayList(date.getFullYear()+'0101', date.getFullYear()+'1231');

@@ -9,14 +9,13 @@ import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseMap } from 'src/app/core/model/response-map';
 
 import { HrmCode, HrmCodeService } from '../shared/hrm-code.service';
+import { PayItemResource } from '../shared/pay-item-resource';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { PayItem, PayItemResource } from '../shared/pay-item-resource';
-import { ResponseList } from 'src/app/core/model/response-list';
 
 export interface PayTable {
   id: string | null;

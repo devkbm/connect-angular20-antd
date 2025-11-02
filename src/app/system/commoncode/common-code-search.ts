@@ -1,50 +1,44 @@
-import { ChangeDetectionStrategy, Component, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
+import { CommonCodeService, SystemTypeEnum } from './common-code.service';
+import { ResponseList } from 'src/app/core/model/response-list';
+
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 
-
 @Component({
-  selector: 'pay-item-staff-search',
+  selector: 'common-code-search',
   imports: [
-    CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    NzFormModule,
     NzButtonModule,
     NzIconModule,
+    NzFormModule,
     NzInputModule,
     NzSelectModule,
     NzDividerModule,
-    NzPopconfirmModule,
     NzSpaceModule,
   ],
   template: `
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-space-compact nzBlock>
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.user.key">
-              @for (option of query.user.list; track option.value) {
+          <nz-select [(ngModel)]="query.company.key">
+            @for (option of query.company.list; track option.value) {
               <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
+            }
+          </nz-select>
+
+          <nz-input-search>
+            <input type="text" [(ngModel)]="query.company.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
+          </nz-input-search>
         </nz-space-compact>
       </div>
-
       <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="btnSearchClicked()">
           <span nz-icon nzType="search"></span>조회
@@ -54,42 +48,45 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
           <span nz-icon nzType="form" nzTheme="outline"></span>신규
         </button>
         <nz-divider nzType="vertical"></nz-divider>
+        <button nz-button (click)="btnSaveClicked()">
+          <span nz-icon nzType="form" nzTheme="outline"></span>저장
+        </button>
+        <nz-divider nzType="vertical"></nz-divider>
         <button nz-button nzDanger="true"
           nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
           (nzOnConfirm)="btnDeleteClicked()" (nzOnCancel)="false">
             <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
         </button>
       </div>
-
     </div>
-  `,
-  styles: `
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayItemStaffSearch {
-
+export class CommonCodeSeacrh {
   search = output<Object>();
   newForm = output<void>();
+  saveForm = output<void>();
   deleteForm = output<void>();
 
+  private commonCodeService = inject(CommonCodeService);
+
   query: {
-    user : { key: string, value: string, list: {label: string, value: string}[] }
+    company : { key: string, value: string, list: {label: string, value: string}[] }
   } = {
-    user : {
-      key: 'payItemCode',
+    company : {
+      key: 'companyCode',
       value: '',
       list: [
-        {label: '급여항목코드', value: 'payItemCode'},
-        {label: '급여항목명', value: 'payItemName'}
+        {label: '회사코드', value: 'companyCode'},
+        {label: '회사명', value: 'companyName'},
       ]
     }
   }
 
   btnSearchClicked() {
     let params: any = new Object();
-    if ( this.query.user.value !== '') {
-      params[this.query.user.key] = this.query.user.value;
+    if ( this.query.company.value !== '') {
+      params[this.query.company.key] = this.query.company.value;
     }
 
     this.search.emit(params);
@@ -99,8 +96,22 @@ export class PayItemStaffSearch {
     this.newForm.emit();
   }
 
+  btnSaveClicked() {
+    this.saveForm.emit();
+  }
+
   btnDeleteClicked() {
     this.deleteForm.emit();
   }
+
+  getSystemTypeCode(): void {
+      this.commonCodeService
+        .getSystemTypeList()
+        .subscribe(
+          (model: ResponseList<SystemTypeEnum>) => {
+            this.query.company.list = model.data;
+          }
+        );
+    }
 
 }

@@ -8,20 +8,17 @@ import { NgPage } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+
 import { WebResourceGrid } from './web-resource-grid';
 import { WebResourceFormDrawer } from './web-resource-form-drawer';
 import { WebResourceSearch } from './web-resource-search';
 import { WebResourceList } from './web-resource-list';
 
-
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
-import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
-
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-
 
 export interface WebResource {
   resourceId: string | null;
@@ -42,7 +39,6 @@ export interface WebResource {
     NzSelectModule,
     NzInputModule,
     NzPageHeaderCustom,
-    NzSearchArea,
     WebResourceGrid,
     WebResourceFormDrawer,
     WebResourceSearch,
@@ -55,13 +51,11 @@ export interface WebResource {
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <web-resource-search
-      (search)="getList($event)"
-      (newForm)="newResource()"
-      (deleteForm)="delete()"
-    />
-  </nz-search-area>
+  <web-resource-search
+    (search)="getList($event)"
+    (newForm)="newResource()"
+    (deleteForm)="delete()"
+  />
 </ng-template>
 
 <ng-page
@@ -137,12 +131,6 @@ export class WebResourceApp implements OnInit {
   }
 
   getList(params: any): void {
-    /*
-    let params: any = new Object();
-    if ( this.query.resource.value !== '') {
-      params[this.query.resource.key] = this.query.resource.value;
-    }
-    */
     console.log(params);
     this.drawer.resource.visible = false;
     this.grid().gridQuery.set(params);

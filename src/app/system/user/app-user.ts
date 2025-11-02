@@ -7,10 +7,12 @@ import { NgPage } from "src/app/core/app/nz-page";
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { ResponseObject } from 'src/app/core/model/response-object';
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 
 import { UesrSearch } from './uesr-search';
 import { UserGrid } from './user-grid';
 import { UserFormDrawer } from './user-form-drawer';
+import { UserList } from './user-list';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -19,10 +21,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
-
-import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
-import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
-import { UserList } from './user-list';
 
 export interface User {
   userId: string | null;
@@ -52,7 +50,6 @@ export interface User {
     NzButtonModule,
     NzPopconfirmModule,
     NzPageHeaderCustom,
-    NzSearchArea,
     UserGrid,
     UserFormDrawer,
     NgPage,
@@ -65,14 +62,12 @@ export interface User {
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <user-search
-      (search)="getUserList($event)"
-      (newForm)="newForm()"
-      (deleteForm)="deleteUser()"
-    >
-    </user-search>
-  </nz-search-area>
+  <user-search
+    (search)="getUserList($event)"
+    (newForm)="newForm()"
+    (deleteForm)="deleteUser()"
+  >
+  </user-search>
 </ng-template>
 
 <ng-page

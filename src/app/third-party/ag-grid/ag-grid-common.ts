@@ -1,4 +1,5 @@
 import { ColDef, colorSchemeDark, RowSelectionOptions, themeBalham } from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 
 export class AgGridCommon {
 
@@ -17,6 +18,8 @@ export class AgGridCommon {
   onGridReady(params: any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+
+    ModuleRegistry.registerModules([AllCommunityModule]);
   }
 
   getSelectedRows() {

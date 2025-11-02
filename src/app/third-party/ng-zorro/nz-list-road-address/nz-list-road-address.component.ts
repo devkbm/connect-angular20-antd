@@ -9,20 +9,28 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 import { RoadAddress, RoadAddressJuso, RoadAddressResult } from './road-address.model';
 import { RoadAddressService } from './road-address.service';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @Component({
   selector: 'app-nz-list-road-address',
-  imports: [CommonModule, FormsModule, NzInputModule, NzListModule, NzPaginationModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    NzInputModule,
+    NzListModule,
+    NzPaginationModule,
+    NzSpaceModule
+  ],
   providers: [NzMessageService],
   template: `
     111- {{searchText()}}
     <div class="container" [style.height]="height()">
-      <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
-        <input nz-input type="text" [(ngModel)]="searchText" (keyup.enter)="fetch()" placeholder="input search text"/>
-        <ng-template #suffixIconButton>
-          <button nz-button nzType="primary" nzSearch on-click="fetch()"><span nz-icon nzType="search"></span></button>
-        </ng-template>
-      </nz-input-group>
+      <nz-space-compact nzBlock>
+        <nz-input-search>
+          <input nz-input type="text" [(ngModel)]="searchText" (keyup.enter)="fetch()" placeholder="input search text"/>
+        </nz-input-search>
+        <button nz-button nzType="primary" nzSearch on-click="fetch()"><span nz-icon nzType="search"></span></button>
+      </nz-space-compact>
 
       <nz-list [nzLoading]="_isLoading">
         @for (item of _data?.juso; track item.roadAddr) {

@@ -16,11 +16,12 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 
-import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
 import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { HttpClient } from '@angular/common/http';
 import { RoleList } from './role-list';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { RoleSeacrh } from "./role-seacrh";
 
 export interface Role {
   roleCode: string | null;
@@ -42,12 +43,14 @@ export interface Role {
     NzSelectModule,
     NzInputModule,
     NzDividerModule,
+    NzSpaceModule,
     NzPageHeaderCustom,
-    NzSearchArea,
+    NzSpaceModule,
     RoleGrid,
     RoleFormDrawer,
     NgPage,
-    RoleList
+    RoleList,
+    RoleSeacrh
 ],
   template: `
 <ng-template #header>
@@ -55,41 +58,12 @@ export interface Role {
 </ng-template>
 
 <ng-template #search>
-  <nz-search-area>
-    <div nz-row>
-      <div nz-col [nzSpan]="12">
-        <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzSuffix]="suffixIconSearch">
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.role.key">
-              @for (option of query.role.list; track option.value) {
-              <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.role.value" nz-input placeholder="input search text" (keyup.enter)="getRoleList()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
-        </nz-input-group>
-      </div>
-
-      <div nz-col [nzSpan]="12" style="text-align: right;">
-        <button nz-button (click)="getRoleList()">
-          <span nz-icon nzType="search"></span>조회
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button (click)="initForm()">
-          <span nz-icon nzType="form" nzTheme="outline"></span>신규
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button nzDanger="true"
-          nz-popconfirm nzPopconfirmTitle="삭제하시겠습니까?"
-          (nzOnConfirm)="delete()" (nzOnCancel)="false">
-            <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
-        </button>
-      </div>
-    </div>
-  </nz-search-area>
+  <role-seacrh
+    (search)="getRoleList()"
+    (newForm)="initForm()"
+    (deleteForm)="delete()"
+  >
+  </role-seacrh>
 </ng-template>
 
 <ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">

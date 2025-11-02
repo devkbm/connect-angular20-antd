@@ -1,50 +1,45 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
+import { NzSearchArea } from "src/app/third-party/ng-zorro/nz-search-area/nz-search-area";
+
+import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 
-
 @Component({
-  selector: 'pay-item-staff-search',
+  selector: 'holidary-search',
   imports: [
-    CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    NzFormModule,
     NzButtonModule,
     NzIconModule,
+    NzFormModule,
     NzInputModule,
     NzSelectModule,
     NzDividerModule,
-    NzPopconfirmModule,
     NzSpaceModule,
-  ],
+    NzSearchArea
+],
   template: `
+  <nz-search-area>
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <nz-space-compact nzBlock>
-          <ng-template #addOnBeforeTemplate>
-            <nz-select [(ngModel)]="query.user.key">
-              @for (option of query.user.list; track option.value) {
+          <nz-select [(ngModel)]="query.holiday.key">
+            @for (option of query.holiday.list; track option.value) {
               <nz-option [nzValue]="option.value" [nzLabel]="option.label"></nz-option>
-              }
-            </nz-select>
-          </ng-template>
-          <input type="text" [(ngModel)]="query.user.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
-          <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-          </ng-template>
+            }
+          </nz-select>
+
+          <nz-input-search>
+            <input type="text" [(ngModel)]="query.holiday.value" nz-input placeholder="input search text" (keyup.enter)="btnSearchClicked()">
+          </nz-input-search>
         </nz-space-compact>
       </div>
-
       <div nz-col [nzSpan]="12" style="text-align: right;">
         <button nz-button (click)="btnSearchClicked()">
           <span nz-icon nzType="search"></span>조회
@@ -60,36 +55,34 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
             <span nz-icon nzType="delete" nzTheme="outline"></span>삭제
         </button>
       </div>
-
     </div>
-  `,
-  styles: `
+  </nz-search-area>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayItemStaffSearch {
-
+export class HolidaySearch {
   search = output<Object>();
   newForm = output<void>();
   deleteForm = output<void>();
 
   query: {
-    user : { key: string, value: string, list: {label: string, value: string}[] }
+    holiday : { key: string, value: string, year: Date, list: {label: string, value: string}[] },
   } = {
-    user : {
-      key: 'payItemCode',
+    holiday : {
+      key: 'resourceCode',
       value: '',
       list: [
-        {label: '급여항목코드', value: 'payItemCode'},
-        {label: '급여항목명', value: 'payItemName'}
-      ]
+        {label: '휴일명', value: 'resourceCode'},
+        {label: '비고', value: 'description'}
+      ],
+      year: new Date()
     }
   }
 
   btnSearchClicked() {
     let params: any = new Object();
-    if ( this.query.user.value !== '') {
-      params[this.query.user.key] = this.query.user.value;
+    if ( this.query.holiday.value !== '') {
+      params[this.query.holiday.key] = this.query.holiday.value;
     }
 
     this.search.emit(params);
