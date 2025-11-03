@@ -18,7 +18,8 @@ export const routes: Routes = [
       {path: 'staff',             loadComponent: () => import('./staff/app-staff-management').then(m => m.StaffManagementApp)},
       {path: 'payitem',           loadComponent: () => import('./pay-item/app-pay-item').then(m => m.AppPayItem)},
       {path: 'paytable',          loadComponent: () => import('./pay-table/app-pay-table').then(m => m.AppPayTable)},
-      {path: 'payitemstaff',      loadComponent: () => import('./pay-item-staff/app-pay-item-staff').then(m => m.AppPayItemStaff)}
+      {path: 'payitemstaff',      loadComponent: () => import('./pay-item-staff/app-pay-item-staff').then(m => m.AppPayItemStaff)},
+      {path: 'payexpression',     loadComponent: () => import('./pay-expression/app-pay-expression').then(m => m.AppPayExpression)}
     ]
   }
 ];

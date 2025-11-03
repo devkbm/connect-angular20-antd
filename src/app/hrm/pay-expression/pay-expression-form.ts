@@ -126,11 +126,11 @@ export class PayExpressionForm {
   formClosed = output<any>();
 
   fg = inject(FormBuilder).group({
+    id                : new FormControl<string | null>(null),
     companyCode       : new FormControl<string | null>(null, { validators: Validators.required }),
     payItemCode       : new FormControl<string | null>(null, { validators: Validators.required }),
-    payItemName       : new FormControl<string | null>(null),
-    type              : new FormControl<string | null>(null),
-    usePayTable       : new FormControl<string>(''),
+    payCondition      : new FormControl<string | null>(null),
+    formula           : new FormControl<string | null>(null),
     seq               : new FormControl<number | null>(null),
     comment           : new FormControl<string | null>(null)
   });

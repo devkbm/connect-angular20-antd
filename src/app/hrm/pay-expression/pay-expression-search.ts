@@ -65,7 +65,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PayItemSearch {
+export class PayExpressionSearch {
 
   search = output<Object>();
   newForm = output<void>();

@@ -6,7 +6,7 @@ import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-g
 import { PayExpressionForm } from "./pay-expression-form";
 
 @Component({
-  selector: 'pay-item-staff-form-drawer',
+  selector: 'pay-expression-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroup,

@@ -54,7 +54,7 @@ export interface PayExpression {
     </ag-grid-angular>
   `
 })
-export class PayItemStaffGrid extends AgGridCommon {
+export class PayExpressionGrid extends AgGridCommon {
 
   private http = inject(HttpClient);
 
