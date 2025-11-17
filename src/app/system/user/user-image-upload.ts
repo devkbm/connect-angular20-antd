@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, inject, input, model, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { GlobalProperty } from 'src/app/core/global-property';
 
@@ -11,6 +12,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'user-image-upload',
@@ -46,6 +48,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
       </button>
     </nz-space>
   </div>
+
+
   `,
   styles: [`
     .container {
@@ -99,6 +103,9 @@ export class UserImageUpload implements OnInit, OnChanges {
   previewImage: string | undefined = '';
 
   imageSrc: string = GlobalProperty.serverUrl() + '/api/system/user/image'; //'/static/';
+
+
+  private sanitizer = inject(DomSanitizer);
 
   /*
   @Input() imageWidth: string = '150px';
@@ -185,6 +192,8 @@ export class UserImageUpload implements OnInit, OnChanges {
               (model: Blob) => {
                 const blob = new Blob([model], { type: 'application/octet-stream' });
                 saveAs(blob, this.userId() + ".jpg");
+
+                //this.fileUrl = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
               }
             );;
   }

@@ -19,7 +19,7 @@ export interface PartnerStaff {
   companyCode: string | null;
   staffNo: string | null;
   name: string | null;
-  nameEng: string | null;
+  nameEng?: string | null ;
   nameChi: string | null;
   gender: string | null;
   birthday: Date | null;
@@ -37,7 +37,7 @@ export interface PartnerStaff {
     FormsModule,
     ReactiveFormsModule,
     NzFormModule,
-        
+
   ],
   template: `
     <form nz-form [formGroup]="fg" nzLayout="vertical" style="padding: 0px; margin: 0px;">
@@ -68,7 +68,7 @@ export interface PartnerStaff {
               <input nz-input id="name" formControlName="name" required/>
             </nz-form-control>
           </nz-form-item>
-          
+
         </div>
       </div>
 
@@ -79,7 +79,7 @@ export interface PartnerStaff {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PartnerStaffFormComponent {
+export class PartnerStaffForm {
 
   private http = inject(HttpClient);
 

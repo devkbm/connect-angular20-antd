@@ -5,14 +5,14 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { WebResourceForm } from 'src/app/system/webresource/web-resource-form';
 import { NzCrudButtonGroup } from 'src/app/third-party/ng-zorro/nz-crud-button-group/nz-crud-button-group';
 
-import { PartnerStaffFormComponent } from "./partner-staff-form";
+import { PartnerStaffForm } from "./partner-staff-form";
 
 @Component({
   selector: 'partner-staff-form-drawer',
   imports: [
     NzDrawerModule,
     NzCrudButtonGroup,
-    PartnerStaffFormComponent
+    PartnerStaffForm
 ],
   template: `
     <nz-drawer
@@ -47,7 +47,7 @@ import { PartnerStaffFormComponent } from "./partner-staff-form";
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PartnerStaffFormDrawerComponent {
+export class PartnerStaffFormDrawer {
 
   drawer = input.required<{visible: boolean, formDataId: any}>();
   drawerClosed = output<any>();

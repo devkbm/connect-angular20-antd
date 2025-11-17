@@ -15,6 +15,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 
 export interface PayItem {
@@ -22,7 +23,7 @@ export interface PayItem {
   payItemCode: string | null;
   payItemName: string | null;
   type: string | null;
-  usePayTable: string;
+  usePayTable: boolean;
   seq: number | null;
   comment: string | null;
 }
@@ -37,6 +38,7 @@ export interface PayItem {
     NzInputModule,
     NzInputNumberModule,
     NzCheckboxModule,
+    NzSwitchModule
 
   ],
   template: `
@@ -123,7 +125,7 @@ export class PayItemForm {
     payItemCode       : new FormControl<string | null>(null, { validators: Validators.required }),
     payItemName       : new FormControl<string | null>(null),
     type              : new FormControl<string | null>(null),
-    usePayTable       : new FormControl<string>(''),
+    usePayTable       : new FormControl<boolean>(false),
     seq               : new FormControl<number | null>(null),
     comment           : new FormControl<string | null>(null)
   });

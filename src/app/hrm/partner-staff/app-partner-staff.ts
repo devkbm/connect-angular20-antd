@@ -1,130 +1,167 @@
-import { ChangeDetectionStrategy, Component, effect, inject, output, signal } from '@angular/core';
+import { Component, OnInit, inject, AfterViewInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { rxResource } from '@angular/core/rxjs-interop';
-
-import { AgGridAngular } from 'ag-grid-angular';
-import type { ColDef, RowClickedEvent, RowDoubleClickedEvent } from 'ag-grid-community';
-import { ModuleRegistry, ClientSideRowModelModule, RowSelectionModule } from 'ag-grid-community';
-import { GetRowIdFunc, GetRowIdParams } from 'ag-grid-community';
-import { ButtonRenderer } from 'src/app/third-party/ag-grid/renderer/button-renderer';
-
-ModuleRegistry.registerModules([
-  ClientSideRowModelModule,
-  RowSelectionModule,
-]);
-
-import { ResponseList } from 'src/app/core/model/response-list';
-
-import { AgGridCommon } from 'src/app/third-party/ag-grid/ag-grid-common';
-import { GlobalProperty } from 'src/app/core/global-property';
-import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
+import { ResponseObject } from 'src/app/core/model/response-object';
+import { NgPage } from "src/app/core/app/nz-page";
 
-export interface PartnerStaff {
-  companyCode: string | null;
-  staffNo: string | null;
-  name: string | null;
-  nameEng: string | null;
-  nameChi: string | null;
-  gender: string | null;
-  birthday: Date | null;
-  partnerCompanyCode: string | null;
-  joinDate: Date | null;
-  retireDate: Date | null;
-  blngDeptCode: string | null;
-  workDeptCode: string | null;
-}
+import { PartnerStaffSearch } from "./partner-staff-search";
+import { PartnerStaffGrid } from './partner-staff-grid';
+import { PartnerStaffFormDrawer } from './partner-staff-form-drawer';
+
+import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
+import { NzSearchArea } from 'src/app/third-party/ng-zorro/nz-search-area/nz-search-area';
+
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
+
 
 @Component({
-  selector: 'app-partner-staff-app',
+  selector: 'app-pay-table',
   imports: [
     CommonModule,
-    AgGridAngular
-  ],
+    FormsModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzButtonModule,
+    NzIconModule,
+    NzSelectModule,
+    NzInputModule,
+    NzDividerModule,
+    NzPageHeaderCustom,
+    NzSearchArea,
+    NgPage,
+    PartnerStaffGrid,
+    PartnerStaffFormDrawer,
+    PartnerStaffSearch
+],
   template: `
-    <ag-grid-angular
-      [theme]="theme"
-      [rowData]="gridResource.value()?.data ?? []"
-      [style.height]="'100%'"
-      [rowSelection]="rowSelection"
-      [columnDefs]="columnDefs"
-      [defaultColDef]="defaultColDef"
-      [getRowId]="getRowId"
-      (gridReady)="onGridReady($event)"
-      (rowClicked)="rowClickedEvent($event)"
-      (rowDoubleClicked)="rowDbClicked($event)">
-    </ag-grid-angular>
+<ng-template #header>
+  <nz-page-header-custom title="협력직원 등록" subtitle="This is a subtitle"></nz-page-header-custom>
+</ng-template>
+
+<ng-template #search>
+  <nz-search-area>
+    <partner-staff-search
+      (search)="getList($event)"
+      (newForm)="newResource()"
+      (deleteForm)="delete()">
+    </partner-staff-search>
+  </nz-search-area>
+</ng-template>
+
+<ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
+  <div class="container">
+    <div>
+      <h3 class="grid-title">급여항목 목록 {{drawer| json}} </h3>
+    </div>
+    <div style="height: 500px">
+      <partner-staff-grid #grid
+        (rowClicked)="gridRowClicked($event)"
+        (editButtonClicked)="editResource($event)"
+        (rowDoubleClicked)="editResource($event)">
+      </partner-staff-grid>
+    </div>
+  </div>
+</ng-page>
+
+<partner-staff-form-drawer
+  [drawer]="drawer.paytable"
+  (drawerClosed)="getList('')">
+</partner-staff-form-drawer>
   `,
   styles: `
-    ag-grid-angular {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -khtml-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+:host {
+  --page-header-height: 98px;
+  --page-search-height: 46px;
+}
+
+.pgm-title {
+  padding-left: 5px;
+  border-left: 5px solid green;
+}
+
+.btn-group {
+  padding: 6px;
+  /*background: #fbfbfb;*/
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding-left: auto;
+  padding-right: 5;
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-rows: 24px 1fr;
+  grid-template-columns: 200px 1fr;
+}
+
+  `
 })
-export class PartnerStaffAppComponent extends AgGridCommon {
+export class AppPartnerStaff implements OnInit, AfterViewInit {
 
   private http = inject(HttpClient);
 
-  rowClicked = output<PartnerStaff>();
-  rowDoubleClicked = output<PartnerStaff>();
-  editButtonClicked = output<PartnerStaff>();
+  grid = viewChild.required(PartnerStaffGrid);
 
-  columnDefs: ColDef[] = [
-    {
-      headerName: '',
-      width: 40,
-      cellStyle: {'text-align': 'center', 'padding': '0px'},
-      cellRenderer: ButtonRenderer,
-      cellRendererParams: {
-        onClick: this.onEditButtonClick.bind(this),
-        label: '',
-        iconType: 'form'
-      }
-    },
-    {
-      headerName: 'No',
-      valueGetter: 'node.rowIndex + 1',
-      width: 70,
-      cellStyle: {'text-align': 'center'}
-    },
-    { headerName: '리소스ID',     field: 'resourceId',      width: 150 },
-    { headerName: '리소스명',     field: 'resourceName',    width: 200 },
-    { headerName: '리소스타입',   field: 'resourceType',    width: 200 },
-    { headerName: 'Url',          field: 'url',             width: 200 },
-    { headerName: '설명',         field: 'description',     width: 300 }
-  ];
-
-  getRowId: GetRowIdFunc<PartnerStaff> = (params: GetRowIdParams<PartnerStaff>) => {
-    return params.data.staffNo!;
-  };
-
-  gridQuery = signal<any>('');
-  gridResource = rxResource({
-    params: () => this.gridQuery(),
-    stream: ({params}) => this.http.get<ResponseList<PartnerStaff>>(
-      GlobalProperty.serverUrl() + `/api/system/webresource`,
-      getHttpOptions(params)
-    )
-  })
-
-  rowClickedEvent(event: RowClickedEvent<PartnerStaff>) {
-    this.rowClicked.emit(event.data!);
+  drawer: {
+    paytable: { visible: boolean, formDataId: any }
+  } = {
+    paytable: { visible: false, formDataId: null }
   }
 
-  rowDbClicked(event: RowDoubleClickedEvent<PartnerStaff>) {
-    this.rowDoubleClicked.emit(event.data!);
+  ngOnInit(): void {
   }
 
-  onEditButtonClick(e: {event: PointerEvent, rowData: any}) {
-    this.editButtonClicked.emit(e.rowData);
+  ngAfterViewInit(): void {
+    //throw new Error('Method not implemented.');
+  }
+
+  getList(params: any): void {
+    this.drawer.paytable.visible = false;
+    console.log(params);
+    this.grid().gridQuery.set(params);
+  }
+
+  newResource(): void {
+    this.drawer.paytable.formDataId = null;
+    this.drawer.paytable.visible = true;
+  }
+
+  editResource(item: any): void {
+    this.drawer.paytable.formDataId = item.id;
+    this.drawer.paytable.visible = true;
+  }
+
+  delete(): void {
+
+    const id = this.grid().getSelectedRows()[0].id;
+
+    const url = GlobalProperty.serverUrl() + `/api/hrm/payitem/${id}`;
+    const options = getHttpOptions();
+
+    this.http.delete<ResponseObject<void>>(url, options).pipe(
+        //   catchError(this.handleError<ResponseObject<Company>>('delete', undefined))
+        )
+        .subscribe(
+          (model: ResponseObject<void>) => {
+            this.grid().gridResource.reload();
+          }
+      )
+  }
+
+  gridRowClicked(item: any): void {
+    if (item) {
+      this.drawer.paytable.formDataId = item.id;
+    }
   }
 
 }
-
