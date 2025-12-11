@@ -17,6 +17,7 @@ import { GlobalProperty } from 'src/app/core/global-property';
 import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { sequenceEqual } from 'rxjs';
 
 export interface BoardManagement {
   boardId: string | null;
@@ -230,7 +231,8 @@ export class BoardForm implements OnInit, AfterViewInit {
     boardParentId   : new FormControl<string | null>(null),
     boardName       : new FormControl<string | null>('', { validators: [Validators.required] }),
     boardType       : new FormControl<string | null>('', { validators: [Validators.required] }),
-    boardDescription: new FormControl<string | null>(null)
+    boardDescription: new FormControl<string | null>(null),
+    sequence        : new FormControl<number | null>(0)
   });
 
   formDataId = input<any>();
@@ -261,6 +263,7 @@ export class BoardForm implements OnInit, AfterViewInit {
   newForm(): void {
     this.fg.reset();
     this.fg.controls.boardType.setValue('BOARD');
+    this.fg.controls.sequence.setValue(0);
 
     this.focusInput();
   }
