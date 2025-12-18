@@ -163,6 +163,7 @@ export class PostForm implements AfterViewInit {
     userId          : new FormControl<string | null>(null),
     title           : new FormControl<string | null>(null, { validators: [Validators.required] }),
     contents        : new FormControl<string | null>(null),
+    isFiexedTop     : new FormControl<boolean | null>(false),
     attachFile      : new FormControl<any>(null)
   });
 
@@ -191,6 +192,7 @@ export class PostForm implements AfterViewInit {
     this.fg.controls.boardId.setValue(boardId);
 
     this.fg.controls.userId.setValue(SessionManager.getUserId());
+    this.fg.controls.isFiexedTop.setValue(false);
     this.uploadedfileList = [];
     this.textData = null;
 
@@ -204,6 +206,8 @@ export class PostForm implements AfterViewInit {
     // boardId, articleId는 base64로 암호화
     this.fg.controls.boardId.setValue(btoa(this.fg.controls.boardId.value!));
     this.fg.controls.postId.setValue(btoa(this.fg.controls.postId.value!));
+
+    this.fg.controls.isFiexedTop.setValue(false);
   }
 
   closeForm(): void {
