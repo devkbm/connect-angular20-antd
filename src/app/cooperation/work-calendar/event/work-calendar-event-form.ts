@@ -248,7 +248,8 @@ export class WorkCalendarEventForm implements OnInit, OnChanges {
 
     this.fg.reset();
 
-    this.fg.controls.workCalendarId.setValue(params.workCalendarId);
+    let calendarId = Array.isArray(params.workCalendarId) ? params.workCalendarId[0] : params.workCalendarId;
+    this.fg.controls.workCalendarId.setValue(calendarId);
 
     this.fg.controls.start.setValue(formatDate(params.start,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));
     this.fg.controls.end.setValue(formatDate(params.end,'yyyy-MM-ddTHH:mm:ss.SSS','ko-kr'));

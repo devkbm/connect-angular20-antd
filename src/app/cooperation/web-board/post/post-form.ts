@@ -170,7 +170,7 @@ export class PostForm implements AfterViewInit {
   constructor() {
 
     effect(() => {
-      console.log(this.boardId(), this.formDataId());
+      //console.log(this.boardId(), this.formDataId());
       if (this.formDataId()) {
         this.get(this.formDataId());
       } else {
