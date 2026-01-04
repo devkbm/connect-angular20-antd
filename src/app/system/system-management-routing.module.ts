@@ -14,7 +14,7 @@ export const routes: Routes = [
       {path: 'menu',          loadComponent: () => import('./menu/app-menu').then(m => m.MenuApp)},
       {path: 'menu-role',     loadComponent: () => import('./menu-role/app-menu-role').then(m => m.MenuRoleApp)},
       {path: 'webresource',   loadComponent: () => import('./webresource/app-web-resource').then(m => m.WebResourceApp)},
-      {path: 'commoncode',    loadComponent: () => import('./commoncode/app-common-code').then(m => m.CommonCodeApp)},
+      {path: 'commoncode',    loadComponent: () => import('./hierarchy-code/app-hierarchy-code').then(m => m.AppHierarchyCode)},
       {path: 'dept',          loadComponent: () => import('./dept/app-dept').then(m => m.DeptApp)},
       {path: 'term',          loadComponent: () => import('./terms/app-term').then(m => m.TermApp)},
       {path: 'holiday',       loadComponent: () => import('./holiday/app-holiday').then(m => m.HolidayApp)},

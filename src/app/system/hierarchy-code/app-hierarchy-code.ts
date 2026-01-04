@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgPage } from "src/app/core/app/nz-page";
 
-import { CommonCodeForm } from './common-code-form';
-import { CommonCodeTree } from './common-code-tree';
-import { CommonCodeSeacrh } from "./common-code-search";
+import { HierarchyCodeForm } from './hierarchy-code-form';
+import { HierarchyCodeTree } from './hierarchy-code-tree';
+import { HierarchyCodeSeacrh } from "./hierarchy-code-search";
 
 import { NzPageHeaderCustom } from 'src/app/third-party/ng-zorro/nz-page-header-custom/nz-page-header-custom';
 
@@ -25,7 +25,7 @@ export class SystemTypeEnum {
 }
 
 @Component({
-  selector: 'common-code-app',
+  selector: 'app-hierarchy-code',
   imports: [
     CommonModule,
     FormsModule,
@@ -38,10 +38,10 @@ export class SystemTypeEnum {
     NzDividerModule,
     NzPageHeaderCustom,
     NzSpaceModule,
-    CommonCodeTree,
-    CommonCodeForm,
+    HierarchyCodeTree,
+    HierarchyCodeForm,
     NgPage,
-    CommonCodeSeacrh
+    HierarchyCodeSeacrh
 ],
   template: `
 <ng-template #header>
@@ -49,13 +49,13 @@ export class SystemTypeEnum {
 </ng-template>
 
 <ng-template #search>
-  <common-code-search
+  <hierarchy-code-search
     (search)="getCommonCodeTree()"
     (newForm)="newForm()"
     (saveForm)="saveCommonCode()"
     (deleteForm)="deleteCommonCode()"
   >
-  </common-code-search>
+  </hierarchy-code-search>
 </ng-template>
 
 <ng-page [header]="{template: header, height: 'var(--page-header-height)'}" [search]="{template: search, height: 'var(--page-search-height)'}">
@@ -65,15 +65,15 @@ export class SystemTypeEnum {
     </div>
 
     <div class="grid-wrapper">
-      <common-code-tree #commonCodeTree
+      <hierarchy-code-tree
         [searchValue]="queryValue"
         (itemSelected)="selectedItem($event)">
-      </common-code-tree>
+      </hierarchy-code-tree>
 
-      <common-code-form #commonCodeForm
+      <hierarchy-code-form
         (formSaved)="getCommonCodeTree()"
         (formDeleted)="getCommonCodeTree()">
-      </common-code-form>
+      </hierarchy-code-form>
     </div>
   </div>
 </ng-page>
@@ -106,10 +106,10 @@ export class SystemTypeEnum {
 
   `
 })
-export class CommonCodeApp implements OnInit, AfterViewInit {
+export class AppHierarchyCode implements OnInit, AfterViewInit {
 
-  tree = viewChild.required(CommonCodeTree);
-  form = viewChild.required(CommonCodeForm);
+  tree = viewChild.required(HierarchyCodeTree);
+  form = viewChild.required(HierarchyCodeForm);
 
   systemTypeCodeList: SystemTypeEnum[] = [];
 
@@ -132,7 +132,7 @@ export class CommonCodeApp implements OnInit, AfterViewInit {
   }
 
   newForm(): void {
-    this.form().newForm(this.systeTypeCode, this.selectedCode);
+    this.form().newForm(this.selectedCode);
   }
 
   saveCommonCode(): void {
@@ -140,12 +140,13 @@ export class CommonCodeApp implements OnInit, AfterViewInit {
   }
 
   deleteCommonCode(): void {
+    console.log('delete');
     this.form().remove();
   }
 
   selectedItem(item: any): void {
     this.selectedCode = item.id;
-    this.form().get(item.systemTypeCode, item.id);
+    this.form().get(item.id);
   }
 
 }

@@ -2,10 +2,11 @@ import { Component, OnInit, Renderer2, inject, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
-import { CommonCodeService } from './common-code.service';
+import { GlobalProperty } from 'src/app/core/global-property';
+import { getHttpOptions } from 'src/app/core/http/http-utils';
 import { NotifyService } from 'src/app/core/service/notify.service';
-
 import { ResponseObject } from 'src/app/core/model/response-object';
 import { ResponseList } from 'src/app/core/model/response-list';
 
@@ -32,36 +33,30 @@ export interface CommonCodeFormData {
   cmt: string | null;
 }
 
-export class SystemTypeEnum {
-  constructor(
-    public label: string,
-    public value: string) {}
+export interface CommonCodeHierarchy {
+  id: string
+  systemTypeCode: string;
+  code: string;
+  codeName: string;
+  codeNameAbbreviation: string;
+  fromDate: string;
+  toDate: string;
+  hierarchyLevel: number;
+  fixedLengthYn: boolean;
+  codeLength: number;
+  cmt: string;
+  parentId: string;
+
+  title: string;
+  key: string;
+  isLeaf: boolean;
+  children: CommonCodeHierarchy[];
 }
 
-
-export class CommonCodeHierarchy {
-  constructor(
-    public id: string,
-    public systemTypeCode: string,
-    public code: string,
-    public codeName: string,
-    public codeNameAbbreviation: string,
-    public fromDate: string,
-    public toDate: string,
-    public hierarchyLevel: number,
-    public fixedLengthYn: boolean,
-    public codeLength: number,
-    public cmt: string,
-    public parentId: string,
-    public title: string,
-    public key: string,
-    public isLeaf: boolean,
-    public children: CommonCodeHierarchy[]) { }
-}
 
 
 @Component({
-  selector: 'common-code-form',
+  selector: 'hierarchy-code-form',
   imports: [
     CommonModule,
     FormsModule,
@@ -89,23 +84,6 @@ export class CommonCodeHierarchy {
 
       <!-- 1 row -->
       <div nz-row nzGutter="8">
-
-        <div nz-col nzSpan="4">
-          <nz-form-item>
-            <nz-form-label nzFor="systemTypeCode" nzRequired>시스템구분코드</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-select nzId="systemTypeCode" formControlName="systemTypeCode">
-                @for (option of systemTypeCodeList; track option) {
-                  <nz-option
-                    [nzLabel]="option.label"
-                    [nzValue]="option.value">
-                  </nz-option>
-                }
-              </nz-select>
-
-            </nz-form-control>
-          </nz-form-item>
-        </div>
 
         <!--상위 공통코드 필드-->
         <div nz-col nzSpan="8">
@@ -286,12 +264,11 @@ export class CommonCodeHierarchy {
 
   `]
 })
-export class CommonCodeForm implements OnInit {
+export class HierarchyCodeForm implements OnInit {
 
   nodeItems: CommonCodeHierarchy[] = [];
-  systemTypeCodeList: SystemTypeEnum[] = [];
 
-  private commonCodeService = inject(CommonCodeService);
+  private http = inject(HttpClient);
   private notifyService = inject(NotifyService);
   private renderer = inject(Renderer2);
 
@@ -300,7 +277,6 @@ export class CommonCodeForm implements OnInit {
   formClosed = output<any>();
 
   fg = inject(FormBuilder).group({
-    systemTypeCode          : new FormControl<string | null>(null),
     codeId                  : new FormControl<string | null>(null),
     parentId                : new FormControl<string | null>(null),
     code                    : new FormControl<string | null>(null, { validators: [Validators.required] }),
@@ -316,34 +292,34 @@ export class CommonCodeForm implements OnInit {
 
   ngOnInit(): void {
     this.getCommonCodeHierarchy('');
-    this.getSystemTypeCode();
   }
 
   focusInput() {
     this.renderer.selectRootElement('#code').focus();
   }
 
-  newForm(systemTypeCode: string, parentId: any): void {
+  newForm(parentId: any): void {
     this.fg.reset();
 
-    this.fg.controls.codeId.disable();
-    this.fg.controls.code.enable();
-    this.fg.controls.systemTypeCode.enable();
-    this.fg.controls.systemTypeCode.setValue(systemTypeCode);
-    this.fg.controls.parentId.setValue(parentId);
-    this.fg.controls.seq.setValue(1);
-    this.fg.controls.lowLevelCodeLength.setValue(0);
-    this.fg.controls.fromDate.setValue(new Date());
-    this.fg.controls.toDate.setValue(new Date(9999, 11, 31));
+    const c = this.fg.controls;
+    c.codeId.disable();
+    c.code.enable();
+    c.parentId.enable();
+    c.parentId.setValue(parentId);
+    c.seq.setValue(1);
+    c.lowLevelCodeLength.setValue(0);
+    c.fromDate.setValue(new Date());
+    c.toDate.setValue(new Date(9999, 11, 31));
 
     this.focusInput();
   }
 
   modifyForm(formData: CommonCodeFormData): void {
-    this.fg.controls.codeId.disable();
-    this.fg.controls.code.disable();
-    this.fg.controls.systemTypeCode.disable();
-    this.fg.controls.parentId.disable();
+
+    const c = this.fg.controls;
+    c.codeId.disable();
+    c.code.disable();
+    c.parentId.disable();
 
     this.fg.patchValue(formData);
   }
@@ -352,16 +328,19 @@ export class CommonCodeForm implements OnInit {
     this.formClosed.emit(this.fg.getRawValue());
   }
 
-  get(systemTypeCode: string, codeId: string): void {
-    this.commonCodeService
-        .getCode(systemTypeCode, codeId)
-        .subscribe(
-          (model: ResponseObject<CommonCodeFormData>) => {
-            if ( model.data ) {
-              this.modifyForm(model.data);
-            }
-          }
-        );
+  get(codeId: string): void {
+
+    const url = GlobalProperty.serverUrl() + `/api/system/hierarchycode/${codeId}`;
+    const options = getHttpOptions();
+
+    this.http.get<ResponseObject<CommonCodeFormData>>(url, options).pipe(
+            //  catchError(this.handleError<ResponseObject<Company>>('get', undefined))
+            )
+            .subscribe(
+              (model: ResponseObject<CommonCodeFormData>) => {
+                model.data ? this.modifyForm(model.data) : this.newForm(null);
+              }
+            )
   }
 
   save(): void {
@@ -375,51 +354,45 @@ export class CommonCodeForm implements OnInit {
       return;
     }
 
-    this.commonCodeService
-        .save(this.fg.getRawValue())
+    const url = GlobalProperty.serverUrl() + `/api/system/hierarchycode`;
+    const options = getHttpOptions();
+
+    this.http.post<ResponseObject<CommonCodeFormData>>(url, this.fg.getRawValue(), options).pipe(
+          // catchError(this.handleError<ResponseObject<Company>>('save', undefined))
+        )
         .subscribe(
           (model: ResponseObject<CommonCodeFormData>) => {
             this.notifyService.changeMessage(model.message);
             this.formSaved.emit(this.fg.getRawValue());
           }
-        );
+        )
   }
 
   remove(): void {
-    this.commonCodeService
-        .remove(this.fg.controls.systemTypeCode.value!, this.fg.controls.codeId.value!)
+    const url = GlobalProperty.serverUrl() + `/api/system/hierarchycode/${this.fg.controls.codeId.value!}`;
+    const options = getHttpOptions();
+
+    this.http.delete<ResponseObject<CommonCodeFormData>>(url, options).pipe(
+        //   catchError(this.handleError<ResponseObject<Company>>('delete', undefined))
+        )
         .subscribe(
           (model: ResponseObject<CommonCodeFormData>) => {
-            this.notifyService.changeMessage(model.message);
-            this.formDeleted.emit(this.fg.getRawValue());
+          this.notifyService.changeMessage(model.message);
+          this.formDeleted.emit(this.fg.getRawValue());
           }
-        );
-  }
-
-  getSystemTypeCode(): void {
-    this.commonCodeService
-      .getSystemTypeList()
-      .subscribe(
-        (model: ResponseList<SystemTypeEnum>) => {
-          this.systemTypeCodeList = model.data;
-        }
-      );
+      )
   }
 
   getCommonCodeHierarchy(systemTypeCode: string): void {
-    const params = {
-      systemTypeCode: systemTypeCode
-    };
+    const url = GlobalProperty.serverUrl() + `/api/system/hierarchycode/treequery`;
+    const options = getHttpOptions();
 
-    this.commonCodeService
-        .getCodeHierarchy(params)
+    this.http.get<ResponseList<CommonCodeHierarchy>>(url, options).pipe(
+      //catchError((err) => Observable.throw(err))
+        )
         .subscribe(
           (model: ResponseList<CommonCodeHierarchy>) => {
-            if ( model.data ) {
-              this.nodeItems = model.data;
-            } else {
-              this.nodeItems = new Array<CommonCodeHierarchy>(0);
-            }
+            model.data ? this.nodeItems = model.data : this.nodeItems = [];
           }
         );
   }

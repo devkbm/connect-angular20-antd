@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { CommonCodeService, SystemTypeEnum } from './common-code.service';
-import { ResponseList } from 'src/app/core/model/response-list';
 
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -11,9 +8,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 
 @Component({
-  selector: 'common-code-search',
+  selector: 'hierarchy-code-search',
   imports: [
     FormsModule,
     NzButtonModule,
@@ -23,6 +21,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NzSelectModule,
     NzDividerModule,
     NzSpaceModule,
+    NzPopconfirmModule,
   ],
   template: `
     <div nz-row>
@@ -62,13 +61,11 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommonCodeSeacrh {
+export class HierarchyCodeSeacrh {
   search = output<Object>();
   newForm = output<void>();
   saveForm = output<void>();
   deleteForm = output<void>();
-
-  private commonCodeService = inject(CommonCodeService);
 
   query: {
     company : { key: string, value: string, list: {label: string, value: string}[] }
@@ -103,15 +100,5 @@ export class CommonCodeSeacrh {
   btnDeleteClicked() {
     this.deleteForm.emit();
   }
-
-  getSystemTypeCode(): void {
-      this.commonCodeService
-        .getSystemTypeList()
-        .subscribe(
-          (model: ResponseList<SystemTypeEnum>) => {
-            this.query.company.list = model.data;
-          }
-        );
-    }
 
 }
