@@ -82,11 +82,8 @@ export interface CommonCodeHierarchy {
         }
       </ng-template>
 
-      <!-- 1 row -->
       <div nz-row nzGutter="8">
-
-        <!--상위 공통코드 필드-->
-        <div nz-col nzSpan="8">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="parentId" nzRequired>상위 공통코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -97,16 +94,11 @@ export interface CommonCodeHierarchy {
                 nzPlaceHolder="부서 없음"
                 >
               </nz-tree-select>
-
             </nz-form-control>
           </nz-form-item>
         </div>
 
-      </div>
-
-      <!-- 2 row -->
-      <div nz-row nzGutter="8">
-        <div nz-col nzSpan="8">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="code" nzRequired>코드</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -117,7 +109,7 @@ export interface CommonCodeHierarchy {
           </nz-form-item>
         </div>
 
-        <div nz-col nzSpan="8">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="codeName" nzRequired>코드명</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -128,7 +120,7 @@ export interface CommonCodeHierarchy {
           </nz-form-item>
         </div>
 
-        <div nz-col nzSpan="8">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="codeNameAbbreviation">코드약어</nz-form-label>
             <nz-form-control>
@@ -140,9 +132,8 @@ export interface CommonCodeHierarchy {
 
       </div>
 
-      <!-- 3 row -->
       <div nz-row nzGutter="8">
-        <div nz-col nzSpan="5">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="fromDate" nzRequired>시작일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -151,7 +142,7 @@ export interface CommonCodeHierarchy {
             </nz-form-control>
           </nz-form-item>
         </div>
-        <div nz-col nzSpan="5">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="toDate" nzRequired>종료일</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -161,7 +152,7 @@ export interface CommonCodeHierarchy {
           </nz-form-item>
         </div>
 
-        <div nz-col nzSpan="5">
+        <div nz-col nzSpan="4">
           <nz-form-item>
             <nz-form-label nzFor="seq" nzRequired>출력 순번</nz-form-label>
             <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
@@ -172,21 +163,22 @@ export interface CommonCodeHierarchy {
           </nz-form-item>
         </div>
 
-        <div nz-col nzSpan="5">
+      </div>
+
+      <div nz-row nzGutter="8">
+        <div nz-col nzSpan="6">
           <nz-form-item>
-            <nz-form-label nzFor="lowLevelCodeLength">하위 코드 길이</nz-form-label>
-            <nz-form-control nzHasFeedback [nzErrorTip]="errorTpl">
-              <nz-input-number nzId="lowLevelCodeLength" formControlName="lowLevelCodeLength"
-                [nzMin]="0" [nzMax]="9999">
-              </nz-input-number>
+            <nz-form-label nzFor="additionalInfo">추가정보</nz-form-label>
+            <nz-form-control>
+              <input nz-input id="additionalInfo" formControlName="additionalInfo"
+                placeholder="추가정보를 입력해주세요."/>
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
 
-      <!-- 4 row -->
       <div nz-row nzGutter="8">
-        <div nz-col nzSpan="24">
+        <div nz-col nzSpan="16">
           <nz-form-item>
             <nz-form-label nzFor="cmt">비고</nz-form-label>
             <nz-form-control>
@@ -282,12 +274,12 @@ export class HierarchyCodeForm implements OnInit {
     code                    : new FormControl<string | null>(null, { validators: [Validators.required] }),
     codeName                : new FormControl<string | null>(null, { validators: [Validators.required] }),
     codeNameAbbreviation    : new FormControl<string | null>(null),
+    cmt                     : new FormControl<string | null>(null),
+    additionalInfo          : new FormControl<string | null>(null),
     fromDate                : new FormControl<Date | null>(null, { validators: [Validators.required] }),
     toDate                  : new FormControl<Date | null>(null, { validators: [Validators.required] }),
     hierarchyLevel          : new FormControl<number | null>(null),
     seq                     : new FormControl<number | null>(null),
-    lowLevelCodeLength      : new FormControl<number | null>(null),
-    cmt                     : new FormControl<string | null>(null)
   });
 
   ngOnInit(): void {
@@ -307,7 +299,6 @@ export class HierarchyCodeForm implements OnInit {
     c.parentId.enable();
     c.parentId.setValue(parentId);
     c.seq.setValue(1);
-    c.lowLevelCodeLength.setValue(0);
     c.fromDate.setValue(new Date());
     c.toDate.setValue(new Date(9999, 11, 31));
 
